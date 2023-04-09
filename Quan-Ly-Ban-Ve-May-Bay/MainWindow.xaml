@@ -7,7 +7,7 @@
         
         xmlns:local="clr-namespace:Quan_Ly_Ban_Ve_May_Bay"
         mc:Ignorable="d"
-        Title="MainWindow" Height="640" Width="1100" Background="Transparent">
+        Height="640" Width="1100" Background="Transparent" WindowStartupLocation="CenterScreen">
     <Grid>
         <Border CornerRadius ="50" BorderThickness="0">
             <Border.Background>
@@ -191,7 +191,7 @@
 
                     <Button
                      Width="200" Height="50" Background="Transparent" BorderBrush="Transparent"
-                     Content="Search" Foreground="White" FontSize="30">
+                     Content="Search" Foreground="White" FontSize="30" Click="btnSearch_Click" >
                     </Button>
                 </Border>
             </Grid>

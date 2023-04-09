@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,10 +21,16 @@ namespace Quan_Ly_Ban_Ve_May_Bay
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    {
+    { 
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            FlightsList flightWindow = new FlightsList();
+            flightWindow.Show();
         }
     }
 }
