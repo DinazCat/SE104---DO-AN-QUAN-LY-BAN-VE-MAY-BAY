@@ -58,24 +58,24 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             adapter.Dispose();
             sqlConnection.Close();
             sqlConnection.Dispose();
-            cbb_from.ItemsSource = destinations;
-            cbb_from.DisplayMemberPath = "city";
-            cbb_to.ItemsSource = destinations;
-            cbb_to.DisplayMemberPath = "city";
+            //cbb_from.ItemsSource = destinations;
+            //cbb_from.DisplayMemberPath = "city";
+            //cbb_to.ItemsSource = destinations;
+            //cbb_to.DisplayMemberPath = "city";
 
         }
 
         
-        private void btnSearch_Click(object sender, RoutedEventArgs e)
-        {
-            FlightsList flightWindow = new FlightsList();
-            flightWindow.Show();
-        }
-
+        
         public class destination
         {
             public string code { get; set; }
             public string city { get; set; }
+        }
+
+        private void btnHome_Click(object sender, RoutedEventArgs e)
+        {
+            fContainer.Navigate(new System.Uri("Pages/Home.xaml", UriKind.RelativeOrAbsolute));
         }
     }
 }

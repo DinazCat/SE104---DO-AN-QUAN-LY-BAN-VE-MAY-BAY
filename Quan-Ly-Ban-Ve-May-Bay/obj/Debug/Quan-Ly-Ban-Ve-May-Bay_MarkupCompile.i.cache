@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\SE104-QLVMB\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\
 Quan_Ly_Ban_Ve_May_Bay
 none
 false
 DEBUG;TRACE
-D:\SE104-QLVMB\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\App.xaml
-3560906239
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\App.xaml
+5-66095219
 
-8-755840123
-221223630192
-FlightDetail.xaml;FlightsList.xaml;MainWindow.xaml;
+9-715802172
+22859504676
+FlightDetail.xaml;FlightsList.xaml;MainWindow.xaml;Pages\Home.xaml;Style\MainStyle.xaml;
 
-False
+True
 

@@ -98,3 +98,6 @@ D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\bin\Debug\EntityFramework.dll
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\bin\Debug\EntityFramework.SqlServer.dll
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\bin\Debug\EntityFramework.xml
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\bin\Debug\EntityFramework.SqlServer.xml
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Style\MainStyle.baml
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Pages\Home.g.cs
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Pages\Home.baml

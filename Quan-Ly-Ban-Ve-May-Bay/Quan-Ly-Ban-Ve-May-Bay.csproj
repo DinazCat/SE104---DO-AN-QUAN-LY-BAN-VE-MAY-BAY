@@ -105,8 +105,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\Home.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Style\MainStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Pages\Home.xaml.cs">
+      <DependentUpon>Home.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -141,6 +152,26 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\airplane_mode_on_64px.png" />
+    <Resource Include="Images\home_52px.png" />
+    <Resource Include="Images\menu_64px.png" />
+    <Resource Include="Images\phone_52px.png" />
+    <Resource Include="Images\settings_52px.png" />
+    <Resource Include="Images\user_100px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\airplane_mode_on_52px.png" />
+    <Resource Include="Images\area_chart_52px.png" />
+    <Resource Include="Images\combo_chart_52px.png" />
+    <Resource Include="Images\contacts_52px.png" />
+    <Resource Include="Images\envelope_52px.png" />
+    <Resource Include="Images\list_52px.png" />
+    <Resource Include="Images\settings_100px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\bg2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.8.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.8.0\build\MaterialDesignThemes.targets')" />

@@ -8,7 +8,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("model1.context.tt")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("model1.tt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/airplane_mode_on_52px.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/area_chart_52px.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/combo_chart_52px.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/contacts_52px.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/envelope_52px.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/list_52px.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/settings_100px.png")]
 
 
