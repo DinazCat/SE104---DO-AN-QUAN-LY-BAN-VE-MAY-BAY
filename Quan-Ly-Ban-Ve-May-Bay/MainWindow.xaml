@@ -6,12 +6,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Quan_Ly_Ban_Ve_May_Bay"
         mc:Ignorable="d"
-        Height="580" Width="1100" Background="White" WindowStartupLocation="CenterScreen">
+        Height="600" Width="1200" Background="White" WindowStartupLocation="CenterScreen">
     <Grid>
-        <StackPanel Orientation="Horizontal">
-            <StackPanel Orientation="Vertical">
-                <Grid Height="50" Background="#7d9f43">
-                    <ToggleButton x:Name="Tg_Btn" VerticalAlignment="Top" Style="{DynamicResource iToggleButtonStyle}" HorizontalAlignment="Left" BorderThickness="0" Margin="25,15,0,0" Height="30" Width="30" Grid.RowSpan="2">
+        
+        <DockPanel LastChildFill="True">
+            <Grid  x:Name="GridNav">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="9*"/>
+                    <RowDefinition Height="85*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Background="#7d9f43" >
+                    <ToggleButton x:Name="Tg_Btn" VerticalAlignment="Center" Style="{DynamicResource iToggleButtonStyle}" Height="30" Width="30" Margin="15 0 0 0" HorizontalAlignment="Left">
                         <ToggleButton.Triggers>
                             <EventTrigger RoutedEvent="ToggleButton.Unchecked">
                                 <BeginStoryboard>
@@ -28,12 +33,12 @@
                                         </DoubleAnimation>
                                     </Storyboard>
                                 </BeginStoryboard>
-                                
+
                             </EventTrigger>
                         </ToggleButton.Triggers>
                     </ToggleButton>
                 </Grid>
-                <Grid Width="200" Height="530" x:Name="GridNav" Background="#7d9f43">
+                <Grid Grid.Row="1" Background="#7d9f43">
                     <StackPanel>
                         <Button HorizontalAlignment="Left" Margin="10 0 0 0" Height="35" Click="btnHome_Click" >
                             <StackPanel Orientation="Horizontal" >
@@ -74,15 +79,15 @@
                         </Button>
                     </StackPanel>
                 </Grid>
-            </StackPanel>
-            <Grid Background="#f1f6e5" Width="900" Height="550">
+            </Grid>
+            <Grid Background="#f1f6e5">
                 <Frame 
                        Name="fContainer"
-                       Margin="20,20,20,20"
                        NavigationUIVisibility="Hidden">
 
-            </Frame>
+                </Frame>
             </Grid>
-        </StackPanel>
+        </DockPanel>
     </Grid>
+    
 </Window>

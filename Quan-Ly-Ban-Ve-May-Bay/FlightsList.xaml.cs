@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaterialDesignColors;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.Eventing.Reader;
@@ -22,8 +23,9 @@ namespace Quan_Ly_Ban_Ve_May_Bay
     /// <summary>
     /// Interaction logic for FlightsList.xaml
     /// </summary>
-    public partial class FlightsList : Window
+    public partial class FlightsList : Page
     {
+        public event RoutedEventHandler ShowDetail;
         public FlightsList()
         {
             InitializeComponent();
@@ -39,9 +41,8 @@ namespace Quan_Ly_Ban_Ve_May_Bay
         private void FlightList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selectedFlight = (Flight)FlightList.SelectedItem;   
-            if (selectedFlight != null) { 
-                var fDetail = new FlightDetail();
-                fDetail.Show();
+            if (selectedFlight != null) {
+                ShowDetail?.Invoke(this, new RoutedEventArgs());
                 FlightList.SelectedIndex = -1;
             }
         }

@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data;
 using System.Data.SqlClient;
+using Quan_Ly_Ban_Ve_May_Bay.Pages;
 
 namespace Quan_Ly_Ban_Ve_May_Bay
 {
@@ -25,11 +26,29 @@ namespace Quan_Ly_Ban_Ve_May_Bay
         public MainWindow()
         {
             InitializeComponent();
-            
+            Home home = new Home();
+            home.Search += Home_Search;
+            fContainer.Content = home;
         }
         private void btnHome_Click(object sender, RoutedEventArgs e)
         {
-            fContainer.Navigate(new System.Uri("Pages/Home.xaml", UriKind.RelativeOrAbsolute));
+            Home home = new Home();
+            home.Search += Home_Search;
+            fContainer.Content = home; 
+        }
+
+        private void Home_Search(object sender, RoutedEventArgs e)
+        {
+            FlightsList flight = new FlightsList();
+            fContainer.Content = flight;
+            flight.ShowDetail += Flight_ShowDetail;
+        }
+
+        private void Flight_ShowDetail(object sender, RoutedEventArgs e)
+        {
+            FlightDetail flightDetai = new FlightDetail();
+            fContainer.Content = flightDetai;
+
         }
     }
 }

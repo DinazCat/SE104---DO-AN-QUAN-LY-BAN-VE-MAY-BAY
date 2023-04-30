@@ -17,8 +17,9 @@ namespace Quan_Ly_Ban_Ve_May_Bay
     /// <summary>
     /// Interaction logic for FlightDetail.xaml
     /// </summary>
-    public partial class FlightDetail : Window
+    public partial class FlightDetail : Page
     {
+
         public FlightDetail()
         {
             InitializeComponent();

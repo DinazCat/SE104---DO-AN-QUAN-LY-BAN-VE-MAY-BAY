@@ -27,6 +27,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
         SqlCommand sqlCommand = new SqlCommand();
         SqlDataAdapter adapter;
         DataSet ds; */
+        public event RoutedEventHandler Search;
         public Home()
         {
             InitializeComponent();
@@ -34,8 +35,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
         }
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
-            FlightsList flightWindow = new FlightsList();
-            flightWindow.Show();
+            Search?.Invoke(this, new RoutedEventArgs());
         }
         /*private void bindcombobox()
         {
