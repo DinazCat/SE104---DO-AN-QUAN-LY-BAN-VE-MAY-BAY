@@ -32,16 +32,5 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             SeatChart.ItemsSource = strings;
         }
 
-        private void ButtonClose_Click(object sender, RoutedEventArgs e)
-        {
-            HangVe_ListView.Visibility = Visibility.Visible;
-            isSeatAvaiable.Visibility = Visibility.Hidden;
-        }
-
-        private void ButtonOpen_Click(object sender, RoutedEventArgs e)
-        {
-            HangVe_ListView.Visibility = Visibility.Hidden;
-            isSeatAvaiable.Visibility = Visibility.Visible;
-        }
     }
 }

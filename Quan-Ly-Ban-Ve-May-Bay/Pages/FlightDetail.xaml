@@ -9,7 +9,7 @@
     <Page.Resources>
         <Storyboard x:Key="CloseBookingTab">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Width" Storyboard.TargetName="GridMenu">
-                <EasingDoubleKeyFrame KeyTime="0" Value="500"/>
+                <EasingDoubleKeyFrame KeyTime="0" Value="550"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
 
@@ -17,7 +17,7 @@
         <Storyboard x:Key="OpenBookingTab">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Width" Storyboard.TargetName="GridMenu">
                 <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="500"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="550"/>
             </DoubleAnimationUsingKeyFrames>
 
         </Storyboard>
@@ -38,34 +38,16 @@
 
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="107*"/>
-            <RowDefinition Height="13*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="511*"/>
+            <RowDefinition Height="59*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Column="0" Grid.Row="1" Name="isSeatAvaiable" Visibility="Hidden">
-            <Grid.ColumnDefinitions>
+        <Button Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Left">
+            <materialDesign:PackIcon Kind="ArrowBack" Width="25" Height="25"/>
+        </Button>
+        <Button Grid.Column="1" Grid.Row="2" HorizontalAlignment="Right" Content="Choose seat" Background="Violet" Name="ButtonOpen" VerticalAlignment="Center" Margin="5"/>
 
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-
-            </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
-                <materialDesign:PackIcon Kind="SquareOutline" Foreground="Gray" VerticalAlignment="Center" Width="25" Height="25"/>
-                <TextBlock Text="Available" FontSize="20" VerticalAlignment="Center"/>
-            </StackPanel>
-            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <materialDesign:PackIcon Kind="Square" Foreground="Gray" Width="25" Height="25" VerticalAlignment="Center"/>
-                <TextBlock Text="Booked" FontSize="20"/>
-            </StackPanel>
-            <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <materialDesign:PackIcon Kind="Square" Foreground="#FF52AADC" VerticalAlignment="Center" Width="25" Height="25"/>
-                <TextBlock Text="Selected" Grid.Column="2" FontSize="20"/>
-            </StackPanel>
-
-        </Grid>
-        <Button Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" Content="Choose seat" Background="Violet" Margin="5" Name="ButtonOpen" Click="ButtonOpen_Click" VerticalAlignment="Center" Height="32" Width="109"/>
-
-        <ListView Grid.Column="0" Grid.Row="0" FontSize="15" ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Hidden" x:Name="HangVe_ListView" Grid.RowSpan="2">
+        <ListView Grid.Column="0" Grid.Row="1" FontSize="15" ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Hidden" x:Name="HangVe_ListView">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Vertical" CanVerticallyScroll="True"/>
@@ -145,7 +127,7 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <ListView BorderBrush="{x:Null}" Margin="2,2,2,2" Grid.Column="1" ScrollViewer.CanContentScroll="False" Name="Transit_ListView" HorizontalContentAlignment="Center" Grid.Row="0" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+        <ListView BorderBrush="{x:Null}" Margin="2,2,2,2" Grid.Column="1" ScrollViewer.CanContentScroll="False" Name="Transit_ListView" HorizontalContentAlignment="Center" Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Grid.Column="0">
@@ -234,18 +216,40 @@
 
             </ListView.ItemTemplate>
         </ListView>
-        <Grid x:Name="GridMenu" Background="White" HorizontalAlignment="Left" Width="0" Grid.ColumnSpan="2">
+        <Grid x:Name="GridMenu" Background="White" Width="0" Grid.RowSpan="2" HorizontalAlignment="Left" Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="34*"/>
-                <RowDefinition Height="415*"/>
-                <RowDefinition Height="55*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="79*"/>
+                <RowDefinition Height="11*"/>
 
             </Grid.RowDefinitions>
-            
-            <Button x:Name="ButtonClose" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" Width="30" Height="30" Padding="0" Click="ButtonClose_Click">
-                <materialDesign:PackIcon Kind="Close"/>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <materialDesign:PackIcon Kind="SquareOutline" Foreground="Gray" VerticalAlignment="Center" Width="25" Height="25"/>
+                    <TextBlock Text="Available" FontSize="20" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="Square" Foreground="Gray" Width="25" Height="25" VerticalAlignment="Center"/>
+                    <TextBlock Text="Booked" FontSize="20"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="Square" Foreground="#FF52AADC" VerticalAlignment="Center" Width="25" Height="25"/>
+                    <TextBlock Text="Selected" Grid.Column="2" FontSize="20"/>
+                </StackPanel>
+
+            </Grid>
+            <Button x:Name="ButtonClose" Grid.Column="0" VerticalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Width="30" Height="30" Padding="0" HorizontalAlignment="Right">
+                <materialDesign:PackIcon Kind="Close" HorizontalAlignment="Right"/>
             </Button>
-            <ScrollViewer Grid.Row="1">
+            <ScrollViewer Grid.Row="2">
                 <ItemsControl x:Name="SeatChart" >
                     <ItemsControl.ItemTemplate>
 
@@ -307,7 +311,7 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </ScrollViewer>
-            <Button Grid.Row="2" Content="Make payment" FontSize="17" FontWeight="Bold" Background="#FFE09FE6" HorizontalAlignment="Center"/>
+            <Button Grid.Row="3" Content="Make payment" FontSize="17" FontWeight="Bold" Background="#FFE09FE6" HorizontalAlignment="Center"/>
         </Grid>
 
     </Grid>

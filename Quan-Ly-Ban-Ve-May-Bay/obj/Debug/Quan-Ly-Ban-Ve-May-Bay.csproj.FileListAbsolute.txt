@@ -50,13 +50,9 @@ D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Quan-Ly-Ban-Ve-May-Bay.csproj.C
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Quan-Ly-Ban-Ve-May-Bay.csproj.CopyComplete
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Quan-Ly-Ban-Ve-May-Bay.exe
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Quan-Ly-Ban-Ve-May-Bay.pdb
-D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\FlightsList.g.cs
-D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\FlightsList.baml
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Quan-Ly-Ban-Ve-May-Bay.GeneratedMSBuildEditorConfig.editorconfig
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Quan-Ly-Ban-Ve-May-Bay.csproj.Fody.CopyLocal.cache
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Quan-Ly-Ban-Ve-May-Bay.csproj.Fody.RuntimeCopyLocal.cache
-D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\FlightDetail.g.cs
-D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\FlightDetail.baml
 D:\SE104-QLVMB\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\bin\Debug\Quan-Ly-Ban-Ve-May-Bay.exe.config
 D:\SE104-QLVMB\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\bin\Debug\Quan-Ly-Ban-Ve-May-Bay.exe
 D:\SE104-QLVMB\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\bin\Debug\Quan-Ly-Ban-Ve-May-Bay.pdb
@@ -101,3 +97,7 @@ D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\bin\Debug\EntityFramework.SqlServer.xml
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Style\MainStyle.baml
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Pages\Home.g.cs
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Pages\Home.baml
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Pages\FlightDetail.g.cs
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Pages\FlightDetail.baml
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Pages\FlightsList.g.cs
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Pages\FlightsList.baml
