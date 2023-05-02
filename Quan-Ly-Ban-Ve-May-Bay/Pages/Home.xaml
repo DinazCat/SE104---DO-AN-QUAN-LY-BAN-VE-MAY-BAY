@@ -15,131 +15,131 @@
             </Border.Background>
         </Border>
         <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="280"/>
-            <RowDefinition Height="180"/>
-            <RowDefinition Height="50"/>
-        </Grid.RowDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="6*" />
+                <RowDefinition Height="3*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
             <Grid Grid.Row="0">
-                
+
             </Grid>
-        <!-- Search Flight -->
-        <Grid Margin="0,0,0,0" Height="200" Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="50"/>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="50"/>
-            </Grid.ColumnDefinitions>
+            <!-- Search Flight -->
+            <Grid Margin="0,0,0,5" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="50"/>
+                </Grid.ColumnDefinitions>
 
-            <!--From -->
+                <!--From -->
                 <Border CornerRadius ="25" Grid.Column="1" Height="150" Width="180"  Margin="-15 0 0 0" VerticalAlignment="Center">
-                <Border.Background>
-                    <LinearGradientBrush>
-                        <GradientStop Color="#bfe063" Offset="0.7"/>
-                        <GradientStop Color="#a6d71b" Offset="0"/>
-                    </LinearGradientBrush>
-                </Border.Background>
-                <StackPanel>
+                    <Border.Background>
+                        <LinearGradientBrush>
+                            <GradientStop Color="#bfe063" Offset="0.7"/>
+                            <GradientStop Color="#a6d71b" Offset="0"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <StackPanel>
 
-                    <TextBlock Margin="0 25 0 0" Height="50" Width="150" Text="From" Foreground="White" FontSize="30"/>
-                    <ComboBox Name="cbb_from"
+                        <TextBlock Margin="0 25 0 0" Height="50" Width="150" Text="From" Foreground="White" FontSize="30"/>
+                        <ComboBox Name="cbb_from"
                                 materialDesign:HintAssist.Hint="City." 
                                 Width="150" FontSize="20" VerticalAlignment="Center" Foreground="#3f7e32"
                                 Style="{StaticResource MaterialDesignFloatingHintComboBox}">
 
-                    </ComboBox>
-                </StackPanel>
-            </Border>
+                        </ComboBox>
+                    </StackPanel>
+                </Border>
 
-            <!--To -->
+                <!--To -->
                 <Border CornerRadius ="25" Grid.Column="2" Margin="-20 0 0 0" Height="150" Width="180" >
-                <Border.Background>
-                    <LinearGradientBrush>
-                        <GradientStop Color="#bfe063" Offset="0.7"/>
-                        <GradientStop Color="#a6d71b" Offset="0"/>
-                    </LinearGradientBrush>
-                </Border.Background>
-                <StackPanel>
-                    <TextBlock Margin="0 25 0 0" Height="50" Width="150" Text="To" Foreground="White" FontSize="30"/>
-                    <ComboBox Name="cbb_to"
+                    <Border.Background>
+                        <LinearGradientBrush>
+                            <GradientStop Color="#bfe063" Offset="0.7"/>
+                            <GradientStop Color="#a6d71b" Offset="0"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <StackPanel>
+                        <TextBlock Margin="0 25 0 0" Height="50" Width="150" Text="To" Foreground="White" FontSize="30"/>
+                        <ComboBox Name="cbbDestination"
                                 materialDesign:HintAssist.Hint="City." 
                                 Width="150" FontSize="20" VerticalAlignment="Center" Foreground="#3f7e32"
                                 Style="{StaticResource MaterialDesignFloatingHintComboBox}">
 
-                    </ComboBox>
-                </StackPanel>
-            </Border>
-            <!-- Date -->
+                        </ComboBox>
+                    </StackPanel>
+                </Border>
+                <!-- Date -->
                 <Border CornerRadius ="25" Grid.Column="3" Height="150" Width="180"  Margin="-20 0 0 0" >
-                <Border.Background>
-                    <LinearGradientBrush>
-                        <GradientStop Color="#bfe063" Offset="0.7"/>
-                        <GradientStop Color="#a6d71b" Offset="0"/>
-                    </LinearGradientBrush>
-                </Border.Background>
-                <StackPanel>
+                    <Border.Background>
+                        <LinearGradientBrush>
+                            <GradientStop Color="#bfe063" Offset="0.7"/>
+                            <GradientStop Color="#a6d71b" Offset="0"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <StackPanel>
 
-                    <TextBlock Margin="0 25 0 0" Height="50" Width="150" Text="Date" 
+                        <TextBlock Margin="0 25 0 0" Height="50" Width="150" Text="Date" 
                                                Foreground="White" FontSize="30"/>
                         <DatePicker Width="150" FontSize="20" Margin="0 14 0 0"
                                         materialDesign:HintAssist.Hint="Pick Date" Foreground="#3f7e32"
                                         VerticalAlignment="Center" 
                                         Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
-                </StackPanel>
+                    </StackPanel>
 
 
-            </Border>
-            <!-- Adults -->
+                </Border>
+                <!-- Adults -->
                 <Border CornerRadius ="25" Grid.Column="4" Height="150" Width="180" Margin="-20 0 0 0" >
-                <Border.Background>
-                    <LinearGradientBrush>
-                        <GradientStop Color="#bfe063" Offset="0.7"/>
-                        <GradientStop Color="#a6d71b" Offset="0"/>
-                    </LinearGradientBrush>
-                </Border.Background>
-                <StackPanel>
-                    <TextBlock Margin="0 25 0 0" Height="50" Width="150" Text="Adults" Foreground="White" FontSize="30"/>
-                    <ComboBox
+                    <Border.Background>
+                        <LinearGradientBrush>
+                            <GradientStop Color="#bfe063" Offset="0.7"/>
+                            <GradientStop Color="#a6d71b" Offset="0"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <StackPanel>
+                        <TextBlock Margin="0 25 0 0" Height="50" Width="150" Text="Adults" Foreground="White" FontSize="30"/>
+                        <ComboBox
                                 materialDesign:HintAssist.Hint="Person." Margin="0 5 0 0"
                                 Width="150" FontSize="20" VerticalAlignment="Center" Foreground="#3f7e32"
                                 Style="{StaticResource MaterialDesignFloatingHintComboBox}">
-                        <ComboBoxItem
+                            <ComboBoxItem
                                     IsSelected="True">
-                            1
-                        </ComboBoxItem>
-                        <ComboBoxItem>
-                            2
-                        </ComboBoxItem>
-                        <ComboBoxItem>
-                            3
-                        </ComboBoxItem>
-                        <ComboBoxItem>
-                            4
-                        </ComboBoxItem>
-                    </ComboBox>
-                </StackPanel>
-            </Border>
-        </Grid>
-        <!-- Search -->
-    
-        <Grid Grid.Row="2">
-            <Border CornerRadius ="25"  Height="50" Width="200">
-                <Border.Background>
-                    <LinearGradientBrush>
-                        <GradientStop Color="#bfe063" Offset="0.7"/>
-                        <GradientStop Color="#a6d71b" Offset="0"/>
-                    </LinearGradientBrush>
-                </Border.Background>
+                                1
+                            </ComboBoxItem>
+                            <ComboBoxItem>
+                                2
+                            </ComboBoxItem>
+                            <ComboBoxItem>
+                                3
+                            </ComboBoxItem>
+                            <ComboBoxItem>
+                                4
+                            </ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel>
+                </Border>
+            </Grid>
+            <!-- Search -->
 
-                <Button
+            <Grid Grid.Row="2">
+                <Border CornerRadius ="25"  Height="50" Width="200">
+                    <Border.Background>
+                        <LinearGradientBrush>
+                            <GradientStop Color="#bfe063" Offset="0.7"/>
+                            <GradientStop Color="#a6d71b" Offset="0"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+
+                    <Button
                      Width="200" Height="50" Background="Transparent" BorderBrush="Transparent"
                      Content="Search" Foreground="White" FontSize="30" Click="btnSearch_Click" >
-                </Button>
-            </Border>
-        </Grid>
+                    </Button>
+                </Border>
+            </Grid>
         </Grid>
     </Grid>
 

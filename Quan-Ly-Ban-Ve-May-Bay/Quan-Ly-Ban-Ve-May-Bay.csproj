@@ -91,6 +91,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Data1\BANGTHAMSO.cs" />
     <Compile Include="Pages\FlightsList.xaml.cs">
       <DependentUpon>FlightsList.xaml</DependentUpon>
     </Compile>
@@ -174,7 +175,7 @@
     <Resource Include="Images\bg2.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Database\script.sql" />
+    <Content Include="Data1\script.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.8.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.8.0\build\MaterialDesignThemes.targets')" />

@@ -23,21 +23,36 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
     /// </summary>
     public partial class Home : Page
     {
-        /* SqlConnection sqlConnection = new SqlConnection(@"Server=(local);Database=Data;Trusted_Connection=Yes;");
+        SqlConnection sqlConnection = new SqlConnection(@"Server=(local);Database=QuanLyBanVeMayBay;Trusted_Connection=Yes;");
         SqlCommand sqlCommand = new SqlCommand();
         SqlDataAdapter adapter;
-        DataSet ds; */
+        DataSet ds;
         public event RoutedEventHandler Search;
         public Home()
         {
             InitializeComponent();
+            sqlConnection.Open();
+            sqlCommand = new SqlCommand(
+            "select distinct Tinh from SANBAY s, CHUYENBAY c where s.MaSanBay = c.SANBAYDEN ", sqlConnection);
+            adapter = new SqlDataAdapter(sqlCommand);
+            ds = new DataSet();
+            adapter.Fill(ds);
+            List<string> listDestination = new List<string>();
+            foreach (DataRow dr in ds.Tables[0].Rows) {
+                listDestination.Add(dr[0].ToString());
+            }
+            ds = null;
+            adapter.Dispose();
+            sqlConnection.Close();
+            sqlConnection.Dispose();
+            cbbDestination.ItemsSource = listDestination;
             //bindcombobox();
         }
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
             Search?.Invoke(this, new RoutedEventArgs());
         }
-        /*private void bindcombobox()
+        /*private void set()
         {
             sqlConnection.Open();
             sqlCommand = new SqlCommand("select * from ccb_destination", sqlConnection);
@@ -63,12 +78,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
             cbb_to.ItemsSource = destinations;
             cbb_to.DisplayMemberPath = "city";
 
-        }
-        public class destination
-        {
-            public string code { get; set; }
-            public string city { get; set; }
         }*/
-
+        
     }
 }

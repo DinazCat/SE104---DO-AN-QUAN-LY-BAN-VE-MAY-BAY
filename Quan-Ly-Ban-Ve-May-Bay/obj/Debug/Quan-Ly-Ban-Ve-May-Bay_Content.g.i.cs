@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("database/script.sql")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("data1/script.sql")]
 
 
