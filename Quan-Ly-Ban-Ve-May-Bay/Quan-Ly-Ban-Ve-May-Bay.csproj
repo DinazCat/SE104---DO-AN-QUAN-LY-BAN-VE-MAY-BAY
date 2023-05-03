@@ -92,6 +92,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Data1\BANGTHAMSO.cs" />
+    <Compile Include="Flight.cs" />
     <Compile Include="Pages\FlightsList.xaml.cs">
       <DependentUpon>FlightsList.xaml</DependentUpon>
     </Compile>

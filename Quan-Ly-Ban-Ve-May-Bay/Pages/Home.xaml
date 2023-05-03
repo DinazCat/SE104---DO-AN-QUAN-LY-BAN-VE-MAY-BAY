@@ -45,7 +45,7 @@
                     <StackPanel>
 
                         <TextBlock Margin="0 25 0 0" Height="50" Width="150" Text="From" Foreground="White" FontSize="30"/>
-                        <ComboBox Name="cbb_from"
+                        <ComboBox Name="cbbDeparture"
                                 materialDesign:HintAssist.Hint="City." 
                                 Width="150" FontSize="20" VerticalAlignment="Center" Foreground="#3f7e32"
                                 Style="{StaticResource MaterialDesignFloatingHintComboBox}">
@@ -87,7 +87,8 @@
                         <DatePicker Width="150" FontSize="20" Margin="0 14 0 0"
                                         materialDesign:HintAssist.Hint="Pick Date" Foreground="#3f7e32"
                                         VerticalAlignment="Center" 
-                                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}" 
+                                        Name="date"/>
                     </StackPanel>
 
 
@@ -102,7 +103,7 @@
                     </Border.Background>
                     <StackPanel>
                         <TextBlock Margin="0 25 0 0" Height="50" Width="150" Text="Adults" Foreground="White" FontSize="30"/>
-                        <ComboBox
+                        <ComboBox Name ="cbbAdultsNumber"
                                 materialDesign:HintAssist.Hint="Person." Margin="0 5 0 0"
                                 Width="150" FontSize="20" VerticalAlignment="Center" Foreground="#3f7e32"
                                 Style="{StaticResource MaterialDesignFloatingHintComboBox}">
@@ -136,7 +137,7 @@
 
                     <Button
                      Width="200" Height="50" Background="Transparent" BorderBrush="Transparent"
-                     Content="Search" Foreground="White" FontSize="30" Click="btnSearch_Click" >
+                     Content="Search" Foreground="White" FontSize="30" Click="btnSearch_Click" VerticalAlignment="Top" >
                     </Button>
                 </Border>
             </Grid>

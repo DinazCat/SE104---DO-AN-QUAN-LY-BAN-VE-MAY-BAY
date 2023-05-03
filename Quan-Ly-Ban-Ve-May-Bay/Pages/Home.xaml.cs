@@ -23,6 +23,30 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
     /// </summary>
     public partial class Home : Page
     {
+        private string departure;
+        private string destination;
+        DateTime _date;
+        private int adultsNumber;
+        public string Departure
+        {
+            get { return departure; }
+            set { departure = value; }
+        }
+        public string Destination
+        {
+            get { return destination; } 
+            set { destination = value; }        
+        } 
+        public DateTime Date
+        {
+            get { return _date; }
+            set { _date = value; }
+        }
+        public int AdultsNumber
+        {
+            set { adultsNumber = value; }
+            get { return adultsNumber; }
+        }
         SqlConnection sqlConnection = new SqlConnection(@"Server=(local);Database=QuanLyBanVeMayBay;Trusted_Connection=Yes;");
         SqlCommand sqlCommand = new SqlCommand();
         SqlDataAdapter adapter;
@@ -32,53 +56,56 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
         {
             InitializeComponent();
             sqlConnection.Open();
+            addDataToCCBDeparture();
+            addDataToCCBDestination();
+            ds = null;
+            adapter.Dispose();
+            sqlConnection.Close();
+            sqlConnection.Dispose();
+        }
+        public void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            if (cbbDeparture.Text == "" || cbbDestination.Text == "" || cbbAdultsNumber.Text == "" || date.Text == "")
+            {
+                MessageBox.Show("Mời bạn chọn đầy đủ thông tin");
+            }
+            else
+            {
+                Search?.Invoke(this, new RoutedEventArgs());
+                departure = cbbDeparture.Text;
+                destination = cbbDestination.Text;
+                adultsNumber = int.Parse(cbbAdultsNumber.Text);
+                _date = DateTime.Parse(date.Text);
+            }
+        }
+        void addDataToCCBDestination()
+        {
             sqlCommand = new SqlCommand(
             "select distinct Tinh from SANBAY s, CHUYENBAY c where s.MaSanBay = c.SANBAYDEN ", sqlConnection);
             adapter = new SqlDataAdapter(sqlCommand);
             ds = new DataSet();
             adapter.Fill(ds);
             List<string> listDestination = new List<string>();
-            foreach (DataRow dr in ds.Tables[0].Rows) {
-                listDestination.Add(dr[0].ToString());
-            }
-            ds = null;
-            adapter.Dispose();
-            sqlConnection.Close();
-            sqlConnection.Dispose();
-            cbbDestination.ItemsSource = listDestination;
-            //bindcombobox();
-        }
-        private void btnSearch_Click(object sender, RoutedEventArgs e)
-        {
-            Search?.Invoke(this, new RoutedEventArgs());
-        }
-        /*private void set()
-        {
-            sqlConnection.Open();
-            sqlCommand = new SqlCommand("select * from ccb_destination", sqlConnection);
-            adapter = new SqlDataAdapter(sqlCommand);
-            ds = new DataSet();
-            adapter.Fill(ds, "ccb_destination");
-            IList<destination> destinations = new List<destination>();
-
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
-                destinations.Add(new destination
-                {
-                    code = dr[0].ToString(),
-                    city = dr[1].ToString()
-                });
+                listDestination.Add(dr[0].ToString());
             }
-            ds = null;
-            adapter.Dispose();
-            sqlConnection.Close();
-            sqlConnection.Dispose();
-            cbb_from.ItemsSource = destinations;
-            cbb_from.DisplayMemberPath = "city";
-            cbb_to.ItemsSource = destinations;
-            cbb_to.DisplayMemberPath = "city";
-
-        }*/
+            cbbDestination.ItemsSource = listDestination;
+        }
+        void addDataToCCBDeparture()
+        {
+            sqlCommand = new SqlCommand(
+            "select distinct Tinh from SANBAY s, CHUYENBAY c where s.MaSanBay = c.SANBAYDI ", sqlConnection);
+            adapter = new SqlDataAdapter(sqlCommand);
+            ds = new DataSet();
+            adapter.Fill(ds);
+            List<string> listDeparture = new List<string>();
+            foreach (DataRow dr in ds.Tables[0].Rows)
+            {
+                listDeparture.Add(dr[0].ToString());
+            }
+            cbbDeparture.ItemsSource = listDeparture;
+        }
         
     }
 }

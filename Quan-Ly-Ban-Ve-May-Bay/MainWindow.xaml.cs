@@ -40,6 +40,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
         private void Home_Search(object sender, RoutedEventArgs e)
         {
             FlightsList flight = new FlightsList();
+
             fContainer.Content = flight;
             flight.ShowDetail += Flight_ShowDetail;
         }
