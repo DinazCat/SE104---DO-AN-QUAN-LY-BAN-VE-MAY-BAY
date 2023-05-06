@@ -47,7 +47,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
             set { adultsNumber = value; }
             get { return adultsNumber; }
         }
-        SqlConnection sqlConnection = new SqlConnection(@"Server=(local);Database=QuanLyBanVeMayBay;Trusted_Connection=Yes;");
+        SqlConnection sqlConnection = new SqlConnection(@"Server=.\SQLEXPRESS;Database=QuanLyBanVeMayBay;Trusted_Connection=Yes;");
         SqlCommand sqlCommand = new SqlCommand();
         SqlDataAdapter adapter;
         DataSet ds;
@@ -62,6 +62,8 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
             adapter.Dispose();
             sqlConnection.Close();
             sqlConnection.Dispose();
+            cbbDestination.Items.Add("abc");
+            cbbDeparture.Items.Add("abc");
         }
         public void btnSearch_Click(object sender, RoutedEventArgs e)
         {
@@ -90,7 +92,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
             {
                 listDestination.Add(dr[0].ToString());
             }
-            cbbDestination.ItemsSource = listDestination;
+           // cbbDestination.ItemsSource = listDestination;
         }
         void addDataToCCBDeparture()
         {
@@ -104,7 +106,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
             {
                 listDeparture.Add(dr[0].ToString());
             }
-            cbbDeparture.ItemsSource = listDeparture;
+           // cbbDeparture.ItemsSource = listDeparture;
         }
         
     }

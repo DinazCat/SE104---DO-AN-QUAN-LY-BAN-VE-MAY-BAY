@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\App.xaml
-5-707252347
-
-10-198414656
+14524210463
+1-1546700801
+20-1745474688
 22859504676
-Pages\FlightsList.xaml;MainWindow.xaml;Pages\FlightDetail.xaml;Pages\Home.xaml;Style\MainStyle.xaml;
+Pages\FlightsList.xaml;MainWindow.xaml;Pages\FlightDetail.xaml;Pages\Home.xaml;Style\MainStyle.xaml;UserControls\AdminRight.xaml;UserControls\Chuyenbay.xaml;UserControls\MonthRevenue.xaml;UserControls\QLCB_SB.xaml;UserControls\Sanbay.xaml;UserControls\YearRevenue.xaml;View\AddChuyenbay.xaml;View\AddSanBay.xaml;View\AddSBTG.xaml;
 
-True
+False
 

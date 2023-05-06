@@ -77,6 +77,9 @@
                                 <TextBlock Margin="15 0 0 0" FontSize="20" Text="Settings" Foreground="#FFF"/>
                             </StackPanel>
                         </Button>
+                        <Button HorizontalAlignment="Left" Margin="10 0 0 0" Height="35" Click="AdminAccessBtn" >
+                            <TextBlock Margin="15 0 0 0" FontSize="20" Text="Admin Right" Foreground="#FFF" />
+                        </Button>
                     </StackPanel>
                 </Grid>
             </Grid>

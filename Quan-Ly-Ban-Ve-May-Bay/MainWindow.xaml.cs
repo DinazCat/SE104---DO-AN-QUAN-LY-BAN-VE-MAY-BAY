@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using System.Data;
 using System.Data.SqlClient;
 using Quan_Ly_Ban_Ve_May_Bay.Pages;
+using Quan_Ly_Ban_Ve_May_Bay.UserControls;
 
 namespace Quan_Ly_Ban_Ve_May_Bay
 {
@@ -40,7 +41,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay
         private void Home_Search(object sender, RoutedEventArgs e)
         {
             FlightsList flight = new FlightsList();
-
             fContainer.Content = flight;
             flight.ShowDetail += Flight_ShowDetail;
         }
@@ -50,6 +50,11 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             FlightDetail flightDetai = new FlightDetail();
             fContainer.Content = flightDetai;
 
+        }
+        private void AdminAccessBtn(object sender, RoutedEventArgs e)
+        {
+            AdminRight adminRight = new AdminRight();
+            fContainer.Content = adminRight;
         }
     }
 }
