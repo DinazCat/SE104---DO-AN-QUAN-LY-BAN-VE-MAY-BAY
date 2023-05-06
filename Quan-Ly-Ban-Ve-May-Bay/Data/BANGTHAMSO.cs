@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Quan_Ly_Ban_Ve_May_Bay
+namespace Quan_Ly_Ban_Ve_May_Bay.Data
 {
     internal class BANGTHAMSO
     {
@@ -22,7 +22,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             }
             set
             {
-                thoiGianBayToiThieu = value;    
+                thoiGianBayToiThieu = value;
             }
         }
         public static int ThoiGianBayToiDa
