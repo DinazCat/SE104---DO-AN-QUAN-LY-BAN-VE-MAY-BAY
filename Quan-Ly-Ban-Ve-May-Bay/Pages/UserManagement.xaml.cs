@@ -1,0 +1,106 @@
+﻿using Quan_Ly_Ban_Ve_May_Bay.Model;
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using static Quan_Ly_Ban_Ve_May_Bay.UserControls.Chuyenbay;
+using Quan_Ly_Ban_Ve_May_Bay.View;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+
+namespace Quan_Ly_Ban_Ve_May_Bay.Pages
+{
+    /// <summary>
+    /// Interaction logic for UserManagement.xaml
+    /// </summary>
+    public partial class UserManagement : Page
+    {
+        
+        public UserManagement()
+        {
+            InitializeComponent();
+            loadData();
+        }
+        void loadData()
+        {
+            UserTable.Items.Clear();
+            string query = "SELECT * FROM TAIKHOAN";
+            DataTable dt;
+            using (SqlDataReader reader = DataProvider.ExecuteReader(query, CommandType.Text))
+            {
+                dt = new DataTable();
+                if (reader.HasRows)
+                {
+                    dt.Load(reader);
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        Account account = new Account();
+                        account.id = dr[0].ToString();
+                        account.username= dr[1].ToString();
+                        account.password= dr[2].ToString();
+                        account.type = dr.Field<int>(3);
+                        account.email = dr[4].ToString();
+                        account.displayname = dr[5].ToString();
+                        UserTable.Items.Add(account);
+                    }
+                }
+            }
+           
+        }
+        private void add_Click(object sender, RoutedEventArgs e)
+        {
+            UserForm userForm = new UserForm(0);
+            userForm.ShowDialog();
+            if(userForm.isSaved)
+                loadData();
+        }
+
+        private void delete_Click(object sender, RoutedEventArgs e)
+        {
+            Account selectedAccount = UserTable.SelectedItem as Account;
+            if (selectedAccount != null)
+            {
+                if (MessageBox.Show("Bạn có chắc muốn xóa tài khoản này không?", "Xác nhận xóa tài khoản", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    SqlConnection sqlCon = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
+                    sqlCon.Open();
+                    SqlCommand cmd = new SqlCommand("Delete from [TAIKHOAN]  where MaTK='" + selectedAccount.id + "'", sqlCon);
+                    cmd.CommandType = CommandType.Text;
+                    cmd.ExecuteNonQuery();
+                    sqlCon.Close();
+                    UserTable.Items.Remove(selectedAccount);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn dòng bạn muốn xóa!");
+            }
+        }
+
+        private void update_Click(object sender, RoutedEventArgs e)
+        {
+            Account selectedAccount = UserTable.SelectedItem as Account;
+            if(selectedAccount != null) {
+                UserForm userForm = new UserForm(1, selectedAccount);
+                userForm.ShowDialog();
+                if (userForm.isSaved)
+                    loadData();
+            }
+            else {
+                MessageBox.Show("Vui lòng chọn dòng bạn muốn sửa!");
+            }
+        }
+    }
+}

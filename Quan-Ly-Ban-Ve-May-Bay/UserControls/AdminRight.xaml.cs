@@ -42,6 +42,11 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
             {
                 frame.NavigationService.Navigate(qLCB);
             }
+
+        private void TDQD_Click(object sender, RoutedEventArgs e)
+        {
+            frame.NavigationService.Navigate(new RuleChange());
         }
+    }
     
 }

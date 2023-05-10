@@ -83,7 +83,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay
 
         private void RaisePropertyChanged([CallerMemberName] string propertyName = "")
         {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

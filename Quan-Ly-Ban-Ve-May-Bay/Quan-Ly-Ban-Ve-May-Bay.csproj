@@ -59,8 +59,10 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -79,6 +81,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Account.cs" />
+    <Compile Include="Pages\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Register.xaml.cs">
+      <DependentUpon>Register.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\UserManagement.xaml.cs">
+      <DependentUpon>UserManagement.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\AdminRight.xaml.cs">
       <DependentUpon>AdminRight.xaml</DependentUpon>
     </Compile>
@@ -91,12 +103,16 @@
     <Compile Include="UserControls\QLCB_SB.xaml.cs">
       <DependentUpon>QLCB_SB.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\RuleChange.xaml.cs">
+      <DependentUpon>RuleChange.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Sanbay.xaml.cs">
       <DependentUpon>Sanbay.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\YearRevenue.xaml.cs">
       <DependentUpon>YearRevenue.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\RuleChangeVM.cs" />
     <Compile Include="View\AddChuyenbay.xaml.cs">
       <DependentUpon>AddChuyenbay.xaml</DependentUpon>
     </Compile>
@@ -105,6 +121,9 @@
     </Compile>
     <Compile Include="View\AddSBTG.xaml.cs">
       <DependentUpon>AddSBTG.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserForm.xaml.cs">
+      <DependentUpon>UserForm.xaml</DependentUpon>
     </Compile>
     <Page Include="Pages\FlightsList.xaml">
       <SubType>Designer</SubType>
@@ -119,7 +138,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Data\BANGTHAMSO.cs" />
-    <Compile Include="Flight.cs" />
+    <Compile Include="Model\Flight.cs" />
     <Compile Include="Model\DataProvider.cs" />
     <Compile Include="Pages\FlightsList.xaml.cs">
       <DependentUpon>FlightsList.xaml</DependentUpon>
@@ -133,6 +152,18 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\Home.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Register.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\UserManagement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -156,6 +187,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\RuleChange.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\Sanbay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -173,6 +208,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AddSBTG.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UserForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -241,6 +280,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Data\script.sql" />
+    <Resource Include="Images\key.png" />
+    <Resource Include="Images\usersetting.png" />
+    <Resource Include="Images\logout.png" />
+    <Resource Include="Images\login.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

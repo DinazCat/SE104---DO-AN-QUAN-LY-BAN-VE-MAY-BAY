@@ -23,8 +23,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Model
             conn.Open();
             SqlDataReader reader = cmd.ExecuteReader();
             return reader;
-
-
         }
     }
 }

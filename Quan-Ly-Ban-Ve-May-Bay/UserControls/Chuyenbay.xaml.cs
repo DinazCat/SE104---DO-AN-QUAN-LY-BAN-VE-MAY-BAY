@@ -29,13 +29,13 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
         public Chuyenbay()
         {
             InitializeComponent();
-            loadDatatoTable();
+            //loadDatatoTable();
         }
         public Chuyenbay(QLCB_SB q)
         {
             InitializeComponent();
             this.q = q;
-            loadDatatoTable();
+            //loadDatatoTable();
         }
         public void loadDatatoTable()
         {
