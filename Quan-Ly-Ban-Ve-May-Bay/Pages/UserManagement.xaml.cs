@@ -19,15 +19,39 @@ using static Quan_Ly_Ban_Ve_May_Bay.UserControls.Chuyenbay;
 using Quan_Ly_Ban_Ve_May_Bay.View;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using System.Globalization;
 
 namespace Quan_Ly_Ban_Ve_May_Bay.Pages
 {
     /// <summary>
     /// Interaction logic for UserManagement.xaml
     /// </summary>
-    public partial class UserManagement : Page
+    public class AccountTypeConverter : IValueConverter
     {
-        
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            int accountType = (int)value;
+            switch (accountType)
+            {
+                case 1:
+                    return "Admin";
+                case 2:
+                    return "Nhân viên";
+                case 3:
+                    return "Khách hàng";
+                default:
+                    return "";
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public partial class UserManagement : Page
+    {      
+
         public UserManagement()
         {
             InitializeComponent();
@@ -102,5 +126,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
                 MessageBox.Show("Vui lòng chọn dòng bạn muốn sửa!");
             }
         }
+       
+
     }
 }

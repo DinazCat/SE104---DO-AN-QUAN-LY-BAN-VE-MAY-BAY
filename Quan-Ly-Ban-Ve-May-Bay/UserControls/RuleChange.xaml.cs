@@ -87,11 +87,11 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
         }
         private void OkTGBTDBtn_Click(object sender, RoutedEventArgs e)
         {
-            panelTGBTT.Visibility = Visibility.Collapsed;
-            TGBTT.IsReadOnly = true;
+            panelTGBTD.Visibility = Visibility.Collapsed;
+            TGBTD.IsReadOnly = true;
             try
             {
-                ruleChangeVM.ThoiGianBayToiDa = int.Parse(TGBTT.Text);
+                ruleChangeVM.ThoiGianBayToiDa = int.Parse(TGBTD.Text);
             }
             catch (Exception ex)
             {
@@ -100,17 +100,17 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
         }
         private void CancelTGBTDBtn_Click(object sender, RoutedEventArgs e)
         {
-            panelTGBTT.Visibility = Visibility.Collapsed;
-            TGBTT.IsReadOnly = true;
-            TGBTT.Text = ruleChangeVM.ThoiGianBayToiDa.ToString();
+            panelTGBTD.Visibility = Visibility.Collapsed;
+            TGBTD.IsReadOnly = true;
+            TGBTD.Text = ruleChangeVM.ThoiGianBayToiDa.ToString();
         }
         private void OkTGDTTBtn_Click(object sender, RoutedEventArgs e)
         {
-            panelTGBTT.Visibility = Visibility.Collapsed;
-            TGBTT.IsReadOnly = true;
+            panelTGDTT.Visibility = Visibility.Collapsed;
+            TGDTT.IsReadOnly = true;
             try
             {
-                ruleChangeVM.ThoiGianDungToiThieu = int.Parse(TGBTT.Text);
+                ruleChangeVM.ThoiGianDungToiThieu = int.Parse(TGDTT.Text);
             }
             catch (Exception ex)
             {
@@ -119,17 +119,17 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
         }
         private void CancelTGDTTBtn_Click(object sender, RoutedEventArgs e)
         {
-            panelTGBTT.Visibility = Visibility.Collapsed;
-            TGBTT.IsReadOnly = true;
-            TGBTT.Text = ruleChangeVM.ThoiGianDungToiThieu.ToString();
+            panelTGDTT.Visibility = Visibility.Collapsed;
+            TGDTT.IsReadOnly = true;
+            TGDTT.Text = ruleChangeVM.ThoiGianDungToiThieu.ToString();
         }
         private void OkTGDTDBtn_Click(object sender, RoutedEventArgs e)
         {
-            panelTGBTT.Visibility = Visibility.Collapsed;
-            TGBTT.IsReadOnly = true;
+            panelTGDTD.Visibility = Visibility.Collapsed;
+            TGDTD.IsReadOnly = true;
             try
             {
-                ruleChangeVM.ThoiGianDungToiDa = int.Parse(TGBTT.Text);
+                ruleChangeVM.ThoiGianDungToiDa = int.Parse(TGDTD.Text);
             }
             catch (Exception ex)
             {
@@ -138,17 +138,17 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
         }
         private void CancelTGDTDBtn_Click(object sender, RoutedEventArgs e)
         {
-            panelTGBTT.Visibility = Visibility.Collapsed;
-            TGBTT.IsReadOnly = true;
-            TGBTT.Text = ruleChangeVM.ThoiGianDungToiDa.ToString();
+            panelTGDTD.Visibility = Visibility.Collapsed;
+            TGDTD.IsReadOnly = true;
+            TGDTD.Text = ruleChangeVM.ThoiGianDungToiDa.ToString();
         }
         private void OkSGTKHCPHVBtn_Click(object sender, RoutedEventArgs e)
         {
-            panelTGBTT.Visibility = Visibility.Collapsed;
-            TGBTT.IsReadOnly = true;
+            panelSGTKHCPHV.Visibility = Visibility.Collapsed;
+            SGTKHCPHV.IsReadOnly = true;
             try
             {
-                ruleChangeVM.SoGioTruocKhoiHanhChoPhepDatVe = int.Parse(TGBTT.Text);
+                ruleChangeVM.SoGioTruocKhoiHanhChoPhepDatVe = int.Parse(SGTKHCPHV.Text);
             }
             catch (Exception ex)
             {
@@ -157,17 +157,17 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
         }
         private void CancelSGTKHCPHVBtn_Click(object sender, RoutedEventArgs e)
         {
-            panelTGBTT.Visibility = Visibility.Collapsed;
-            TGBTT.IsReadOnly = true;
-            TGBTT.Text = ruleChangeVM.SoGioTruocKhoiHanhChoPhepDatVe.ToString();
+            panelSGTKHCPHV.Visibility = Visibility.Collapsed;
+            SGTKHCPHV.IsReadOnly = true;
+            SGTKHCPHV.Text = ruleChangeVM.SoGioTruocKhoiHanhChoPhepDatVe.ToString();
         }
         private void OkSGTKHCPDVBtn_Click(object sender, RoutedEventArgs e)
         {
-            panelTGBTT.Visibility = Visibility.Collapsed;
-            TGBTT.IsReadOnly = true;
+            panelSGTKHCPDV.Visibility = Visibility.Collapsed;
+            SGTKHCPDV.IsReadOnly = true;
             try
             {
-                ruleChangeVM.SoGioTruocKhoiHanhChoPhepHuyVe = int.Parse(TGBTT.Text);
+                ruleChangeVM.SoGioTruocKhoiHanhChoPhepHuyVe = int.Parse(SGTKHCPDV.Text);
             }
             catch (Exception ex)
             {
@@ -176,9 +176,9 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
         }
         private void CancelSGTKHCPDVBtn_Click(object sender, RoutedEventArgs e)
         {
-            panelTGBTT.Visibility = Visibility.Collapsed;
-            TGBTT.IsReadOnly = true;
-            TGBTT.Text = ruleChangeVM.SoGioTruocKhoiHanhChoPhepHuyVe.ToString();
+            panelSGTKHCPDV.Visibility = Visibility.Collapsed;
+            SGTKHCPDV.IsReadOnly = true;
+            SGTKHCPDV.Text = ruleChangeVM.SoGioTruocKhoiHanhChoPhepHuyVe.ToString();
         }
     }
 }

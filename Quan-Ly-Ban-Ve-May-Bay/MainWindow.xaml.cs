@@ -26,7 +26,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
 
     public partial class MainWindow : Window
     {
-        public static Account curAccount;
+        public static Account curAccount = null;
         public MainWindow()
         {
             InitializeComponent();

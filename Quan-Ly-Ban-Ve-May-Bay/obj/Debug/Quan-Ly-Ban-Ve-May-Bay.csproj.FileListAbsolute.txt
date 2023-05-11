@@ -130,3 +130,4 @@ D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Pages\UserManagement.g.cs
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Pages\UserManagement.baml
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\View\UserForm.g.cs
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\View\UserForm.baml
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\GeneratedInternalTypeHelper.g.cs
