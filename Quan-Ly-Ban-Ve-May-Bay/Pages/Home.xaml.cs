@@ -58,6 +58,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
             sqlConnection.Open();
             addDataToCCBDeparture();
             addDataToCCBDestination();
+            addDataToClass();
             ds = null;
             adapter.Dispose();
             sqlConnection.Close();
@@ -67,7 +68,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
         }
         public void btnSearch_Click(object sender, RoutedEventArgs e)
         {
-            if (cbbDeparture.Text == "" || cbbDestination.Text == "" || cbbAdultsNumber.Text == "" || date.Text == "")
+            if (cbbDeparture.Text == "" || cbbDestination.Text == "" || cbbQuantity.Text == "" || date.Text == "")
             {
                 MessageBox.Show("Mời bạn chọn đầy đủ thông tin");
             }
@@ -76,11 +77,11 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
                 Search?.Invoke(this, new RoutedEventArgs());
                 departure = cbbDeparture.Text;
                 destination = cbbDestination.Text;
-                adultsNumber = int.Parse(cbbAdultsNumber.Text);
+                adultsNumber = int.Parse(cbbQuantity.Text);
                 _date = DateTime.Parse(date.Text);
             }
         }
-        void addDataToCCBDestination()
+        private void addDataToCCBDestination()
         {
             sqlCommand = new SqlCommand(
             "select distinct Tinh from SANBAY s, CHUYENBAY c where s.MaSanBay = c.SANBAYDEN ", sqlConnection);
@@ -92,9 +93,9 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
             {
                 listDestination.Add(dr[0].ToString());
             }
-           // cbbDestination.ItemsSource = listDestination;
+            //cbbDestination.ItemsSource = listDestination;
         }
-        void addDataToCCBDeparture()
+        private void addDataToCCBDeparture()
         {
             sqlCommand = new SqlCommand(
             "select distinct Tinh from SANBAY s, CHUYENBAY c where s.MaSanBay = c.SANBAYDI ", sqlConnection);
@@ -106,8 +107,21 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
             {
                 listDeparture.Add(dr[0].ToString());
             }
-           // cbbDeparture.ItemsSource = listDeparture;
+          // cbbDeparture.ItemsSource = listDeparture;
         }
-        
+        private void addDataToClass()
+        {
+            sqlCommand = new SqlCommand(
+            "select TenHangVe from HANGVE", sqlConnection);
+            adapter = new SqlDataAdapter(sqlCommand);
+            ds = new DataSet();
+            adapter.Fill(ds);
+            List<string> listDeparture = new List<string>();
+            foreach (DataRow dr in ds.Tables[0].Rows)
+            {
+                listDeparture.Add(dr[0].ToString());
+            }
+            cbbClass.ItemsSource = listDeparture;
+        }
     }
 }

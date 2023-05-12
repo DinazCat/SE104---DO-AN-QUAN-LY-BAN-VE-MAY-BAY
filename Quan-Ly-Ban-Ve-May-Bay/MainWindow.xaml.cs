@@ -26,33 +26,38 @@ namespace Quan_Ly_Ban_Ve_May_Bay
 
     public partial class MainWindow : Window
     {
+        private Home home;
+        private FlightsList flights;
+        private FlightDetail flightDetail;
         public static Account curAccount = null;
         public MainWindow()
         {
             InitializeComponent();
-            Home home = new Home();
+            home = new Home();
+            flights = new FlightsList();
+            flightDetail = new FlightDetail();
             home.Search += Home_Search;
+            flights.ShowDetail += Flight_ShowDetail;
+            flights.Return += btnHome_Click;
+            flightDetail.Return += Home_Search;
+            flights.Search += btnHome_Click;
             fContainer.Content = home;
         }
+
+
         private void btnHome_Click(object sender, RoutedEventArgs e)
         {
-            Home home = new Home();
-            home.Search += Home_Search;
             fContainer.Content = home; 
         }
 
         private void Home_Search(object sender, RoutedEventArgs e)
         {
-            FlightsList flight = new FlightsList();
-            fContainer.Content = flight;
-            flight.ShowDetail += Flight_ShowDetail;
+            fContainer.Content = flights;
         }
 
         private void Flight_ShowDetail(object sender, RoutedEventArgs e)
         {
-            FlightDetail flightDetai = new FlightDetail();
-            fContainer.Content = flightDetai;
-
+            fContainer.Content = flightDetail ;
         }
         private void AdminAccessBtn(object sender, RoutedEventArgs e)
         {

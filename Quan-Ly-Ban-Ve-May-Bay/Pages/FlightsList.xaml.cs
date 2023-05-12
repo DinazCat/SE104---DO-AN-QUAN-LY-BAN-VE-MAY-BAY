@@ -1,4 +1,5 @@
 ﻿using MaterialDesignColors;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,6 +27,8 @@ namespace Quan_Ly_Ban_Ve_May_Bay
     public partial class FlightsList : Page
     {
         public event RoutedEventHandler ShowDetail;
+        public event RoutedEventHandler Return;
+        public event RoutedEventHandler Search;
         public FlightsList()
         {
             InitializeComponent();
@@ -46,6 +49,17 @@ namespace Quan_Ly_Ban_Ve_May_Bay
                 FlightList.SelectedIndex = -1;
             }
         }
+
+        private void btnReturn_Click(object sender, RoutedEventArgs e)
+        {
+            Return?.Invoke(this, new RoutedEventArgs());
+        }
+
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            Search?.Invoke(this, new RoutedEventArgs());
+        }
+
     }
 
 }

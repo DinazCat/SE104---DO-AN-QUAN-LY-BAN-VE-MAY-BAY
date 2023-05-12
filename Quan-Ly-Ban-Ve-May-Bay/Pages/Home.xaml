@@ -26,12 +26,12 @@
             <!-- Search Flight -->
             <Grid Margin="0,0,0,5" Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50"/>
-                    <ColumnDefinition Width="200"/>
-                    <ColumnDefinition Width="200"/>
-                    <ColumnDefinition Width="200"/>
-                    <ColumnDefinition Width="200"/>
-                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="190"/>
+                    <ColumnDefinition Width="190"/>
+                    <ColumnDefinition Width="190"/>
+                    <ColumnDefinition Width="190"/>
+                    <ColumnDefinition Width="190"/>
                 </Grid.ColumnDefinitions>
 
                 <!--From -->
@@ -84,16 +84,17 @@
 
                         <TextBlock Margin="0 25 0 0" Height="50" Width="150" Text="Date" 
                                                Foreground="White" FontSize="30"/>
-                        <DatePicker Width="150" FontSize="20" Margin="0 14 0 0"
+                        <DatePicker Width="150" FontSize="20" Margin="0 20 0 0"
                                         materialDesign:HintAssist.Hint="Pick Date" Foreground="#3f7e32"
                                         VerticalAlignment="Center" 
-                                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}" 
+                                        Style="{StaticResource MaterialDesignDatePicker}" 
                                         Name="date"/>
                     </StackPanel>
 
 
                 </Border>
-                <!-- Adults -->
+                
+                
                 <Border CornerRadius ="25" Grid.Column="4" Height="150" Width="180" Margin="-20 0 0 0" >
                     <Border.Background>
                         <LinearGradientBrush>
@@ -102,9 +103,25 @@
                         </LinearGradientBrush>
                     </Border.Background>
                     <StackPanel>
-                        <TextBlock Margin="0 25 0 0" Height="50" Width="150" Text="Adults" Foreground="White" FontSize="30"/>
-                        <ComboBox Name ="cbbAdultsNumber"
-                                materialDesign:HintAssist.Hint="Person." Margin="0 5 0 0"
+                        <TextBlock Margin="0 25 0 0" Height="50" Width="150" Text="Class" Foreground="White" FontSize="30"/>
+                        <ComboBox Name ="cbbClass"
+                                Width="150" FontSize="20" VerticalAlignment="Center" Foreground="#3f7e32"
+                                Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                            
+                        </ComboBox>
+                    </StackPanel>
+                </Border>
+                <!-- Adults -->
+                <Border CornerRadius ="25" Grid.Column="5" Height="150" Width="180" Margin="-20 0 0 0" >
+                    <Border.Background>
+                        <LinearGradientBrush>
+                            <GradientStop Color="#bfe063" Offset="0.7"/>
+                            <GradientStop Color="#a6d71b" Offset="0"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <StackPanel>
+                        <TextBlock Margin="0 25 0 0" Height="50" Width="150" Text="Quantity" Foreground="White" FontSize="30"/>
+                        <ComboBox Name ="cbbQuantity"
                                 Width="150" FontSize="20" VerticalAlignment="Center" Foreground="#3f7e32"
                                 Style="{StaticResource MaterialDesignFloatingHintComboBox}">
                             <ComboBoxItem
@@ -123,6 +140,7 @@
                         </ComboBox>
                     </StackPanel>
                 </Border>
+                
             </Grid>
             <!-- Search -->
 

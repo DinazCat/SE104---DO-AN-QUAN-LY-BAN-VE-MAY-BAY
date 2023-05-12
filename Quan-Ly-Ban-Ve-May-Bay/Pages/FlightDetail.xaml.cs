@@ -19,18 +19,20 @@ namespace Quan_Ly_Ban_Ve_May_Bay
     /// </summary>
     public partial class FlightDetail : Page
     {
-
+        public event RoutedEventHandler Return;
         public FlightDetail()
         {
             InitializeComponent();
             Dictionary<string, List<string>> D = new Dictionary<string, List<string>>();
             D.Add("A", new List<string>() { "a1", "a2"});
             D.Add("B", new List<string>() { "a1", "a2" });
-            Transit_ListView.ItemsSource = D;
             List<string> strings = new List<string>() { "a", "b" };
             HangVe_ListView.ItemsSource = strings;
             SeatChart.ItemsSource = strings;
         }
-
+        private void btnReturn_Click(object sender, RoutedEventArgs e)
+        {
+            Return?.Invoke(this, new RoutedEventArgs());
+        }
     }
 }
