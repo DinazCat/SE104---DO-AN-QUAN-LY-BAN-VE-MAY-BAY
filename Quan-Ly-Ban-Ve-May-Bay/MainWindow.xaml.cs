@@ -71,13 +71,16 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             }
             else
             {
-                MainWindow.curAccount = null;
-                tblLogin.Text = "Login";
-                BitmapImage bitmap = new BitmapImage(new Uri("/Images/login.png", UriKind.Relative));
-                imgLogin.Source = bitmap;
-                btn_UserManagement.Visibility = Visibility.Collapsed;
-                btn_SalesmanRight.Visibility = Visibility.Collapsed;
-                btnHome_Click(sender, e);
+                if (MessageBox.Show("Bạn có chắc muốn đăng xuất khỏi tài khoản này?", "Đăng xuất", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    MainWindow.curAccount = null;
+                    tblLogin.Text = "Login";
+                    BitmapImage bitmap = new BitmapImage(new Uri("/Images/login.png", UriKind.Relative));
+                    imgLogin.Source = bitmap;
+                    btn_UserManagement.Visibility = Visibility.Collapsed;
+                    btn_SalesmanRight.Visibility = Visibility.Collapsed;
+                    btnHome_Click(sender, e);
+                }
             }
         }
 

@@ -94,7 +94,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 int ID = rd.Next(100000, 999999);
                 sqlCon.Open();
                 int type = cbRBAC.SelectedIndex + 1;
-                SqlCommand cmd = new SqlCommand("Insert into [TaiKhoan] values('" + ID.ToString() + "',N'" + Username.Text + "',N'" + PasswordBox1.Password + "'," + type + ",'" + Email.Text + "',N'" + Displayname.Text + "')", sqlCon);
+                SqlCommand cmd = new SqlCommand("Insert into [TaiKhoan] values('" + "U" + ID + "',N'" + Username.Text + "',N'" + PasswordBox1.Password + "'," + type + ",'" + Email.Text + "',N'" + Displayname.Text + "')", sqlCon);
                 cmd.CommandType = CommandType.Text;
                 cmd.ExecuteNonQuery();
                 sqlCon.Close();

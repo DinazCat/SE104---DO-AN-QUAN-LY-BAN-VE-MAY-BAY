@@ -9,12 +9,12 @@ namespace Quan_Ly_Ban_Ve_May_Bay.ViewModel
 {
     internal class RuleChangeViewModel : INotifyPropertyChanged
     {
-        private int _thoiGianBayToiThieu = 30;
-        private int _thoiGianBayToiDa = 2;
-        private int _thoiGianDungToiThieu = 10;
-        private int _thoiGianDungToiDa = 20;
-        private int _soGioTruocKhoiHanhChoPhepDatVe = 24;
-        private int _soGioTruocKhoiHanhChoPhepHuyVe = 1;
+        private int _thoiGianBayToiThieu;
+        private int _soSanBayTrungGianToiDa;
+        private int _thoiGianDungToiThieu;
+        private int _thoiGianDungToiDa;
+        private int _soGioTruocKhoiHanhChoPhepDatVe;
+        private int _soGioTruocKhoiHanhChoPhepHuyVe;
         public int ThoiGianBayToiThieu
         {
             get { return _thoiGianBayToiThieu; }
@@ -27,15 +27,15 @@ namespace Quan_Ly_Ban_Ve_May_Bay.ViewModel
                 }
             }
         }
-        public int ThoiGianBayToiDa
+        public int SoSanBayTrungGianToiDa
         {
-            get { return _thoiGianBayToiDa; }
+            get { return _soSanBayTrungGianToiDa; }
             set
             {
-                if (_thoiGianBayToiDa != value)
+                if (_soSanBayTrungGianToiDa != value)
                 {
-                    _thoiGianBayToiDa = value;
-                    OnPropertyChanged("ThoiGianBayToiDa");
+                    _soSanBayTrungGianToiDa = value;
+                    OnPropertyChanged("SoSanBayTrungGianToiDa");
                 }
             }
         }

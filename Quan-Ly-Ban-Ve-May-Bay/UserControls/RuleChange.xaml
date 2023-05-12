@@ -12,7 +12,7 @@
     <StackPanel>
         <TextBlock Text="Bảng các quy định"  FontSize="25" TextAlignment="Center" Background="#8EB54C" Foreground="White"  FontWeight="Bold" FontFamily="Sitka Text" Padding="5"/>
         <DockPanel Margin="30 60 30 0">
-            <TextBlock Text="Thời gian bay tối thiểu"  FontSize="17" FontFamily="Cambria Math" Width="320" VerticalAlignment="Center"/>
+            <TextBlock Text="Thời gian bay tối thiểu (phút)"  FontSize="17" FontFamily="Cambria Math" Width="350" VerticalAlignment="Center"/>
             <TextBox x:Name="TGBTT" Text="{Binding ThoiGianBayToiThieu, Mode=OneWay}" FontSize="17" FontFamily="Cambria Math" BorderBrush="White" IsReadOnly="True"/>
             <Button Style="{StaticResource MaterialDesignIconButton}" HorizontalAlignment="Right" ToolTip="Chỉnh sửa"
                         Height="22" Width="40" Click="editTGBTT_Click">
@@ -20,27 +20,27 @@
             </Button>
         </DockPanel>
         <StackPanel x:Name="panelTGBTT"  Orientation="Horizontal" Visibility="Collapsed" Margin="0 8 0 0">
-            <Button Style="{StaticResource MaterialDesignRaisedLightButton}" Content="Đồng ý" Width="100" Margin="230 0 20 0" Background="#8EB54C" Click="OkTGBTTBtn_Click"/>
+            <Button Style="{StaticResource MaterialDesignRaisedLightButton}" Content="Đồng ý" Width="100" Margin="260 0 20 0" Background="#8EB54C" Click="OkTGBTTBtn_Click"/>
             <Button Style="{StaticResource MaterialDesignOutlinedLightButton}" Content="Hủy" Width="70" Click="CancelTGBTTBtn_Click"/>
         </StackPanel>
         <Border BorderThickness="0 1 0 0" BorderBrush="Gray" Margin="30 10"/>
         
         <DockPanel Margin="30 0">
-            <TextBlock Text="Thời gian bay tối đa"  FontSize="17" FontFamily="Cambria Math" Width="320" VerticalAlignment="Center"/>
-            <TextBox x:Name="TGBTD" Text="{Binding ThoiGianBayToiDa, Mode=OneWay}" FontSize="17" FontFamily="Cambria Math" BorderBrush="White" IsReadOnly="True"/>
+            <TextBlock Text="Số sân bay trung gian tối đa"  FontSize="17" FontFamily="Cambria Math" Width="350" VerticalAlignment="Center"/>
+            <TextBox x:Name="SSBTGTD" Text="{Binding SoSanBayTrungGianToiDa, Mode=OneWay}" FontSize="17" FontFamily="Cambria Math" BorderBrush="White" IsReadOnly="True"/>
             <Button Style="{StaticResource MaterialDesignIconButton}" HorizontalAlignment="Right" ToolTip="Chỉnh sửa"
-                        Height="22" Width="40" Click="editTGBTD_Click">
+                        Height="22" Width="40" Click="editSSBTGTD_Click">
                 <materialDesign:PackIcon Kind="Pencil"/>
             </Button>
         </DockPanel>
-        <StackPanel x:Name="panelTGBTD"  Orientation="Horizontal" Visibility="Collapsed" Margin="0 8 0 0">
-            <Button Style="{StaticResource MaterialDesignRaisedLightButton}" Content="Đồng ý" Width="100" Margin="230 0 20 0" Background="#8EB54C" Click="OkTGBTDBtn_Click"/>
-            <Button Style="{StaticResource MaterialDesignOutlinedLightButton}" Content="Hủy" Width="70" Click="CancelTGBTDBtn_Click"/>
+        <StackPanel x:Name="panelSSBTGTD"  Orientation="Horizontal" Visibility="Collapsed" Margin="0 8 0 0">
+            <Button Style="{StaticResource MaterialDesignRaisedLightButton}" Content="Đồng ý" Width="100" Margin="260 0 20 0" Background="#8EB54C" Click="OkSSBTGTDBtn_Click"/>
+            <Button Style="{StaticResource MaterialDesignOutlinedLightButton}" Content="Hủy" Width="70" Click="CancelSSBTGTDBtn_Click"/>
         </StackPanel>
         <Border BorderThickness="0 1 0 0" BorderBrush="Gray" Margin="30 10"/>
 
         <DockPanel Margin="30 0">
-            <TextBlock Text="Thời gian dừng tối thiểu"  FontSize="17" FontFamily="Cambria Math" Width="320" VerticalAlignment="Center"/>
+            <TextBlock Text="Thời gian dừng tối thiểu (phút)"  FontSize="17" FontFamily="Cambria Math" Width="350" VerticalAlignment="Center"/>
             <TextBox x:Name="TGDTT" Text="{Binding ThoiGianDungToiThieu, Mode=OneWay}"  FontSize="17" FontFamily="Cambria Math" BorderBrush="White" IsReadOnly="True"/>
             <Button Style="{StaticResource MaterialDesignIconButton}" HorizontalAlignment="Right" ToolTip="Chỉnh sửa"
                         Height="22" Width="40" Click="editTGDTT_Click">
@@ -48,13 +48,13 @@
             </Button>
         </DockPanel>
         <StackPanel x:Name="panelTGDTT"  Orientation="Horizontal" Visibility="Collapsed" Margin="0 8 0 0">
-            <Button Style="{StaticResource MaterialDesignRaisedLightButton}" Content="Đồng ý" Width="100" Margin="230 0 20 0" Background="#8EB54C" Click="OkTGDTTBtn_Click"/>
+            <Button Style="{StaticResource MaterialDesignRaisedLightButton}" Content="Đồng ý" Width="100" Margin="260 0 20 0" Background="#8EB54C" Click="OkTGDTTBtn_Click"/>
             <Button Style="{StaticResource MaterialDesignOutlinedLightButton}" Content="Hủy" Width="70" Click="CancelTGDTTBtn_Click"/>
         </StackPanel>
         <Border BorderThickness="0 1 0 0" BorderBrush="Gray" Margin="30 10"/>
 
         <DockPanel Margin="30 0">
-            <TextBlock Text="Thời gian dừng tối đa" FontSize="17" FontFamily="Cambria Math" Width="320" VerticalAlignment="Center"/>
+            <TextBlock Text="Thời gian dừng tối đa (phút)" FontSize="17" FontFamily="Cambria Math" Width="350" VerticalAlignment="Center"/>
             <TextBox x:Name="TGDTD" Text="{Binding ThoiGianDungToiDa, Mode=OneWay}"  FontSize="17" FontFamily="Cambria Math" BorderBrush="White" IsReadOnly="True"/>
             <Button Style="{StaticResource MaterialDesignIconButton}" HorizontalAlignment="Right" ToolTip="Chỉnh sửa"
                         Height="22" Width="40" Click="editTGDTD_Click">
@@ -62,13 +62,13 @@
             </Button>
         </DockPanel>
         <StackPanel x:Name="panelTGDTD"  Orientation="Horizontal" Visibility="Collapsed" Margin="0 8 0 0">
-            <Button Style="{StaticResource MaterialDesignRaisedLightButton}" Content="Đồng ý" Width="100" Margin="230 0 20 0" Background="#8EB54C" Click="OkTGDTDBtn_Click"/>
+            <Button Style="{StaticResource MaterialDesignRaisedLightButton}" Content="Đồng ý" Width="100" Margin="260 0 20 0" Background="#8EB54C" Click="OkTGDTDBtn_Click"/>
             <Button Style="{StaticResource MaterialDesignOutlinedLightButton}" Content="Hủy" Width="70" Click="CancelTGDTDBtn_Click"/>
         </StackPanel>
         <Border BorderThickness="0 1 0 0" BorderBrush="Gray" Margin="30 10"/>
 
         <DockPanel Margin="30 0">
-            <TextBlock Text="Số giờ trước khởi hành cho phép đặt vé"  FontSize="17" FontFamily="Cambria Math" Width="320" VerticalAlignment="Center"/>
+            <TextBlock Text="Thời gian chậm nhất cho phép đặt vé (giờ)"  FontSize="17" FontFamily="Cambria Math" Width="350" VerticalAlignment="Center"/>
             <TextBox x:Name="SGTKHCPDV" Text="{Binding SoGioTruocKhoiHanhChoPhepDatVe, Mode=OneWay}"  FontSize="17" FontFamily="Cambria Math" BorderBrush="White" IsReadOnly="True"/>
             <Button Style="{StaticResource MaterialDesignIconButton}" HorizontalAlignment="Right" ToolTip="Chỉnh sửa"
                         Height="22" Width="40" Click="editSGTKHCPDV_Click">
@@ -76,13 +76,13 @@
             </Button>
         </DockPanel>
         <StackPanel x:Name="panelSGTKHCPDV"  Orientation="Horizontal" Visibility="Collapsed" Margin="0 8 0 0">
-            <Button Style="{StaticResource MaterialDesignRaisedLightButton}" Content="Đồng ý" Width="100" Margin="230 0 20 0" Background="#8EB54C" Click="OkSGTKHCPDVBtn_Click"/>
+            <Button Style="{StaticResource MaterialDesignRaisedLightButton}" Content="Đồng ý" Width="100" Margin="260 0 20 0" Background="#8EB54C" Click="OkSGTKHCPDVBtn_Click"/>
             <Button Style="{StaticResource MaterialDesignOutlinedLightButton}" Content="Hủy" Width="70" Click="CancelSGTKHCPDVBtn_Click"/>
         </StackPanel>
         <Border BorderThickness="0 1 0 0" BorderBrush="Gray" Margin="30 10"/>
      
         <DockPanel Margin="30 0">
-            <TextBlock Text="Số giờ trước khởi hành cho phép hủy vé"  FontSize="17" FontFamily="Cambria Math" Width="320" VerticalAlignment="Center"/>
+            <TextBlock Text="Thời gian chậm nhất cho phép hủy đặt vé (giờ)"  FontSize="17" FontFamily="Cambria Math" Width="350" VerticalAlignment="Center"/>
             <TextBox x:Name="SGTKHCPHV" Text="{Binding SoGioTruocKhoiHanhChoPhepHuyVe, Mode=OneWay}"  FontSize="17" FontFamily="Cambria Math" BorderBrush="White" IsReadOnly="True"/>
             <Button Style="{StaticResource MaterialDesignIconButton}" HorizontalAlignment="Right" ToolTip="Chỉnh sửa"
                         Height="22" Width="40" Click="editSGTKHCPHV_Click">
@@ -90,7 +90,7 @@
             </Button>
         </DockPanel>
         <StackPanel x:Name="panelSGTKHCPHV"  Orientation="Horizontal" Visibility="Collapsed" Margin="0 8 0 0">
-            <Button Style="{StaticResource MaterialDesignRaisedLightButton}" Content="Đồng ý" Width="100" Margin="230 0 20 0" Background="#8EB54C" Click="OkSGTKHCPHVBtn_Click"/>
+            <Button Style="{StaticResource MaterialDesignRaisedLightButton}" Content="Đồng ý" Width="100" Margin="260 0 20 0" Background="#8EB54C" Click="OkSGTKHCPHVBtn_Click"/>
             <Button Style="{StaticResource MaterialDesignOutlinedLightButton}" Content="Hủy" Width="70" Click="CancelSGTKHCPHVBtn_Click"/>
         </StackPanel>
     </StackPanel>

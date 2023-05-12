@@ -58,5 +58,13 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
             Cbaydetail.Visibility = Visibility.Visible;
             SB_CB.NavigationService.Navigate(chuyenbay);
         }
+
+        private void HangVe_Click(object sender, RoutedEventArgs e)
+        {
+            FareClassManagement fareClassManagement = new FareClassManagement();
+            sanbaydetail.Visibility = Visibility.Collapsed;
+            Cbaydetail.Visibility = Visibility.Collapsed;
+            SB_CB.NavigationService.Navigate(fareClassManagement);
+        }
     }
 }

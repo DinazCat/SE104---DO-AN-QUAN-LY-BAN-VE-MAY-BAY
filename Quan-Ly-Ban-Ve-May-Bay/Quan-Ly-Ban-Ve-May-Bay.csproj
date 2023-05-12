@@ -97,6 +97,9 @@
     <Compile Include="UserControls\Chuyenbay.xaml.cs">
       <DependentUpon>Chuyenbay.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\FareClassManagement.xaml.cs">
+      <DependentUpon>FareClassManagement.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\MonthRevenue.xaml.cs">
       <DependentUpon>MonthRevenue.xaml</DependentUpon>
     </Compile>
@@ -121,6 +124,9 @@
     </Compile>
     <Compile Include="View\AddSBTG.xaml.cs">
       <DependentUpon>AddSBTG.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FareClassForm.xaml.cs">
+      <DependentUpon>FareClassForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UserForm.xaml.cs">
       <DependentUpon>UserForm.xaml</DependentUpon>
@@ -179,6 +185,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\FareClassManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\MonthRevenue.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -208,6 +218,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AddSBTG.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FareClassForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

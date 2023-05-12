@@ -6,7 +6,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Quan_Ly_Ban_Ve_May_Bay"
         mc:Ignorable="d"
-        Height="600" Width="1200" Background="White" WindowStartupLocation="CenterScreen">
+        Height="600" Width="1200" Background="White" WindowStartupLocation="CenterScreen"
+        Title="Quản lý bán vé máy bay">
     <Grid>
         
         <DockPanel LastChildFill="True">

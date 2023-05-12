@@ -109,7 +109,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
             }
             else
             {
-                MessageBox.Show("Vui lòng chọn dòng bạn muốn xóa!");
+                MessageBox.Show("Vui lòng chọn dòng bạn muốn xóa!", "Error");
             }
         }
 
@@ -123,7 +123,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
                     loadData();
             }
             else {
-                MessageBox.Show("Vui lòng chọn dòng bạn muốn sửa!");
+                MessageBox.Show("Vui lòng chọn dòng bạn muốn sửa!", "Error");
             }
         }
        
