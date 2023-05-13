@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\lethi\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\
+C:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\
 Quan_Ly_Ban_Ve_May_Bay
 none
 false
 DEBUG;TRACE
-C:\Users\lethi\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\App.xaml
-21230122687
+C:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\App.xaml
+241896795523
 1-1546700801
-292112717124
-24-1361441726
-Pages\FlightsList.xaml;MainWindow.xaml;Pages\FlightDetail.xaml;Pages\Home.xaml;Pages\Login.xaml;Pages\Register.xaml;Pages\UserManagement.xaml;Style\MainStyle.xaml;UserControls\AdminRight.xaml;UserControls\Chuyenbay.xaml;UserControls\FareClassManagement.xaml;UserControls\MonthRevenue.xaml;UserControls\QLCB_SB.xaml;UserControls\RuleChange.xaml;UserControls\Sanbay.xaml;UserControls\YearRevenue.xaml;View\AddChuyenbay.xaml;View\AddSanBay.xaml;View\AddSBTG.xaml;View\FareClassForm.xaml;View\UserForm.xaml;
+3320907789
+24954824502
+Pages\FlightsList.xaml;MainWindow.xaml;Pages\FlightDetail.xaml;Pages\Home.xaml;Pages\Login.xaml;Pages\Register.xaml;Pages\UserManagement.xaml;Style\MainStyle.xaml;UserControls\AdminRight.xaml;UserControls\Chuyenbay.xaml;UserControls\FareClassManagement.xaml;UserControls\Hangmaybay.xaml;UserControls\HangVeItem.xaml;UserControls\MonthRevenue.xaml;UserControls\QLCB_SB.xaml;UserControls\RuleChange.xaml;UserControls\Sanbay.xaml;UserControls\YearRevenue.xaml;View\AddChuyenbay.xaml;View\AddHangMB.xaml;View\AddSanBay.xaml;View\AddSBTG.xaml;View\FareClassForm.xaml;View\UserForm.xaml;
 
 False
 

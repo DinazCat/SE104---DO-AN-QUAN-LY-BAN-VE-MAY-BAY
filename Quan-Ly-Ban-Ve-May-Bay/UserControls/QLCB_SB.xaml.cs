@@ -23,11 +23,14 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
     {
         Sanbay sanbay;
         Chuyenbay chuyenbay;
+        Hangmaybay hangmaybay;
         public QLCB_SB()
         {
             InitializeComponent();
             sanbaydetail.Visibility = Visibility.Visible;
             Cbaydetail.Visibility = Visibility.Hidden;
+            Hbaydetail.Visibility = Visibility.Hidden;
+            Hvedetail.Visibility = Visibility.Hidden;
             sanbay = new Sanbay(this);
             SB_CB.NavigationService.Navigate(sanbay);
         }
@@ -47,6 +50,8 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
             sanbay = new Sanbay(this);
             sanbaydetail.Visibility = Visibility.Visible;
             Cbaydetail.Visibility = Visibility.Hidden;
+            Hbaydetail.Visibility = Visibility.Hidden;
+            Hvedetail.Visibility = Visibility.Hidden;
             SB_CB.NavigationService.Navigate(sanbay);
 
         }
@@ -56,14 +61,26 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
             chuyenbay = new Chuyenbay(this);
             sanbaydetail.Visibility = Visibility.Hidden;
             Cbaydetail.Visibility = Visibility.Visible;
+            Hbaydetail.Visibility = Visibility.Hidden;
+            Hvedetail.Visibility = Visibility.Hidden;
             SB_CB.NavigationService.Navigate(chuyenbay);
         }
-
+        private void HangMB_Click(object sender, RoutedEventArgs e)
+        {
+            hangmaybay = new Hangmaybay(this);
+            sanbaydetail.Visibility = Visibility.Hidden;
+            Cbaydetail.Visibility = Visibility.Hidden;
+            Hbaydetail.Visibility = Visibility.Visible;
+            Hvedetail.Visibility = Visibility.Hidden;
+            SB_CB.NavigationService.Navigate(hangmaybay);
+        }
         private void HangVe_Click(object sender, RoutedEventArgs e)
         {
-            FareClassManagement fareClassManagement = new FareClassManagement();
-            sanbaydetail.Visibility = Visibility.Collapsed;
-            Cbaydetail.Visibility = Visibility.Collapsed;
+            FareClassManagement fareClassManagement = new FareClassManagement(this);
+            sanbaydetail.Visibility = Visibility.Hidden;
+            Cbaydetail.Visibility = Visibility.Hidden;
+            Hbaydetail.Visibility = Visibility.Hidden;
+            Hvedetail.Visibility = Visibility.Visible;
             SB_CB.NavigationService.Navigate(fareClassManagement);
         }
     }

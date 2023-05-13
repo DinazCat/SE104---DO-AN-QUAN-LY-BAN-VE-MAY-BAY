@@ -21,6 +21,9 @@
                 <Button BorderBrush="Black" BorderThickness="2" Height="40" Width="150" Background="#F5F5F5" Margin="10,0" Click="SanBay_Click">
                     <TextBlock Text="Sân bay"/>
                 </Button>
+                <Button BorderBrush="Black" BorderThickness="2" Height="40" Width="130" Background="#F5F5F5" Margin="10,0" Click="HangMB_Click">
+                    <TextBlock Text="Hãng máy bay"/>
+                </Button>
                 <Button BorderBrush="Black" BorderThickness="2" Height="40" Width="150" Background="#F5F5F5" Margin="10,0" Click="ChuyenBay_Click">
                     <TextBlock Text="Chuyến bay"/>
                 </Button>
@@ -49,8 +52,22 @@
                     <TextBox Width="170" Height="30" BorderBrush="Black" BorderThickness="1" x:Name="fromtoTxb" Background="White"/>
                     <TextBlock Text="Ngay - gio:" FontSize="20" Foreground="AntiqueWhite" TextAlignment="Left"/>
                     <TextBox Width="170" Height="30" BorderBrush="Black" BorderThickness="1" x:Name="datetimeTxb" Background="White"/>
-                    <TextBlock Text="SLH1 - SLH2:" FontSize="20" Foreground="AntiqueWhite" TextAlignment="Left"/>
-                    <TextBox Width="170" Height="30" BorderBrush="Black" BorderThickness="1" x:Name="H1H2Txb" Background="White"/>
+                    <TextBlock Text="Giá:" FontSize="20" Foreground="AntiqueWhite" TextAlignment="Left"/>
+                    <TextBox Width="170" Height="30" BorderBrush="Black" BorderThickness="1" x:Name="GiaTxb" Background="White"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" VerticalAlignment="Center" x:Name="Hbaydetail">
+                    <TextBlock Text="Mã hãng:" FontSize="20" Foreground="AntiqueWhite" TextAlignment="Left"/>
+                    <TextBox Width="170" Height="30" BorderBrush="Black" BorderThickness="1" x:Name="mahangTxb" Background="White"/>
+                    <TextBlock Text="Tên hãng:" FontSize="20" Foreground="AntiqueWhite" TextAlignment="Left"/>
+                    <TextBox Width="170" Height="30" BorderBrush="Black" BorderThickness="1" x:Name="tenhangTxb" Background="White"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" VerticalAlignment="Center" x:Name="Hvedetail">
+                    <TextBlock Text="Mã hãng vé:" FontSize="20" Foreground="AntiqueWhite" TextAlignment="Left"/>
+                    <TextBox Width="170" Height="30" BorderBrush="Black" BorderThickness="1" x:Name="mahangveTxb" Background="White"/>
+                    <TextBlock Text="Tên hãng vé:" FontSize="20" Foreground="AntiqueWhite" TextAlignment="Left"/>
+                    <TextBox Width="170" Height="30" BorderBrush="Black" BorderThickness="1" x:Name="tenhangveTxb" Background="White"/>
+                    <TextBlock Text="Tỉ lệ:" FontSize="20" Foreground="AntiqueWhite" TextAlignment="Left"/>
+                    <TextBox Width="170" Height="30" BorderBrush="Black" BorderThickness="1" x:Name="tileTxb" Background="White"/>
                 </StackPanel>
             </Grid>
         </Border>

@@ -29,13 +29,13 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
         public Chuyenbay()
         {
             InitializeComponent();
-            //loadDatatoTable();
+            loadDatatoTable();
         }
         public Chuyenbay(QLCB_SB q)
         {
             InitializeComponent();
             this.q = q;
-            //loadDatatoTable();
+            loadDatatoTable();
         }
         public void loadDatatoTable()
         {
@@ -60,7 +60,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
                 cb.SBden = dr["SanBayDen"].ToString();
                 cb.datetime = dr["NgayKhoiHanh"].ToString() + dr["ThoiGianXuatPhat"].ToString();
                 cb.tgBay = dr["ThoiGianDuKien"].ToString();
-                cb.Gia = dr["GiaVe"].ToString();
+                cb.Gia = dr["Gia"].ToString();
                 CBTable.Items.Add(cb);
                 stt++;
             }
@@ -81,7 +81,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
             public string STT { get; set; }
             public string tenSB { get; set; }
             public string TGdung { get; set; }
-            public string TGden { get; set; }
             public string ghichu { get; set; }
         }
         AddChuyenbay addChuyenbay;
@@ -96,14 +95,27 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
             chuyenbayclass info = CBTable.SelectedItem as chuyenbayclass;
             SqlConnection con = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
             con.Open();
-            SqlCommand cmd = new SqlCommand("Delete from CHUYENBAY where MaChuyenBay=N'" + info.maCB + "'", con);
-            cmd.CommandType = CommandType.Text;
-            cmd.ExecuteReader();
-            con.Close();
-            con.Open();
             SqlCommand cmd2 = new SqlCommand("Delete from  SANBAYTRUNGGIAN where MaChuyenBay=N'" + info.maCB + "'", con);
             cmd2.CommandType = CommandType.Text;
             cmd2.ExecuteReader();
+            con.Close();
+
+            con.Open();
+            SqlCommand cmd3 = new SqlCommand("Delete from VE where  MaChuyenBay=N'" + info.maCB + "'", con);
+            cmd3.CommandType = CommandType.Text;
+            cmd3.ExecuteReader();
+            con.Close();
+
+            con.Open();
+            SqlCommand cmd1 = new SqlCommand("Delete from QuanLyHangVeChuyenBay where  MaChuyenBay=N'" + info.maCB + "'", con);
+            cmd1.CommandType = CommandType.Text;
+            cmd1.ExecuteReader();
+            con.Close();
+
+            con.Open();
+            SqlCommand cmd = new SqlCommand("Delete from CHUYENBAY where MaChuyenBay=N'" + info.maCB + "'", con);
+            cmd.CommandType = CommandType.Text;
+            cmd.ExecuteReader();
             con.Close();
             CBTable.Items.Clear();
             loadDatatoTable();
@@ -148,7 +160,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
                 foreach (DataRow dr in dt.Rows)
                 {
 
-                    q.H1H2Txb.Text = dr["SLGheHang1"].ToString() + "-" + dr["SLGheHang2"].ToString();
+                    q.GiaTxb.Text = dr["Gia"].ToString();
                 }
             }
         }

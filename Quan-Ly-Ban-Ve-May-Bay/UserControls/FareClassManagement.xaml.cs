@@ -17,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Quan_Ly_Ban_Ve_May_Bay.View;
+using static Quan_Ly_Ban_Ve_May_Bay.UserControls.Hangmaybay;
 
 namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
 {
@@ -32,11 +33,19 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
     }
     public partial class FareClassManagement : UserControl
     {
+        private readonly QLCB_SB q;
         public FareClassManagement()
         {
             InitializeComponent();
             loadData();
             
+        }
+        public FareClassManagement(QLCB_SB q)
+        {
+            InitializeComponent();
+            loadData();
+            this.q = q;
+
         }
         private void loadData() {
             FareClassTable.Items.Clear();
@@ -75,18 +84,46 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
             {
                 if (MessageBox.Show("Bạn có chắc muốn xóa hạng vé này không?", "Xóa hạng vé", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    SqlConnection sqlCon = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
-                    sqlCon.Open();
-                    SqlCommand cmd = new SqlCommand("Delete from [HANGVE]  where MaHangVe='" + selectedFareClass.id + "'", sqlCon);
+                    SqlConnection con = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
+                    con.Open();
+                    SqlCommand cmd3 = new SqlCommand("Delete from VE where  MaHangVe=N'" + selectedFareClass.id + "'", con);
+                    cmd3.CommandType = CommandType.Text;
+                    cmd3.ExecuteReader();
+                    con.Close();
+
+                    con.Open();
+                    SqlCommand cmd1 = new SqlCommand("Delete from QuanLyHangVeChuyenBay where  MaHangVe=N'" + selectedFareClass.id + "'", con);
+                    cmd1.CommandType = CommandType.Text;
+                    cmd1.ExecuteReader();
+                    con.Close();
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("Delete from HANGVE where MaHangVe=N'" + selectedFareClass.id + "'", con);
                     cmd.CommandType = CommandType.Text;
-                    cmd.ExecuteNonQuery();
-                    sqlCon.Close();
+                    cmd.ExecuteReader();
+                    con.Close();
+                    //SqlConnection sqlCon = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
+                    //sqlCon.Open();
+                    //SqlCommand cmd = new SqlCommand("Delete from [HANGVE]  where MaHangVe='" + selectedFareClass.id + "'", sqlCon);
+                    //cmd.CommandType = CommandType.Text;
+                    //cmd.ExecuteNonQuery();
+                    //sqlCon.Close();
                     FareClassTable.Items.Remove(selectedFareClass);
                 }
             }
             else
             {
                 MessageBox.Show("Vui lòng chọn dòng bạn muốn xóa!", "Error");
+            }
+        }
+
+        private void FareClassTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            FareClass info = FareClassTable.SelectedItem as FareClass;
+            if (info != null)
+            {
+                q.mahangveTxb.Text = info.id;
+                q.tenhangveTxb.Text = info.name;
+                q.tileTxb.Text = info.percentage;
             }
         }
     }

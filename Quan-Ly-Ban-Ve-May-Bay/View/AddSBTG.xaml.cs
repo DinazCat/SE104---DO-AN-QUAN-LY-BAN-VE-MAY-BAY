@@ -52,7 +52,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             if (thaotac == 1)
             {
                 SBTGcBox.SelectedItem = AddChuyenbay.infotofix.tenSB;
-                thoigiandenTxb.Text = AddChuyenbay.infotofix.TGden;
                 thoigiandungTxb.Text = AddChuyenbay.infotofix.TGdung;
                 ghichuTxb.Text = AddChuyenbay.infotofix.ghichu;
             }
@@ -61,7 +60,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
         {
             this.Close();
         }
-        public string tenSB, tgDen, tgDung, GhiChu;
+        public string tenSB, tgDung, GhiChu;
 
         public void loadDatatoSBTG()
         {
@@ -85,7 +84,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 sb.tenSB = dr["SanBayTrungGian"].ToString();
                 sb.TGdung = dr["ThoiGianDung"].ToString();
                 sb.ghichu = dr["GhiChu"].ToString();
-                sb.TGden = dr["ThoiGianDen"].ToString();
                 SanBayTG.Items.Add(sb);
                 stt++;
             }
@@ -95,7 +93,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             tenSB = SBTGcBox.Text;
             tgDung = thoigiandungTxb.Text;
             GhiChu = ghichuTxb.Text;
-            tgDen = thoigiandenTxb.Text;
             if (thaotac == 0)
             {
                 string query = "SELECT * FROM SANBAYTRUNGGIAN where MaChuyenBay = @ma";
@@ -114,11 +111,10 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 sb.tenSB = tenSB;
                 sb.TGdung = tgDung;
                 sb.ghichu = GhiChu;
-                sb.TGden = tgDen;
                 SanBayTG.Items.Add(sb);
                 SqlConnection con = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
                 con.Open();
-                SqlCommand cmd = new SqlCommand("Insert into SANBAYTRUNGGIAN values('" + tenSB + "',N'" + maCB + "',N'" + tgDen + "',N'" + tgDung + "',N'" + GhiChu + "')", con);
+                SqlCommand cmd = new SqlCommand("Insert into SANBAYTRUNGGIAN values('" + tenSB + "',N'" + maCB + "',N'" + tgDung + "',N'" + GhiChu + "')", con);
                 cmd.CommandType = CommandType.Text;
                 cmd.ExecuteNonQuery();
                 con.Close();
@@ -129,7 +125,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             {
                 SqlConnection con = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
                 con.Open();
-                SqlCommand cmd = new SqlCommand("Update [SANBAYTRUNGGIAN] set SanBayTrungGian='" + tenSB + "',ThoigianDen='" + tgDen + "',ThoiGianDung='" + tgDung + "', GhiChu='" + GhiChu + "' where MaChuyenBay='" + maCB + "' and SanBayTrungGian='" + AddChuyenbay.infotofix.tenSB + "'", con);
+                SqlCommand cmd = new SqlCommand("Update [SANBAYTRUNGGIAN] set SanBayTrungGian='" + tenSB + "',ThoiGianDung='" + tgDung + "', GhiChu='" + GhiChu + "' where MaChuyenBay='" + maCB + "' and SanBayTrungGian='" + AddChuyenbay.infotofix.tenSB + "'", con);
                 cmd.CommandType = CommandType.Text;
                 cmd.ExecuteNonQuery();
                 con.Close();

@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="Quan_Ly_Ban_Ve_May_Bay.UserControls.HangVeItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Quan_Ly_Ban_Ve_May_Bay.UserControls" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="350">
+    <Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Mã HV: "/>
+            <ComboBox Width="100" FontSize="18" 
+                             BorderBrush="Black" BorderThickness="1"
+                             Background="#F5F5F5"
+                             DropDownClosed="maHVcBox_DropDownClosed"
+                             Text="{Binding Mahangve}"
+                             x:Name="maHVcBox"/>
+            <TextBlock Text="Số lượng: "/>
+            <ComboBox Width="100" FontSize="18" 
+                             BorderBrush="Black" BorderThickness="1"
+                             Background="#F5F5F5"
+                             DropDownClosed="SLcBox_DropDownClosed"
+                             Text="{Binding Soluong}"
+                             x:Name="SLcBox"/>
+
+        </StackPanel>
+
+    </Grid>
+</UserControl>
