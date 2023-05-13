@@ -289,3 +289,9 @@ C:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\View\AddHangMB.g.cs
 C:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\UserControls\Hangmaybay.baml
 C:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\UserControls\HangVeItem.baml
 C:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\View\AddHangMB.baml
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\UserControls\Hangmaybay.g.cs
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\UserControls\HangVeItem.g.cs
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\View\AddHangMB.g.cs
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\UserControls\Hangmaybay.baml
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\UserControls\HangVeItem.baml
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\View\AddHangMB.baml

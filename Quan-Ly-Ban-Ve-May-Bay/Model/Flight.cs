@@ -51,38 +51,65 @@ namespace Quan_Ly_Ban_Ve_May_Bay
                 RaisePropertyChanged();
             }
         }
-        private string hour;
-        public string Hour
+        private string timeDestination;
+        public string TimeDestination
         {
-            get { return hour; }
+            get { return timeDestination; }
             set
             {
-                hour = value;
+                timeDestination = value;
                 RaisePropertyChanged();
             }
         }
-        private string ho;
-
-        public string Ho
+        private string timDeparture;
+        public string TimDeparture
         {
-            get { return ho; }
+            get { return timDeparture; }
             set
             {
-                ho = value;
+                timDeparture = value;
+                RaisePropertyChanged();
+            }
+        }
+        private string time;
+        public string Time
+        {
+            get { return time; }
+            set
+            {
+                time = value;
+                RaisePropertyChanged();
+            }
+        }
+        private string stop;
+
+        public string Stop
+        {
+            get { return stop; }
+            set
+            {
+                stop = value;
+                RaisePropertyChanged();
+            }
+        }
+        private string price;
+
+        public string Price
+        {
+            get { return price; }
+            set
+            {
+                price = value;
                 RaisePropertyChanged();
             }
         }
         public Flight() { }
-        public Flight(string AirlineName, string hour, string ho)
-        {
-            airlineName = AirlineName;
-            Hour = hour;
-            Ho = ho;
-        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void RaisePropertyChanged([CallerMemberName] string propertyName = "")
         {
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

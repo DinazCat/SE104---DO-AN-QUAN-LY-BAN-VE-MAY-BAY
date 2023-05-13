@@ -26,7 +26,8 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
         private string departure;
         private string destination;
         DateTime _date;
-        private int adultsNumber;
+        private int quantity;
+        private string flightClass;
         public string Departure
         {
             get { return departure; }
@@ -42,12 +43,17 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
             get { return _date; }
             set { _date = value; }
         }
-        public int AdultsNumber
+        public int Quantity
         {
-            set { adultsNumber = value; }
-            get { return adultsNumber; }
+            set { quantity = value; }
+            get { return quantity; }
         }
-        SqlConnection sqlConnection = new SqlConnection(@"Server=.\SQLEXPRESS;Database=QuanLyBanVeMayBay;Trusted_Connection=Yes;");
+        public string FlightClass
+        {
+            set { flightClass = value; }
+            get { return flightClass; }
+        }
+        SqlConnection sqlConnection = new SqlConnection(@"Server=(local);Database=QuanLyBanVeMayBay;Trusted_Connection=Yes;");
         SqlCommand sqlCommand = new SqlCommand();
         SqlDataAdapter adapter;
         DataSet ds;
@@ -77,8 +83,10 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
                 Search?.Invoke(this, new RoutedEventArgs());
                 departure = cbbDeparture.Text;
                 destination = cbbDestination.Text;
-                adultsNumber = int.Parse(cbbQuantity.Text);
+                quantity = int.Parse(cbbQuantity.Text);
                 _date = DateTime.Parse(date.Text);
+                flightClass = cbbClass.Text;
+
             }
         }
         private void addDataToCCBDestination()

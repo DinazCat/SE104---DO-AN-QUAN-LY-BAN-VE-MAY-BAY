@@ -23,12 +23,80 @@ namespace Quan_Ly_Ban_Ve_May_Bay
         public FlightDetail()
         {
             InitializeComponent();
-            Dictionary<string, List<string>> D = new Dictionary<string, List<string>>();
-            D.Add("A", new List<string>() { "a1", "a2"});
-            D.Add("B", new List<string>() { "a1", "a2" });
-            List<string> strings = new List<string>() { "a", "b" };
-            HangVe_ListView.ItemsSource = strings;
-            SeatChart.ItemsSource = strings;
+            List<string> strings = new List<string>();
+            List<string> strings1 = new List<string>();
+            strings1.Add("A");
+            strings1.Add("A");
+            strings1.Add("A");
+            strings1.Add("A");
+            strings1.Add("A");
+
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+            strings.Add("A");
+
+            SBTrungGian.ItemsSource = strings1;
+            ClassesColor.ItemsSource = strings1;
+            SeatsChart1.ItemsSource = strings;
+            SeatsChart2.ItemsSource = strings;
+            SeatsChart3.ItemsSource = strings;
+            SeatsChart4.ItemsSource = strings;
+            SeatsChart5.ItemsSource = strings;
+            SeatsChart6.ItemsSource = strings;
         }
         private void btnReturn_Click(object sender, RoutedEventArgs e)
         {

@@ -82,6 +82,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\Account.cs" />
+    <Compile Include="Model\FlightClass.cs" />
     <Compile Include="Model\QLHangVeClass.cs" />
     <Compile Include="Pages\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
@@ -316,6 +317,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Data\script.sql" />
+    <Resource Include="Images\logo_Bamboo.png" />
+    <Resource Include="Images\logo_Jetstar.png" />
+    <Resource Include="Images\logo_Vietjet.png" />
+    <Resource Include="Images\logo_VNA.png" />
     <Resource Include="Images\key.png" />
     <Resource Include="Images\usersetting.png" />
     <Resource Include="Images\logout.png" />
