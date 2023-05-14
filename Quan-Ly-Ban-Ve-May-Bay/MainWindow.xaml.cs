@@ -52,7 +52,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
 
         private void Home_Search(object sender, RoutedEventArgs e)
         {
-            flights = new FlightsList(home.Departure, home.Destination, home.Quantity, home.FlightClass);
+            flights.FlightSearched(home.Departure, home.Destination, home.Quantity, home.FlightClass);
             fContainer.Content = flights;
         }
 

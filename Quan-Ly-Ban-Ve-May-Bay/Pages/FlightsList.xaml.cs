@@ -31,7 +31,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
     {
         public event RoutedEventHandler ShowDetail;
         public event RoutedEventHandler Return;
-        SqlConnection sqlConnection = new SqlConnection(@"Server=(local);Database=QuanLyBanVeMayBay;Trusted_Connection=Yes;");
+        SqlConnection sqlConnection = new SqlConnection(@"Server=.\SQLEXPRESS;Database=QuanLyBanVeMayBay;Trusted_Connection=Yes;");
         SqlCommand sqlCommand = new SqlCommand();
         SqlDataAdapter adapter;
         DataSet ds;
@@ -40,16 +40,19 @@ namespace Quan_Ly_Ban_Ve_May_Bay
         {
             InitializeComponent();
         }
-        public FlightsList(String departure, String destination, int quantity, String flightClass)
+        public void FlightSearched(String departure, String destination, int quantity, String flightClass)
         {
-            InitializeComponent();
-            sqlConnection.Open();
+            //sqlConnection.Open();
+            List<string> strings = new List<string>();
+            strings.Add("A");
+            strings.Add("B");   
+            FlightList.ItemsSource = strings;   
         }
 
 
         private void FlightList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selectedFlight = (Flight)FlightList.SelectedItem;   
+            var selectedFlight = FlightList.SelectedItem;   
             if (selectedFlight != null) {
                 ShowDetail?.Invoke(this, new RoutedEventArgs());
                 FlightList.SelectedIndex = -1;
@@ -72,9 +75,11 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             adapter = new SqlDataAdapter(sqlCommand);
             ds = new DataSet();
             adapter.Fill(ds);
-            List<FlightClass> flights = new List<FlightClass>();
+            List<Flight> flights = new List<Flight>();
             foreach (DataRow dr in ds.Tables[0].Rows)
             {
+                flights.Add(new Flight(dr[0].ToString(), dr[1].ToString(), dr[1].ToString(), dr[1].ToString(), dr[1].ToString(), dr[1].ToString(), dr[1].ToString(), dr[0].ToString(), dr[0].ToString(), dr[0].ToString()));
+                
             }
             FlightList.ItemsSource = flights;
         }

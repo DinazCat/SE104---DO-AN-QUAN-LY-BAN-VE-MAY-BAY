@@ -10,13 +10,23 @@ namespace Quan_Ly_Ban_Ve_May_Bay
 {
     internal class Flight : INotifyPropertyChanged
     {
-        private string airlineNameLogo;
-        public string AirlineNameLogo
+        private string flightID;
+        public string FlightID
         {
-            get { return airlineNameLogo; }
+            get { return flightID; }
             set
             {
-                airlineNameLogo = value;
+                flightID = value;
+                RaisePropertyChanged();
+            }
+        }
+        private string airlineLogo;
+        public string AirlineLogo
+        {
+            get { return airlineLogo; }
+            set
+            {
+                airlineLogo = value;
                 RaisePropertyChanged();
             }
         }
@@ -104,6 +114,19 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             }
         }
         public Flight() { }
+        public Flight(string flightID, string airlineLogo, string airlineName, string airportDepartureName, string airportDestinationName, string timeDestination, string timDeparture, string time, string stop, string price)
+        {
+            this.flightID = flightID;
+            this.airlineLogo = airlineLogo;
+            this.airlineName = airlineName;
+            this.airportDepartureName = airportDepartureName;
+            this.airportDestinationName = airportDestinationName;
+            this.timeDestination = timeDestination;
+            this.timDeparture = timDeparture;
+            this.time= time;
+            this.stop = stop;
+            this.price = price;
+        }   
 
         public event PropertyChangedEventHandler PropertyChanged;
 

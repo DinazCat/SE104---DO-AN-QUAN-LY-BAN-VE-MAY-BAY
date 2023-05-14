@@ -60,21 +60,23 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
         public event RoutedEventHandler Search;
         public Home()
         {
-            InitializeComponent();
             sqlConnection.Open();
-            addDataToCCBDeparture();
-            addDataToCCBDestination();
+            InitializeComponent();
+            //addDataToCCBDeparture();
+            //addDataToCCBDestination();
             addDataToClass();
+            
+            cbbDestination.Items.Add("abc");
+            cbbDeparture.Items.Add("abc");
+
             ds = null;
             adapter.Dispose();
             sqlConnection.Close();
             sqlConnection.Dispose();
-            cbbDestination.Items.Add("abc");
-            cbbDeparture.Items.Add("abc");
         }
         public void btnSearch_Click(object sender, RoutedEventArgs e)
         {
-            if (cbbDeparture.Text == "" || cbbDestination.Text == "" || cbbQuantity.Text == "" || date.Text == "")
+            if (cbbDeparture.Text == "" || cbbDestination.Text == "" || cbbQuantity.Text == "" || date.Text == "" ||cbbClass.Text == "")
             {
                 MessageBox.Show("Mời bạn chọn đầy đủ thông tin");
             }
@@ -101,7 +103,8 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
             {
                 listDestination.Add(dr[0].ToString());
             }
-            //cbbDestination.ItemsSource = listDestination;
+            cbbDestination.ItemsSource = listDestination;
+            ds = null;
         }
         private void addDataToCCBDeparture()
         {
@@ -115,7 +118,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
             {
                 listDeparture.Add(dr[0].ToString());
             }
-          // cbbDeparture.ItemsSource = listDeparture;
+            cbbDeparture.ItemsSource = listDeparture;
         }
         private void addDataToClass()
         {

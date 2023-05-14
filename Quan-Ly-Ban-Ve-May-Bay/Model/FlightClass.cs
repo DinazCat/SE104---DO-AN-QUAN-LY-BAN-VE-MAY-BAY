@@ -16,6 +16,26 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Model
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        private string classId;
+        public string ClassId
+        {
+            get { return classId; }
+            set
+            {
+                classId = value;
+                RaisePropertyChanged();
+            }
+        }
+        private string percent;
+        public string Percent
+        {
+            get { return classId; }
+            set
+            {
+                classId = value;
+                RaisePropertyChanged();
+            }
+        }
         private string classColor;
         public string ClassColor
         {
@@ -35,6 +55,18 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Model
                 className = value;
                 RaisePropertyChanged();
             }
+        }
+        public FlightClass() { }
+        public FlightClass(string classId, string className, string percent, string classColor) {
+            this.classId = classId;
+            this.percent = percent; 
+            this.className = className;
+            this.classColor = classColor;   
+        }
+        public FlightClass(string className, string classColor)
+        {
+            this.className = className;
+            this.classColor = classColor;
         }
     }
 }

@@ -101,7 +101,6 @@ D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Pages\FlightDetail.g.cs
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Pages\FlightDetail.baml
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Pages\FlightsList.g.cs
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Pages\FlightsList.baml
-D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Quan-Ly-Ban-Ve-May-Bay_Content.g.cs
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\UserControls\AdminRight.g.cs
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\UserControls\Chuyenbay.g.cs
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\UserControls\MonthRevenue.g.cs

@@ -38,8 +38,8 @@
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Margin="0 5 0 5" Orientation="Horizontal">
-                                        <Rectangle Width="25" Height="25" Fill="Blue" VerticalAlignment="Center"/>
-                                        <TextBlock Grid.Column="1"  Text="Hạng 1" FontSize="15" HorizontalAlignment="Center" Margin="15 0 0 0"/>
+                                        <Rectangle Width="25" Height="25" Fill="{Binding ClassColor}" VerticalAlignment="Center"/>
+                                        <TextBlock Grid.Column="1"  Text="{Binding ClassName}" FontSize="15" HorizontalAlignment="Center" Margin="15 0 0 0"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
@@ -52,8 +52,10 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="35"/>
                         <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
 
                     </Grid.RowDefinitions>
+                    <Button Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Continue" Background="#FF3F9866" Margin="10"/>
                     <TextBlock Text="Sơ đồ vé" Grid.Row="0" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#FF439E22" VerticalAlignment="Center" Height="27"/>
                     <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
                         <Grid HorizontalAlignment="Center">
@@ -80,7 +82,7 @@
                             <ItemsControl Grid.Column="1" Name="SeatsChart2">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <Button Height="35" Width="35" Background="Black" Margin="0 8 0 8"/>
+                                        <Button Height="35" Width="35" Background="Black" Margin="0 8 0 8" IsEnabled="false"/>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
@@ -118,16 +120,16 @@
 
                 </Grid>
             </Grid>
+            
+            <!--Flight details -->
 
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="35"/>
                     <RowDefinition Height="275"/>
-                    <RowDefinition Height="150"/>
-                    <RowDefinition/>
+                    <RowDefinition />
                 </Grid.RowDefinitions>
-
-                <!-- Flight details -->
+                
                 <TextBlock Text="Chi tiết chuyến bay" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#FF439E22" VerticalAlignment="Center"/>
                 <Grid Grid.Row="1" >
 
@@ -195,7 +197,7 @@
                         <TextBlock Text="Narita Intl" FontSize="15" Foreground="Gray" HorizontalAlignment="Left"/>
                     </StackPanel>
                 </Grid>
-                <Border BorderThickness="0.5" CornerRadius="4" Margin="5,5,5,5" Background="#FFEBEBEB" Grid.Row="2" BorderBrush="Black" >
+                <Border BorderThickness="0.5" CornerRadius="4" Margin="10,5,5,5" Background="#FFEBEBEB" Grid.Row="2" BorderBrush="Black" VerticalAlignment="Top" Name="SBTrungGianView">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
