@@ -53,7 +53,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
             set { flightClass = value; }
             get { return flightClass; }
         }
-        SqlConnection sqlConnection = new SqlConnection(@"Server=(local);Database=QuanLyBanVeMayBay;Trusted_Connection=Yes;");
+        SqlConnection sqlConnection = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
         SqlCommand sqlCommand = new SqlCommand();
         SqlDataAdapter adapter;
         DataSet ds;
@@ -65,9 +65,9 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
             //addDataToCCBDeparture();
             //addDataToCCBDestination();
             addDataToClass();
-            
-            cbbDestination.Items.Add("abc");
-            cbbDeparture.Items.Add("abc");
+
+            addDataToCCBDeparture();
+            addDataToCCBDestination();
 
             ds = null;
             adapter.Dispose();
@@ -94,7 +94,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
         private void addDataToCCBDestination()
         {
             sqlCommand = new SqlCommand(
-            "select distinct Tinh from SANBAY s, CHUYENBAY c where s.MaSanBay = c.SANBAYDEN ", sqlConnection);
+            "select distinct Tinh from SANBAY s", sqlConnection);
             adapter = new SqlDataAdapter(sqlCommand);
             ds = new DataSet();
             adapter.Fill(ds);
@@ -109,7 +109,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
         private void addDataToCCBDeparture()
         {
             sqlCommand = new SqlCommand(
-            "select distinct Tinh from SANBAY s, CHUYENBAY c where s.MaSanBay = c.SANBAYDI ", sqlConnection);
+            "select distinct Tinh from SANBAY s", sqlConnection);
             adapter = new SqlDataAdapter(sqlCommand);
             ds = new DataSet();
             adapter.Fill(ds);

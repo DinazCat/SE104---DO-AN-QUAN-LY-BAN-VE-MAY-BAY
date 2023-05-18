@@ -93,6 +93,11 @@
     <Compile Include="Pages\UserManagement.xaml.cs">
       <DependentUpon>UserManagement.xaml</DependentUpon>
     </Compile>
+    <Compile Include="QuanLyBanVeMayBayDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QuanLyBanVeMayBayDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\AdminRight.xaml.cs">
       <DependentUpon>AdminRight.xaml</DependentUpon>
     </Compile>
@@ -281,6 +286,17 @@
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="QuanLyBanVeMayBayDataSet.xsc">
+      <DependentUpon>QuanLyBanVeMayBayDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="QuanLyBanVeMayBayDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>QuanLyBanVeMayBayDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="QuanLyBanVeMayBayDataSet.xss">
+      <DependentUpon>QuanLyBanVeMayBayDataSet.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
