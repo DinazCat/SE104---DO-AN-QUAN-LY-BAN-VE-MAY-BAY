@@ -71,13 +71,13 @@ namespace Quan_Ly_Ban_Ve_May_Bay
                 RaisePropertyChanged();
             }
         }
-        private string timDeparture;
-        public string TimDeparture
+        private string timeDeparture;
+        public string TimeDeparture
         {
-            get { return timDeparture; }
+            get { return timeDeparture; }
             set
             {
-                timDeparture = value;
+                timeDeparture = value;
                 RaisePropertyChanged();
             }
         }
@@ -114,7 +114,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             }
         }
         public Flight() { }
-        public Flight(string flightID, string airlineLogo, string airlineName, string airportDepartureName, string airportDestinationName, string timeDestination, string timDeparture, string time, string stop, string price)
+        public Flight(string flightID, string airlineLogo, string airlineName, string airportDepartureName, string airportDestinationName, string timeDestination, string timeDeparture, string time, string stop, string price)
         {
             this.flightID = flightID;
             this.airlineLogo = airlineLogo;
@@ -122,7 +122,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             this.airportDepartureName = airportDepartureName;
             this.airportDestinationName = airportDestinationName;
             this.timeDestination = timeDestination;
-            this.timDeparture = timDeparture;
+            this.timeDeparture = timeDeparture;
             this.time= time;
             this.stop = stop;
             this.price = price;

@@ -20,12 +20,14 @@ using Quan_Ly_Ban_Ve_May_Bay.Pages;
 using Quan_Ly_Ban_Ve_May_Bay.UserControls;
 using Quan_Ly_Ban_Ve_May_Bay.Model;
 using Microsoft.Win32;
+using System.Globalization;
 
 namespace Quan_Ly_Ban_Ve_May_Bay
 {
 
     public partial class MainWindow : Window
     {
+        
         private Home home;
         private FlightsList flights;
         private FlightDetail flightDetail;
@@ -52,12 +54,14 @@ namespace Quan_Ly_Ban_Ve_May_Bay
 
         private void Home_Search(object sender, RoutedEventArgs e)
         {
-            flights.FlightSearched(home.Departure, home.Destination, home.Quantity, home.FlightClass);
+            flights.FlightSearched(home.Departure, home.Destination, home.Date, home.Quantity, home.FlightClass);
             fContainer.Content = flights;
+            
         }
 
         private void Flight_ShowDetail(object sender, RoutedEventArgs e)
         {
+            flightDetail.isHavingStop(flights.Stop);
             fContainer.Content = flightDetail ;
         }
         private void AdminAccessBtn(object sender, RoutedEventArgs e)

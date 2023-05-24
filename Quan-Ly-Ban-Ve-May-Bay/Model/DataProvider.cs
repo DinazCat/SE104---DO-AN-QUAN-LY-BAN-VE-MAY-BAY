@@ -24,5 +24,9 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Model
             SqlDataReader reader = cmd.ExecuteReader();
             return reader;
         }
+
+
+        public static SqlConnection sqlConnection = new SqlConnection(@"Data Source=(local);Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
+        
     }
 }

@@ -45,9 +45,9 @@
                     </Border.Background>
                     <StackPanel>
 
-                        <TextBlock Margin="20 25 20 0" Height="50" Text="From" Foreground="White" FontSize="30"/>
+                        <TextBlock Margin="20 25 20 0" Height="50" Text="Khởi hành" Foreground="White" FontSize="30"/>
                         <ComboBox Name="cbbDeparture"
-                                materialDesign:HintAssist.Hint="City." 
+                                materialDesign:HintAssist.Hint="Thành phố" 
                                 FontSize="20" VerticalAlignment="Center" Foreground="#3f7e32"
                                 Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                                 Margin="20 0 20 0">
@@ -65,9 +65,9 @@
                         </LinearGradientBrush>
                     </Border.Background>
                     <StackPanel>
-                        <TextBlock Margin="20 25 20 0" Height="50" Text="To" Foreground="White" FontSize="30"/>
+                        <TextBlock Margin="20 25 20 0" Height="50" Text="Điểm đến" Foreground="White" FontSize="30"/>
                         <ComboBox Name="cbbDestination"
-                                materialDesign:HintAssist.Hint="City." 
+                                materialDesign:HintAssist.Hint="Thành phố" 
                                 FontSize="20" VerticalAlignment="Center" Foreground="#3f7e32"
                                 Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                                 Margin="20 0 20 0">
@@ -85,10 +85,10 @@
                     </Border.Background>
                     <StackPanel>
 
-                        <TextBlock Margin="20 25 20 0" Height="50" Text="Date" 
+                        <TextBlock Margin="20 25 20 0" Height="50" Text="Ngày" 
                                                Foreground="White" FontSize="30"/>
                         <DatePicker FontSize="20" Margin="20 20 20 0"
-                                        materialDesign:HintAssist.Hint="Pick Date" Foreground="#3f7e32"
+                                        materialDesign:HintAssist.Hint="Chọn ngày" Foreground="#3f7e32"
                                         VerticalAlignment="Center" 
                                         Style="{StaticResource MaterialDesignDatePicker}" 
                                         Name="date"/>
@@ -106,9 +106,9 @@
                         </LinearGradientBrush>
                     </Border.Background>
                     <StackPanel>
-                        <TextBlock Margin="20 25 20 0" Height="50" Text="Class" Foreground="White" FontSize="30"/>
+                        <TextBlock Margin="20 25 20 0" Height="50" Text="Hạng vé" Foreground="White" FontSize="30"/>
                         <ComboBox Name ="cbbClass"
-                                materialDesign:HintAssist.Hint="City."
+                                materialDesign:HintAssist.Hint="Chọn hạng vé"
                                 Margin="20 0 20 0" FontSize="20" VerticalAlignment="Center" Foreground="#3f7e32"
                                 Style="{StaticResource MaterialDesignFloatingHintComboBox}">
 

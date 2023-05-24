@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static Quan_Ly_Ban_Ve_May_Bay.MainWindow;
+using Quan_Ly_Ban_Ve_May_Bay.Model;
 
 namespace Quan_Ly_Ban_Ve_May_Bay.Pages
 {
@@ -25,7 +26,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
     {
         private string departure;
         private string destination;
-        DateTime _date;
+        string _date;
         private int quantity;
         private string flightClass;
         public string Departure
@@ -38,7 +39,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
             get { return destination; } 
             set { destination = value; }        
         } 
-        public DateTime Date
+        public string Date
         {
             get { return _date; }
             set { _date = value; }
@@ -53,26 +54,14 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
             set { flightClass = value; }
             get { return flightClass; }
         }
-        SqlConnection sqlConnection = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
-        SqlCommand sqlCommand = new SqlCommand();
-        SqlDataAdapter adapter;
-        DataSet ds;
+        
         public event RoutedEventHandler Search;
         public Home()
         {
-            sqlConnection.Open();
             InitializeComponent();
-            //addDataToCCBDeparture();
-            //addDataToCCBDestination();
             addDataToClass();
-
             addDataToCCBDeparture();
             addDataToCCBDestination();
-
-            ds = null;
-            adapter.Dispose();
-            sqlConnection.Close();
-            sqlConnection.Dispose();
         }
         public void btnSearch_Click(object sender, RoutedEventArgs e)
         {
@@ -82,21 +71,27 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
             }
             else
             {
-                Search?.Invoke(this, new RoutedEventArgs());
-                departure = cbbDeparture.Text;
-                destination = cbbDestination.Text;
-                quantity = int.Parse(cbbQuantity.Text);
-                _date = DateTime.Parse(date.Text);
-                flightClass = cbbClass.Text;
-
+                if (cbbDestination.Text == cbbDeparture.Text)
+                {
+                    MessageBox.Show("Không được chọn nơi đến trùng nơi xuất phát");
+                }
+                else
+                {
+                    departure = cbbDeparture.Text;
+                    destination = cbbDestination.Text;
+                    quantity = int.Parse(cbbQuantity.Text);
+                    _date = date.Text;
+                    flightClass = cbbClass.Text;
+                    Search?.Invoke(this, new RoutedEventArgs());
+                }
             }
         }
         private void addDataToCCBDestination()
         {
-            sqlCommand = new SqlCommand(
-            "select distinct Tinh from SANBAY s", sqlConnection);
-            adapter = new SqlDataAdapter(sqlCommand);
-            ds = new DataSet();
+            SqlCommand sqlCommand = new SqlCommand(
+            "select distinct Tinh from [SANBAY] [s], [CHUYENBAY] [c] where [s].MaSanBay = [c].SanBayDen", DataProvider.sqlConnection);
+            SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
+            DataSet ds = new DataSet();
             adapter.Fill(ds);
             List<string> listDestination = new List<string>();
             foreach (DataRow dr in ds.Tables[0].Rows)
@@ -104,14 +99,13 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
                 listDestination.Add(dr[0].ToString());
             }
             cbbDestination.ItemsSource = listDestination;
-            ds = null;
         }
         private void addDataToCCBDeparture()
         {
-            sqlCommand = new SqlCommand(
-            "select distinct Tinh from SANBAY s", sqlConnection);
-            adapter = new SqlDataAdapter(sqlCommand);
-            ds = new DataSet();
+            SqlCommand sqlCommand = new SqlCommand(
+            "select distinct Tinh from [SANBAY] [s], [CHUYENBAY] [c] where [s].MaSanBay = [c].SanBayDi", DataProvider.sqlConnection);
+            SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
+            DataSet ds = new DataSet();
             adapter.Fill(ds);
             List<string> listDeparture = new List<string>();
             foreach (DataRow dr in ds.Tables[0].Rows)
@@ -122,10 +116,10 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
         }
         private void addDataToClass()
         {
-            sqlCommand = new SqlCommand(
-            "select TenHangVe from HANGVE", sqlConnection);
-            adapter = new SqlDataAdapter(sqlCommand);
-            ds = new DataSet();
+            SqlCommand sqlCommand = new SqlCommand(
+            "select TenHangVe from [HANGVE]", DataProvider.sqlConnection);
+            SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
+            DataSet ds = new DataSet();
             adapter.Fill(ds);
             List<string> listDeparture = new List<string>();
             foreach (DataRow dr in ds.Tables[0].Rows)

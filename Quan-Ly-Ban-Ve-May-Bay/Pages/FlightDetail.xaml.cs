@@ -36,12 +36,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             flight_classes = new List<FlightClass>();
             flight_classes.Add(new FlightClass("Đã đặt", "#FF95988E"));
             List<string> strings = new List<string>();
-            //sqlConnection.Open();
-            //addDataToClassColor();
-            //ds = null;
-            //adapter.Dispose();
-            //sqlConnection.Close();
-            //sqlConnection.Dispose();
+            addDataToClassColor();
 
             strings.Add("A");
             strings.Add("A");
@@ -123,19 +118,30 @@ namespace Quan_Ly_Ban_Ve_May_Bay
         {
             Return?.Invoke(this, new RoutedEventArgs());
         }
-        //public void addDataToClassColor()
-        //{ 
-        //    sqlCommand = new SqlCommand(
-        //    "select * from HANGVE order by TenHangVe asc", sqlConnection);
-        //    adapter = new SqlDataAdapter(sqlCommand);
-        //    ds = new DataSet();
-        //    adapter.Fill(ds);
-        //    foreach (DataRow dr in ds.Tables[0].Rows)
-        //    {
-        //        flight_classes.Add(new FlightClass(dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString()));
-        //    }
-        //    ClassesColor.ItemsSource = flight_classes;
+        public void addDataToClassColor()
+        { 
+            SqlCommand sqlCommand = new SqlCommand(
+            "select * from [HANGVE] order by TenHangVe asc", DataProvider.sqlConnection);
+            SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
+            DataSet ds = new DataSet();
+            adapter.Fill(ds);
+            foreach (DataRow dr in ds.Tables[0].Rows)
+            {
+                flight_classes.Add(new FlightClass(dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString()));
+            }
+            ClassesColor.ItemsSource = flight_classes;
 
-        //}
+        }
+        public void isHavingStop(int stop)
+        {
+            if (stop == 0)
+            {
+                SBTrungGianView.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                SBTrungGianView.Visibility= Visibility.Visible; 
+            }
+        }
     }
 }
