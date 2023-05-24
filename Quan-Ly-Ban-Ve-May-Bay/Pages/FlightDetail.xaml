@@ -55,7 +55,7 @@
                         <RowDefinition Height="Auto"/>
 
                     </Grid.RowDefinitions>
-                    <Button Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Continue" Background="#FF3F9866" Margin="10"/>
+                    <Button Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Content="Continue" Background="#FF3F9866" Margin="10" Click="btnCont_Click"/>
                     <TextBlock Text="Sơ đồ vé" Grid.Row="0" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#FF439E22" VerticalAlignment="Center" Height="27"/>
                     <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
                         <Grid HorizontalAlignment="Center">

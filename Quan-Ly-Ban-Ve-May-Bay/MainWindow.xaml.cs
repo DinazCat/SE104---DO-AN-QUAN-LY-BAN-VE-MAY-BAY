@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using System.Data;
 using System.Data.SqlClient;
 using Quan_Ly_Ban_Ve_May_Bay.Pages;
+using Quan_Ly_Ban_Ve_May_Bay.View;
 using Quan_Ly_Ban_Ve_May_Bay.UserControls;
 using Quan_Ly_Ban_Ve_May_Bay.Model;
 using Microsoft.Win32;
@@ -42,10 +43,16 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             flights.ShowDetail += Flight_ShowDetail;
             flights.Return += btnHome_Click;
             flightDetail.Return += Home_Search;
+            flightDetail.Continue += FlightDetail_Continue;
             flights.Search += btnHome_Click;
             fContainer.Content = home;
         }
 
+        private void FlightDetail_Continue(object sender, RoutedEventArgs e)
+        {
+            AddInforHK addInforHK = new AddInforHK();
+            addInforHK.ShowDialog();
+        }
 
         private void btnHome_Click(object sender, RoutedEventArgs e)
         {

@@ -135,6 +135,9 @@
     <Compile Include="View\AddHangMB.xaml.cs">
       <DependentUpon>AddHangMB.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\AddInforHK.xaml.cs">
+      <DependentUpon>AddInforHK.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AddSanBay.xaml.cs">
       <DependentUpon>AddSanBay.xaml</DependentUpon>
     </Compile>
@@ -242,6 +245,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AddHangMB.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AddInforHK.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

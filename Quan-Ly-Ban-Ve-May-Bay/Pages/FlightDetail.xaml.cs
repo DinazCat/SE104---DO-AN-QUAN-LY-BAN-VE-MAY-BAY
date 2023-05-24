@@ -24,6 +24,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
     {
         List<FlightClass> flight_classes;
         public event RoutedEventHandler Return;
+        public event RoutedEventHandler Continue;
 
         //SqlConnection sqlConnection = new SqlConnection(@"Server=(local);Database=QuanLyBanVeMayBay;Trusted_Connection=Yes;");
         //SqlCommand sqlCommand = new SqlCommand();
@@ -142,6 +143,10 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             {
                 SBTrungGianView.Visibility= Visibility.Visible; 
             }
+        }
+        private void btnCont_Click(object sender, RoutedEventArgs e)
+        {
+            Continue?.Invoke(this, new RoutedEventArgs());
         }
     }
 }

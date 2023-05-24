@@ -91,7 +91,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 hb.tenhang = tenhang;
                 hb.mahang = mahang;
                 hangmbtable.Items.Add(hb);
-                SqlConnection con = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
+                SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-9LVKB7T\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
                 con.Open();
                 SqlCommand cmd = new SqlCommand("Insert into HANGMAYBAY values('" + mahang + "',N'" + tenhang + "')", con);
                 cmd.CommandType = CommandType.Text;
@@ -102,7 +102,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             }
             else
             {
-                SqlConnection con = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
+                SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-9LVKB7T\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
                 con.Open();
                 SqlCommand cmd = new SqlCommand("Update [HANGMAYBAY] set MaHang='" + mahang + "',TenHang='" + tenhang + "' where MaHang='" + Hangmaybay.hangbaytofix.mahang + "'", con);
                 cmd.CommandType = CommandType.Text;

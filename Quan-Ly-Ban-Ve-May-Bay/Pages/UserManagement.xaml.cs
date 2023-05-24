@@ -98,7 +98,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
             {
                 if (MessageBox.Show("Bạn có chắc muốn xóa tài khoản này không?", "Xác nhận xóa tài khoản", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    SqlConnection sqlCon = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
+                    SqlConnection sqlCon = new SqlConnection(@"Data Source=DESKTOP-9LVKB7T\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
                     sqlCon.Open();
                     SqlCommand cmd = new SqlCommand("Delete from [TAIKHOAN]  where MaTK='" + selectedAccount.id + "'", sqlCon);
                     cmd.CommandType = CommandType.Text;

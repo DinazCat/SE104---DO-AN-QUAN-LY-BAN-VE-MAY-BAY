@@ -219,7 +219,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
         private void XoaSBTG_Click(object sender, RoutedEventArgs e)
         {
             SanbayTG info = SBTGTable.SelectedItem as SanbayTG;
-            SqlConnection con = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
+            SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-9LVKB7T\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
             con.Open();
             SqlCommand cmd = new SqlCommand("Delete from SANBAYTRUNGGIAN where SanBayTrungGian=N'" + info.tenSB + "' and MaChuyenBay=N'" + machuyenbayTxb.Text + "'", con);
             cmd.CommandType = CommandType.Text;
@@ -278,7 +278,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                     qLHangVeClass[i].Gia = (int)(int.Parse(Gia) * phantram);
                 }
                 qLHangVeClass[i].Machuyenbay = MaCB;
-                SqlConnection con = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
+                SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-9LVKB7T\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
                 con.Open();
                 SqlCommand cmd1 = new SqlCommand("Insert into [QuanLyHangVeChuyenBay] values('" + MaCB + "', N'" + qLHangVeClass[i].Mahangve + "'," + qLHangVeClass[i].Gia + ",N'" + qLHangVeClass[i].Soluong + "')", con);
                 cmd1.CommandType = CommandType.Text;
@@ -335,7 +335,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 cb.tgBay = TgBay;
                 cb.Gia = Gia;
                 chuyenbayTable.Items.Add(cb);
-                SqlConnection con = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
+                SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-9LVKB7T\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
                 con.Open();
                 SqlCommand cmd = new SqlCommand("Insert into [CHUYENBAY] values('" + MaCB + "',N'" + Sanbaydi + "',N'" + Sanbayden + "',N'" + Ngay + "',N'" + Gio + "',N'" + TgBay + "',N'" + mahangMB + "',N'" + loaiMB + "',N'" + Gia + "')", con);
                 cmd.CommandType = CommandType.Text;
@@ -346,7 +346,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             }
             else
             {
-                SqlConnection con = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
+                SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-9LVKB7T\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
                 con.Open();
                 SqlCommand cmd2 = new SqlCommand("Delete from VE where  MaChuyenBay=N'" + Chuyenbay.chuyenbaytofix.maCB + "'", con);
                 cmd2.CommandType = CommandType.Text;

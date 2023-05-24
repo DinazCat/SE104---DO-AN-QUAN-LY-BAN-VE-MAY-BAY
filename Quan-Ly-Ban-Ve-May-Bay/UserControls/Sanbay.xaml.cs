@@ -82,7 +82,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
         private void Xoa_Click(object sender, RoutedEventArgs e)
         {
             sanbayclass info = SBTable.SelectedItem as sanbayclass;
-            SqlConnection con = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
+            SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-9LVKB7T\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
             con.Open();
             SqlCommand cmd = new SqlCommand("Delete from SANBAY where MaSanBay=N'" + info.maSB + "'", con);
             cmd.CommandType = CommandType.Text;

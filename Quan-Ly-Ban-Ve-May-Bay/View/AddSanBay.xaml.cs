@@ -96,7 +96,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 sb.tinh = Tinh;
                 SanbayDataGrid.Items.Add(sb);
 
-                SqlConnection con = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
+                SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-9LVKB7T\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
                 con.Open();
                 SqlCommand cmd = new SqlCommand("Insert into [SANBAY] values('" + MaSB + "',N'" + TenSB + "', N'" + Tinh + "')", con);
                 cmd.CommandType = CommandType.Text;
@@ -108,7 +108,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             }
             else
             {
-                SqlConnection con = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
+                SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-9LVKB7T\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
                 con.Open();
                 SqlCommand cmd = new SqlCommand("Update [SANBAY] set MaSanBay='" + MaSB + "', TenSanBay='" + TenSB + "', Tinh='" + Tinh + "' where MaSanBay='" + Sanbay.sanbaytofix.maSB + "'", con);
                 cmd.CommandType = CommandType.Text;

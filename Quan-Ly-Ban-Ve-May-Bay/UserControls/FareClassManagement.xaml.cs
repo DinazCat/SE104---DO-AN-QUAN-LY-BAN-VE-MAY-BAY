@@ -84,7 +84,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
             {
                 if (MessageBox.Show("Bạn có chắc muốn xóa hạng vé này không?", "Xóa hạng vé", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    SqlConnection con = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
+                    SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-9LVKB7T\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
                     con.Open();
                     SqlCommand cmd3 = new SqlCommand("Delete from VE where  MaHangVe=N'" + selectedFareClass.id + "'", con);
                     cmd3.CommandType = CommandType.Text;
@@ -101,7 +101,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
                     cmd.CommandType = CommandType.Text;
                     cmd.ExecuteReader();
                     con.Close();
-                    //SqlConnection sqlCon = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
+                    //SqlConnection sqlCon = new SqlConnection(@"Data Source=DESKTOP-9LVKB7T\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
                     //sqlCon.Open();
                     //SqlCommand cmd = new SqlCommand("Delete from [HANGVE]  where MaHangVe='" + selectedFareClass.id + "'", sqlCon);
                     //cmd.CommandType = CommandType.Text;

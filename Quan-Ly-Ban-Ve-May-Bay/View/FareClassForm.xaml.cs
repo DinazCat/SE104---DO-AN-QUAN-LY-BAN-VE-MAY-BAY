@@ -42,7 +42,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             try
             {
                 int p = int.Parse(Percentage.Text);
-                SqlConnection sqlCon = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
+                SqlConnection sqlCon = new SqlConnection(@"Data Source=DESKTOP-9LVKB7T\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
                 try
                 {
                     if (sqlCon.State == ConnectionState.Closed)

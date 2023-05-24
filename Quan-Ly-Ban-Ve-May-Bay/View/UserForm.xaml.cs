@@ -70,7 +70,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             }
 
             if (action == 0) {
-                SqlConnection sqlCon = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
+                SqlConnection sqlCon = new SqlConnection(@"Data Source=DESKTOP-9LVKB7T\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
                 try
                 {
                     if (sqlCon.State == ConnectionState.Closed)
@@ -102,7 +102,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 MessageBox.Show("Thêm tài khoản thành công!", "Success");
             }
             else if(action == 1) {
-                SqlConnection sqlCon = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
+                SqlConnection sqlCon = new SqlConnection(@"Data Source=DESKTOP-9LVKB7T\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
                 try
                 {
                     if (sqlCon.State == ConnectionState.Closed)
