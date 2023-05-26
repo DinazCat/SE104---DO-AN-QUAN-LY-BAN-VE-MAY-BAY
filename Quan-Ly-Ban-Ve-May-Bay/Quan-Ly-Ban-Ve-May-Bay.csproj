@@ -81,6 +81,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converter\DateConverter.cs" />
+    <Compile Include="Converter\DurationConverter.cs" />
+    <Compile Include="Converter\TimeConverter.cs" />
+    <Compile Include="Converter\TimeSpanConverter.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\FlightClass.cs" />
     <Compile Include="Model\QLHangVeClass.cs" />
@@ -346,11 +350,13 @@
     <Resource Include="Images\logo_Bamboo.png" />
     <Resource Include="Images\logo_Jetstar.png" />
     <Resource Include="Images\logo_Vietjet.png" />
-    <Resource Include="Images\logo_VNA.png" />
     <Resource Include="Images\key.png" />
     <Resource Include="Images\usersetting.png" />
     <Resource Include="Images\logout.png" />
     <Resource Include="Images\login.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\logo_VNA.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Data\script.sql" />

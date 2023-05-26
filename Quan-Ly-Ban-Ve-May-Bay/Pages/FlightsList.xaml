@@ -4,9 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Quan_Ly_Ban_Ve_May_Bay"
+        xmlns:convert="clr-namespace:Quan_Ly_Ban_Ve_May_Bay.Converter"
         mc:Ignorable="d" 
         d:DesignHeight="550" d:DesignWidth="1000"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+    <Page.Resources>
+        <convert:DurationConverter x:Key="DurationConverter"/>
+    </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="31*"/>
@@ -21,7 +25,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
-
+                    <RowDefinition Height="Auto"/>
 
                 </Grid.RowDefinitions>
                 <Button HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Click="btnReturn_Click">
@@ -176,18 +180,18 @@
                                     </StackPanel>
                                 </Expander.Header>
                                 <StackPanel Margin="20,0,0,0">
-                                    <Button Content="Giá thấp nhất" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000" FontSize="15" />
+                                    <Button Content="Giá thấp nhất" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000" FontSize="15" Click="sortPriceAsc_Click" />
                                     <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
-                                    <Button Content="Giá cao nhất" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000" />
+                                    <Button Content="Giá cao nhất" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000" Click="sortPriceDes_Click"/>
                                     <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
-                                    <Button Content="Xuất phát sớm nhất" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000"/>
-                                    <Button Content="Xuất phát trễ nhất" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000" />
+                                    <Button Content="Xuất phát sớm nhất" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000" Click="sortTimeDepartureAsc_Click"/>
+                                    <Button Content="Xuất phát trễ nhất" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000" Click="sortTimeDepartureDesc_Click"/>
                                     <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
-                                    <Button Content="Đến sớm nhất" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000" />
+                                    <Button Content="Đến sớm nhất" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000" Click="sortTimeDestinationAsc_Click"/>
                                     <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
-                                    <Button Content="Đến trễ nhất" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000" />
+                                    <Button Content="Đến trễ nhất" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000" Click="sortTimeDestinationDesc_Click"/>
                                     <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
-                                    <Button Content="Thời gian bay ngắn nhất" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000" />
+                                    <Button Content="Thời gian bay ngắn nhất" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000" Click="sortTimeAsc_Click"/>
                                 </StackPanel>
                             </Expander>
 
@@ -198,6 +202,9 @@
                 </Border>
                 <TextBlock Grid.Row="2" Text="Filter: " FontSize="20" FontWeight="Bold" VerticalAlignment="Center" Margin="15,10,0,0" Height="28"/>
                 <Border Background="White" CornerRadius="5" Margin="15,8,10,0" VerticalAlignment="Top" Grid.Row="3">
+                    <Button Margin="5" Content="Mặc định" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000" FontSize="17" Click="btnDefault_Click" FontWeight="Bold"/>
+                </Border>
+                <Border Background="White" CornerRadius="5" Margin="15,8,10,0" VerticalAlignment="Top" Grid.Row="4">
                     <StackPanel>
                         <ListBox Background="{x:Null}" Foreground="#000000" FontWeight="Bold">
                             <ListBox.Resources>
@@ -345,12 +352,12 @@
                                     <TextBlock Text="Điểm dừng" FontWeight="Bold" FontSize="17" VerticalAlignment="Center" />
                                 </Expander.Header>
                                 <StackPanel Margin="20,0,0,0">
-                                    <Button Content="Bay thẳng" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000" FontSize="15" />
+                                    <Button Content="Bay thẳng" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000" FontSize="15" Click="noStopFilter_Click"/>
                                     <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
-                                    <Button Content="1 điểm dừng" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000" />
+                                    <Button Content="1 điểm dừng" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000" Click="oneStopFilter_Click"/>
                                     <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
 
-                                    <Button Content="2+ điểm dừng" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000"/>
+                                    <Button Content="2+ điểm dừng" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000" Click="moreTwoStopFilter_Click"/>
                                     
                                 </StackPanel>
                             </Expander>
@@ -360,15 +367,16 @@
                                 <Expander.Header>
                                     <TextBlock Text="Hãng máy bay" FontWeight="Bold" FontSize="17" />
                                 </Expander.Header>
-                                <StackPanel Margin="20,0,0,0">
-                                    <Button Content="VietNam Airlines" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000"/>
-                                    <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
-                                    <Button Content="Vietjet Air" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000"/>
-                                    <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
-                                    <Button Content="Bamboo Airways" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000"/>
-                                    <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
-                                    <Button Content="Jetstar Pacific Airlines" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000"/>
-                                </StackPanel>
+                                <ListView Name="lvAirline" Margin="20 0 20 0" SelectionMode="Single" SelectionChanged="lvAirline_SelectionChanged"> 
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <DockPanel>
+                                                <TextBlock Text="{Binding}" Background="{x:Null}" Foreground="#000000" Margin="9 0 0 0" FontSize="14" FontFamily="Segoe UI Semibold"/>
+                                            </DockPanel>
+                                            </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                    
+                                </ListView>
                             </Expander>
                             <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
 
@@ -377,13 +385,13 @@
                                     <TextBlock Text="Thời gian xuất phát" FontWeight="Bold" FontSize="17" />
                                 </Expander.Header>
                                 <StackPanel Margin="20,0,0,0">
-                                    <Button Content="00:00 - 05:059" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000"  />
+                                    <Button Content="00:00 - 05:59" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000" Click="nightToMorning_Departure_Click"/>
                                     <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
-                                    <Button Content="06:00 - 11:59" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000" />
+                                    <Button Content="06:00 - 11:59" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000" Click="morningToNoon_Departure_Click"/>
                                     <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
-                                    <Button Content="12:00 - 18:00" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000" />
+                                    <Button Content="12:00 - 17:59" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000" Click="noonToEvening_Departure_Click"/>
                                     <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
-                                    <Button Content="18:00 - 23:59" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000" />
+                                    <Button Content="18:00 - 23:59" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000" Click="eveningToNight_Departure_Click"/>
                                 </StackPanel>
                             </Expander>
                             <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
@@ -393,13 +401,13 @@
                                     <TextBlock Text="Thời gian đến" FontWeight="Bold" FontSize="17" />
                                 </Expander.Header>
                                 <StackPanel Margin="20,0,0,0">
-                                    <Button Content="00:00 - 05:059" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000"  />
+                                    <Button Content="00:00 - 05:59" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000" Click="nightToMorning_Destination_Click"/>
                                     <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
-                                    <Button Content="06:00 - 11:59" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000" />
+                                    <Button Content="06:00 - 11:59" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000" Click="morningToNoon_Destination_Click"/>
                                     <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
-                                    <Button Content="12:00 - 18:00" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000" />
+                                    <Button Content="12:00 - 17:59" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000" Click="noonToEvening_Destination_Click"/>
                                     <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
-                                    <Button Content="18:00 - 23:59" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000" />
+                                    <Button Content="18:00 - 23:59" HorizontalContentAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#000000" Click="eveningToNight_Destination_Click"/>
                                 </StackPanel>
                             </Expander>
                             <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
@@ -429,7 +437,7 @@
                 <Button Grid.Column="1" HorizontalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}" Click="btnSearch_Click">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                         <materialDesign:PackIcon  Kind="Search" Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <TextBlock Text="Change search" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"/>
+                        <TextBlock Text="Thay đổi tìm kiếm" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"/>
                     </StackPanel>
                 </Button>
 
@@ -437,7 +445,7 @@
 
             <TextBlock Grid.Row="1" Text="All flight from your search!" FontFamily="Calibri" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" Height="24" Margin="10,0,0,0" Name ="isHavingData"/>
 
-            <ListView Grid.Row="2" Background="{x:Null}" Margin="2,2,2,2" Name="FlightList" BorderBrush="{x:Null}" HorizontalContentAlignment="Center" ScrollViewer.CanContentScroll="false" SelectionChanged="FlightList_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+            <ListView Grid.Row="2" Background="{x:Null}" Margin="2,2,2,2" Name="lvFlight" BorderBrush="{x:Null}" HorizontalContentAlignment="Center" ScrollViewer.CanContentScroll="false" SelectionChanged="FlightList_SelectionChanged" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Border CornerRadius="4" Background="White" BorderBrush="DarkSeaGreen" BorderThickness="1" Margin="0 4 0 4">
@@ -461,7 +469,7 @@
 
 
                                     <WrapPanel Grid.Column="0" Width="200" VerticalAlignment="Center" Margin="15 0 0 0">
-                                        <Image Source="{Binding AirlineLogo}" Width="60" Height="60" />
+                                        <Image Source="{Binding AirlineLogo}" Width="40" Height="60" />
                                         <TextBlock Margin="5 0 0 0" Text="{Binding AirlineName}" FontSize="16" FontFamily="Cascadia Mono SemiLight" VerticalAlignment="Center"/>
                                     </WrapPanel>
 
@@ -478,8 +486,8 @@
                                             <TextBlock Text="{Binding AirportDepartureName}" Margin="0 35 0 0" HorizontalAlignment="Center" FontSize="14"/>
                                         </StackPanel>
 
-                                        <StackPanel Grid.Column="1" Width="200">
-                                            <TextBlock Text="{Binding Time}" Foreground="Gray" HorizontalAlignment="Center" FontSize="14" Margin="0 0 0 5" />
+                                        <StackPanel Grid.Column="1" Width="220">
+                                            <TextBlock Text="{Binding Time, Converter={StaticResource DurationConverter}}" Foreground="Gray" HorizontalAlignment="Center" FontSize="14" Margin="0 0 0 5" />
                                             <WrapPanel>
                                                 <materialDesign:PackIcon Kind="CircleOutline" VerticalAlignment="Center" Width="8" Height="8"/>
                                                 <TextBlock Text="- - - - - - - - -" VerticalAlignment="Center"/>
@@ -488,7 +496,7 @@
                                                 <materialDesign:PackIcon Kind="Circle" VerticalAlignment="Center" Width="8" Height="8"/>
                                             </WrapPanel>
                                             <TextBlock Foreground="Gray" HorizontalAlignment="Center" FontSize="14" Margin="0 5 0 0">
-                                                <Run Text="{Binding stop}"/>
+                                                <Run Text="{Binding Stop}"/>
                                                 <Run Text=" điểm dừng"/>
                                             </TextBlock>
                                         </StackPanel>

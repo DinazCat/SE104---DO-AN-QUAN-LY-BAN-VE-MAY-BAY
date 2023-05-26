@@ -124,7 +124,7 @@
                         </LinearGradientBrush>
                     </Border.Background>
                     <StackPanel>
-                        <TextBlock Margin="20 25 20 0" Height="50" Text="Quantity" Foreground="White" FontSize="30"/>
+                        <TextBlock Margin="20 25 20 0" Height="50" Text="Số lượng" Foreground="White" FontSize="30"/>
                         <ComboBox Name ="cbbQuantity"
                                 Margin="20 0 20 0" FontSize="20" VerticalAlignment="Center" Foreground="#3f7e32"
                                 Style="{StaticResource MaterialDesignFloatingHintComboBox}">
@@ -159,7 +159,7 @@
 
                     <Button
                      Width="200" Height="50" Background="Transparent" BorderBrush="Transparent"
-                     Content="Search" Foreground="White" FontSize="30" Click="btnSearch_Click" VerticalAlignment="Top" >
+                     Content="Tìm kiếm" Foreground="White" FontSize="30" Click="btnSearch_Click" VerticalAlignment="Top" >
                     </Button>
                 </Border>
             </Grid>

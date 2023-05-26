@@ -459,3 +459,14 @@ C:\Users\DELL\Source\Repos\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Quan-Ly
 C:\Users\DELL\Source\Repos\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Quan-Ly-Ban-Ve-May-Bay.pdb
 C:\Users\DELL\Source\Repos\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\View\AddInforHK.g.cs
 C:\Users\DELL\Source\Repos\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\View\AddInforHK.baml
+C:\Users\lethi\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Style\FilterMenu.baml
+C:\Users\lethi\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\UserControls\Hangmaybay.g.cs
+C:\Users\lethi\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\UserControls\HangVeItem.g.cs
+C:\Users\lethi\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\View\AddHangMB.g.cs
+C:\Users\lethi\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\View\AddInforHK.g.cs
+C:\Users\lethi\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\UserControls\Hangmaybay.baml
+C:\Users\lethi\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\UserControls\HangVeItem.baml
+C:\Users\lethi\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\View\AddHangMB.baml
+C:\Users\lethi\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\View\AddInforHK.baml
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\View\AddInforHK.g.cs
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\View\AddInforHK.baml

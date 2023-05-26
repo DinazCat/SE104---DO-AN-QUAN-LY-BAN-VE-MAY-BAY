@@ -24,6 +24,7 @@ using Quan_Ly_Ban_Ve_May_Bay.Model;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 using System.Diagnostics;
 using System.Globalization;
+using Quan_Ly_Ban_Ve_May_Bay.Converter;
 
 namespace Quan_Ly_Ban_Ve_May_Bay
 {
@@ -32,23 +33,46 @@ namespace Quan_Ly_Ban_Ve_May_Bay
     /// </summary>
     public partial class FlightsList : Page
     {
+        string selectedAirlineName;
         public int Stop;
         public event RoutedEventHandler ShowDetail;
         public event RoutedEventHandler Return;
-       
+
         public event RoutedEventHandler Search;
+        List<string> airports;
         public FlightsList()
         {
             InitializeComponent();
-        }
+            airports = new List<string>();
+            addDataToLsvAirport();
 
+        }
+        private void addDataToLsvAirport()
+        {
+            SqlCommand sqlCommand = new SqlCommand(
+            "select * from [HANGMAYBAY]", DataProvider.sqlConnection);
+            SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
+            DataSet ds = new DataSet();
+            adapter.Fill(ds);
+            List<string> listDestination = new List<string>();
+            foreach (DataRow dr in ds.Tables[0].Rows)
+            {
+                listDestination.Add(dr["TenHang"].ToString());
+            }
+            lvAirline.ItemsSource = listDestination;
+        }
+        //filter by airport name
+        private bool airlineNameFilter(object item)
+        {
+            return ((item as Flight).AirlineName.CompareTo(selectedAirlineName) == 0);
+        }
         //set up flightList Screen
         public void FlightSearched(string departure, string destination, string date, int quantity, string flightClass)
         {
             infoSearch.Text = departure + " -> " + destination + " | " + date + " | " + flightClass + " | " + quantity + " người";
             DataProvider.sqlConnection.Open();
             SqlCommand sqlCommand = new SqlCommand(
-             "select [c].*, Logo, TenHang,(select count(*) from [SANBAYTRUNGGIAN] [sbtg] where [sbtg].MaChuyenBay = [c].MaChuyenBay) SoSBTG from [CHUYENBAY] [c], [SANBAY] [s1], [SANBAY] [s2], [HANGMAYBAY] [hmb] " +
+             "select [c].*, s1.Tinh TinhSBDi, s2.Tinh TinhSBDen, Logo, TenHang,(select count(*) from [SANBAYTRUNGGIAN] [sbtg] where [sbtg].MaChuyenBay = [c].MaChuyenBay) SoSBTG from [CHUYENBAY] [c], [SANBAY] [s1], [SANBAY] [s2], [HANGMAYBAY] [hmb] " +
              "where NgayKhoiHanh=@date " +
              "and [c].SanBayDi=[s1].MaSanBay " +
              "and [c].SanBayDen=[s2].MaSanBay " +
@@ -78,25 +102,25 @@ namespace Quan_Ly_Ban_Ve_May_Bay
                     string airlineName = reader["TenHang"].ToString();
                     string airportDepartureName = reader["SanBayDi"].ToString();
                     string airportDestinationName = reader["SanBayDen"].ToString();
-                    string timeDeparture = reader["ThoiGianXuatPhat"].ToString();
-                    string time = reader["ThoiGianDuKien"].ToString();
-                    TimeSpan khoangtg = TimeSpan.FromMinutes(double.Parse(time));
+                    string ngayGioXuatPhat = reader["NgayKhoiHanh"].ToString() + " " + reader["ThoiGianXuatPhat"].ToString();
+                    CultureInfo provider = CultureInfo.InvariantCulture;
+                    string format = "dd/MM/yyyy HH:mm";
+                    TimeSpan time = TimeSpan.FromMinutes(double.Parse(reader["ThoiGianDuKien"].ToString()));
 
-                    TimeSpan tgXuatPhat = TimeSpan.ParseExact(timeDeparture, @"hh\:mm", CultureInfo.InvariantCulture);
+                    DateTime dateTimeDeparture = DateTime.ParseExact(ngayGioXuatPhat, format, provider);
+                    DateTime dateTimeDestination = dateTimeDeparture.Add(time);
 
-                    string timeDestination = (khoangtg + tgXuatPhat).ToString(@"hh\:mm");
-                    if (int.Parse(time) > 60)
-                    {
-                        time = khoangtg.ToString(@"hh\:mm");
-                    }
-                    string stop = reader["SoSBTG"].ToString();
-                    string price = reader["Gia"].ToString();
-                    flight_list.Add(new Flight(flightID, airlineLogo, airlineName, airportDepartureName, airportDestinationName, timeDestination, timeDeparture, time, stop, price));   
+                    string timeDeparture = dateTimeDeparture.ToString("HH:mm");
+                    string timeDestination = dateTimeDestination.ToString("HH:mm");
+
+                    int stop = int.Parse(reader["SoSBTG"].ToString());
+                    long price = long.Parse(reader["Gia"].ToString());
+                    flight_list.Add(new Flight(flightID, airlineLogo, airlineName, airportDepartureName, airportDestinationName, timeDestination, timeDeparture, time, dateTimeDeparture, dateTimeDestination, stop, price));
                 }
             }
             DataProvider.sqlConnection.Close();
 
-            FlightList.ItemsSource = flight_list;
+            lvFlight.ItemsSource = flight_list;
             if (flight_list.Count == 0)
             {
                 isHavingData.Text = "Không tìm thấy chuyến bay thích hợp";
@@ -110,11 +134,12 @@ namespace Quan_Ly_Ban_Ve_May_Bay
 
         private void FlightList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selectedFlight = (Flight)FlightList.SelectedItem;   
-            if (selectedFlight != null) {
-                Stop = int.Parse(selectedFlight.Stop);
+            var selectedFlight = (Flight)lvFlight.SelectedItem;
+            if (selectedFlight != null)
+            {
+                Stop = selectedFlight.Stop;
                 ShowDetail?.Invoke(this, new RoutedEventArgs());
-                FlightList.SelectedIndex = -1;
+                lvFlight.SelectedIndex = -1;
             }
         }
 
@@ -127,8 +152,219 @@ namespace Quan_Ly_Ban_Ve_May_Bay
         {
             Search?.Invoke(this, new RoutedEventArgs());
         }
-        
 
+        private void sortPriceAsc_Click(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvFlight.ItemsSource);
+            view.SortDescriptions.Clear();
+            view.SortDescriptions.Add(new SortDescription("Price", ListSortDirection.Ascending));
+        }
+        private void sortPriceDes_Click(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvFlight.ItemsSource);
+            view.SortDescriptions.Clear();
+            view.SortDescriptions.Add(new SortDescription("Price", ListSortDirection.Descending));
+        }
+        private void sortTimeAsc_Click(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvFlight.ItemsSource);
+            view.SortDescriptions.Clear();
+            view.SortDescriptions.Add(new SortDescription("Time", ListSortDirection.Ascending));
+        }
+
+        private void sortTimeDestinationAsc_Click(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvFlight.ItemsSource);
+            view.SortDescriptions.Clear();
+            view.SortDescriptions.Add(new SortDescription("TimeDestination", ListSortDirection.Ascending));
+        }
+
+        private void sortTimeDestinationDesc_Click(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvFlight.ItemsSource);
+            view.SortDescriptions.Clear();
+            view.SortDescriptions.Add(new SortDescription("TimeDestination", ListSortDirection.Descending));
+        }
+        private void sortTimeDepartureAsc_Click(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvFlight.ItemsSource);
+            view.SortDescriptions.Clear();
+            view.SortDescriptions.Add(new SortDescription("TimeDeparture", ListSortDirection.Ascending));
+        }
+
+        private void sortTimeDepartureDesc_Click(object sender, RoutedEventArgs e)
+        {
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvFlight.ItemsSource);
+            view.SortDescriptions.Clear();
+            view.SortDescriptions.Add(new SortDescription("TimeDeparture", ListSortDirection.Descending));
+        }
+
+        ///function filter
+        private bool noStopFilter(object item)
+        {
+            return ((item as Flight).Stop == 0);
+        }
+        private bool oneStopFilter(object item)
+        {
+            return ((item as Flight).Stop == 1);
+        }
+        private bool moreTwoStopFilter(object item)
+        {
+            return ((item as Flight).Stop >= 2);
+        }
+        private bool nightToMorning_Destination_Filter(object item)
+        {
+            if (((item as Flight).TimeDestination.CompareTo("00:00")) >= 0 && ((item as Flight).TimeDestination.CompareTo("05:59")) <= 0)
+            {
+                return true;
+            }
+            return false;
+        }
+        private bool morningToNoon_Destination_Filter(object item)
+        {
+            if (((item as Flight).TimeDestination.CompareTo("06:00")) >= 0 && ((item as Flight).TimeDestination.CompareTo("11:59")) <= 0)
+            {
+                return true;
+            }
+            return false;
+        }
+        private bool noonToEvening_Destination_Filter(object item)
+        {
+            if (((item as Flight).TimeDestination.CompareTo("12:00")) >= 0 && ((item as Flight).TimeDestination.CompareTo("17:59")) <= 0)
+            {
+                return true;
+            }
+            return false;
+        }
+        private bool eveningToNight_Destination_Filter(object item)
+        {
+            if (((item as Flight).TimeDestination.CompareTo("18:00")) >= 0 && ((item as Flight).TimeDestination.CompareTo("23:59")) <= 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private bool nightToMorning_Departure_Filter(object item)
+        {
+            if (((item as Flight).TimeDeparture.CompareTo("00:00")) >= 0 && ((item as Flight).TimeDeparture.CompareTo("05:59")) <= 0)
+            {
+                return true;
+            }
+            return false;
+        }
+        private bool morningToNoon_Departure_Filter(object item)
+        {
+            if (((item as Flight).TimeDeparture.CompareTo("06:00")) >= 0 && ((item as Flight).TimeDeparture.CompareTo("11:59")) <= 0)
+            {
+                return true;
+            }
+            return false;
+        }
+        private bool noonToEvening_Departure_Filter(object item)
+        {
+            if (((item as Flight).TimeDeparture.CompareTo("12:00")) >= 0 && ((item as Flight).TimeDeparture.CompareTo("17:59")) <= 0)
+            {
+                return true;
+            }
+            return false;
+        }
+        private bool eveningToNight_Departure_Filter(object item)
+        {
+            if (((item as Flight).TimeDeparture.CompareTo("18:00")) >= 0 && ((item as Flight).TimeDeparture.CompareTo("23:59")) <= 0)
+            {
+                return true;
+            }
+            return false;
+        }
+        //
+
+        //filter stop
+        private void noStopFilter_Click(object sender, RoutedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(lvFlight.ItemsSource).Refresh();
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvFlight.ItemsSource);
+            view.Filter = noStopFilter;
+        }
+
+        private void btnDefault_Click(object sender, RoutedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(lvFlight.ItemsSource).Refresh();
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvFlight.ItemsSource);
+            view.Filter = null;
+        }
+        private void oneStopFilter_Click(object sender, RoutedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(lvFlight.ItemsSource).Refresh();
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvFlight.ItemsSource);
+            view.Filter = oneStopFilter;
+        }
+        private void moreTwoStopFilter_Click(object sender, RoutedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(lvFlight.ItemsSource).Refresh();
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvFlight.ItemsSource);
+            view.Filter = moreTwoStopFilter;
+        }
+        //filter destination
+        private void nightToMorning_Destination_Click(object sender, RoutedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(lvFlight.ItemsSource).Refresh();
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvFlight.ItemsSource);
+            view.Filter = nightToMorning_Destination_Filter;
+        }
+        private void morningToNoon_Destination_Click(object sender, RoutedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(lvFlight.ItemsSource).Refresh();
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvFlight.ItemsSource);
+            view.Filter = morningToNoon_Destination_Filter;
+        }
+        private void noonToEvening_Destination_Click(object sender, RoutedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(lvFlight.ItemsSource).Refresh();
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvFlight.ItemsSource);
+            view.Filter = noonToEvening_Destination_Filter;
+        }
+        private void eveningToNight_Destination_Click(object sender, RoutedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(lvFlight.ItemsSource).Refresh();
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvFlight.ItemsSource);
+            view.Filter = eveningToNight_Destination_Filter;
+        }
+
+        //filter departure
+        private void nightToMorning_Departure_Click(object sender, RoutedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(lvFlight.ItemsSource).Refresh();
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvFlight.ItemsSource);
+            view.Filter = nightToMorning_Departure_Filter;
+        }
+        private void morningToNoon_Departure_Click(object sender, RoutedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(lvFlight.ItemsSource).Refresh();
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvFlight.ItemsSource);
+            view.Filter = morningToNoon_Departure_Filter;
+        }
+        private void noonToEvening_Departure_Click(object sender, RoutedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(lvFlight.ItemsSource).Refresh();
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvFlight.ItemsSource);
+            view.Filter = noonToEvening_Departure_Filter;
+        }
+        private void eveningToNight_Departure_Click(object sender, RoutedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(lvFlight.ItemsSource).Refresh();
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvFlight.ItemsSource);
+            view.Filter = eveningToNight_Departure_Filter;
+        }
+
+
+        private void lvAirline_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            selectedAirlineName = lvAirline.SelectedItem as string;
+            CollectionViewSource.GetDefaultView(lvFlight.ItemsSource).Refresh();
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvFlight.ItemsSource);
+
+            view.Filter = airlineNameFilter;
+        }
     }
-
 }
