@@ -29,10 +29,10 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Model
         private string percent;
         public string Percent
         {
-            get { return classId; }
+            get { return percent; }
             set
             {
-                classId = value;
+                percent = value;
                 RaisePropertyChanged();
             }
         }

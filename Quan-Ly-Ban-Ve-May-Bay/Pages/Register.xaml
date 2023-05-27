@@ -17,8 +17,7 @@
                             Height="25" Width="25" Click="BtnBack_Click"
                             ToolTip="Go Back" OverridesDefaultStyle="True"
                     HorizontalAlignment="Left">
-                <materialDesign:PackIcon Kind="ArrowLeft"
-                                                 Foreground="White"/>
+                <materialDesign:PackIcon Kind="ArrowLeft" Foreground="White"/>
             </Button>
             <TextBlock Text="Đăng Ký" 
                                TextAlignment="Center"

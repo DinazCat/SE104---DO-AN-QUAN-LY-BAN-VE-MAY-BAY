@@ -12,10 +12,10 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Converter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            TimeSpan duration = (TimeSpan)value;
+            TimeSpan duration = (TimeSpan) value;
             if (duration.Hours * 60 + duration.Minutes < 60)
             {
-                return (duration.Hours * 60 + duration.Minutes).ToString();
+                return (duration.Hours * 60 + duration.Minutes).ToString() + "'";
             }
             return duration.ToString(@"hh\:mm");
         }

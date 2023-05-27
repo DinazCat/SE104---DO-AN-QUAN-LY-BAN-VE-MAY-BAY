@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Quan_Ly_Ban_Ve_May_Bay"
         mc:Ignorable="d"
-        Height="600" Width="1200" Background="White" WindowStartupLocation="CenterScreen"
+        Height="600" Width="1250" Background="White" WindowStartupLocation="CenterScreen"
         Title="Quản lý bán vé máy bay">
     <Grid>
         
@@ -22,7 +22,7 @@
                             <EventTrigger RoutedEvent="ToggleButton.Unchecked">
                                 <BeginStoryboard>
                                     <Storyboard x:Name="ShowStackPanel">
-                                        <DoubleAnimation Storyboard.TargetName="GridNav" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="73" To="220" Duration="0:0:0.5">
+                                        <DoubleAnimation Storyboard.TargetName="GridNav" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="73" To="210" Duration="0:0:0.5">
                                         </DoubleAnimation>
                                     </Storyboard>
                                 </BeginStoryboard>
@@ -30,7 +30,7 @@
                             <EventTrigger RoutedEvent="ToggleButton.Checked">
                                 <BeginStoryboard>
                                     <Storyboard x:Name="HideStackPanel">
-                                        <DoubleAnimation Storyboard.TargetName="GridNav" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="220" To="73" Duration="0:0:0.5">
+                                        <DoubleAnimation Storyboard.TargetName="GridNav" Storyboard.TargetProperty="Width" BeginTime="0:0:0" From="210" To="73" Duration="0:0:0.5">
                                         </DoubleAnimation>
                                     </Storyboard>
                                 </BeginStoryboard>

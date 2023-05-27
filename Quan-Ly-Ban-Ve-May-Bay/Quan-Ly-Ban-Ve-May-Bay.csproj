@@ -88,6 +88,8 @@
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\FlightClass.cs" />
     <Compile Include="Model\QLHangVeClass.cs" />
+    <Compile Include="Model\SBTrungGian.cs" />
+    <Compile Include="Model\Ticket.cs" />
     <Compile Include="Pages\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
@@ -157,6 +159,7 @@
     <Page Include="Pages\FlightsList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -168,9 +171,12 @@
     </Compile>
     <Compile Include="Data\BANGTHAMSO.cs" />
     <Compile Include="Model\Flight.cs" />
-    <Compile Include="Model\DataProvider.cs" />
+    <Compile Include="Model\DataProvider.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="Pages\FlightsList.xaml.cs">
       <DependentUpon>FlightsList.xaml</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -179,10 +185,12 @@
     <Page Include="Pages\FlightDetail.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Page>
     <Page Include="Pages\Home.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Page>
     <Page Include="Pages\Login.xaml">
       <SubType>Designer</SubType>
@@ -276,9 +284,11 @@
   <ItemGroup>
     <Compile Include="Pages\FlightDetail.xaml.cs">
       <DependentUpon>FlightDetail.xaml</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Pages\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

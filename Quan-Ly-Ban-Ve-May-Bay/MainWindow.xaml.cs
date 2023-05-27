@@ -43,7 +43,9 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             flights.ShowDetail += Flight_ShowDetail;
             flights.Return += btnHome_Click;
             flightDetail.Return += Home_Search;
+            //continue
             flightDetail.Continue += FlightDetail_Continue;
+            //
             flights.Search += btnHome_Click;
             fContainer.Content = home;
         }
@@ -68,7 +70,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
 
         private void Flight_ShowDetail(object sender, RoutedEventArgs e)
         {
-            flightDetail.isHavingStop(flights.Stop);
+            flightDetail.Show(flights.flightID, flights.airlineLogo, flights.time, flights.dateTimeDestination, flights.dateTimeDeparture);
             fContainer.Content = flightDetail ;
         }
         private void AdminAccessBtn(object sender, RoutedEventArgs e)
