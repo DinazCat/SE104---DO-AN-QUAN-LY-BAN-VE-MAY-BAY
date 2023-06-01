@@ -7,11 +7,15 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Data.SqlClient;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Text.RegularExpressions;
+using System.Data;
+using Quan_Ly_Ban_Ve_May_Bay.Model;
 
 namespace Quan_Ly_Ban_Ve_May_Bay.View
 {
@@ -32,7 +36,13 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
 
 
             maVeBox.SelectedIndex = 0;
-            ngaylapHDTxt.Text = DateTime.Today.ToString();
+            ngaylapHDTxt.Text = DateTime.Now.ToString();
+
+            Random r = new Random();
+            maHoaDonTxt.Text = r.Next(100000, 9999999).ToString();
+
+            addData();
+
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
@@ -46,7 +56,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             public string mahangve { get; set; }
             public string mahk { get; set; }
             public string tenhk { get; set; }
-            public string cmnd { get; set; }
+            public string cccd { get; set; }
             public string sdt { get; set; }
 
         }
@@ -60,7 +70,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             {
                 if (ve.Count == 0)
                 {
-                    ve.Add(new Ve() { mave = maVeBox.SelectedItem.ToString(), soghe = soGheTxt.Text, mahangve = maHangVeTxt.Text, mahk = maHanhKhachText.Text, tenhk = tenHanhKhachTxt.Text, cmnd = cmndTxt.Text, sdt = sdtTxt.Text });
+                    ve.Add(new Ve() { mave = maVeBox.SelectedItem.ToString(), soghe = soGheTxt.Text, mahangve = maHangVeTxt.Text, mahk = maHanhKhachText.Text, tenhk = tenHanhKhachTxt.Text, cccd = cmndTxt.Text, sdt = sdtTxt.Text });
                 }
                 else
                 {
@@ -69,11 +79,11 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                         if (ve[i].mave == maVeBox.SelectedItem)
                         {
                             ve.Remove(ve[i]);
-                            ve.Insert(i, new Ve() { mave = maVeBox.SelectedItem.ToString(), soghe = soGheTxt.Text, mahangve = maHangVeTxt.Text, mahk = maHanhKhachText.Text, tenhk = tenHanhKhachTxt.Text, cmnd = cmndTxt.Text, sdt = sdtTxt.Text });
+                            ve.Insert(i, new Ve() { mave = maVeBox.SelectedItem.ToString(), soghe = soGheTxt.Text, mahangve = maHangVeTxt.Text, mahk = maHanhKhachText.Text, tenhk = tenHanhKhachTxt.Text, cccd = cmndTxt.Text, sdt = sdtTxt.Text });
                         }
                         else
                         {
-                            ve.Add(new Ve() { mave = maVeBox.SelectedItem.ToString(), soghe = soGheTxt.Text, mahangve = maHangVeTxt.Text, mahk = maHanhKhachText.Text, tenhk = tenHanhKhachTxt.Text, cmnd = cmndTxt.Text, sdt = sdtTxt.Text });
+                            ve.Add(new Ve() { mave = maVeBox.SelectedItem.ToString(), soghe = soGheTxt.Text, mahangve = maHangVeTxt.Text, mahk = maHanhKhachText.Text, tenhk = tenHanhKhachTxt.Text, cccd = cmndTxt.Text, sdt = sdtTxt.Text });
                         }
                     }
                 }
@@ -91,7 +101,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 if (ve[i].mave == maVeBox.SelectedItem)
                 {
                     tenHanhKhachTxt.Text = ve[i].tenhk;
-                    cmndTxt.Text = ve[i].cmnd;
+                    cmndTxt.Text = ve[i].cccd;
                     sdtTxt.Text = ve[i].sdt;
                 }
             }
@@ -103,8 +113,89 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             if (item_ve != null)
             {
                 tenHanhKhachTxt.Text = item_ve.tenhk;
-                cmndTxt.Text = item_ve.cmnd;
+                cmndTxt.Text = item_ve.cccd;
                 sdtTxt.Text = item_ve.sdt;
+            }
+        }
+
+        private void cmndTxt_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void sdtTxt_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void tenHanhKhachTxt_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^a-zA-Z]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void addData()
+        {
+            String stringcm = "select SanBayDi, SanBayDen, NgayKhoiHanh, ThoiGianXuatPhat from [CHUYENBAY] [c] where [c].MaChuyenBay = " + maChuyenBayTxt.Text;
+            SqlCommand sqlCommand = new SqlCommand(stringcm, DataProvider.sqlConnection);
+            SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
+            DataSet ds = new DataSet();
+            adapter.Fill(ds);
+            tuTxt.Text = ds.Tables[0].Rows[0][0].ToString();
+            denTxt.Text = ds.Tables[0].Rows[0][1].ToString();
+            ngayGiotxt.Text = ds.Tables[0].Rows[0][2].ToString() + " " + ds.Tables[0].Rows[0][3].ToString();
+        }
+
+        private void btnTTSau_Click(object sender, RoutedEventArgs e)
+        {
+            if (ve.Count < maVeBox.Items.Count)
+            {
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin vé!");
+            }
+            else
+            {
+                String stringcm;
+                String mahk, tenhk, cccd, sdt, tinhtrang;
+
+                for (int i = 0; i < ve.Count; i++)
+                {
+                    stringcm = "update [VE] set MaHK = " + ve[i].mahk + ", TenHK = " + ve[i].tenhk +
+                        ", SDT = " + ve[i].sdt + ", CMND = " + ve[i].cccd + ", TinhTrang = 'DaBan' where MaVe = " + ve[i].mave;
+                    SqlCommand sqlCommand = new SqlCommand(stringcm, DataProvider.sqlConnection);
+                }
+
+                stringcm = "insert [HOADON] values (" + maHoaDonTxt.Text + ", " + ngaylapHDTxt.Text + ", " + tienTxt.Text + ", 'ChuaTT', "
+                    + maTKTTTxt.Text + ")";
+
+                MessageBox.Show("Đặt vé thành công! \nVui lòng thanh toán hóa đơn trước khi chuyến bay xuất phát! \n" +
+                    "Phiếu đặt chỗ sẽ bị hủy nếu không được thanh toán trước giờ bay!");
+            }
+        }
+
+        private void btnTTNgay_Click(object sender, RoutedEventArgs e)
+        {
+            if (ve.Count < maVeBox.Items.Count)
+            {
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin vé!");
+            }
+            else
+            {
+                String stringcm;
+                String mahk, tenhk, cccd, sdt, tinhtrang;
+
+                for (int i = 0; i < ve.Count; i++)
+                {
+                    stringcm = "update [VE] set MaHK = " + ve[i].mahk + ", TenHK = " + ve[i].tenhk +
+                        ", SDT = " + ve[i].sdt + ", CMND = " + ve[i].cccd + ", TinhTrang = 'DaBan' where MaVe = " + ve[i].mave;
+                    SqlCommand sqlCommand = new SqlCommand(stringcm, DataProvider.sqlConnection);
+                }
+
+                stringcm = "insert [HOADON] values (" + maHoaDonTxt.Text + ", " + ngaylapHDTxt.Text + ", " + tienTxt.Text
+                    + ", 'DaTT', " + maTKTTTxt.Text + ")";
+
+                MessageBox.Show("Thanh toán vé thành công!");
             }
         }
     }

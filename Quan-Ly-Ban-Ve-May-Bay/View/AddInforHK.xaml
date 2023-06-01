@@ -43,8 +43,24 @@
                 <TextBlock Text="Thông tin chuyến bay" Margin="30,0,0,0" FontSize="20"/>
                 <TextBlock Text="Mã chuyến bay: " Margin="60,5,0,0"/>
                 <TextBox x:Name="maChuyenBayTxt"  Text="VNA01274603" HorizontalAlignment="Stretch" Margin="180,0,0,0" TextDecorations="{x:Null}" Visibility="Visible" UndoLimit="99" IsEnabled="False" SelectionBrush="{x:Null}" BorderBrush="{x:Null}"/>
-                <TextBlock Text="Tuyến: " Margin="60,0,0,0"/>
-                <TextBox x:Name="tuyenTxt"  Text="HCM - HaNoi" HorizontalAlignment="Stretch" Margin="180,0,0,0" TextDecorations="{x:Null}" Visibility="Visible" UndoLimit="99" IsEnabled="False" SelectionBrush="{x:Null}" BorderBrush="{x:Null}"/>
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="270"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <StackPanel>
+                            <TextBlock Text="Xuất phát từ: " Margin="60,0,0,0"/>
+                            <TextBox x:Name="tuTxt"  HorizontalAlignment="Stretch" Margin="180,0,0,0" TextDecorations="{x:Null}" Visibility="Visible" UndoLimit="99" IsEnabled="False" SelectionBrush="{x:Null}" BorderBrush="{x:Null}"/>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <StackPanel>
+                            <TextBlock Text="Đến: " Margin="20,0,0,0"/>
+                            <TextBox x:Name="denTxt" HorizontalAlignment="Stretch" Margin="70,0,0,0" TextDecorations="{x:Null}" Visibility="Visible" UndoLimit="99" IsEnabled="False" SelectionBrush="{x:Null}" BorderBrush="{x:Null}"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
                 <TextBlock Text="Ngày giờ: " Margin="60,0,0,0"/>
                 <TextBox x:Name="ngayGiotxt"  Text="13:00 20/06/2023" HorizontalAlignment="Stretch" Margin="180,0,0,0" TextDecorations="{x:Null}" Visibility="Visible" UndoLimit="99" IsEnabled="False" SelectionBrush="{x:Null}" BorderBrush="{x:Null}"/>
             </StackPanel>

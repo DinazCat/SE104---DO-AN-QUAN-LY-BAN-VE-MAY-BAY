@@ -473,3 +473,7 @@ D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Quan-Ly-Ban-Ve-May-Bay.csproj.F
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Quan-Ly-Ban-Ve-May-Bay.csproj.CopyComplete
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Quan-Ly-Ban-Ve-May-Bay.exe
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Quan-Ly-Ban-Ve-May-Bay.pdb
+C:\Users\DELL\Source\Repos\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\bin\Debug\Model\DataProvider.cs
+C:\Users\DELL\Source\Repos\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\bin\Debug\Pages\FlightsList.xaml.cs
+C:\Users\DELL\Source\Repos\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\bin\Debug\Pages\FlightDetail.xaml.cs
+C:\Users\DELL\Source\Repos\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\bin\Debug\Pages\Home.xaml.cs
