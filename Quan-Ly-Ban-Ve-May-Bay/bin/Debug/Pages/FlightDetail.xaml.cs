@@ -53,12 +53,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             }
             ClassesColor.ItemsSource = flight_classes;
 
-        }
-
-        private void btnCont_Click(object sender, RoutedEventArgs e)
-        {
-            Continue?.Invoke(this, new RoutedEventArgs());
-        }
+        }       
         //show detail
         public void Show(string flightID, string airlineLogo, TimeSpan time, DateTime dateTimeDestination, DateTime dateTimeDeparture)
         {
@@ -139,16 +134,18 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             }
             addDataToSeat(flightID);
         }
+
         //add data for ticket
+        List<Ticket> tickets1 = new List<Ticket>();
+        List<Ticket> tickets2 = new List<Ticket>();
+        List<Ticket> tickets3 = new List<Ticket>();
+        List<Ticket> tickets4 = new List<Ticket>();
+        List<Ticket> tickets5 = new List<Ticket>();
+        List<Ticket> tickets6 = new List<Ticket>();
         private void addDataToSeat(string flightID)
         {
 
-            List<Ticket> tickets1 = new List<Ticket>();
-            List<Ticket> tickets2 = new List<Ticket>();
-            List<Ticket> tickets3 = new List<Ticket>();
-            List<Ticket> tickets4 = new List<Ticket>();
-            List<Ticket> tickets5 = new List<Ticket>();
-            List<Ticket> tickets6 = new List<Ticket>();
+            
             for (int i = 1; i < flight_classes.Count; i++)
             {
                 DataProvider.sqlConnection.Open();
@@ -178,6 +175,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
                         else
                         {
                             color = "#FF95988E";
+                            // enable = false;
                         }
 
                         switch (seatNumber % 6)
@@ -215,17 +213,33 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             SeatsChart6.ItemsSource = tickets6;
         }
 
-        //List<string> ticket_chosen;
-        //public List<string> Ticket_chosen
-        //{
-        //    get { return ticket_chosen; }
-        //    set { ticket_chosen = value; }
-        //}
-        //private void BtnChose_Click(object sender, RoutedEventArgs e)
-        //{     
-        //    Ticket button = (sender as Button).DataContext as Ticket;
-        //    ticket_chosen.Add(button.TiketID);
-        //}
+        public List<string> TicketID_Chosen = new List<string>();
+        public string flightID;
+        private void BtnChose_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            Ticket ticket = (Ticket)button.DataContext;
+            if (button.Background != Brushes.Green)
+            {
+                button.Background = Brushes.Green;
+                TicketID_Chosen.Add(ticket.TiketID);
+            }
+            else
+            {
+                TicketID_Chosen.Remove(ticket.TiketID);
+                if (ticket.FlightClass == "HV229365")
+                {
+                    
+                    button.Background = Brushes.Yellow;
+                }
+                else button.Background = Brushes.Red;
+            }
+        }
 
+        private void btnCont_Click(object sender, RoutedEventArgs e)
+        {
+            flightID = flight_ID.Text;
+            Continue?.Invoke(this, new RoutedEventArgs());
+        }
     }
 }

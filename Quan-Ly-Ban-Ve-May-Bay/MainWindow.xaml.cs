@@ -53,6 +53,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
         private void FlightDetail_Continue(object sender, RoutedEventArgs e)
         {
             AddInforHK addInforHK = new AddInforHK();
+            addInforHK.Show(flightDetail.flightID, flightDetail.TicketID_Chosen);
             addInforHK.ShowDialog();
         }
 

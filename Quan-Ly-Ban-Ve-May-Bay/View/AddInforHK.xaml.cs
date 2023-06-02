@@ -23,18 +23,12 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
     {
         List<Ticket> ve = new List<Ticket>();
         List<string> list_mave = new List<string>();
-        private string machuyenbay= "N'QH001'";
+        DateTime ngayHD = new DateTime();
+        //private string machuyenbay= "N'QH001'";
 
         public AddInforHK()
         {
-            InitializeComponent();
-
-            list_mave.Add("9");
-            maVeBox.ItemsSource = list_mave;
-
-            Show(list_mave, machuyenbay);
-            veLV.ItemsSource = ve; 
-            maVeBox.SelectedIndex = 0;
+            InitializeComponent();            
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
@@ -79,7 +73,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                     if (reader.Read())
                     {
                         int dongia = int.Parse(reader["Gia"].ToString());
-                        if (item.FlightClass == "HV229365")
+                        if (item.FlightClass != "HV229365")
                         {
                             tien += (dongia * 105) / 100;
                         }
@@ -119,11 +113,11 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             {
                 if (reader.Read())
                 {
-                    int mahd = int.Parse(reader["MaHD"].ToString());
+                    int mahd = int.Parse(reader["MaHD"].ToString()) + 1;
                     maHoaDonTxt.Text = mahd.ToString();
                 }
             }
-            else maHoaDonTxt.Text = "000001";
+            else maHoaDonTxt.Text = "100";
             DataProvider.sqlConnection.Close();
 
             DataProvider.sqlConnection.Open();
@@ -136,14 +130,30 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                     int mahk = int.Parse(reader["MaHK"].ToString()) + 1;
                     maHanhKhachText.Text = mahk.ToString();
                 }
-                else maHanhKhachText.Text = "000001";
+                else maHanhKhachText.Text = "100";
             }            
             DataProvider.sqlConnection.Close();
         }
-        private void Show(List<string> list, string macb)
+        private void veLV_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Ticket item = veLV.SelectedItem as Ticket;
+            if (item != null)
+            {
+                tenHanhKhachTxt.Text = item.HkName;
+                cmndTxt.Text = item.CMND;
+                sdtTxt.Text = item.PhoneNumber;
+                soGheTxt.Text = item.SeatNumber.ToString();
+                maHangVeTxt.Text = item.FlightClass;
+                maVeBox.SelectedItem = item.TiketID;
+            }
+        }
+
+        public void Show(string macb, List<string> list)
         {           
             NewHD_NewHK();
-            ngaylapHDTxt.Text = DateTime.Now.ToString("dd/mm/yyyy h:mm");
+            ngayHD = DateTime.Now;
+            ngaylapHDTxt.Text = ngayHD.ToString("dd/mm/yyyy h:mm");
+            maVeBox.ItemsSource = list;
 
             foreach (string mave in list)
             {
@@ -171,7 +181,8 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 ve.Add(ticket);
                 DataProvider.sqlConnection.Close();
             }
-                        
+            veLV.ItemsSource = ve;
+
             SqlCommand sqlcommand = new SqlCommand(
                 "select [c].SanBayDi, [c].SanBayDen, [c].NgayKhoiHanh, [c].ThoiGianXuatPhat " +
                 "from [CHUYENBAY] [c] where [c].MaChuyenBay = " + maChuyenBayTxt.Text,
@@ -183,23 +194,10 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             denTxt.Text = ds.Tables[0].Rows[0][1].ToString();
             ngayGiotxt.Text = ds.Tables[0].Rows[0][2].ToString() + " " + ds.Tables[0].Rows[0][3].ToString();
 
+            maVeBox.SelectedIndex = 0;
             TienVe();
         }
-
-        private void veLV_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Ticket item = veLV.SelectedItem as Ticket;
-            if (item != null)
-            {
-                tenHanhKhachTxt.Text = item.HkName;
-                cmndTxt.Text = item.CMND;
-                sdtTxt.Text = item.PhoneNumber;
-                soGheTxt.Text = item.SeatNumber.ToString();
-                maHangVeTxt.Text = item.FlightClass;
-                maVeBox.SelectedItem = item.TiketID;
-            }
-        }
-
+        
         private void cmndTxt_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");
@@ -241,7 +239,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 SqlCommand sqlCommand = new SqlCommand(
                     "insert into [HOADON] values (@mahd, @ngay, @tien, 'UNPAID', @matk)", DataProvider.sqlConnection);
                 sqlCommand.Parameters.Add("@mahd", SqlDbType.NVarChar).Value = maHoaDonTxt.Text;
-                sqlCommand.Parameters.Add("@ngay", SqlDbType.DateTime).Value = ngaylapHDTxt.Text;
+                sqlCommand.Parameters.Add("@ngay", SqlDbType.DateTime).Value = ngayHD;
                 sqlCommand.Parameters.Add("@tien", SqlDbType.Int).Value = int.Parse(tienTxt.Text.ToString());
                 sqlCommand.Parameters.Add("@matk", SqlDbType.NVarChar).Value = maTKTTTxt.Text;
                 sqlCommand.ExecuteNonQuery();
@@ -266,7 +264,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 SqlCommand sqlCommand = new SqlCommand(
                     "insert into [HOADON] values (@mahd, @ngay, @tien, 'PAID', @matk)", DataProvider.sqlConnection);
                 sqlCommand.Parameters.Add("@mahd", SqlDbType.NVarChar).Value = maHoaDonTxt.Text;
-                sqlCommand.Parameters.Add("@ngay", SqlDbType.DateTime).Value = ngaylapHDTxt.Text;
+                sqlCommand.Parameters.Add("@ngay", SqlDbType.DateTime).Value = ngayHD;
                 sqlCommand.Parameters.Add("@tien", SqlDbType.Int).Value = int.Parse(tienTxt.Text.ToString());
                 sqlCommand.Parameters.Add("@matk", SqlDbType.NVarChar).Value = maTKTTTxt.Text;
                 sqlCommand.ExecuteNonQuery();
