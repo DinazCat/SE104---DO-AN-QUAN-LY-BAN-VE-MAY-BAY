@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Quan_Ly_Ban_Ve_May_Bay.Model;
 
 namespace Quan_Ly_Ban_Ve_May_Bay.Pages
 {
@@ -48,7 +49,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
             }
             else
             {
-                SqlConnection sqlCon = new SqlConnection(@"Data Source=DESKTOP-9LVKB7T\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
+                SqlConnection sqlCon = DataProvider.sqlConnection;
                 try
                 {
                     if (sqlCon.State == ConnectionState.Closed)
@@ -70,7 +71,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
                 finally { sqlCon.Close(); }
                 Random rd = new Random();
                 int ID = rd.Next(100000, 999999);
-                SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-9LVKB7T\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
+                SqlConnection con = DataProvider.sqlConnection;
                 con.Open();
                 SqlCommand cmd = new SqlCommand("Insert into [TaiKhoan] values('" + ID.ToString() + "',N'" + Username.Text + "',N'"  + PasswordBox1.Password + "'," + 3 + ",'" + Email.Text + "',N'" + Displayname.Text + "')", con);
                 cmd.CommandType = CommandType.Text;

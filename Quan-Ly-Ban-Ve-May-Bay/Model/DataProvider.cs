@@ -10,8 +10,9 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Model
 {
     internal class DataProvider
     {
-        private static string connectionStr = @"Data Source=(local);Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True";
-        // SqlConnection connect = new SqlConnection(conn);
+        //private static string connectionStr = @"Data Source=(local);Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True";
+        private static string connectionStr = @"Data Source=.\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True";
+
         public static SqlDataReader ExecuteReader(String commandText, CommandType commandType, params SqlParameter[] parameters)
         {
             SqlConnection conn = new SqlConnection(connectionStr);
@@ -26,7 +27,8 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Model
         }
 
 
-        public static SqlConnection sqlConnection = new SqlConnection(@"Data Source=(local);Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
-        
+        //public static SqlConnection sqlConnection = new SqlConnection(@"Data Source=(local);Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
+        public static SqlConnection sqlConnection = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
+
     }
 }

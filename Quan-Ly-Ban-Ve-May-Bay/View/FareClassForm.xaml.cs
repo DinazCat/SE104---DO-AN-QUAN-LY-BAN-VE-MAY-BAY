@@ -17,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using Quan_Ly_Ban_Ve_May_Bay.Model;
 
 namespace Quan_Ly_Ban_Ve_May_Bay.View
 {
@@ -42,7 +43,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             try
             {
                 int p = int.Parse(Percentage.Text);
-                SqlConnection sqlCon = new SqlConnection(@"Data Source=DESKTOP-9LVKB7T\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
+                SqlConnection sqlCon = DataProvider.sqlConnection;
                 try
                 {
                     if (sqlCon.State == ConnectionState.Closed)

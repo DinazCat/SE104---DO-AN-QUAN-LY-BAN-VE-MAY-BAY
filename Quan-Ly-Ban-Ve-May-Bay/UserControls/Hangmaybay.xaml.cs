@@ -79,7 +79,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
             HangMBclass info = HangMBTable.SelectedItem as HangMBclass;
             try
             {
-                SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-9LVKB7T\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
+                SqlConnection con = DataProvider.sqlConnection;
                 con.Open();
                 SqlCommand cmd = new SqlCommand("Delete from HANGMAYBAY where MaHang=N'" + info.mahang + "'", con);
                 cmd.CommandType = CommandType.Text;

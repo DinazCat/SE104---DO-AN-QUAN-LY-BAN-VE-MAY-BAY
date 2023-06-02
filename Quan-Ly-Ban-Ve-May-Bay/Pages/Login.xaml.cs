@@ -49,7 +49,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
                 txblError.Text = "Vui lòng nhập đầy đủ thông tin!";
                 return;
             }
-            SqlConnection sqlCon = new SqlConnection(@"Data Source=DESKTOP-9LVKB7T\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
+            SqlConnection sqlCon = DataProvider.sqlConnection;
             try
             {
                 if (sqlCon.State == ConnectionState.Closed)
