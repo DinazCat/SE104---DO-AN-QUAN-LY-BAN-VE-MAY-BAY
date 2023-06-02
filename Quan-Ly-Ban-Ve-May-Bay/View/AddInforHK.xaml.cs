@@ -110,12 +110,40 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             }
         }
 
+        private void NewHD_NewHK() 
+        { 
+            DataProvider.sqlConnection.Open();
+            SqlCommand sqlCommand = new SqlCommand("select [h].* from HOADON [h] order by MaHD desc", DataProvider.sqlConnection);
+            SqlDataReader reader = sqlCommand.ExecuteReader();
+            if (reader.HasRows)
+            {
+                if (reader.Read())
+                {
+                    int mahd = int.Parse(reader["MaHD"].ToString());
+                    maHoaDonTxt.Text = mahd.ToString();
+                }
+            }
+            else maHoaDonTxt.Text = "000001";
+            DataProvider.sqlConnection.Close();
+
+            DataProvider.sqlConnection.Open();
+            sqlCommand = new SqlCommand("select [v].* from VE [v] order by MaHK desc", DataProvider.sqlConnection);
+            reader = sqlCommand.ExecuteReader();
+            if (reader.Read())
+            {
+                if (reader["MaHK"].ToString() != "")
+                {
+                    int mahk = int.Parse(reader["MaHK"].ToString()) + 1;
+                    maHanhKhachText.Text = mahk.ToString();
+                }
+                else maHanhKhachText.Text = "000001";
+            }            
+            DataProvider.sqlConnection.Close();
+        }
         private void Show(List<string> list, string macb)
-        {
+        {           
+            NewHD_NewHK();
             ngaylapHDTxt.Text = DateTime.Now.ToString("dd/mm/yyyy h:mm");
-            Random r = new Random();
-            maHoaDonTxt.Text = r.Next(100000, 9999999).ToString();
-            maHanhKhachText.Text = r.Next(10000,99999999).ToString();
 
             foreach (string mave in list)
             {

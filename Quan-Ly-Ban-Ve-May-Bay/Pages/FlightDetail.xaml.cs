@@ -214,18 +214,5 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             SeatsChart5.ItemsSource = tickets5;
             SeatsChart6.ItemsSource = tickets6;
         }
-
-        //List<string> ticket_chosen;
-        //public List<string> Ticket_chosen
-        //{
-        //    get { return ticket_chosen; }
-        //    set { ticket_chosen = value; }
-        //}
-        //private void BtnChose_Click(object sender, RoutedEventArgs e)
-        //{     
-        //    Ticket button = (sender as Button).DataContext as Ticket;
-        //    ticket_chosen.Add(button.TiketID);
-        //}
-
     }
 }
