@@ -200,6 +200,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             HangVeList.Items.Remove(hv);
             qLHangVeClass.Remove(hv);
         }
+
         public static SanbayTG infotofix;
         private void SuaSBTG_Click(object sender, RoutedEventArgs e)
         {

@@ -26,7 +26,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=LAPTOP-68IV7KVK\\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrat" +
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-9LVKB7T\\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrat" +
             "ed Security=True")]
         public string QuanLyBanVeMayBayConnectionString {
             get {

@@ -32,7 +32,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
 
             sp_timeDeparture.DataContext = new DateTime();
             sp_timeDestination.DataContext = new DateTime();
-            tb_Time.DataContext = new TimeSpan();   
+            tb_Time.DataContext = new TimeSpan();
 
             ClassesColor.ItemsSource = flight_classes;
         }
@@ -41,7 +41,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             Return?.Invoke(this, new RoutedEventArgs());
         }
         public void addDataToClassColor()
-        { 
+        {
             SqlCommand sqlCommand = new SqlCommand(
             "select * from [HANGVE] order by TenHangVe asc", DataProvider.sqlConnection);
             SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
@@ -54,7 +54,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             ClassesColor.ItemsSource = flight_classes;
 
         }
-        
+
         private void btnCont_Click(object sender, RoutedEventArgs e)
         {
             Continue?.Invoke(this, new RoutedEventArgs());
@@ -97,7 +97,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
                 }
             }
             DataProvider.sqlConnection.Close();
-            tb_airportDeparture.Text = flight[5] + "(" + flight[3] +")";
+            tb_airportDeparture.Text = flight[5] + "(" + flight[3] + ")";
             tb_airportDepartureID.Text = flight[1];
             tb_airportDestination.Text = flight[6] + "(" + flight[4] + ")";
             tb_airportDestinationID.Text = flight[2];
@@ -135,7 +135,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             else
             {
                 SBTrungGianView.Visibility = Visibility.Visible;
-                ic_SBTrungGian.ItemsSource = listSBTrungGian;   
+                ic_SBTrungGian.ItemsSource = listSBTrungGian;
             }
             addDataToSeat(flightID);
         }
@@ -205,7 +205,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
                 }
                 DataProvider.sqlConnection.Close();
             }
-            
+
 
             SeatsChart1.ItemsSource = tickets1;
             SeatsChart2.ItemsSource = tickets2;
@@ -215,6 +215,17 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             SeatsChart6.ItemsSource = tickets6;
         }
 
-        
+        //List<string> ticket_chosen;
+        //public List<string> Ticket_chosen
+        //{
+        //    get { return ticket_chosen; }
+        //    set { ticket_chosen = value; }
+        //}
+        //private void BtnChose_Click(object sender, RoutedEventArgs e)
+        //{     
+        //    Ticket button = (sender as Button).DataContext as Ticket;
+        //    ticket_chosen.Add(button.TiketID);
+        //}
+
     }
 }

@@ -10,7 +10,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Model
 {
     internal class DataProvider
     {
-        private static string connectionStr = @"Data Source=(local);Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True";
+        private static string connectionStr = @"Data Source=DESKTOP-9LVKB7T\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True";
         // SqlConnection connect = new SqlConnection(conn);
         public static SqlDataReader ExecuteReader(String commandText, CommandType commandType, params SqlParameter[] parameters)
         {
@@ -26,7 +26,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Model
         }
 
 
-        public static SqlConnection sqlConnection = new SqlConnection(@"Data Source=(local);Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
+        public static SqlConnection sqlConnection = new SqlConnection(@"Data Source=DESKTOP-9LVKB7T\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
         
     }
 }
