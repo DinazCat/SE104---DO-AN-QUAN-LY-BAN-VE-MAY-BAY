@@ -229,10 +229,9 @@ namespace Quan_Ly_Ban_Ve_May_Bay
                 TicketID_Chosen.Remove(ticket.TiketID);
                 if (ticket.FlightClass == "HV229365")
                 {
-                    
-                    button.Background = Brushes.Yellow;
+                    button.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#C8D70C");
                 }
-                else button.Background = Brushes.Red;
+                else button.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#CB1D1D");
             }
         }
 

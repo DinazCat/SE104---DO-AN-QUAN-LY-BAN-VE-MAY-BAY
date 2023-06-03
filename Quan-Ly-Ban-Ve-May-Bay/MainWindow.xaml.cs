@@ -52,9 +52,23 @@ namespace Quan_Ly_Ban_Ve_May_Bay
 
         private void FlightDetail_Continue(object sender, RoutedEventArgs e)
         {
-            AddInforHK addInforHK = new AddInforHK();
-            addInforHK.Show(flightDetail.flightID, flightDetail.TicketID_Chosen);
-            addInforHK.ShowDialog();
+            if (curAccount != null)
+            {
+                AddInforHK addInforHK = new AddInforHK();
+                addInforHK.Show(flightDetail.flightID, flightDetail.TicketID_Chosen, curAccount.id);
+                addInforHK.ShowDialog();
+            }
+            else
+            {
+                MessageBoxResult result = MessageBox.Show("Vui lòng đăng nhập trước khi đặt vé!");
+                if (result == MessageBoxResult.OK)
+                {
+                    Login login = new Login();
+                    login.redirectSignup += Login_redirectSignup;
+                    login.loginSuccess += Login_loginSuccess;
+                    fContainer.Content = login;
+                }
+            }
         }
 
         private void btnHome_Click(object sender, RoutedEventArgs e)

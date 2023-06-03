@@ -148,11 +148,12 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             }
         }
 
-        public void Show(string macb, List<string> list)
+        public void Show(string macb, List<string> list,string userID)
         {           
             NewHD_NewHK();
             ngayHD = DateTime.Now;
             ngaylapHDTxt.Text = ngayHD.ToString("dd/mm/yyyy h:mm");
+            maTKTTTxt.Text = userID;
             maVeBox.ItemsSource = list;
 
             foreach (string mave in list)

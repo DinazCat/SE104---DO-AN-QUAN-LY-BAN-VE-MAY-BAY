@@ -36,7 +36,7 @@
                 <TextBlock Text="Ngày lập: " Margin="60,0,0,0"/>
                 <TextBox x:Name="ngaylapHDTxt" HorizontalAlignment="Stretch" Margin="180,0,0,0" TextDecorations="{x:Null}" Visibility="Visible" UndoLimit="99" IsEnabled="False" SelectionBrush="{x:Null}" BorderBrush="{x:Null}"/>
                 <TextBlock Text="Mã tài khoản thanh toán: " Margin="60,0,0,0"/>
-                <TextBox x:Name="maTKTTTxt"  Text="U000000" HorizontalAlignment="Stretch" Margin="180,0,0,0" TextDecorations="{x:Null}" Visibility="Visible" UndoLimit="99" IsEnabled="False" SelectionBrush="{x:Null}" BorderBrush="{x:Null}"/>
+                <TextBox x:Name="maTKTTTxt" HorizontalAlignment="Stretch" Margin="180,0,0,0" TextDecorations="{x:Null}" Visibility="Visible" UndoLimit="99" IsEnabled="False" SelectionBrush="{x:Null}" BorderBrush="{x:Null}"/>
 
             </StackPanel>
             <StackPanel Grid.Column="1">
