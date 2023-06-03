@@ -33,7 +33,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
         private FlightsList flights;
         private FlightDetail flightDetail;
         public static Account curAccount = null;
-        
+        private AllFlight allFlight;
         public MainWindow()
         {
             InitializeComponent();
@@ -43,12 +43,24 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             home.Search += Home_Search;
             flights.ShowDetail += Flight_ShowDetail;
             flights.Return += btnHome_Click;
-            flightDetail.Return += Home_Search;
+            flightDetail.Return += FlightDetail_Return;
             //continue
             flightDetail.Continue += FlightDetail_Continue;
             //
+            
             flights.Search += btnHome_Click;
             fContainer.Content = home;
+        }
+
+        private void FlightDetail_Return(object sender, RoutedEventArgs e)
+        {
+            if(flightDetail.isAllFlight == true)
+            {
+                btnAllFlight_Click(sender, e);
+            }
+            else {
+                Home_Search(sender, e);
+            }
         }
 
         private void FlightDetail_Continue(object sender, RoutedEventArgs e)
@@ -86,7 +98,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
 
         private void Flight_ShowDetail(object sender, RoutedEventArgs e)
         {
-            flightDetail.Show(flights.flightID, flights.airlineLogo, flights.time, flights.dateTimeDestination, flights.dateTimeDeparture);
+            flightDetail.Show(flights.flightID, flights.airlineLogo, flights.time, flights.dateTimeDestination, flights.dateTimeDeparture, false);
             fContainer.Content = flightDetail;
         }
         private void AdminAccessBtn(object sender, RoutedEventArgs e)
@@ -152,6 +164,19 @@ namespace Quan_Ly_Ban_Ve_May_Bay
         {
             UserManagement userManagement = new UserManagement();
             fContainer.Content = userManagement;
+        }
+
+        private void btnAllFlight_Click(object sender, RoutedEventArgs e)
+        {
+            allFlight = new AllFlight();
+            fContainer.Content = allFlight;
+            allFlight.ShowDetail += AllFlight_ShowDetail;
+        }
+
+        private void AllFlight_ShowDetail(object sender, RoutedEventArgs e)
+        {
+            flightDetail.Show(allFlight.flightID, allFlight.airlineLogo, allFlight.time, allFlight.dateTimeDestination, allFlight.dateTimeDeparture, true);
+            fContainer.Content = flightDetail;
         }
     }
 }

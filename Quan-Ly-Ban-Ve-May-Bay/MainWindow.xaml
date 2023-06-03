@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Quan_Ly_Ban_Ve_May_Bay"
         mc:Ignorable="d"
-        Height="600" Width="1250" Background="White" WindowStartupLocation="CenterScreen"
+        Height="600" Width="1280" Background="White" WindowStartupLocation="CenterScreen"
         Title="Quản lý bán vé máy bay">
     <Grid>
         
@@ -54,9 +54,9 @@
                                 <TextBlock Margin="15 0 0 0" FontSize="20" Text="My Bookings" Foreground="#FFF"/>
                             </StackPanel>
                         </Button>
-                        <Button HorizontalAlignment="Left" Margin="10 0 0 0" Height="35">
+                        <Button HorizontalAlignment="Left" Margin="10 0 0 0" Height="35" Click="btnAllFlight_Click">
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="/Images/airplane_mode_on_52px.png" Height="25" Width="30" />
+                                <Image Source="/Images/airplane_mode_on_52px.png" Height="25" Width="30"/>
                                 <TextBlock Margin="15 0 0 0" FontSize="20" Text="All Flight" Foreground="#FFF"/>
                             </StackPanel>
                         </Button>

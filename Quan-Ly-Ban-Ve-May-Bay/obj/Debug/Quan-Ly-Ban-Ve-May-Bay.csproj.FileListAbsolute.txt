@@ -569,3 +569,5 @@ D:\SE104\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Quan-Ly-Ban-Ve-May-Bay.cs
 D:\SE104\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Quan-Ly-Ban-Ve-May-Bay.csproj.CopyComplete
 D:\SE104\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Quan-Ly-Ban-Ve-May-Bay.exe
 D:\SE104\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Quan-Ly-Ban-Ve-May-Bay.pdb
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Pages\AllFlight.g.cs
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Pages\AllFlight.baml

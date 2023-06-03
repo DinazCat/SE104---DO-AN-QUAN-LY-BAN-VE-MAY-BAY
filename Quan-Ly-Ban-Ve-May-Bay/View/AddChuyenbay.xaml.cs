@@ -34,6 +34,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
         DataGrid chuyenbayTable;
         int thaotac;
         List<QLHangVeClass> qLHangVeClass;
+        
         public AddChuyenbay(DataGrid chuyenbayTable, int thaotac)
         {
             InitializeComponent();

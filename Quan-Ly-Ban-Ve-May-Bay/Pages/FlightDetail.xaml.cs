@@ -21,6 +21,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
         List<FlightClass> flight_classes;
         public event RoutedEventHandler Return;
         public event RoutedEventHandler Continue;
+        public bool isAllFlight;
 
         public FlightDetail()
         {
@@ -55,8 +56,9 @@ namespace Quan_Ly_Ban_Ve_May_Bay
 
         }
         //show detail
-        public void Show(string flightID, string airlineLogo, TimeSpan time, DateTime dateTimeDestination, DateTime dateTimeDeparture)
+        public void Show(string flightID, string airlineLogo, TimeSpan time, DateTime dateTimeDestination, DateTime dateTimeDeparture, bool _isAllFlight)
         {
+            isAllFlight = _isAllFlight;
             flight_ID.Text = flightID;
             sp_timeDeparture.DataContext = dateTimeDeparture;
             sp_timeDestination.DataContext = dateTimeDestination;
@@ -144,8 +146,13 @@ namespace Quan_Ly_Ban_Ve_May_Bay
         List<Ticket> tickets6 = new List<Ticket>();
         private void addDataToSeat(string flightID)
         {
-
-
+            tickets1 = new List<Ticket>();
+            tickets2 = new List<Ticket>();
+            tickets3 = new List<Ticket>();
+            tickets4 = new List<Ticket>();
+            tickets5 = new List<Ticket>();
+            TicketID_Chosen = new List<string>();
+            tickets6 = new List<Ticket>();
             for (int i = 1; i < flight_classes.Count; i++)
             {
                 DataProvider.sqlConnection.Open();
@@ -219,25 +226,21 @@ namespace Quan_Ly_Ban_Ve_May_Bay
         {
             Button button = (Button)sender;
             Ticket ticket = (Ticket)button.DataContext;
-            SolidColorBrush colorgray = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF95988E");
-            if (button.Background != Brushes.Green)
+            //SolidColorBrush colorgray = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF95988E");
+            if (ticket.Color != "#FF95988E")
             {
-                button.Background = Brushes.Green;
-                TicketID_Chosen.Add(ticket.TiketID);
-            }
-            else if (button.Background == colorgray)
-            {
-                button.IsEnabled = true;
-            }
-            else
-            {
-                TicketID_Chosen.Remove(ticket.TiketID);
-                if (ticket.FlightClass == "HV229365")
+                if (button.Background != Brushes.Green)
                 {
-                    button.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#C8D70C");
+                    button.Background = Brushes.Green;
+                    TicketID_Chosen.Add(ticket.TiketID);
                 }
-                else button.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#CB1D1D");
-            }        
+                else
+                {
+                    TicketID_Chosen.Remove(ticket.TiketID);
+                    button.Background = (SolidColorBrush)new BrushConverter().ConvertFromString(ticket.Color);
+                    button.Background = (SolidColorBrush)new BrushConverter().ConvertFromString(ticket.Color);
+                }
+            }
         }
 
         private void btnCont_Click(object sender, RoutedEventArgs e)
