@@ -16,14 +16,18 @@ using System.Windows.Shapes;
 using System.Text.RegularExpressions;
 using System.Data;
 using Quan_Ly_Ban_Ve_May_Bay.Model;
+using Quan_Ly_Ban_Ve_May_Bay.Pages;
 
 namespace Quan_Ly_Ban_Ve_May_Bay.View
 {
     public partial class AddInforHK : Window
     {
+
+
         List<Ticket> ve = new List<Ticket>();
         List<string> list_mave = new List<string>();
         DateTime ngayHD = new DateTime();
+        public event RoutedEventHandler GoToHomeScreen;
 
         public AddInforHK()
         {
@@ -256,10 +260,15 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 DataProvider.sqlConnection.Close();
 
                 SaveVe("BOOKED");
-                MessageBox.Show("Đặt vé thành công! \nVui lòng thanh toán hóa đơn trước khi chuyến bay xuất phát! \n" +
-                    "Phiếu đặt chỗ sẽ bị hủy nếu không được thanh toán trước giờ bay!");
                 Finish();
-                this.Close();
+                //go to home screen in MainWindow
+                MessageBoxResult result = MessageBox.Show("Đặt vé thành công! \nVui lòng thanh toán hóa đơn trước khi chuyến bay xuất phát! \n" +
+                    "Phiếu đặt chỗ sẽ bị hủy nếu không được thanh toán trước giờ bay!");
+                if (result == MessageBoxResult.OK)
+                {
+                    GoToHomeScreen?.Invoke(this, new RoutedEventArgs());
+                    this.Close();
+                }
             }
         }
 
@@ -282,9 +291,14 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 sqlCommand.ExecuteNonQuery();
                 DataProvider.sqlConnection.Close();
                 SaveVe("SOLD");
-                MessageBox.Show("Thanh toán vé thành công!");
+                MessageBoxResult result = MessageBox.Show("Thanh toán vé thành công!");
                 Finish();
-                this.Close();
+                //go to home screen in MainWindow
+                if (result == MessageBoxResult.OK)
+                {
+                    GoToHomeScreen?.Invoke(this, new RoutedEventArgs());
+                    this.Close();
+                }
             }
         }
 

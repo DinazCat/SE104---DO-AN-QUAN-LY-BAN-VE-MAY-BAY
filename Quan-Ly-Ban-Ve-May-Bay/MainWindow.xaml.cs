@@ -33,23 +33,34 @@ namespace Quan_Ly_Ban_Ve_May_Bay
         private FlightsList flights;
         private FlightDetail flightDetail;
         public static Account curAccount = null;
+        private AddInforHK addInforHK;
         private AllFlight allFlight;
         public MainWindow()
         {
             InitializeComponent();
             home = new Home();
+            allFlight = new AllFlight();
+            addInforHK = new AddInforHK();
             flights = new FlightsList();
             flightDetail = new FlightDetail();
             home.Search += Home_Search;
             flights.ShowDetail += Flight_ShowDetail;
             flights.Return += btnHome_Click;
             flightDetail.Return += FlightDetail_Return;
+            
             //continue
             flightDetail.Continue += FlightDetail_Continue;
             //
             
             flights.Search += btnHome_Click;
             fContainer.Content = home;
+        }
+
+        private void AddInforHK_GoToHomeScreen(object sender, RoutedEventArgs e)
+        {
+            home = new Home();
+            fContainer.Content = home;
+            home.Search += Home_Search;
         }
 
         private void FlightDetail_Return(object sender, RoutedEventArgs e)
@@ -67,9 +78,18 @@ namespace Quan_Ly_Ban_Ve_May_Bay
         {
             if (curAccount != null)
             {
-                AddInforHK addInforHK = new AddInforHK();
+                if (addInforHK == null)
+                {
+                    addInforHK = new AddInforHK();
+                }
+                else
+                {
+                    addInforHK.Close();
+                    addInforHK = new AddInforHK();
+                }
+                addInforHK.GoToHomeScreen += AddInforHK_GoToHomeScreen;
                 addInforHK.Show(flightDetail.flightID, flightDetail.TicketID_Chosen, curAccount.id);
-                addInforHK.ShowDialog();
+                addInforHK.Show();
             }
             else
             {
@@ -168,7 +188,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay
 
         private void btnAllFlight_Click(object sender, RoutedEventArgs e)
         {
-            allFlight = new AllFlight();
             fContainer.Content = allFlight;
             allFlight.ShowDetail += AllFlight_ShowDetail;
         }

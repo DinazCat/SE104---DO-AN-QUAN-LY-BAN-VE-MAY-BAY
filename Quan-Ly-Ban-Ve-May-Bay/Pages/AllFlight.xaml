@@ -15,7 +15,13 @@
         <convert:DateConverter x:Key="DateConverter"/>
     </Page.Resources>
     <Grid>
-        <ListView Grid.Row="2" Background="{x:Null}" Margin="2,2,2,2" Name="lvFlight" BorderBrush="{x:Null}" HorizontalContentAlignment="Center"  ScrollViewer.CanContentScroll="false" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionChanged="FlightList_SelectionChanged">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.15*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Tất cả các chuyến bay" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="Bold" Foreground="#FF43C863"></TextBlock>
+        <Grid Grid.Row="1">
+            <ListView Grid.Row="2" Background="{x:Null}" Margin="2,2,2,2" Name="lvFlight" BorderBrush="{x:Null}" HorizontalContentAlignment="Center"  ScrollViewer.CanContentScroll="false" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionChanged="FlightList_SelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border CornerRadius="4" Background="White" BorderBrush="DarkSeaGreen" BorderThickness="1" Margin="0 4 0 4">
@@ -90,5 +96,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+    </Grid>
     </Grid>
 </Page>

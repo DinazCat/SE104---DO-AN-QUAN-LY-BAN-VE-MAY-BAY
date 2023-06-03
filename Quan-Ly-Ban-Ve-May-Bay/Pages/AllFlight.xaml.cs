@@ -77,6 +77,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
         private void FlightList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selectedFlight = (Flight)lvFlight.SelectedItem;
+            lvFlight.ScrollIntoView(lvFlight.SelectedIndex);
             if (selectedFlight != null)
             {
                 //dữ liệu cần truyền sang cho flightListDetail
