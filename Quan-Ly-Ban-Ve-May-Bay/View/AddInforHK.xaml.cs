@@ -152,7 +152,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
         {
             NewHD_NewHK();
             ngayHD = DateTime.Now;
-            ngaylapHDTxt.Text = ngayHD.ToString("dd/mm/yyyy h:mm");
+            ngaylapHDTxt.Text = ngayHD.ToString("dd/MM/yyyy h:mm");
             maTKTTTxt.Text = userID;
             maVeBox.ItemsSource = list;
             maChuyenBayTxt.Text = macb;
@@ -259,6 +259,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 MessageBox.Show("Đặt vé thành công! \nVui lòng thanh toán hóa đơn trước khi chuyến bay xuất phát! \n" +
                     "Phiếu đặt chỗ sẽ bị hủy nếu không được thanh toán trước giờ bay!");
                 Finish();
+                this.Close();
             }
         }
 
@@ -283,6 +284,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 SaveVe();
                 MessageBox.Show("Thanh toán vé thành công!");
                 Finish();
+                this.Close();
             }
         }
 
@@ -307,7 +309,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
 
         private void Finish()
         {
-            this.Close();            
+            
         }
     }
 }
