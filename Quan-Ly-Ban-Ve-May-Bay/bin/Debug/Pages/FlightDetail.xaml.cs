@@ -32,7 +32,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
 
             sp_timeDeparture.DataContext = new DateTime();
             sp_timeDestination.DataContext = new DateTime();
-            tb_Time.DataContext = new TimeSpan();   
+            tb_Time.DataContext = new TimeSpan();
 
             ClassesColor.ItemsSource = flight_classes;
         }
@@ -41,7 +41,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             Return?.Invoke(this, new RoutedEventArgs());
         }
         public void addDataToClassColor()
-        { 
+        {
             SqlCommand sqlCommand = new SqlCommand(
             "select * from [HANGVE] order by TenHangVe asc", DataProvider.sqlConnection);
             SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
@@ -53,11 +53,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             }
             ClassesColor.ItemsSource = flight_classes;
 
-        }
-        
-        private void btnCont_Click(object sender, RoutedEventArgs e)
-        {
-            Continue?.Invoke(this, new RoutedEventArgs());
         }
         //show detail
         public void Show(string flightID, string airlineLogo, TimeSpan time, DateTime dateTimeDestination, DateTime dateTimeDeparture)
@@ -97,7 +92,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
                 }
             }
             DataProvider.sqlConnection.Close();
-            tb_airportDeparture.Text = flight[5] + "(" + flight[3] +")";
+            tb_airportDeparture.Text = flight[5] + "(" + flight[3] + ")";
             tb_airportDepartureID.Text = flight[1];
             tb_airportDestination.Text = flight[6] + "(" + flight[4] + ")";
             tb_airportDestinationID.Text = flight[2];
@@ -135,20 +130,22 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             else
             {
                 SBTrungGianView.Visibility = Visibility.Visible;
-                ic_SBTrungGian.ItemsSource = listSBTrungGian;   
+                ic_SBTrungGian.ItemsSource = listSBTrungGian;
             }
             addDataToSeat(flightID);
         }
+
         //add data for ticket
+        List<Ticket> tickets1 = new List<Ticket>();
+        List<Ticket> tickets2 = new List<Ticket>();
+        List<Ticket> tickets3 = new List<Ticket>();
+        List<Ticket> tickets4 = new List<Ticket>();
+        List<Ticket> tickets5 = new List<Ticket>();
+        List<Ticket> tickets6 = new List<Ticket>();
         private void addDataToSeat(string flightID)
         {
 
-            List<Ticket> tickets1 = new List<Ticket>();
-            List<Ticket> tickets2 = new List<Ticket>();
-            List<Ticket> tickets3 = new List<Ticket>();
-            List<Ticket> tickets4 = new List<Ticket>();
-            List<Ticket> tickets5 = new List<Ticket>();
-            List<Ticket> tickets6 = new List<Ticket>();
+
             for (int i = 1; i < flight_classes.Count; i++)
             {
                 DataProvider.sqlConnection.Open();
@@ -178,6 +175,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
                         else
                         {
                             color = "#FF95988E";
+                            // enable = false;
                         }
 
                         switch (seatNumber % 6)
@@ -205,7 +203,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
                 }
                 DataProvider.sqlConnection.Close();
             }
-            
+
 
             SeatsChart1.ItemsSource = tickets1;
             SeatsChart2.ItemsSource = tickets2;
@@ -215,6 +213,44 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             SeatsChart6.ItemsSource = tickets6;
         }
 
-        
+        public List<string> TicketID_Chosen = new List<string>();
+        public string flightID;
+        private void BtnChose_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            Ticket ticket = (Ticket)button.DataContext;
+            SolidColorBrush colorgray = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF95988E");
+            if (button.Background != Brushes.Green)
+            {
+                button.Background = Brushes.Green;
+                TicketID_Chosen.Add(ticket.TiketID);
+            }
+            else if (button.Background == colorgray)
+            {
+                button.IsEnabled = true;
+            }
+            else
+            {
+                TicketID_Chosen.Remove(ticket.TiketID);
+                if (ticket.FlightClass == "HV229365")
+                {
+                    button.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#C8D70C");
+                }
+                else button.Background = (SolidColorBrush)new BrushConverter().ConvertFromString("#CB1D1D");
+            }        
+        }
+
+        private void btnCont_Click(object sender, RoutedEventArgs e)
+        {
+            if (TicketID_Chosen.Count == 0)
+            {
+                MessageBox.Show("Vui lòng chọn vé muốn đặt!");
+            }
+            else
+            {
+                flightID = flight_ID.Text;
+                Continue?.Invoke(this, new RoutedEventArgs());
+            }
+        }
     }
 }

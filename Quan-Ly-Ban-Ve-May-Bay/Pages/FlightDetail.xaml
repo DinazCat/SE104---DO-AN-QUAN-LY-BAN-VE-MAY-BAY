@@ -79,44 +79,44 @@
 
                             <!--Seats Chart -->
                             <ItemsControl Grid.Column="0" Name="SeatsChart1">
-                                <ItemsControl.ItemTemplate>
+                                <ItemsControl.ItemTemplate >
                                     <DataTemplate>
-                                        <Button DataContext="{Binding}" Content="{Binding SeatNumber}" Height="55" Width="55" Background="{Binding Color}" Margin="2 10 2 10"/>
+                                        <Button DataContext="{Binding}" Content="{Binding SeatNumber}" Height="55" Width="55" Background="{Binding Color}" Margin="2 10 2 10" Click="BtnChose_Click"/>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
                             <ItemsControl Grid.Column="1" Name="SeatsChart2">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <Button DataContext="{Binding}" Content="{Binding SeatNumber}" Height="55" Width="55" Background="{Binding Color}" Margin="2 10 2 10"/>
+                                        <Button DataContext="{Binding}" Content="{Binding SeatNumber}" Height="55" Width="55" Background="{Binding Color}" Margin="2 10 2 10" Click="BtnChose_Click"/>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
                             <ItemsControl Grid.Column="2" Name="SeatsChart3">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <Button DataContext="{Binding}" Content="{Binding SeatNumber}" Height="55" Width="55" Background="{Binding Color}" Margin="2 10 2 10"/>
+                                        <Button DataContext="{Binding}" Content="{Binding SeatNumber}" Height="55" Width="55" Background="{Binding Color}" Margin="2 10 2 10" Click="BtnChose_Click"/>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
                             <ItemsControl Grid.Column="4" Name="SeatsChart4">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <Button DataContext="{Binding}" Content="{Binding SeatNumber}" Height="55" Width="55" Background="{Binding Color}" Margin="2 10 2 10"/>
+                                        <Button DataContext="{Binding}" Content="{Binding SeatNumber}" Height="55" Width="55" Background="{Binding Color}" Margin="2 10 2 10" Click="BtnChose_Click"/>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
                             <ItemsControl Grid.Column="5" Name="SeatsChart5">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <Button DataContext="{Binding}" Content="{Binding SeatNumber}" Height="55" Width="55" Background="{Binding Color}" Margin="2 10 2 10"/>
+                                        <Button DataContext="{Binding}" Content="{Binding SeatNumber}" Height="55" Width="55" Background="{Binding Color}" Margin="2 10 2 10" Click="BtnChose_Click"/>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
                             <ItemsControl Grid.Column="6" Name="SeatsChart6" >
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <Button DataContext="{Binding}" Content="{Binding SeatNumber}" Height="55" Width="55" Background="{Binding Color}" Margin="2 10 2 10"/>
+                                        <Button DataContext="{Binding}" Content="{Binding SeatNumber}" Height="55" Width="55" Background="{Binding Color}" Margin="2 10 2 10" Click="BtnChose_Click"/>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
@@ -126,7 +126,7 @@
 
                 </Grid>
             </Grid>
-            
+
             <!--Flight details -->
 
             <Grid Grid.Column="0">
@@ -135,7 +135,7 @@
                     <RowDefinition Height="275"/>
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                
+
                 <TextBlock Text="Chi tiết chuyến bay" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Foreground="#FF439E22" VerticalAlignment="Center"/>
                 <Grid Grid.Row="1" >
 

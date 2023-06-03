@@ -28,11 +28,12 @@ namespace Quan_Ly_Ban_Ve_May_Bay
 
     public partial class MainWindow : Window
     {
-        
+
         private Home home;
         private FlightsList flights;
         private FlightDetail flightDetail;
         public static Account curAccount = null;
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -52,26 +53,41 @@ namespace Quan_Ly_Ban_Ve_May_Bay
 
         private void FlightDetail_Continue(object sender, RoutedEventArgs e)
         {
-            AddInforHK addInforHK = new AddInforHK();
-            addInforHK.ShowDialog();
+            if (curAccount != null)
+            {
+                AddInforHK addInforHK = new AddInforHK();
+                addInforHK.Show(flightDetail.flightID, flightDetail.TicketID_Chosen, curAccount.id);
+                addInforHK.ShowDialog();
+            }
+            else
+            {
+                MessageBoxResult result = MessageBox.Show("Vui lòng đăng nhập trước khi đặt vé!");
+                if (result == MessageBoxResult.OK)
+                {
+                    Login login = new Login();
+                    login.redirectSignup += Login_redirectSignup;
+                    login.loginSuccess += Login_loginSuccess;
+                    fContainer.Content = login;
+                }
+            }
         }
 
         private void btnHome_Click(object sender, RoutedEventArgs e)
         {
-            fContainer.Content = home; 
+            fContainer.Content = home;
         }
 
         private void Home_Search(object sender, RoutedEventArgs e)
         {
             flights.FlightSearched(home.Departure, home.Destination, home.Date, home.Quantity, home.FlightClass);
             fContainer.Content = flights;
-            
+
         }
 
         private void Flight_ShowDetail(object sender, RoutedEventArgs e)
         {
             flightDetail.Show(flights.flightID, flights.airlineLogo, flights.time, flights.dateTimeDestination, flights.dateTimeDeparture);
-            fContainer.Content = flightDetail ;
+            fContainer.Content = flightDetail;
         }
         private void AdminAccessBtn(object sender, RoutedEventArgs e)
         {
@@ -109,8 +125,9 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             tblLogin.Text = "Logout";
             BitmapImage bitmap = new BitmapImage(new Uri("/Images/logout.png", UriKind.Relative));
             imgLogin.Source = bitmap;
-            if(MainWindow.curAccount.type == 1){
-                btn_UserManagement.Visibility = Visibility.Visible;     
+            if (MainWindow.curAccount.type == 1)
+            {
+                btn_UserManagement.Visibility = Visibility.Visible;
                 btn_SalesmanRight.Visibility = Visibility.Visible;
             }
             if (MainWindow.curAccount.type == 2)
@@ -121,9 +138,9 @@ namespace Quan_Ly_Ban_Ve_May_Bay
 
         private void Login_redirectSignup(object sender, RoutedEventArgs e)
         {
-            Register register= new Register();
+            Register register = new Register();
             register.redirectLogin += Register_redirectLogin;
-            fContainer.Content = register;          
+            fContainer.Content = register;
         }
 
         private void Register_redirectLogin(object sender, RoutedEventArgs e)

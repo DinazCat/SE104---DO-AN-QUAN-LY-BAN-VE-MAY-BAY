@@ -67,6 +67,33 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Model
             }
         }
 
+        private string hkID;
+        public string HkID
+        {
+            get { return hkID; }
+            set { hkID = value; }
+        }
+        private string hkName;
+        public string HkName
+        {
+            get { return hkName; }
+            set { hkName = value; }
+        }
+
+        private string cmnd;
+        public string CMND
+        {
+            get { return cmnd; }
+            set { cmnd = value; }
+        }
+
+        private string phoneNumber;
+        public string PhoneNumber
+        {
+            get { return phoneNumber; }
+            set { phoneNumber = value; }
+        }
+
         public Ticket() { }
         public Ticket(string ticketID, string flightClass, int seatNumber, string status, string color)
         {
@@ -75,6 +102,18 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Model
             this.seatNumber = seatNumber;
             this.status = status;
             this.color = color;
+        }
+
+        public Ticket(string ticketID, string flightClass, int seatNumber, string status, string hkID, string hkName, string cmnd, string phoneNumber)
+        {
+            this.ticketID = ticketID;
+            this.flightClass = flightClass;
+            this.seatNumber = seatNumber;
+            this.status = status;
+            this.hkID = hkID;
+            this.hkName = hkName;
+            this.cmnd = cmnd;
+            this.phoneNumber = phoneNumber;
         }
     }
 }
