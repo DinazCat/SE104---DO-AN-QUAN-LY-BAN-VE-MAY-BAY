@@ -255,7 +255,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 sqlCommand.ExecuteNonQuery();
                 DataProvider.sqlConnection.Close();
 
-                SaveVe();
+                SaveVe("BOOKED");
                 MessageBox.Show("Đặt vé thành công! \nVui lòng thanh toán hóa đơn trước khi chuyến bay xuất phát! \n" +
                     "Phiếu đặt chỗ sẽ bị hủy nếu không được thanh toán trước giờ bay!");
                 Finish();
@@ -281,27 +281,28 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 sqlCommand.Parameters.Add("@matk", SqlDbType.NVarChar).Value = maTKTTTxt.Text;
                 sqlCommand.ExecuteNonQuery();
                 DataProvider.sqlConnection.Close();
-                SaveVe();
+                SaveVe("SOLD");
                 MessageBox.Show("Thanh toán vé thành công!");
                 Finish();
                 this.Close();
             }
         }
 
-        private void SaveVe()
+        private void SaveVe(String tinhtrang)
         {
             foreach (Ticket item in ve)
             {
                 DataProvider.sqlConnection.Open();
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 SqlCommand sqlCommand = new SqlCommand(
-                    "update [VE] set MaHK = @mahk, TenHK = @tenhk, CMND = @cmnd, SDT = @sdt, TinhTrang = 'SOLD' " +
+                    "update [VE] set MaHK = @mahk, TenHK = @tenhk, CMND = @cmnd, SDT = @sdt, TinhTrang = @tinhtrang " +
                     "where MaVe = @mave", DataProvider.sqlConnection);
                 sqlCommand.Parameters.Add("@mahk", SqlDbType.NVarChar).Value = item.HkID;
                 sqlCommand.Parameters.Add("@tenhk", SqlDbType.NVarChar).Value = item.HkName;
                 sqlCommand.Parameters.Add("@cmnd", SqlDbType.NVarChar).Value = item.CMND;
                 sqlCommand.Parameters.Add("@sdt", SqlDbType.NVarChar).Value = item.PhoneNumber;
                 sqlCommand.Parameters.Add("@mave", SqlDbType.NVarChar).Value = item.TiketID;
+                sqlCommand.Parameters.Add("@tinhtrang", SqlDbType.NVarChar).Value = tinhtrang;
                 sqlCommand.ExecuteNonQuery();
                 DataProvider.sqlConnection.Close();
             }

@@ -11,11 +11,12 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <TextBlock Text="Năm" Foreground="#000000" TextAlignment="Center" FontSize="20" VerticalAlignment="Center"/>
-            <ComboBox Width="200" Margin="10" FontSize="18" VerticalAlignment="Center"
-                      Background="#F5F5F5"
+            <ComboBox Width="100" Margin="10" FontSize="18" VerticalAlignment="Center"
+                      Background="#F5F5F5" SelectionChanged="cbox_selectionChanged"
                       x:Name="cBox">
             </ComboBox>
         </StackPanel>
@@ -44,13 +45,15 @@
 
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="STT" Width="100" Binding="{Binding stt}"/>
                 <DataGridTextColumn Header="Tháng" Width="150" Binding="{Binding thang}"/>
-                <DataGridTextColumn Header="Số chuyến bay" Width="150" Binding="{Binding sochuyenbay}"/>
+                <DataGridTextColumn Header="Số chuyến bay" Width="*" Binding="{Binding sochuyenbay}"/>
                 <DataGridTextColumn Header="Doanh thu" Width="*" Binding="{Binding doanhthu}"/>
-                <DataGridTextColumn Header="Tỉ lệ" Width="150" Binding="{Binding tile}"/>
+                <DataGridTextColumn Header="Tỉ lệ" Width="0.8*" Binding="{Binding tile}"/>
             </DataGrid.Columns>
         </DataGrid>
-
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <TextBlock  Text="Tổng doanh thu: " FontSize="20" VerticalAlignment="Center" Margin="20 0 0 0"/>
+            <TextBlock  x:Name="tb_total" FontSize="20" VerticalAlignment="Center" Margin="10 0 0 0"/>
+        </StackPanel>
     </Grid>
 </UserControl>

@@ -20,28 +20,29 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
     /// </summary>
     public partial class AdminRight : UserControl
     {
-            public AdminRight()
-            {
-                InitializeComponent();
-                frame.NavigationService.Navigate(new MonthRevenue());
-            }
-            MonthRevenue MonthBCDT = new MonthRevenue();
-            YearRevenue YearBCDT = new YearRevenue();
-            QLCB_SB qLCB = new QLCB_SB();
-            private void MonthRevenue_Click(object sender, RoutedEventArgs e)
-            {
-                frame.NavigationService.Navigate(MonthBCDT);
-            }
+        MonthRevenue MonthBCDT = new MonthRevenue();
+        YearRevenue YearBCDT = new YearRevenue();
+        QLCB_SB qLCB = new QLCB_SB();
+        public AdminRight()
+        {
+            InitializeComponent();
+            frame.NavigationService.Navigate(MonthBCDT);
+        }
 
-            private void YearRevenue_Click(object sender, RoutedEventArgs e)
-            {
-                frame.NavigationService.Navigate(YearBCDT);
-            }
+        private void MonthRevenue_Click(object sender, RoutedEventArgs e)
+        {
+            frame.NavigationService.Navigate(MonthBCDT);
+        }
 
-            private void QLCB_Click(object sender, RoutedEventArgs e)
-            {
-                frame.NavigationService.Navigate(qLCB);
-            }
+        private void YearRevenue_Click(object sender, RoutedEventArgs e)
+        {
+            frame.NavigationService.Navigate(YearBCDT);
+        }
+
+        private void QLCB_Click(object sender, RoutedEventArgs e)
+        {
+            frame.NavigationService.Navigate(qLCB);
+        }
 
         private void TDQD_Click(object sender, RoutedEventArgs e)
         {

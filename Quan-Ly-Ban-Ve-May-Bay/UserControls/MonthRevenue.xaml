@@ -12,18 +12,21 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <TextBlock Text="Tháng: " Foreground="#000000" TextAlignment="Center" FontSize="20" VerticalAlignment="Center"/>
-            <ComboBox Width="100" Margin="10" FontSize="18" VerticalAlignment="Center"
+            <ComboBox Width="80" Margin="10" FontSize="18" VerticalAlignment="Center"
                       Background="#F5F5F5"
                       x:Name="cBoxMonth">
             </ComboBox>
             <TextBlock Text="Năm: " Foreground="#000000" TextAlignment="Center" FontSize="20" VerticalAlignment="Center" Margin="10 0 0 0"/>
-            <ComboBox Width="100" Margin="10" FontSize="18" VerticalAlignment="Center"
+            <ComboBox Width="80" Margin="10" FontSize="18" VerticalAlignment="Center"
                       Background="#F5F5F5"
                       x:Name="cBoxYear">
             </ComboBox>
+            <Button x:Name="bt_ok" Content="Ok" Background="White" Width="70" Margin="20 0 0 0"
+                    Click="btOk_click"/>
         </StackPanel>
         <DataGrid Grid.Row="1" x:Name="MonthRevenueTable">
             <DataGrid.Resources>
@@ -51,11 +54,14 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="STT" Width="100" Binding="{Binding stt}"/>
                 <DataGridTextColumn Header="Chuyến bay" Width="*" Binding="{Binding chuyenbay}"/>
-                <DataGridTextColumn Header="Số vé" Width="100" Binding="{Binding sove}"/>
-                <DataGridTextColumn Header="Doanh thu" Width="200" Binding="{Binding doanhthu}"/>
-                <DataGridTextColumn Header="Tỉ lệ" Width="100" Binding="{Binding tile}"/>
+                <DataGridTextColumn Header="Số vé bán được" Width="*" Binding="{Binding sove}"/>
+                <DataGridTextColumn Header="Doanh thu" Width="*" Binding="{Binding doanhthu}"/>
+                <DataGridTextColumn Header="Tỉ lệ" Width="0.8*" Binding="{Binding tile}"/>
             </DataGrid.Columns>
         </DataGrid>
-
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <TextBlock  Text="Tổng doanh thu: " FontSize="20" VerticalAlignment="Center" Margin="20 0 0 0"/>
+            <TextBlock  x:Name="tb_total" FontSize="20" VerticalAlignment="Center" Margin="10 0 0 0"/>
+        </StackPanel>
     </Grid>
 </UserControl>
