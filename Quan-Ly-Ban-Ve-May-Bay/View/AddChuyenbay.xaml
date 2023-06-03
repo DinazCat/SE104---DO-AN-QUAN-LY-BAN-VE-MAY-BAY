@@ -8,7 +8,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:uc="clr-namespace:Quan_Ly_Ban_Ve_May_Bay.UserControls"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
-        Title="AddChuyenbay" Height="700" Width="1000">
+        Title="AddChuyenbay" Height="720" Width="1000">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
@@ -51,10 +51,10 @@
                 <TextBlock Text="Ngày giờ: "/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <DatePicker Width="200"  BorderBrush="Black" BorderThickness="1" x:Name="Ngaypicker"/>
-                    <TextBlock Text="Giờ:" Margin="50,0,3,0"/>
+                    <TextBlock Text="Giờ (00:00):" Margin="50,0,3,0"/>
                     <TextBox Width="200" Height="30" BorderBrush="Black" BorderThickness="1" x:Name="gioTxb" />
                 </StackPanel>
-                <TextBlock Text="Thời gian bay: "/>
+                <TextBlock Text="Thời gian bay (phút) : "/>
                 <TextBox Width="300" Height="30" BorderBrush="Black" BorderThickness="1" x:Name="TGbayTxb" />
                 <TextBlock Text="Giá vé: "/>
                 <TextBox Width="300" Height="30" BorderBrush="Black" BorderThickness="1" x:Name="GiaTxb"/>
@@ -66,7 +66,7 @@
                     <RowDefinition Height="50"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Button  Height="30" Width="120" Content="Thêm hạng vé" Foreground="Black" FontSize="14" Background="#2E8B57" Click="ThemHV_Click"/>
+                <Button  Height="30" Width="130" Content="Thêm hạng vé" Foreground="Black" FontSize="14" Background="#2E8B57" Click="ThemHV_Click"/>
                 <ListView x:Name="HangVeList" 
                           Grid.Row="1"
                       HorizontalContentAlignment="Stretch" 

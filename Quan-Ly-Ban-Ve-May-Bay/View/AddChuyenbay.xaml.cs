@@ -18,6 +18,11 @@ using static Quan_Ly_Ban_Ve_May_Bay.UserControls.Chuyenbay;
 using Quan_Ly_Ban_Ve_May_Bay.UserControls;
 using System.Globalization;
 using System.Drawing;
+using Quan_Ly_Ban_Ve_May_Bay.ViewModel;
+using System.Windows.Forms;
+using MessageBox = System.Windows.Forms.MessageBox;
+using Button = System.Windows.Controls.Button;
+using DataGrid = System.Windows.Controls.DataGrid;
 
 namespace Quan_Ly_Ban_Ve_May_Bay.View
 {
@@ -49,10 +54,11 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             }
             foreach (DataRow dr in dt.Rows)
             {
-                FromcBox.Items.Add(dr["TenSanBay"].ToString());
-                TocBox.Items.Add(dr["TenSanBay"].ToString());
+                FromcBox.Items.Add(dr["MaSanBay"].ToString());
+                TocBox.Items.Add(dr["MaSanBay"].ToString());
             }
             FromcBox.SelectedIndex = 0;
+            TocBox.SelectedIndex = 0;
             query = "SELECT * FROM HANGMAYBAY";
             param1 = new SqlParameter("", "");
             using (SqlDataReader reader = DataProvider.ExecuteReader(query, CommandType.Text, param1))
@@ -112,7 +118,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 int stt = 1;
                 foreach (DataRow dr in dt.Rows)
                 {
-                    string[] thoigian = dr["NgayKhoiHanh"].ToString().Split('.');
+                    string[] thoigian = dr["NgayKhoiHanh"].ToString().Split('/');
                     int nam = int.Parse(thoigian[2]);
                     int thang = int.Parse(thoigian[1]);
                     int ngay = int.Parse(thoigian[0]);
@@ -122,6 +128,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                     loaimaybayTxb.Text = dr["LoaiMayBay"].ToString();
                 }
                 machuyenbayTxb.Text = Chuyenbay.chuyenbaytofix.maCB;
+                machuyenbayTxb.IsEnabled = false;
                 FromcBox.SelectedItem = Chuyenbay.chuyenbaytofix.SBdi;
                 TocBox.SelectedItem = Chuyenbay.chuyenbaytofix.SBden;
                 TGbayTxb.Text = Chuyenbay.chuyenbaytofix.tgBay;
@@ -143,12 +150,12 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                     HV.Mahangve = dr["MaHangVe"].ToString();
                     HV.Machuyenbay = dr["MaChuyenBay"].ToString();
                     HV.Soluong = dr["SoLuong"].ToString();
-                    HV.Gia = (int)dr["Gia"];
                     qLHangVeClass.Add(HV);
                     HangVeList.Items.Add(HV);
                 }
 
             }
+          
         }
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)
@@ -158,8 +165,29 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
         AddSBTG addSBTG;
         private void AddSBTG_Click(object sender, RoutedEventArgs e)
         {
-            addSBTG = new AddSBTG(SBTGTable, machuyenbayTxb.Text, 0);
-            addSBTG.Show();
+            int SoSanBayTGtoida = 0;
+            string q = "SELECT * FROM BANGTHAMSO";
+            DataTable d;
+            using (SqlDataReader reader = DataProvider.ExecuteReader(q, CommandType.Text))
+            {
+                d = new DataTable();
+                if (reader.HasRows)
+                {
+                    d.Load(reader);
+                    DataRow dr = d.Rows[1];
+                    SoSanBayTGtoida = dr.Field<int>(1);
+                }
+            }
+            int rowCount = SBTGTable.Items.Count;
+            if (rowCount < SoSanBayTGtoida)
+            {
+                addSBTG = new AddSBTG(SBTGTable, machuyenbayTxb.Text, 0);
+                addSBTG.Show();
+            }
+            else
+            {
+                MessageBox.Show("Số sân bay trung gian đã đạt đến giới hạn quy định. ", "Thông báo!");
+            }
         }
         public void loadDatatoSBTG(string MaCB)
         {
@@ -250,7 +278,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 cb.maCB = dr["MaChuyenBay"].ToString();
                 cb.SBdi = dr["SanBayDi"].ToString();
                 cb.SBden = dr["SanBayDen"].ToString();
-                cb.datetime = dr["NgayKhoiHanh"].ToString() + dr["ThoiGianXuatPhat"].ToString();
+                cb.datetime = dr["NgayKhoiHanh"].ToString() +"-"+ dr["ThoiGianXuatPhat"].ToString();
                 cb.tgBay = dr["ThoiGianDuKien"].ToString();
                 cb.Gia = dr["Gia"].ToString();
                 chuyenbayTable.Items.Add(cb);
@@ -261,6 +289,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
         {
             for (int i = 0; i < qLHangVeClass.Count; i++)
             {
+                int giave = 0;
                 string query1 = "SELECT * FROM HANGVE WHERE MaHangVe=@ma";
                 SqlParameter param2 = new SqlParameter("@ma", qLHangVeClass[i].Mahangve);
                 DataTable dt1;
@@ -275,20 +304,23 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 foreach (DataRow dr in dt1.Rows)
                 {
                     double phantram = int.Parse(dr["TyLe"].ToString()) / 100.0;
-                    qLHangVeClass[i].Gia = (int)(int.Parse(Gia) * phantram);
+                    giave = (int)(int.Parse(Gia) * phantram);
                 }
                 qLHangVeClass[i].Machuyenbay = MaCB;
                 SqlConnection con = DataProvider.sqlConnection;
                 con.Open();
-                SqlCommand cmd1 = new SqlCommand("Insert into [QuanLyHangVeChuyenBay] values('" + MaCB + "', N'" + qLHangVeClass[i].Mahangve + "'," + qLHangVeClass[i].Gia + ",N'" + qLHangVeClass[i].Soluong + "')", con);
+                SqlCommand cmd1 = new SqlCommand("Insert into [QuanLyHangVeChuyenBay] values('" + MaCB + "', N'" + qLHangVeClass[i].Mahangve + "',N'" + qLHangVeClass[i].Soluong + "')", con);
                 cmd1.CommandType = CommandType.Text;
                 cmd1.ExecuteNonQuery();
                 con.Close();
                 for (int j = 0; j < int.Parse(qLHangVeClass[i].Soluong); j++)
                 {
-                    string mave = j.ToString() + MaCB + qLHangVeClass[i].Mahangve;
+                    //string mave = j.ToString() + MaCB + qLHangVeClass[i].Mahangve;
+                    Random rd = new Random();
+                    int ID = rd.Next(100000, 999999);
+                    string mave = ID.ToString()+j.ToString();
                     con.Open();
-                    SqlCommand cmd2 = new SqlCommand("Insert into [VE] values('" + mave + "', N'" + qLHangVeClass[i].Machuyenbay + "',N'" + "" + "',N'" + "" + "',N'" + "" + "',N'" + "" + "',N'" + "" + "',N'" + "còn trống" + "',N'" + qLHangVeClass[i].Mahangve + "')", con);
+                    SqlCommand cmd2 = new SqlCommand("Insert into [VE] values('" + mave + "', N'" + qLHangVeClass[i].Machuyenbay + "',N'" + "" + "',N'" + "" + "',N'" + "" + "',N'" + "" + "',N'" + "" + "',N'" + "TRONG" + "',N'" + qLHangVeClass[i].Mahangve + "'," + giave + ")", con);
                     cmd2.CommandType = CommandType.Text;
                     cmd2.ExecuteNonQuery();
                     con.Close();
@@ -300,10 +332,24 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
         chuyenbayclass cb;
         private void Hoantat_Click(object sender, RoutedEventArgs e)
         {
+            int ThoiGianBayToiThieu = 0;
+            string q = "SELECT * FROM BANGTHAMSO";
+            DataTable d;
+            using (SqlDataReader reader = DataProvider.ExecuteReader(q, CommandType.Text))
+            {
+                d = new DataTable();
+                if (reader.HasRows)
+                {
+                    d.Load(reader);
+                    DataRow dr = d.Rows[0];
+                    ThoiGianBayToiThieu = dr.Field<int>(1);
+                }
+            }
+
             DateTime? selectedDate = Ngaypicker.SelectedDate;
             if (selectedDate.HasValue)
             {
-                Ngay = selectedDate.Value.ToString("dd.MM.yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                Ngay = selectedDate.Value.ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
             }
             MaCB = machuyenbayTxb.Text;
             Sanbaydi = FromcBox.Text;
@@ -313,62 +359,87 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             Gia = GiaTxb.Text;
             mahangMB = MaHcBox.Text;
             loaiMB = loaimaybayTxb.Text;
-            if (thaotac == 0)
+            try
             {
-                string query = "SELECT * From CHUYENBAY";
-                SqlParameter param1 = new SqlParameter("", "");
-                DataTable dt;
-                using (SqlDataReader reader = DataProvider.ExecuteReader(query, CommandType.Text, param1))
+                int p1 = int.Parse(Gia);
+            }
+            catch
+            {
+                MessageBox.Show("Vui lòng nhập giá là một số nguyên.", "Dữ liệu không hợp lệ!");
+                return;
+            }
+            try
+            {
+                int p2 = int.Parse(TgBay);
+            }
+            catch
+            {
+                MessageBox.Show("Vui lòng nhập thời gian bay là một số nguyên.", "Dữ liệu không hợp lệ!");
+                return;
+            }
+            if (int.Parse(TgBay) >= ThoiGianBayToiThieu)
+            {
+                if (thaotac == 0)
                 {
-                    dt = new DataTable();
-                    if (reader.HasRows)
+                    string query = "SELECT * From CHUYENBAY";
+                    SqlParameter param1 = new SqlParameter("", "");
+                    DataTable dt;
+                    using (SqlDataReader reader = DataProvider.ExecuteReader(query, CommandType.Text, param1))
                     {
-                        dt.Load(reader);
+                        dt = new DataTable();
+                        if (reader.HasRows)
+                        {
+                            dt.Load(reader);
+                        }
                     }
+                    cb = new chuyenbayclass();
+                    cb.STT = (dt.Rows.Count + 1).ToString();
+                    cb.maCB = MaCB;
+                    cb.SBdi = Sanbaydi;
+                    cb.SBden = Sanbayden;
+                    cb.datetime = Ngay + "-" + Gio;
+                    cb.tgBay = TgBay;
+                    cb.Gia = Gia;
+                    chuyenbayTable.Items.Add(cb);
+                    SqlConnection con = DataProvider.sqlConnection;
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("Insert into [CHUYENBAY] values('" + MaCB + "',N'" + Sanbaydi + "',N'" + Sanbayden + "',N'" + Ngay + "',N'" + Gio + "',N'" + TgBay + "',N'" + mahangMB + "',N'" + loaiMB + "',N'" + Gia + "')", con);
+                    cmd.CommandType = CommandType.Text;
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    SaveHV_VE();
+                    this.Close();
                 }
-                cb = new chuyenbayclass();
-                cb.STT = (dt.Rows.Count + 1).ToString();
-                cb.maCB = MaCB;
-                cb.SBdi = Sanbaydi;
-                cb.SBden = Sanbayden;
-                cb.datetime = Ngay + "-" + Gio;
-                cb.tgBay = TgBay;
-                cb.Gia = Gia;
-                chuyenbayTable.Items.Add(cb);
-                SqlConnection con = DataProvider.sqlConnection;
-                con.Open();
-                SqlCommand cmd = new SqlCommand("Insert into [CHUYENBAY] values('" + MaCB + "',N'" + Sanbaydi + "',N'" + Sanbayden + "',N'" + Ngay + "',N'" + Gio + "',N'" + TgBay + "',N'" + mahangMB + "',N'" + loaiMB + "',N'" + Gia + "')", con);
-                cmd.CommandType = CommandType.Text;
-                cmd.ExecuteNonQuery();
-                con.Close();
-                SaveHV_VE();
-                this.Close();
+                else
+                {
+                    SqlConnection con = DataProvider.sqlConnection;
+                    con.Open();
+                    SqlCommand cmd2 = new SqlCommand("Delete from VE where  MaChuyenBay=N'" + Chuyenbay.chuyenbaytofix.maCB + "'", con);
+                    cmd2.CommandType = CommandType.Text;
+                    cmd2.ExecuteReader();
+                    con.Close();
+
+                    con.Open();
+                    SqlCommand cmd1 = new SqlCommand("Delete from QuanLyHangVeChuyenBay where  MaChuyenBay=N'" + Chuyenbay.chuyenbaytofix.maCB + "'", con);
+                    cmd1.CommandType = CommandType.Text;
+                    cmd1.ExecuteReader();
+                    con.Close();
+
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("Update [CHUYENBAY] set MaChuyenBay = '" + MaCB + "',SanBayDi='" + Sanbaydi + "', SanBayDen='" + Sanbayden + "', NgayKhoiHanh='" + Ngay + "',ThoiGianXuatPhat='" + Gio + "', ThoiGianDuKien='" + TgBay + "', MaHangMayBay='" + mahangMB + "', LoaiMayBay=N'" + loaiMB + "', Gia='" + Gia + "' where MaChuyenBay='" + Chuyenbay.chuyenbaytofix.maCB + "'", con);
+                    cmd.CommandType = CommandType.Text;
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+
+                    SaveHV_VE();
+                    chuyenbayTable.Items.Clear();
+                    loadDatatoTable();
+                    this.Close();
+                }
             }
             else
             {
-                SqlConnection con = DataProvider.sqlConnection;
-                con.Open();
-                SqlCommand cmd2 = new SqlCommand("Delete from VE where  MaChuyenBay=N'" + Chuyenbay.chuyenbaytofix.maCB + "'", con);
-                cmd2.CommandType = CommandType.Text;
-                cmd2.ExecuteReader();
-                con.Close();
-
-                con.Open();
-                SqlCommand cmd1 = new SqlCommand("Delete from QuanLyHangVeChuyenBay where  MaChuyenBay=N'" + Chuyenbay.chuyenbaytofix.maCB + "'", con);
-                cmd1.CommandType = CommandType.Text;
-                cmd1.ExecuteReader();
-                con.Close();
-
-                con.Open();
-                SqlCommand cmd = new SqlCommand("Update [CHUYENBAY] set MaChuyenBay = '" + MaCB + "',SanBayDi='" + Sanbaydi + "', SanBayDen='" + Sanbayden + "', NgayKhoiHanh='" + Ngay + "',ThoiGianXuatPhat='" + Gio + "', ThoiGianDuKien='" + TgBay + "', MaHangMayBay='" + mahangMB + "', LoaiMayBay=N'" + loaiMB + "', Gia='" + Gia + "' where MaChuyenBay='" + Chuyenbay.chuyenbaytofix.maCB + "'", con);
-                cmd.CommandType = CommandType.Text;
-                cmd.ExecuteNonQuery();
-                con.Close();
-
-                SaveHV_VE();
-                chuyenbayTable.Items.Clear();
-                loadDatatoTable();
-                this.Close();
+                MessageBox.Show("Vui lòng nhập thời gian bay phải lớn hơn thời gian bay tối thiểu đã định. ", "Dữ liệu không hợp lệ!");
             }
 
         }

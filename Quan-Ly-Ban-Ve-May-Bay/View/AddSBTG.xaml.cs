@@ -93,45 +93,78 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             tenSB = SBTGcBox.Text;
             tgDung = thoigiandungTxb.Text;
             GhiChu = ghichuTxb.Text;
-            if (thaotac == 0)
+            try
             {
-                string query = "SELECT * FROM SANBAYTRUNGGIAN where MaChuyenBay = @ma";
-                SqlParameter param1 = new SqlParameter("@ma", maCB);
-                DataTable dt;
-                using (SqlDataReader reader = DataProvider.ExecuteReader(query, CommandType.Text, param1))
-                {
-                    dt = new DataTable();
-                    if (reader.HasRows)
-                    {
-                        dt.Load(reader);
-                    }
-                }
-                SanbayTG sb = new SanbayTG();
-                sb.STT = (dt.Rows.Count + 1).ToString();
-                sb.tenSB = tenSB;
-                sb.TGdung = tgDung;
-                sb.ghichu = GhiChu;
-                SanBayTG.Items.Add(sb);
-                SqlConnection con = DataProvider.sqlConnection;
-                con.Open();
-                SqlCommand cmd = new SqlCommand("Insert into SANBAYTRUNGGIAN values('" + tenSB + "',N'" + maCB + "',N'" + tgDung + "',N'" + GhiChu + "')", con);
-                cmd.CommandType = CommandType.Text;
-                cmd.ExecuteNonQuery();
-                con.Close();
+                int p = int.Parse(tgDung);
 
-                this.Close();
+            }
+            catch
+            {
+                MessageBox.Show("Vui lòng nhập thời gian dừng là một số nguyên.", "Dữ liệu không hợp lệ!");
+                return;
+            }
+            int TGdungtoithieu = 0;
+            int TGdungtoida = 0;
+            string q = "SELECT * FROM BANGTHAMSO";
+            DataTable d;
+            using (SqlDataReader reader = DataProvider.ExecuteReader(q, CommandType.Text))
+            {
+                d = new DataTable();
+                if (reader.HasRows)
+                {
+                    d.Load(reader);
+                    DataRow dr = d.Rows[2];
+                    TGdungtoithieu = dr.Field<int>(1);
+                    dr = d.Rows[3];
+                    TGdungtoida = dr.Field<int>(1);
+                }
+            }
+            if (int.Parse(tgDung) >= TGdungtoithieu && int.Parse(tgDung) <= TGdungtoida)
+            {
+                if (thaotac == 0)
+                {
+                    string query = "SELECT * FROM SANBAYTRUNGGIAN where MaChuyenBay = @ma";
+                    SqlParameter param1 = new SqlParameter("@ma", maCB);
+                    DataTable dt;
+                    using (SqlDataReader reader = DataProvider.ExecuteReader(query, CommandType.Text, param1))
+                    {
+                        dt = new DataTable();
+                        if (reader.HasRows)
+                        {
+                            dt.Load(reader);
+                        }
+                    }
+                    SanbayTG sb = new SanbayTG();
+                    sb.STT = (dt.Rows.Count + 1).ToString();
+                    sb.tenSB = tenSB;
+                    sb.TGdung = tgDung;
+                    sb.ghichu = GhiChu;
+                    SanBayTG.Items.Add(sb);
+                    SqlConnection con = DataProvider.sqlConnection;
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("Insert into SANBAYTRUNGGIAN values('" + tenSB + "',N'" + maCB + "',N'" + tgDung + "',N'" + GhiChu + "')", con);
+                    cmd.CommandType = CommandType.Text;
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+
+                    this.Close();
+                }
+                else
+                {
+                    SqlConnection con = DataProvider.sqlConnection;
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("Update [SANBAYTRUNGGIAN] set SanBayTrungGian='" + tenSB + "',ThoiGianDung='" + tgDung + "', GhiChu='" + GhiChu + "' where MaChuyenBay='" + maCB + "' and SanBayTrungGian='" + AddChuyenbay.infotofix.tenSB + "'", con);
+                    cmd.CommandType = CommandType.Text;
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    SanBayTG.Items.Clear();
+                    loadDatatoSBTG();
+                    this.Close();
+                }
             }
             else
             {
-                SqlConnection con = DataProvider.sqlConnection;
-                con.Open();
-                SqlCommand cmd = new SqlCommand("Update [SANBAYTRUNGGIAN] set SanBayTrungGian='" + tenSB + "',ThoiGianDung='" + tgDung + "', GhiChu='" + GhiChu + "' where MaChuyenBay='" + maCB + "' and SanBayTrungGian='" + AddChuyenbay.infotofix.tenSB + "'", con);
-                cmd.CommandType = CommandType.Text;
-                cmd.ExecuteNonQuery();
-                con.Close();
-                SanBayTG.Items.Clear();
-                loadDatatoSBTG();
-                this.Close();
+                MessageBox.Show("Vui lòng nhập thời gian dừng phải phù hợp với thời gian dừng tối thiểu và tối đa đã định. ", "Dữ liệu không hợp lệ!");
             }
         }
     }
