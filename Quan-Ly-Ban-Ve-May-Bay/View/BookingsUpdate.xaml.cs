@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Quan_Ly_Ban_Ve_May_Bay.Model;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace Quan_Ly_Ban_Ve_May_Bay.View
 {
@@ -19,14 +22,66 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
     /// </summary>
     public partial class BookingsUpdate : Window
     {
+        private string MaVe;
+        //public event RoutedEventHandler ReturnBookings;
         public BookingsUpdate()
         {
             InitializeComponent();
         }
 
-        private void btnClose_Click(object sender, RoutedEventArgs e)
+        public void ShowInforHK(string mave)
         {
-            this.Close();
+            MaVe = mave;
+            DataProvider.sqlConnection.Open();
+            SqlCommand sqlCommand = new SqlCommand(
+                "select [v].TenHK, [v].CMND, [v].SDT from [VE] [v] " +
+                "where [v].MaVe = @mave", DataProvider.sqlConnection);
+            sqlCommand.Parameters.Add("@mave",SqlDbType.NVarChar).Value = mave;
+            SqlDataReader reader = sqlCommand.ExecuteReader();
+            if (reader.HasRows)
+            {
+                if (reader.Read())
+                {
+                    tenHanhKhachTxt.Text = reader["TenHK"].ToString();
+                    cmndTxt.Text = reader["CMND"].ToString();
+                    sdtTxt.Text = reader["SDT"].ToString();
+                }
+            }
+            DataProvider.sqlConnection.Close();
+        }
+
+        private void btnHuy_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Bạn có chắc chắn muốn hủy chỉnh sửa?");
+            if (result == MessageBoxResult.OK)
+            {
+                this.Close();
+            }
+        }
+
+        private void btnXacNhan_Click(object sender, RoutedEventArgs e)
+        {
+            if (tenHanhKhachTxt.Text == "" || cmndTxt.Text == "" || sdtTxt.Text == "")
+            {
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
+            }
+            else
+            {
+                DataProvider.sqlConnection.Open();
+                SqlCommand sqlCommand = new SqlCommand(
+                    "update [VE] set TenHK = @tenhk, CMND = @cmnd, SDT = @sdt " +
+                    "where MaVe = @mave", DataProvider.sqlConnection);
+                sqlCommand.Parameters.Add("@tenhk", SqlDbType.NVarChar).Value = tenHanhKhachTxt.Text;
+                sqlCommand.Parameters.Add("@cmnd", SqlDbType.NVarChar).Value = cmndTxt.Text;
+                sqlCommand.Parameters.Add("@sdt", SqlDbType.NVarChar).Value = sdtTxt.Text;
+                sqlCommand.Parameters.Add("@mave", SqlDbType.NVarChar).Value = MaVe;
+                sqlCommand.ExecuteNonQuery();
+                DataProvider.sqlConnection.Close();
+
+                //ReturnBookings?.Invoke(this, new RoutedEventArgs());
+                this.Close();
+            }
+
         }
     }
 }

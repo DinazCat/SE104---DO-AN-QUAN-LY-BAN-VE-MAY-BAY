@@ -21,47 +21,47 @@
                         <TextBlock Text="CHUYẾN BAY" FontSize="16" FontWeight="Bold" Foreground="#4d9921" HorizontalAlignment="Left" Margin="70,0,0,0"/>
                         <DockPanel>
                             <TextBlock Text="Mã chuyến bay: " FontSize="14" FontWeight="Normal" HorizontalAlignment="Left" Margin="35,0,0,0" VerticalAlignment="Bottom" Width="120"/>
-                            <TextBlock Text="QH001" FontSize="16" FontWeight="Normal" HorizontalAlignment="Left" Margin="0,0,0,0" Width="200"/>
+                            <TextBlock x:Name="maCBTxt" FontSize="16" FontWeight="Normal" HorizontalAlignment="Left" Margin="0,0,0,0" Width="200"/>
                         </DockPanel>
                         <DockPanel>
                             <TextBlock Text="Cất cánh: " FontSize="14" FontWeight="Normal" HorizontalAlignment="Left" Margin="35,0,0,0" VerticalAlignment="Bottom" Width="120"/>
-                            <TextBlock Text="SGN" FontSize="16" FontWeight="Normal" Margin="0,0,0,0" Width="200"/>
+                            <TextBlock x:Name="tuTxt" FontSize="16" FontWeight="Normal" Margin="0,0,0,0" Width="200"/>
                             <TextBlock Text="Hạ cánh: " FontSize="14" FontWeight="Normal" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="120"/>
-                            <TextBlock Text="HNOI" FontSize="16" FontWeight="Normal" HorizontalAlignment="Left" Margin="15,2,0,0"/>
+                            <TextBlock x:Name="denTxt" FontSize="16" FontWeight="Normal" HorizontalAlignment="Left" Margin="0,2,0,0"/>
                         </DockPanel>
                         <DockPanel>
                             <TextBlock Text="Giờ bay: " FontSize="14" FontWeight="Normal" HorizontalAlignment="Left" Margin="35,0,0,0" VerticalAlignment="Bottom" Width="120"/>
-                            <TextBlock Text="13:00 02/07/2023" FontSize="16" FontWeight="Normal" HorizontalAlignment="Stretch" Margin="0,0,0,0" Width="200"/>
+                            <TextBlock x:Name="gioBayTxt" FontSize="16" FontWeight="Normal" HorizontalAlignment="Stretch" Margin="0,0,0,0" Width="200"/>
                             <TextBlock Text="Thời gian bay: " FontSize="14" FontWeight="Normal" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="120"/>
-                            <TextBlock Text="120 phút" FontSize="16" FontWeight="Normal" HorizontalAlignment="Left" Margin="0,0,0,0"/>
+                            <TextBlock x:Name="tgBayTxt" FontSize="16" FontWeight="Normal" HorizontalAlignment="Left" Margin="0,0,0,0"/>
                         </DockPanel>
                     </StackPanel>
                     <StackPanel Margin="0,10,0,0">
                         <TextBlock Text="VÉ" FontSize="16" FontWeight="Bold" Foreground="#4d9921" HorizontalAlignment="Left" Margin="70,0,0,0"/>
                         <DockPanel>
                             <TextBlock Text="Mã vé: " FontSize="14" FontWeight="Normal" HorizontalAlignment="Left" Margin="35,0,0,0" VerticalAlignment="Bottom" Width="120"/>
-                            <TextBlock Text="322" FontSize="16" FontWeight="Normal" HorizontalAlignment="Left" Margin="0,0,0,0" Width="200"/>
+                            <TextBlock x:Name="maVeTxt" FontSize="16" FontWeight="Normal" HorizontalAlignment="Left" Margin="0,0,0,0" Width="200"/>
                         </DockPanel>
                         <DockPanel>
                             <TextBlock Text="Số ghế: " FontSize="14" FontWeight="Normal" HorizontalAlignment="Left" Margin="35,0,0,0" VerticalAlignment="Bottom" Width="120"/>
-                            <TextBlock Text="20" FontSize="16" FontWeight="Normal" Margin="0,0,0,0" Width="200"/>
+                            <TextBlock x:Name="soGheTxt" FontSize="16" FontWeight="Normal" Margin="0,0,0,0" Width="200"/>
                             <TextBlock Text="Hạng vé: " FontSize="14" FontWeight="Normal" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="120"/>
-                            <TextBlock Text="2" FontSize="16" FontWeight="Normal" HorizontalAlignment="Left" Margin="15,2,0,0"/>
+                            <TextBlock x:Name="tenHangVeTxt" FontSize="16" FontWeight="Normal" HorizontalAlignment="Left" Margin="15,2,0,0"/>
                         </DockPanel>
                     </StackPanel>
                     <StackPanel Margin="0,10,0,0">
                         <TextBlock Text="HÀNH KHÁCH" FontSize="16" FontWeight="Bold" Foreground="#4d9921" HorizontalAlignment="Left" Margin="70,0,0,0"/>
                         <DockPanel>
                             <TextBlock Text="Họ tên:" FontSize="14" FontWeight="Normal" HorizontalAlignment="Left" Margin="35,0,0,0" VerticalAlignment="Bottom" Width="120"/>
-                            <TextBlock Text="Nguyễn Văn A" FontSize="16" FontWeight="Normal" Margin="0,0,0,0" Width="200"/>
+                            <TextBlock x:Name="tenHKTxt" FontSize="16" FontWeight="Normal" Margin="0,0,0,0" Width="200"/>
                             <TextBlock Text="Mã hành khách:" FontSize="14" FontWeight="Normal" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="120"/>
-                            <TextBlock Text="2258" FontSize="16" FontWeight="Normal" HorizontalAlignment="Left" Margin="15,2,0,0"/>
+                            <TextBlock x:Name="maHKTxt" FontSize="16" FontWeight="Normal" HorizontalAlignment="Left" Margin="15,2,0,0"/>
                         </DockPanel>
                         <DockPanel>
-                            <TextBlock Text="CMND: " FontSize="14" FontWeight="Normal" Margin="35,0,0,0" Width="120"/>
-                            <TextBlock Text="234567892" FontSize="16" FontWeight="Normal" Margin="0,0,0,0" Width="200"/>
+                            <TextBlock Text="CMND: " FontSize="14" FontWeight="Normal" Margin="35,0,0,0" Width="120" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                            <TextBlock x:Name="cmndTxt" FontSize="16" FontWeight="Normal" Margin="0,0,0,0" Width="200"/>
                             <TextBlock Text="SĐT: " FontSize="14" FontWeight="Normal" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="120"/>
-                            <TextBlock Text="0123456789" FontSize="16" FontWeight="Normal" HorizontalAlignment="Left" Margin="15,2,0,0"/>
+                            <TextBlock x:Name="sdtTxt" FontSize="16" FontWeight="Normal" HorizontalAlignment="Left" Margin="15,2,0,0"/>
                         </DockPanel>
                     </StackPanel>
                     <StackPanel Margin="0,10,0,8
@@ -69,19 +69,19 @@
                         <TextBlock Text="HÓA ĐƠN" FontSize="16" FontWeight="Bold" Foreground="#4d9921" HorizontalAlignment="Left" Margin="70,0,0,0"/>
                         <DockPanel>
                             <TextBlock Text="Mã hóa đơn: " FontSize="14" FontWeight="Normal" HorizontalAlignment="Left" Margin="35,0,0,0" VerticalAlignment="Bottom" Width="120"/>
-                            <TextBlock Text="89" FontSize="16" FontWeight="Normal" HorizontalAlignment="Left" Margin="0,0,0,0" Width="200"/>
+                            <TextBlock x:Name="maHDTxt" FontSize="16" FontWeight="Normal" HorizontalAlignment="Left" Margin="0,0,0,0" Width="200"/>
                         </DockPanel>
                         <DockPanel>
                             <TextBlock Text="Ngày lập:" FontSize="14" FontWeight="Normal" HorizontalAlignment="Left" Margin="35,0,0,0" VerticalAlignment="Bottom" Width="120"/>
-                            <TextBlock Text="20:00 28/06/2023" FontSize="16" FontWeight="Normal" Margin="0,0,0,0" Width="200"/>
+                            <TextBlock x:Name="ngayLapTxt" FontSize="16" FontWeight="Normal" Margin="0,0,0,0" Width="200"/>
                             <TextBlock Text="Số tiền:" FontSize="14" FontWeight="Normal" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="120"/>
-                            <TextBlock Text="2000000" FontSize="16" FontWeight="Normal" HorizontalAlignment="Left" Margin="15,2,0,0"/>
+                            <TextBlock x:Name="tienTxt" FontSize="16" FontWeight="Normal" HorizontalAlignment="Left" Margin="15,2,0,0"/>
                         </DockPanel>
                         <DockPanel>
-                            <TextBlock Text="ID thanh toán:" FontSize="14" FontWeight="Normal" Margin="35,0,0,0" Width="120"/>
-                            <TextBlock Text="729302" FontSize="16" FontWeight="Normal" Margin="0,0,0,0" Width="200"/>
+                            <TextBlock Text="ID thanh toán:" FontSize="14" FontWeight="Normal" Margin="35,0,0,0" Width="120" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                            <TextBlock x:Name="maTKTxt" FontSize="16" FontWeight="Normal" Margin="0,0,0,0" Width="200"/>
                             <TextBlock Text="Tình trạng:" FontSize="14" FontWeight="Normal" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Bottom" Width="120"/>
-                            <TextBlock Text="PAID" FontSize="16" FontWeight="Normal" HorizontalAlignment="Left" Margin="15,2,0,0"/>
+                            <TextBlock x:Name="tinhTrangTxt" FontSize="16" FontWeight="Normal" HorizontalAlignment="Left" Margin="15,2,0,0"/>
                         </DockPanel>
                     </StackPanel>
                 </StackPanel>
@@ -90,7 +90,7 @@
         <DockPanel Grid.Row="1">
             <TextBox Text="*Vui lòng kiểm tra thông tin cá nhân cẩn thận. Quý khách chỉ có thể chỉnh sửa thông tin trước giờ bay 2 giờ." 
                      TextWrapping="Wrap" AcceptsReturn="True" FontSize="10" FontWeight="Normal" Width="357" Margin="15,0,0,0" HorizontalAlignment="Left"/>
-            <Button x:Name="btnUpdate" Content="Chỉnh sửa thông tin" Width="180" Background="SeaGreen"/>
+            <Button x:Name="btnUpdate" Content="Chỉnh sửa thông tin" Width="180" Background="SeaGreen" Click="btnUpdate_Click"/>
         </DockPanel>
 
     </Grid>

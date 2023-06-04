@@ -46,8 +46,11 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Model
             get { return ngayGio; }
             set { ngayGio = value; RaisePropertyChanged(); }
         }
-        public SymbolTicket(string tuyen, string ngayGio, string soGhe, string hangVe, string tenHK)
+        private string maVe;
+        public string MaVe { get { return maVe; } set { maVe = value; } }
+        public SymbolTicket(string maVe, string tuyen, string ngayGio, string soGhe, string hangVe, string tenHK)
         {
+            this.maVe = maVe;
             this.tuyen = tuyen;
             this.ngayGio = ngayGio;
             this.soGhe = soGhe;
