@@ -75,9 +75,13 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             {
                 DataProvider.sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand(
-                    "select [c].Gia from [CHUYENBAY] [c] where [c].MaChuyenBay = @macb",
+                    "select [c].Gia, [hv].TyLe from [CHUYENBAY] [c], [HANGVE] [hv], [VE] [v] where [c].MaChuyenBay = @macb " +
+                    "and [v].MaChuyenBay = [c].MaChuyenBay " +
+                    "and [hv].MaHangVe = [v].MaHangVe " +
+                    "and [hv].MaHangVe=@maHangVe",
                     DataProvider.sqlConnection);
                 sqlCommand.Parameters.Add("@macb", SqlDbType.NVarChar).Value = maChuyenBayTxt.Text;
+                sqlCommand.Parameters.Add("@maHangVe", SqlDbType.NVarChar).Value = item.FlightClass;
                 SqlDataReader reader = sqlCommand.ExecuteReader();
 
                 if (reader.HasRows)
@@ -85,12 +89,8 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                     if (reader.Read())
                     {
                         int dongia = int.Parse(reader["Gia"].ToString());
-                        if (item.FlightClass != "HV229365")
-                        {
-                            tien += (dongia * 105) / 100;
-                        }
-                        else
-                            tien += dongia;
+                        double TyLe = double.Parse(reader["TyLe"].ToString());
+                        tien += (int)(dongia * TyLe / 100);
                     }
                 }
                 DataProvider.sqlConnection.Close();
@@ -268,6 +268,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 DataProvider.sqlConnection.Close();
 
                 SaveVe("BOOKED");
+                SaveCTHD();
                 Finish();
                 //go to home screen in MainWindow
                 MessageBoxResult result = MessageBox.Show("Đặt vé thành công! \nVui lòng thanh toán hóa đơn trước khi chuyến bay xuất phát! \n" +
@@ -299,6 +300,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 sqlCommand.ExecuteNonQuery();
                 DataProvider.sqlConnection.Close();
                 SaveVe("SOLD");
+                SaveCTHD();
                 MessageBoxResult result = MessageBox.Show("Thanh toán vé thành công!");
                 Finish();
                 //go to home screen in MainWindow
@@ -325,6 +327,29 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 sqlCommand.Parameters.Add("@sdt", SqlDbType.NVarChar).Value = item.PhoneNumber;
                 sqlCommand.Parameters.Add("@mave", SqlDbType.NVarChar).Value = item.TiketID;
                 sqlCommand.Parameters.Add("@tinhtrang", SqlDbType.NVarChar).Value = tinhtrang;
+                sqlCommand.ExecuteNonQuery();
+                DataProvider.sqlConnection.Close();
+            }
+        }
+        private void SaveCTHD()
+        {
+            SqlCommand _sqlCommand = new SqlCommand(
+             "select * from [CTHD]", DataProvider.sqlConnection);
+            SqlDataAdapter _adapter = new SqlDataAdapter(_sqlCommand);
+            DataSet ds = new DataSet();
+            _adapter.Fill(ds);
+            int count = ds.Tables[0].Rows.Count + 1;
+
+            for (int i = 0; i < ve.Count; i++)
+            {
+                Ticket item = (Ticket)ve[i];
+                DataProvider.sqlConnection.Open();
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                SqlCommand sqlCommand = new SqlCommand(
+                    "insert into [CTHD] values (@macthd, @mahd, @mave)", DataProvider.sqlConnection);
+                sqlCommand.Parameters.Add("@macthd", SqlDbType.NVarChar).Value = (count + i).ToString();
+                sqlCommand.Parameters.Add("@mahd", SqlDbType.NVarChar).Value = maHoaDonTxt.Text;
+                sqlCommand.Parameters.Add("@mave", SqlDbType.NVarChar).Value = item.TiketID;
                 sqlCommand.ExecuteNonQuery();
                 DataProvider.sqlConnection.Close();
             }
