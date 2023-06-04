@@ -11,8 +11,8 @@
 
     <Grid>
         <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
         <Grid>
@@ -82,7 +82,7 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                </StackPanel>               
+                </StackPanel>
             </Grid>
             <Grid Grid.Column="1" >
                 <Grid.Background>

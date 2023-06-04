@@ -39,7 +39,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
             DataProvider.sqlConnection.Open();
             SqlCommand sqlCommand = new SqlCommand(
                 "select [v].TenHK, [v].SoGhe, [hv].TenHangVe, [cb].SanBayDi, [cb].SanBayDen,[cb].NgayKhoiHanh, [cb].ThoiGianXuatPhat " +
-                "from [HOADON] [hd], [VE] [v], [CTHD] [ct], [CHUYENBAY] [cb], [HANGVE] [hv]"+
+                "from [HOADON] [hd], [VE] [v], [CTHD] [ct], [CHUYENBAY] [cb], [HANGVE] [hv]" +
                 "where  [hd].MaHD = [ct].MaHD and " +
                         "[v].MaVe = [ct].MaVe and " +
                         "[v].MaChuyenBay = [cb].MaChuyenBay and " +
