@@ -172,6 +172,9 @@
     <Compile Include="View\FareClassForm.xaml.cs">
       <DependentUpon>FareClassForm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\SendCodeForm.xaml.cs">
+      <DependentUpon>SendCodeForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UserForm.xaml.cs">
       <DependentUpon>UserForm.xaml</DependentUpon>
     </Compile>
@@ -312,6 +315,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\FareClassForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SendCodeForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

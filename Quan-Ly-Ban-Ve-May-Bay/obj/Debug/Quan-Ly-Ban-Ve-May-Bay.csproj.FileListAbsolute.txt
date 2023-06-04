@@ -767,3 +767,7 @@ D:\5.6\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Quan-Ly-Ban-Ve-May-Bay.cspr
 D:\5.6\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Quan-Ly-Ban-Ve-May-Bay.csproj.CopyComplete
 D:\5.6\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Quan-Ly-Ban-Ve-May-Bay.exe
 D:\5.6\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Quan-Ly-Ban-Ve-May-Bay.pdb
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Pages\ContactUs.g.cs
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\View\SendCodeForm.g.cs
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Pages\ContactUs.baml
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\View\SendCodeForm.baml

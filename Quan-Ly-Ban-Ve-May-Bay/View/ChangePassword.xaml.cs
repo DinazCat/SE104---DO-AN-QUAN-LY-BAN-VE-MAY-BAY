@@ -33,29 +33,31 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
 
         private void changePassword_Click(object sender, RoutedEventArgs e)
         {
-
-            SqlConnection sqlCon = DataProvider.sqlConnection;
-            try
+            if (PasswordBox.Visibility == Visibility.Visible)
             {
-                if (sqlCon.State == ConnectionState.Closed)
+                SqlConnection sqlCon = DataProvider.sqlConnection;
+                try
                 {
-                    sqlCon.Open();
-                    String query = "SELECT COUNT(1) FROM [TaiKhoan] WHERE MaTK=@uid AND MatKhau=@password";
-                    SqlCommand sqlCmd = new SqlCommand(query, sqlCon);
-                    sqlCmd.CommandType = CommandType.Text;
-                    sqlCmd.Parameters.AddWithValue("@uid", MainWindow.curAccount.id);
-                    sqlCmd.Parameters.AddWithValue("@password", PasswordBox.Password);
-                    int count = Convert.ToInt32(sqlCmd.ExecuteScalar());
-                    if (count < 1)
+                    if (sqlCon.State == ConnectionState.Closed)
                     {
-                        Errortxt.Text = "Mật khẩu cũ không chính xác!";
-                        PasswordBox.Focus();
-                        return;
+                        sqlCon.Open();
+                        String query = "SELECT COUNT(1) FROM [TaiKhoan] WHERE MaTK=@uid AND MatKhau=@password";
+                        SqlCommand sqlCmd = new SqlCommand(query, sqlCon);
+                        sqlCmd.CommandType = CommandType.Text;
+                        sqlCmd.Parameters.AddWithValue("@uid", MainWindow.curAccount.id);
+                        sqlCmd.Parameters.AddWithValue("@password", PasswordBox.Password);
+                        int count = Convert.ToInt32(sqlCmd.ExecuteScalar());
+                        if (count < 1)
+                        {
+                            Errortxt.Text = "Mật khẩu cũ không chính xác!";
+                            PasswordBox.Focus();
+                            return;
+                        }
                     }
                 }
+                catch { }
+                finally { sqlCon.Close(); }
             }
-            catch { }
-            finally { sqlCon.Close(); }
 
             if (PasswordBox1.Password != PasswordBox2.Password)
             {
@@ -72,7 +74,15 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 {
                     SqlConnection con = DataProvider.sqlConnection;
                     con.Open();
-                    SqlCommand cmd = new SqlCommand("Update [TaiKhoan] set MatKhau='" + PasswordBox1.Password + "'where MaTK=N'" + MainWindow.curAccount.id + "'", con);
+                    SqlCommand cmd;
+                    if (MainWindow.curAccount != null)
+                    {
+                        cmd = new SqlCommand("Update [TaiKhoan] set MatKhau='" + PasswordBox1.Password + "'where MaTK=N'" + MainWindow.curAccount.id + "'", con);
+                    }
+                    else
+                    {
+                        cmd = new SqlCommand("Update [TaiKhoan] set MatKhau='" + PasswordBox1.Password + "'where Email='" + SendCodeForm.to + "'", con);
+                    }
                     cmd.CommandType = CommandType.Text;
                     cmd.ExecuteNonQuery();
                     con.Close();

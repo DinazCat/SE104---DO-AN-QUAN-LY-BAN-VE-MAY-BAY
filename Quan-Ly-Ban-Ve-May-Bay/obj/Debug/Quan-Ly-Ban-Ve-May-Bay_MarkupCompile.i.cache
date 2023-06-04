@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\5.6\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\
 Quan_Ly_Ban_Ve_May_Bay
 none
 false
 DEBUG;TRACE
-D:\5.6\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\App.xaml
-31400726719
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\App.xaml
+32-1738739997
 1-1546700801
-48-19850626
-251665177339
-Pages\AllFlight.xaml;Pages\ContactUs.xaml;Pages\FlightsList.xaml;MainWindow.xaml;Pages\FlightDetail.xaml;Pages\Home.xaml;Pages\Login.xaml;Pages\MyBookings.xaml;Pages\Register.xaml;Pages\Setting.xaml;Pages\UserManagement.xaml;Style\FilterMenu.xaml;Style\MainStyle.xaml;UserControls\AdminRight.xaml;UserControls\Chuyenbay.xaml;UserControls\FareClassManagement.xaml;UserControls\Hangmaybay.xaml;UserControls\HangVeItem.xaml;UserControls\MonthRevenue.xaml;UserControls\QLCB_SB.xaml;UserControls\RuleChange.xaml;UserControls\Sanbay.xaml;UserControls\YearRevenue.xaml;View\AddChuyenbay.xaml;View\AddHangMB.xaml;View\AddInforHK.xaml;View\AddSanBay.xaml;View\AddSBTG.xaml;View\ChangePassword.xaml;View\FareClassForm.xaml;View\UserForm.xaml;
+491989716242
+25-107386494
+Pages\AllFlight.xaml;Pages\ContactUs.xaml;Pages\FlightsList.xaml;MainWindow.xaml;Pages\FlightDetail.xaml;Pages\Home.xaml;Pages\Login.xaml;Pages\MyBookings.xaml;Pages\Register.xaml;Pages\Setting.xaml;Pages\UserManagement.xaml;Style\FilterMenu.xaml;Style\MainStyle.xaml;UserControls\AdminRight.xaml;UserControls\Chuyenbay.xaml;UserControls\FareClassManagement.xaml;UserControls\Hangmaybay.xaml;UserControls\HangVeItem.xaml;UserControls\MonthRevenue.xaml;UserControls\QLCB_SB.xaml;UserControls\RuleChange.xaml;UserControls\Sanbay.xaml;UserControls\YearRevenue.xaml;View\AddChuyenbay.xaml;View\AddHangMB.xaml;View\AddInforHK.xaml;View\AddSanBay.xaml;View\AddSBTG.xaml;View\ChangePassword.xaml;View\FareClassForm.xaml;View\SendCodeForm.xaml;View\UserForm.xaml;
 
 True
 

@@ -77,6 +77,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
         private void editPassword_Click(object sender, RoutedEventArgs e)
         {
             ChangePassword changePasswordwd = new ChangePassword();
+            changePasswordwd.PasswordBox.Visibility = Visibility.Visible;
             changePasswordwd.ShowDialog();
         }
 
