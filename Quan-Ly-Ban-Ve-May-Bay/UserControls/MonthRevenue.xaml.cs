@@ -72,30 +72,34 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
                 "GROUP BY C.MaChuyenBay, C.NgayKhoiHanh";
             SqlParameter param1 = new SqlParameter("@Month", int.Parse(cBoxMonth.SelectedItem.ToString()));
             SqlParameter param2 = new SqlParameter("@Year", int.Parse(cBoxYear.SelectedItem.ToString()));
-            using (SqlDataReader reader = DataProvider.ExecuteReader(query, CommandType.Text, param1, param2))
+            try
             {
-                dt = new DataTable();
-                if (reader.HasRows)
+                using (SqlDataReader reader = DataProvider.ExecuteReader(query, CommandType.Text, param1, param2))
                 {
-                    dt.Load(reader);
+                    dt = new DataTable();
+                    if (reader.HasRows)
+                    {
+                        dt.Load(reader);
+                    }
                 }
-            }
 
-            int stt = 1;
-            int sum = 0;
-            foreach (DataRow dr in dt.Rows)
-            {
-                MonthSale ms = new MonthSale();
-                ms.stt = stt.ToString();
-                ms.chuyenbay = dr[0].ToString();
-                ms.sove = dr[1].ToString();
-                ms.doanhthu = dr[2].ToString();
-                ms.tile = dr[3].ToString();
-                MonthRevenueTable.Items.Add(ms);
-                stt++;
-                sum += dr.Field<int>(2);
+                int stt = 1;
+                int sum = 0;
+                foreach (DataRow dr in dt.Rows)
+                {
+                    MonthSale ms = new MonthSale();
+                    ms.stt = stt.ToString();
+                    ms.chuyenbay = dr[0].ToString();
+                    ms.sove = dr[1].ToString();
+                    ms.doanhthu = dr[2].ToString();
+                    ms.tile = dr[3].ToString();
+                    MonthRevenueTable.Items.Add(ms);
+                    stt++;
+                    sum += dr.Field<int>(2);
+                }
+                tb_total.Text = sum.ToString();
             }
-            tb_total.Text = sum.ToString();
+            catch (Exception ex) { Console.WriteLine(ex); }
         }
 
         private void btOk_click(object sender, RoutedEventArgs e)

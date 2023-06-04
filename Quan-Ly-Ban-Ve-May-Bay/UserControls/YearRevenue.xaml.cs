@@ -46,7 +46,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
         private void loadData()
         {
             YearRevenueTable.Items.Clear();
-            string query = 
+            string query =
                 "SELECT SUBSTRING(C.NgayKhoiHanh, 4, 2) AS Thang, " +
                     "(SELECT COUNT(DISTINCT C1.MaChuyenBay) " +
                         "FROM CHUYENBAY C1 WHERE SUBSTRING(C1.NgayKhoiHanh, 4, 2) = SUBSTRING(C.NgayKhoiHanh, 4, 2) AND SUBSTRING(C1.NgayKhoiHanh, 7, 4) = @Year) AS SoChuyenBay, " +
@@ -58,27 +58,32 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
                 "GROUP BY SUBSTRING(C.NgayKhoiHanh, 4, 2), C.NgayKhoiHanh " +
                 "ORDER BY SUBSTRING(C.NgayKhoiHanh, 4, 2) ASC";
             SqlParameter param1 = new SqlParameter("@Year", int.Parse(cBox.SelectedItem.ToString()));
-            using (SqlDataReader reader = DataProvider.ExecuteReader(query, CommandType.Text, param1))
+            try
             {
-                dt = new DataTable();
-                if (reader.HasRows)
+                
+                using (SqlDataReader reader = DataProvider.ExecuteReader(query, CommandType.Text, param1))
                 {
-                    dt.Load(reader);
+                    dt = new DataTable();
+                    if (reader.HasRows)
+                    {
+                        dt.Load(reader);
+                    }
                 }
-            }
 
-            int sum = 0;
-            foreach (DataRow dr in dt.Rows)
-            {
-                YearSale ys = new YearSale();
-                ys.thang = dr[0].ToString();
-                ys.sochuyenbay = dr[1].ToString();
-                ys.doanhthu = dr[2].ToString();
-                ys.tile = dr[3].ToString();
-                YearRevenueTable.Items.Add(ys);
-                sum += dr.Field<int>(2);
+                int sum = 0;
+                foreach (DataRow dr in dt.Rows)
+                {
+                    YearSale ys = new YearSale();
+                    ys.thang = dr[0].ToString();
+                    ys.sochuyenbay = dr[1].ToString();
+                    ys.doanhthu = dr[2].ToString();
+                    ys.tile = dr[3].ToString();
+                    YearRevenueTable.Items.Add(ys);
+                    sum += dr.Field<int>(2);
+                }
+                tb_total.Text = sum.ToString();
             }
-            tb_total.Text = sum.ToString();
+            catch (Exception ex) { Console.WriteLine(ex); }
         }
 
         private void cbox_selectionChanged(object sender, SelectionChangedEventArgs e)

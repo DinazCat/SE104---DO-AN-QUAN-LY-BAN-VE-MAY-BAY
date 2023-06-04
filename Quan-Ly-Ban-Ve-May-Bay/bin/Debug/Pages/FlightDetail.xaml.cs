@@ -121,7 +121,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             List<SBTrungGian> listSBTrungGian = new List<SBTrungGian>();
             if (reader.HasRows)
             {
-                while (reader.Read())
+                while(reader.Read())
                 {
                     string airportName = reader["TenSanBay"].ToString();
                     TimeSpan timeStop = TimeSpan.FromMinutes(double.Parse(reader["ThoiGianDung"].ToString()));

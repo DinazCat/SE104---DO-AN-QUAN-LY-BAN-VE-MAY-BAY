@@ -102,6 +102,9 @@
     <Compile Include="Pages\Register.xaml.cs">
       <DependentUpon>Register.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Setting.xaml.cs">
+      <DependentUpon>Setting.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\UserManagement.xaml.cs">
       <DependentUpon>UserManagement.xaml</DependentUpon>
     </Compile>
@@ -155,6 +158,9 @@
     </Compile>
     <Compile Include="View\AddSBTG.xaml.cs">
       <DependentUpon>AddSBTG.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ChangePassword.xaml.cs">
+      <DependentUpon>ChangePassword.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\FareClassForm.xaml.cs">
       <DependentUpon>FareClassForm.xaml</DependentUpon>
@@ -211,6 +217,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Register.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Setting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -283,6 +293,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AddSBTG.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ChangePassword.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

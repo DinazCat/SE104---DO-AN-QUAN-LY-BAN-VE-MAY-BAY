@@ -178,7 +178,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
                 if (MessageBox.Show("Bạn có chắc muốn đăng xuất khỏi tài khoản này?", "Đăng xuất", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
                     MainWindow.curAccount = null;
-                    tblLogin.Text = "Login";
+                    tblLogin.Text = "Đăng nhập";
                     BitmapImage bitmap = new BitmapImage(new Uri("/Images/login.png", UriKind.Relative));
                     imgLogin.Source = bitmap;
                     btn_UserManagement.Visibility = Visibility.Collapsed;
@@ -191,7 +191,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
         private void Login_loginSuccess(object sender, RoutedEventArgs e)
         {
             btnHome_Click(sender, e);
-            tblLogin.Text = "Logout";
+            tblLogin.Text = "Đăng xuất";
             BitmapImage bitmap = new BitmapImage(new Uri("/Images/logout.png", UriKind.Relative));
             imgLogin.Source = bitmap;
             if (MainWindow.curAccount.type == 1)
@@ -238,6 +238,13 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             flightDetail.Show(allFlight.flightID, allFlight.airlineLogo, allFlight.time, allFlight.dateTimeDestination, allFlight.dateTimeDeparture, true);
             fContainer.Content = flightDetail;
         }
-        
+        private void setting_click(object sender, RoutedEventArgs e)
+        {
+            if (curAccount != null)
+            {
+                Setting setting = new Setting();
+                fContainer.Content = setting;
+            }
+        }
     }
 }

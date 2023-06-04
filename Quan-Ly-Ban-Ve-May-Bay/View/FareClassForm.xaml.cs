@@ -43,29 +43,37 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             try
             {
                 int p = int.Parse(Percentage.Text);
-                SqlConnection sqlCon = DataProvider.sqlConnection;
-                try
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Vui lòng nhập tỷ lệ phần trăm là một số nguyên.", "Dữ liệu không hợp lệ!");
+                return;
+            }
+            SqlConnection sqlCon = DataProvider.sqlConnection;
+            try
+            {
+                if (sqlCon.State == ConnectionState.Closed)
                 {
-                    if (sqlCon.State == ConnectionState.Closed)
+                    sqlCon.Open();
+                    String query = "SELECT COUNT(1) FROM [HANGVE] WHERE TenHangVe=@name";
+                    SqlCommand sqlCmd = new SqlCommand(query, sqlCon);
+                    sqlCmd.CommandType = CommandType.Text;
+                    sqlCmd.Parameters.AddWithValue("@name", Name.Text);
+                    int count = Convert.ToInt32(sqlCmd.ExecuteScalar());
+                    if (count > 0)
                     {
-                        sqlCon.Open();
-                        String query = "SELECT COUNT(1) FROM [HANGVE] WHERE TenHangVe=@name";
-                        SqlCommand sqlCmd = new SqlCommand(query, sqlCon);
-                        sqlCmd.CommandType = CommandType.Text;
-                        sqlCmd.Parameters.AddWithValue("@name", Name.Text);
-                        int count = Convert.ToInt32(sqlCmd.ExecuteScalar());
-                        if (count > 0)
-                        {
-                            txblError.Text = "Hạng vé này đã tồn tại!";
-                            return;
-                        }
+                        txblError.Text = "Hạng vé này đã tồn tại!";
+                        return;
                     }
                 }
-                catch { }
-                finally { sqlCon.Close(); }
-                Random rd = new Random();
-                int ID = rd.Next(100000, 999999);
-                sqlCon.Open();              
+            }
+            catch { }
+            finally { sqlCon.Close(); }
+            Random rd = new Random();
+            int ID = rd.Next(100000, 999999);
+            try
+            {
+                sqlCon.Open();
                 SqlCommand cmd = new SqlCommand("Insert into [HANGVE] values('" + "HV" + ID + "',N'" + Name.Text + "','" + Percentage.Text + "')", sqlCon);
                 cmd.CommandType = CommandType.Text;
                 cmd.ExecuteNonQuery();
@@ -73,10 +81,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 this.Close();
                 MessageBox.Show("Thêm hạng vé thành công!", "Success");
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Vui lòng nhập tỷ lệ phần trăm là một số nguyên.", "Dữ liệu không hợp lệ!");
-            }
+            catch (Exception ex){ Console.WriteLine(ex); }                      
         }
 
         private void BtnCancel_click(object sender, RoutedEventArgs e)

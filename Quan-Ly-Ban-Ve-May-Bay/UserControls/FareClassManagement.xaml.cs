@@ -84,30 +84,34 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
             {
                 if (MessageBox.Show("Bạn có chắc muốn xóa hạng vé này không?", "Xóa hạng vé", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    SqlConnection con = DataProvider.sqlConnection;
-                    con.Open();
-                    SqlCommand cmd3 = new SqlCommand("Delete from VE where  MaHangVe=N'" + selectedFareClass.id + "'", con);
-                    cmd3.CommandType = CommandType.Text;
-                    cmd3.ExecuteReader();
-                    con.Close();
+                    try
+                    {
+                        SqlConnection con = DataProvider.sqlConnection;
+                        con.Open();
+                        SqlCommand cmd3 = new SqlCommand("Delete from VE where  MaHangVe=N'" + selectedFareClass.id + "'", con);
+                        cmd3.CommandType = CommandType.Text;
+                        cmd3.ExecuteReader();
+                        con.Close();
 
-                    con.Open();
-                    SqlCommand cmd1 = new SqlCommand("Delete from QuanLyHangVeChuyenBay where  MaHangVe=N'" + selectedFareClass.id + "'", con);
-                    cmd1.CommandType = CommandType.Text;
-                    cmd1.ExecuteReader();
-                    con.Close();
-                    con.Open();
-                    SqlCommand cmd = new SqlCommand("Delete from HANGVE where MaHangVe=N'" + selectedFareClass.id + "'", con);
-                    cmd.CommandType = CommandType.Text;
-                    cmd.ExecuteReader();
-                    con.Close();
-                    //SqlConnection sqlCon = new SqlConnection(@"Data Source=DESKTOP-9LVKB7T\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
-                    //sqlCon.Open();
-                    //SqlCommand cmd = new SqlCommand("Delete from [HANGVE]  where MaHangVe='" + selectedFareClass.id + "'", sqlCon);
-                    //cmd.CommandType = CommandType.Text;
-                    //cmd.ExecuteNonQuery();
-                    //sqlCon.Close();
-                    FareClassTable.Items.Remove(selectedFareClass);
+                        con.Open();
+                        SqlCommand cmd1 = new SqlCommand("Delete from QuanLyHangVeChuyenBay where  MaHangVe=N'" + selectedFareClass.id + "'", con);
+                        cmd1.CommandType = CommandType.Text;
+                        cmd1.ExecuteReader();
+                        con.Close();
+                        con.Open();
+                        SqlCommand cmd = new SqlCommand("Delete from HANGVE where MaHangVe=N'" + selectedFareClass.id + "'", con);
+                        cmd.CommandType = CommandType.Text;
+                        cmd.ExecuteReader();
+                        con.Close();
+                        //SqlConnection sqlCon = new SqlConnection(@"Data Source=DESKTOP-9LVKB7T\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
+                        //sqlCon.Open();
+                        //SqlCommand cmd = new SqlCommand("Delete from [HANGVE]  where MaHangVe='" + selectedFareClass.id + "'", sqlCon);
+                        //cmd.CommandType = CommandType.Text;
+                        //cmd.ExecuteNonQuery();
+                        //sqlCon.Close();
+                        FareClassTable.Items.Remove(selectedFareClass);
+                    }
+                    catch (Exception ex) { Console.WriteLine(ex); }
                 }
             }
             else
