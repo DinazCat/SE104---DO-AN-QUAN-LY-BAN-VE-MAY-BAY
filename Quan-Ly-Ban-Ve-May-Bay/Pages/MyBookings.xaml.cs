@@ -98,12 +98,16 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
         {
             bookingsDetail = new BookingsDetail();
             SymbolTicket ticket = (SymbolTicket)lvTicket.SelectedItem;
-            bookingsDetail.ShowDetail(ticket.MaVe);
-            fTicket.Content = bookingsDetail;
+            if (ticket != null)
+            {
+                bookingsDetail.ShowDetail(ticket.MaVe);
+                fTicket.Content = bookingsDetail;
+            }
         }
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)
-        {            
+        {
+
             DataProvider.sqlConnection.Open();
             string sql = "select distinct [cb].MaChuyenBay, [ct].MaHD, [v].MaVe, [v].TenHK, [v].SoGhe, [hv].TenHangVe, " +
                                  "[cb].SanBayDi, [cb].SanBayDen,[cb].NgayKhoiHanh, [cb].ThoiGianXuatPhat " +
@@ -158,7 +162,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
             }
             else StatusBookings.Text = "Vui lòng nhấn vào vé để xem thông tin vé!";
 
-            fTicket.Resources.Clear();
+            fTicket.Content = null;
         }
     
         private void addSearchOptions()

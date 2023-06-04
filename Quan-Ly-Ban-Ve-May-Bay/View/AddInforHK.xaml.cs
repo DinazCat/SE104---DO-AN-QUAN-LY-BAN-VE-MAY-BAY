@@ -152,7 +152,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
         {
             NewHD_NewHK();
             ngayHD = DateTime.Now;
-            ngaylapHDTxt.Text = ngayHD.ToString("dd/mm/yyyy h:mm");
+            ngaylapHDTxt.Text = ngayHD.ToString("dd/MM/yyyy h:mm");
             maTKTTTxt.Text = userID;
             maVeBox.ItemsSource = list;
             maChuyenBayTxt.Text = macb;
@@ -208,13 +208,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             TienVe();
         }
 
-        private void cmndTxt_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            Regex regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
-        }
-
-        private void sdtTxt_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void Number_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);

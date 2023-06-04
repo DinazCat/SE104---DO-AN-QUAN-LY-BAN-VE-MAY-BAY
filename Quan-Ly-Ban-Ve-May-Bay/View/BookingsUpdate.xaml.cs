@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using Quan_Ly_Ban_Ve_May_Bay.Model;
 using System.Data.SqlClient;
 using System.Data;
+using System.Text.RegularExpressions;
 
 namespace Quan_Ly_Ban_Ve_May_Bay.View
 {
@@ -78,10 +79,24 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 sqlCommand.ExecuteNonQuery();
                 DataProvider.sqlConnection.Close();
 
+                MessageBox.Show("Cập nhật thông tin hành khách thành công!");
                 //ReturnBookings?.Invoke(this, new RoutedEventArgs());
                 this.Close();
             }
 
         }
+
+        private void tenHanhKhachTxt_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^a-zA-Z]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void Number_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
     }
 }

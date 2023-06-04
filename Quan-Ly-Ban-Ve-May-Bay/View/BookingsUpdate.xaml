@@ -18,15 +18,15 @@
             <TextBlock Text="CHỈNH SỬA THÔNG TIN HÀNH KHÁCH" FontSize="20" FontWeight="Bold" Foreground="#4d9921" Margin="0,10,0,0" HorizontalAlignment="Center"/>
             <DockPanel Margin="0,20,0,0">
                 <TextBlock Text="Tên hành khách: " Margin="30,5,0,0" FontSize="14" Width="150"/>
-                <TextBox Width="300" BorderBrush="Black" BorderThickness="1" x:Name="tenHanhKhachTxt" HorizontalAlignment="Left" Margin="0,0,0,0" FontSize="14"/>
+                <TextBox Width="300" BorderBrush="Black" BorderThickness="1" x:Name="tenHanhKhachTxt" HorizontalAlignment="Left" Margin="0,0,0,0" FontSize="14" PreviewTextInput="tenHanhKhachTxt_PreviewTextInput"/>
             </DockPanel>
             <DockPanel Margin="0,20,0,0">
                 <TextBlock Text="CMND:" Margin="30,5,0,0" FontSize="14" Width="150"/>
-                <TextBox Width="300" BorderBrush="Black" BorderThickness="1" x:Name="cmndTxt" HorizontalAlignment="Left" Margin="0,0,0,0" FontSize="14"/>
+                <TextBox Width="300" MaxLength="9" BorderBrush="Black" BorderThickness="1" x:Name="cmndTxt" HorizontalAlignment="Left" Margin="0,0,0,0" FontSize="14" PreviewTextInput="Number_PreviewTextInput"/>
             </DockPanel>
             <DockPanel Margin="0,20,0,0">
                 <TextBlock Text="Số điện thoại:" Margin="30,5,0,0" FontSize="14" Width="150"/>
-                <TextBox Width="300" BorderBrush="Black" BorderThickness="1" x:Name="sdtTxt" HorizontalAlignment="Left" Margin="0,0,0,0" FontSize="14"/>
+                <TextBox Width="300" MaxLength="11" BorderBrush="Black" BorderThickness="1" x:Name="sdtTxt" HorizontalAlignment="Left" Margin="0,0,0,0" FontSize="14" PreviewTextInput="Number_PreviewTextInput"/>
             </DockPanel>
             <DockPanel Margin="250,25,0,0">
                 <Button x:Name="btnXacNhan" Content="Xác nhận" Foreground="Black" FontSize="14" Background="#2E8B57" HorizontalAlignment="Stretch" Width="100" Click="btnXacNhan_Click" />
