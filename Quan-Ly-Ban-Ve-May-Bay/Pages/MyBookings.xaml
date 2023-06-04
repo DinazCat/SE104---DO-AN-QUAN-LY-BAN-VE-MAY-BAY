@@ -5,10 +5,87 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Quan_Ly_Ban_Ve_May_Bay.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="MyBookings">
+      d:DesignHeight="600" d:DesignWidth="1020"
+      Title="MyBookings" 
+      Background="#f1f6e5">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Border Background="#FFE2F7C9" Width="845" Height="36" Margin="15,10,0,10" BorderThickness="1,1,3,3" HorizontalAlignment="Left" CornerRadius="15,15,15,15" Grid.ColumnSpan="2" Padding="5,0,0,0" BorderBrush="#FF7D9F43">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="12,0,0,0" >
+                    <TextBlock Margin="0,4,0,0" Text="Từ:" Foreground="#FF7D9F43" FontSize="18" Width="30" FontWeight="Bold"/>
+                    <ComboBox x:Name="tuSearchTxt" Margin="5,3,0,3" Foreground="#FF7D9F43" FontSize="13" Width="120" BorderThickness="0,0,0,1" BorderBrush="#FF7D9F43"/>
+                    <TextBlock Margin="30,4,0,0" Text="Đến:" Foreground="#FF7D9F43" FontSize="18" Width="43" FontWeight="Bold"/>
+                    <ComboBox x:Name="denSearchTxt" Margin="5,3,0,3" Foreground="#FF7D9F43" FontSize="13" Width="120" BorderThickness="0,0,0,1" BorderBrush="#FF7D9F43"/>
+                    <TextBlock Margin="30,4,0,0" Text="Ngày:" Foreground="#FF7D9F43" FontSize="18" Width="52" FontWeight="Bold"/>
+                    <DatePicker Width="120" BorderBrush="#FF7D9F43" Foreground="#FF7D9F43" FontSize="13" Margin="5,3,0,3" Style="{StaticResource MaterialDesignDatePicker}" x:Name="ngaySearchBox"/>
+                    <TextBlock Margin="30,4,0,0" Text="Hạng vé:" Foreground="#FF7D9F43" FontSize="18" Width="77" FontWeight="Bold"/>
+                    <ComboBox x:Name="hangveSearchBox" Width="90" BorderBrush="#FF7D9F43" Foreground="#FF7D9F43" FontSize="13" Margin="5,3,0,3"/>
+                    <Button x:Name="btnSearch" Width="57" Margin="4,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Click="btnSearch_Click" >
+                        <Image  Height="24" Width="26" RenderTransformOrigin="0,0" HorizontalAlignment="Left" Source="/Pages/search_ic.png"/>
+                    </Button>
+                </StackPanel>
+            </Border>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="365"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Margin="10,0,0,0">
+                <StackPanel>
+                    <TextBlock x:Name="StatusBookings" Margin="20,0,0,0" FontSize="14" FontWeight="Normal"/>
+                    <ListView x:Name="lvTicket" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="lvTicket_SelectionChanged" Height="514">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Border BorderBrush="#FF7D9F43" Width="320" Height="110" VerticalAlignment="Top" Margin="0,0,0,0" CornerRadius="20,20,20,20" BorderThickness="1,1,4,4" Background="#FFE2F7C9">
+                                        <Grid>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Image Width="65"></Image>
+                                                <Grid>
+                                                    <StackPanel Margin="0,0,-200,0">
+                                                        <DockPanel >
+                                                            <TextBlock Text="Tuyến: " Width="40" Margin="8,0,0,5" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="11"/>
+                                                            <TextBlock Text="{Binding Tuyen}" FontSize="16" Background="{x:Null}" FontWeight="Normal" Height="25" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                                                        </DockPanel>
+                                                        <DockPanel >
+                                                            <TextBlock Text="Ngày giờ: " Width="53" Margin="8,0,0,5" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="11"/>
+                                                            <TextBlock Text="{Binding NgayGio}" FontSize="16" Background="{x:Null}" FontWeight="Normal" Height="25" />
+                                                        </DockPanel>
+                                                        <DockPanel >
+                                                            <TextBlock Text="Số ghế: " Width="40" Margin="8,0,0,5" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="11"/>
+                                                            <TextBlock Text="{Binding SoGhe}" FontSize="16" Background="{x:Null}" FontWeight="Normal" Height="25"/>
+                                                            <TextBlock Text="Hạng vé: " Width="48" Margin="40,0,0,5" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="11"/>
+                                                            <TextBlock Text="{Binding HangVe}" FontSize="16" Background="{x:Null}" FontWeight="Normal" Height="25" />
+                                                        </DockPanel>
+                                                        <DockPanel >
+                                                            <TextBlock Text="Họ tên:" Width="43" Margin="8,0,0,5" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="11"/>
+                                                            <TextBlock Text="{Binding TenHK}" FontSize="16" Background="{x:Null}" FontWeight="Normal" Height="25"/>
+                                                        </DockPanel>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Column="1" >
+                <Grid.Background>
+                    <ImageBrush ImageSource="/Images/ticket.png" Stretch="Uniform"/>
+                </Grid.Background>
+                <Frame Name="fTicket"/>
+            </Grid>
+
+        </Grid>
     </Grid>
 </Page>
