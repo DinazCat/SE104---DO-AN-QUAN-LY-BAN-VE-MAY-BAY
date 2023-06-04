@@ -10,6 +10,7 @@ using Quan_Ly_Ban_Ve_May_Bay.Converter;
 using System.Globalization;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
+using System.Windows.Documents;
 
 namespace Quan_Ly_Ban_Ve_May_Bay
 {
@@ -48,9 +49,12 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
             DataSet ds = new DataSet();
             adapter.Fill(ds);
-            foreach (DataRow dr in ds.Tables[0].Rows)
+            
+            ClassesColor.ItemsSource = flight_classes;
+            for(int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
-                flight_classes.Add(new FlightClass(dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), dr[3].ToString()));
+                DataRow dr = ds.Tables[0].Rows[i];
+                flight_classes.Add(new FlightClass(dr[0].ToString(), dr[1].ToString(), dr[2].ToString(), DataProvider.colorList[i]));
             }
             ClassesColor.ItemsSource = flight_classes;
 
@@ -117,7 +121,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             List<SBTrungGian> listSBTrungGian = new List<SBTrungGian>();
             if (reader.HasRows)
             {
-                if (reader.Read())
+                while(reader.Read())
                 {
                     string airportName = reader["TenSanBay"].ToString();
                     TimeSpan timeStop = TimeSpan.FromMinutes(double.Parse(reader["ThoiGianDung"].ToString()));
@@ -157,7 +161,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             {
                 DataProvider.sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand(
-                 "select [v].MaVe, [v].MaHangVe, [v].SoGhe, [v].TinhTrang, Mau from [VE] [v], [HANGVE] [hv]" +
+                 "select [v].MaVe, [v].MaHangVe, [v].SoGhe, [v].TinhTrang from [VE] [v], [HANGVE] [hv]" +
                  "where [v].MaChuyenBay=@flightID " +
                  "and [v].MaHangVe = [hv].MaHangVe " +
                  "and [hv].MaHangVe=@flightClassID " +
@@ -177,7 +181,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
                         string color;
                         if (status == "TRONG")
                         {
-                            color = reader["Mau"].ToString();
+                            color = flight_classes[i].ClassColor;
                         }
                         else
                         {
