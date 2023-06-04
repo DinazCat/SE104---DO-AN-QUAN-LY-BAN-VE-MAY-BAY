@@ -246,5 +246,11 @@ namespace Quan_Ly_Ban_Ve_May_Bay
                 fContainer.Content = setting;
             }
         }
+        private void contactsUs_click(object sender, RoutedEventArgs e)
+        {
+            ContactUs contactUs = new ContactUs();
+            fContainer.Content = contactUs;
+
+        }
     }
 }

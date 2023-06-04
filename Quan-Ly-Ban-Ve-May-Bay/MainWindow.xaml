@@ -60,18 +60,13 @@
                                 <TextBlock Margin="15 0 0 0" FontSize="20" Text="Danh sách chuyến bay" Foreground="#FFF"/>
                             </StackPanel>
                         </Button>
-                        <Button HorizontalAlignment="Left" Margin="10 0 0 0" Height="35">
+                        <Button HorizontalAlignment="Left" Margin="10 0 0 0" Height="35" Click="contactsUs_click">
                             <StackPanel  Orientation="Horizontal">
                                 <Image Source="/Images/envelope_52px.png" Height="30" Width="30" />
-                                <TextBlock Margin="15 0 0 0" FontSize="20" Text="Contact Us" Foreground="#FFF"/>
+                                <TextBlock Margin="15 0 0 0" FontSize="20" Text="Liên lạc" Foreground="#FFF"/>
                             </StackPanel>
                         </Button>
-                        <Button HorizontalAlignment="Left" Margin="10 0 0 0" Height="35">
-                            <StackPanel Orientation="Horizontal">
-                                <Image Source="/Images/area_chart_52px.png" Height="30" Width="30" />
-                                <TextBlock Margin="15 0 0 0" FontSize="20" Text="Reports" Foreground="#FFF"/>
-                            </StackPanel>
-                        </Button>
+                        
                         <Button HorizontalAlignment="Left" Margin="10 0 0 0" Height="35" Click="setting_click">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="/Images/settings_100px.png" Height="30"/>
