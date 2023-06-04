@@ -16,18 +16,30 @@ using System.Windows.Shapes;
 using System.Text.RegularExpressions;
 using System.Data;
 using Quan_Ly_Ban_Ve_May_Bay.Model;
+using Quan_Ly_Ban_Ve_May_Bay.Pages;
 
 namespace Quan_Ly_Ban_Ve_May_Bay.View
 {
     public partial class AddInforHK : Window
     {
+
+
         List<Ticket> ve = new List<Ticket>();
         List<string> list_mave = new List<string>();
         DateTime ngayHD = new DateTime();
+        public event RoutedEventHandler GoToHomeScreen;
 
         public AddInforHK()
         {
             InitializeComponent();
+            if(MainWindow.curAccount != null) {
+                if (MainWindow.curAccount.type == 1 || MainWindow.curAccount.type == 2)
+                {
+                    tbl_MaTK.Text = "Mã nhân viên: ";
+                    btnTTNgay.Content = "Đã thanh toán";
+                    btnTTSau.Content = "Chưa thanh toán";
+                }
+            }           
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
@@ -208,7 +220,13 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             TienVe();
         }
 
-        private void Number_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void cmndTxt_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void sdtTxt_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
@@ -249,10 +267,16 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 sqlCommand.ExecuteNonQuery();
                 DataProvider.sqlConnection.Close();
 
-                SaveVe("BOOKED",maHoaDonTxt.Text);
-                MessageBox.Show("Đặt vé thành công! \nVui lòng thanh toán hóa đơn trước khi chuyến bay xuất phát! \n" +
-                    "Phiếu đặt chỗ sẽ bị hủy nếu không được thanh toán trước giờ bay!");
+                SaveVe("BOOKED");
                 Finish();
+                //go to home screen in MainWindow
+                MessageBoxResult result = MessageBox.Show("Đặt vé thành công! \nVui lòng thanh toán hóa đơn trước khi chuyến bay xuất phát! \n" +
+                    "Phiếu đặt chỗ sẽ bị hủy nếu không được thanh toán trước giờ bay!");
+                if (result == MessageBoxResult.OK)
+                {
+                    GoToHomeScreen?.Invoke(this, new RoutedEventArgs());
+                    this.Close();
+                }
             }
         }
 
@@ -274,43 +298,41 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 sqlCommand.Parameters.Add("@matk", SqlDbType.NVarChar).Value = maTKTTTxt.Text;
                 sqlCommand.ExecuteNonQuery();
                 DataProvider.sqlConnection.Close();
-                SaveVe("SOLD",maHoaDonTxt.Text);
-                MessageBox.Show("Thanh toán vé thành công!");
+                SaveVe("SOLD");
+                MessageBoxResult result = MessageBox.Show("Thanh toán vé thành công!");
                 Finish();
+                //go to home screen in MainWindow
+                if (result == MessageBoxResult.OK)
+                {
+                    GoToHomeScreen?.Invoke(this, new RoutedEventArgs());
+                    this.Close();
+                }
             }
         }
 
-        private void SaveVe(String tinhtrang, string mahd)
+        private void SaveVe(String tinhtrang)
         {
             foreach (Ticket item in ve)
             {
                 DataProvider.sqlConnection.Open();
+                SqlDataAdapter adapter = new SqlDataAdapter();
                 SqlCommand sqlCommand = new SqlCommand(
-                    "update [VE] set MaHK = @mahk, TenHK = @tenhk, CMND = @cmnd, SDT = @sdt, TinhTrang = @tt " +
+                    "update [VE] set MaHK = @mahk, TenHK = @tenhk, CMND = @cmnd, SDT = @sdt, TinhTrang = @tinhtrang " +
                     "where MaVe = @mave", DataProvider.sqlConnection);
                 sqlCommand.Parameters.Add("@mahk", SqlDbType.NVarChar).Value = item.HkID;
                 sqlCommand.Parameters.Add("@tenhk", SqlDbType.NVarChar).Value = item.HkName;
                 sqlCommand.Parameters.Add("@cmnd", SqlDbType.NVarChar).Value = item.CMND;
                 sqlCommand.Parameters.Add("@sdt", SqlDbType.NVarChar).Value = item.PhoneNumber;
                 sqlCommand.Parameters.Add("@mave", SqlDbType.NVarChar).Value = item.TiketID;
-                sqlCommand.Parameters.Add("@tt", SqlDbType.NVarChar).Value = tinhtrang;
+                sqlCommand.Parameters.Add("@tinhtrang", SqlDbType.NVarChar).Value = tinhtrang;
                 sqlCommand.ExecuteNonQuery();
-                DataProvider.sqlConnection.Close();
-
-                DataProvider.sqlConnection.Open();
-                SqlCommand sql = new SqlCommand(
-                    "insert into [CTHD] values(@macthd, @mahd, @mave)", DataProvider.sqlConnection);
-                sql.Parameters.Add("@macthd", SqlDbType.NVarChar).Value = item.TiketID;
-                sql.Parameters.Add("@mahd", SqlDbType.NVarChar).Value = mahd;
-                sql.Parameters.Add("@mave", SqlDbType.NVarChar).Value = item.TiketID;
-                sql.ExecuteNonQuery();
                 DataProvider.sqlConnection.Close();
             }
         }
 
         private void Finish()
         {
-            this.Close();            
+            
         }
     }
 }

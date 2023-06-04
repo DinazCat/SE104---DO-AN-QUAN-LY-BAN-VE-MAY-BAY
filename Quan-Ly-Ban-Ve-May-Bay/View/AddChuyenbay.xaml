@@ -8,7 +8,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:uc="clr-namespace:Quan_Ly_Ban_Ve_May_Bay.UserControls"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
-        Title="AddChuyenbay" Height="700" Width="1000">
+        Title="AddChuyenbay" Height="720" Width="1000">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
@@ -29,35 +29,58 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" Orientation="Vertical" Margin="0,10">
-                <TextBlock Text="Mã chuyến bay: "/>
-                <TextBox Width="300" Height="30" BorderBrush="Black" BorderThickness="1" x:Name="machuyenbayTxb"/>
-                <TextBlock Text="Mã hãng máy bay: "/>
-                <ComboBox Width="300" FontSize="18" VerticalAlignment="Center"
+                <StackPanel Orientation="Horizontal" Margin="10" >
+                    <TextBlock Text="Mã chuyến bay: "  VerticalAlignment='Center'/>
+                    <TextBox Width="300" Height="30" BorderBrush="Black" BorderThickness="1" x:Name="machuyenbayTxb"  VerticalAlignment='Center' Margin="50,0,0,0"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <TextBlock Text="Mã hãng máy bay: " VerticalAlignment='Center'/>
+                    <ComboBox Width="300" FontSize="18"  VerticalAlignment='Center' Margin="35,0,0,0"
                       BorderBrush="Black" BorderThickness="1"
                       Background="#F5F5F5"
                       x:Name="MaHcBox"/>
-                <TextBlock Text="Loại máy bay: "/>
-                <TextBox Width="300" Height="30" BorderBrush="Black" BorderThickness="1" x:Name="loaimaybayTxb"/>
-                <TextBlock Text="Sân bay đi: "/>
-                <ComboBox Width="300" FontSize="18" VerticalAlignment="Center"
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <TextBlock Text="Loại máy bay: "  VerticalAlignment='Center'/>
+                    <TextBox Width="300" Height="30" BorderBrush="Black" BorderThickness="1" x:Name="loaimaybayTxb"  VerticalAlignment='Center' Margin="62,0,0,0"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <TextBlock Text="Sân bay đi: "  VerticalAlignment='Center'/>
+                    <ComboBox Width="300" FontSize="18" VerticalAlignment="Center" Margin="75,0,0,0"
                       BorderBrush="Black" BorderThickness="1"
                       Background="#F5F5F5"
                       x:Name="FromcBox"/>
-                <TextBlock Text="Sân bay đến: "/>
-                <ComboBox Width="300" FontSize="18" VerticalAlignment="Center"
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <TextBlock Text="Sân bay đến: "  VerticalAlignment='Center'/>
+                    <ComboBox Width="300" FontSize="18" VerticalAlignment="Center" Margin="65,0,0,0"
                       BorderBrush="Black" BorderThickness="1"
                       Background="#F5F5F5"
                       x:Name="TocBox"/>
-                <TextBlock Text="Ngày giờ: "/>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <DatePicker Width="200"  BorderBrush="Black" BorderThickness="1" x:Name="Ngaypicker"/>
-                    <TextBlock Text="Giờ:" Margin="50,0,3,0"/>
-                    <TextBox Width="200" Height="30" BorderBrush="Black" BorderThickness="1" x:Name="gioTxb" />
                 </StackPanel>
-                <TextBlock Text="Thời gian bay: "/>
-                <TextBox Width="300" Height="30" BorderBrush="Black" BorderThickness="1" x:Name="TGbayTxb" />
-                <TextBlock Text="Giá vé: "/>
-                <TextBox Width="300" Height="30" BorderBrush="Black" BorderThickness="1" x:Name="GiaTxb"/>
+
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <TextBlock Text="Ngày giờ: "  VerticalAlignment='Center'/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <DatePicker Width="200"  BorderBrush="Black" BorderThickness="1" x:Name="Ngaypicker"  VerticalAlignment='Center'/>
+                        <TextBlock Text="Giờ (00:00):" Margin="10" VerticalAlignment='Center'/>
+                        <TextBox Width="200" Height="30" BorderBrush="Black" BorderThickness="1" x:Name="gioTxb" VerticalAlignment='Center' />
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <TextBlock Text="Thời gian bay (phút) : "  VerticalAlignment='Center' />
+                    <TextBox Width="300" Height="30" BorderBrush="Black" BorderThickness="1" x:Name="TGbayTxb"  VerticalAlignment='Center' Margin="20,0,0,0"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <TextBlock Text="Giá vé: "  VerticalAlignment='Center'/>
+                    <TextBox Width="300" Height="30" BorderBrush="Black" BorderThickness="1" x:Name="GiaTxb"  VerticalAlignment='Center' Margin="98,0,0,0"/> 
+                </StackPanel>
 
 
             </StackPanel>
@@ -66,7 +89,7 @@
                     <RowDefinition Height="50"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Button  Height="30" Width="120" Content="Thêm hạng vé" Foreground="Black" FontSize="14" Background="#2E8B57" Click="ThemHV_Click"/>
+                <Button  Height="30" Width="130" Content="Thêm hạng vé" Foreground="Black" FontSize="14" Background="#2E8B57" Click="ThemHV_Click"/>
                 <ListView x:Name="HangVeList" 
                           Grid.Row="1"
                       HorizontalContentAlignment="Stretch" 

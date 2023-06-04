@@ -20,44 +20,105 @@ using Quan_Ly_Ban_Ve_May_Bay.Pages;
 using Quan_Ly_Ban_Ve_May_Bay.View;
 using Quan_Ly_Ban_Ve_May_Bay.UserControls;
 using Quan_Ly_Ban_Ve_May_Bay.Model;
-using Microsoft.Win32;
-using System.Globalization;
-
+using System.Windows.Threading;
 namespace Quan_Ly_Ban_Ve_May_Bay
 {
 
     public partial class MainWindow : Window
     {
-
+        DispatcherTimer dispatcherTimer = new DispatcherTimer();    
         private Home home;
         private FlightsList flights;
         private FlightDetail flightDetail;
         public static Account curAccount = null;
-        
+        private AddInforHK addInforHK;
+        private AllFlight allFlight;
         public MainWindow()
         {
             InitializeComponent();
+            //hủy vé tự động
+            dispatcherTimer.Tick += DispatcherTimer_Tick;
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            dispatcherTimer.Start();
+
+            //main code
             home = new Home();
-            flights = new FlightsList();
+            allFlight = new AllFlight();
+            addInforHK = new AddInforHK();
             flightDetail = new FlightDetail();
             home.Search += Home_Search;
-            flights.ShowDetail += Flight_ShowDetail;
-            flights.Return += btnHome_Click;
-            flightDetail.Return += Home_Search;
-            //continue
-            flightDetail.Continue += FlightDetail_Continue;
-            //
-            flights.Search += btnHome_Click;
+
+            flights = new FlightsList();
             fContainer.Content = home;
+        }
+
+        private void Flights_Return(object sender, RoutedEventArgs e)
+        {
+            fContainer.Content = home;
+        }
+
+        private void DispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            //DataProvider.sqlConnection.Open();
+            //SqlCommand sqlCommand = new SqlCommand(
+            // "select * from [HOADON] where " +
+            // " ",
+            //DataProvider.sqlConnection);
+            //sqlCommand.Parameters.Add("@flightID", SqlDbType.NVarChar).Value = flightID;
+            //SqlDataReader reader = sqlCommand.ExecuteReader();
+            //string[] flight = new string[8];
+            //if (reader.HasRows)
+            //{
+            //    if (reader.Read())
+            //    {
+            //        string airlineName = reader["TenHang"].ToString();
+            //        string airportDepartureID = reader["SanBayDi"].ToString();
+            //        string airportDestinationID = reader["SanBayDen"].ToString();
+            //        string airportDepartureName = reader["TenSBDi"].ToString();
+            //        string airportDestinationName = reader["TenSBDen"].ToString();
+            //        string airportDepartureCity = reader["TinhSBDi"].ToString();
+            //        string airportDestinationCity = reader["TinhSBDen"].ToString();
+            //        string aircraftType = reader["LoaiMayBay"].ToString();
+            //        flight = new string[] { airlineName, airportDepartureID, airportDestinationID, airportDepartureName, airportDestinationName, airportDepartureCity, airportDestinationCity, aircraftType };
+            //    }
+            //}
+            //DataProvider.sqlConnection.Close();
+        }
+
+        private void AddInforHK_GoToHomeScreen(object sender, RoutedEventArgs e)
+        {
+            home = new Home();
+            fContainer.Content = home;
+            home.Search += Home_Search;
+        }
+
+        private void FlightDetail_Return(object sender, RoutedEventArgs e)
+        {
+            if(flightDetail.isAllFlight == true)
+            {
+                btnAllFlight_Click(sender, e);
+            }
+            else {
+                Home_Search(sender, e);
+            }
         }
 
         private void FlightDetail_Continue(object sender, RoutedEventArgs e)
         {
             if (curAccount != null)
             {
-                AddInforHK addInforHK = new AddInforHK();
+                if (addInforHK == null)
+                {
+                    addInforHK = new AddInforHK();
+                }
+                else
+                {
+                    addInforHK.Close();
+                    addInforHK = new AddInforHK();
+                }
+                addInforHK.GoToHomeScreen += AddInforHK_GoToHomeScreen;
                 addInforHK.Show(flightDetail.flightID, flightDetail.TicketID_Chosen, curAccount.id);
-                addInforHK.ShowDialog();
+                addInforHK.Show();
             }
             else
             {
@@ -74,11 +135,16 @@ namespace Quan_Ly_Ban_Ve_May_Bay
 
         private void btnHome_Click(object sender, RoutedEventArgs e)
         {
+            home = new Home();
+            home.Search += Home_Search;
             fContainer.Content = home;
         }
 
         private void Home_Search(object sender, RoutedEventArgs e)
         {
+            flights = new FlightsList();
+            flights.Return += Flights_Return; 
+            flights.ShowDetail += Flight_ShowDetail;
             flights.FlightSearched(home.Departure, home.Destination, home.Date, home.Quantity, home.FlightClass);
             fContainer.Content = flights;
 
@@ -86,7 +152,10 @@ namespace Quan_Ly_Ban_Ve_May_Bay
 
         private void Flight_ShowDetail(object sender, RoutedEventArgs e)
         {
-            flightDetail.Show(flights.flightID, flights.airlineLogo, flights.time, flights.dateTimeDestination, flights.dateTimeDeparture);
+            flightDetail = new FlightDetail();
+            flightDetail.Show(flights.flightID, flights.airlineLogo, flights.time, flights.dateTimeDestination, flights.dateTimeDeparture, false);
+            flightDetail.Return += FlightDetail_Return;
+            flightDetail.Continue += FlightDetail_Continue;
             fContainer.Content = flightDetail;
         }
         private void AdminAccessBtn(object sender, RoutedEventArgs e)
@@ -109,7 +178,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
                 if (MessageBox.Show("Bạn có chắc muốn đăng xuất khỏi tài khoản này?", "Đăng xuất", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
                     MainWindow.curAccount = null;
-                    tblLogin.Text = "Login";
+                    tblLogin.Text = "Đăng nhập";
                     BitmapImage bitmap = new BitmapImage(new Uri("/Images/login.png", UriKind.Relative));
                     imgLogin.Source = bitmap;
                     btn_UserManagement.Visibility = Visibility.Collapsed;
@@ -122,7 +191,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
         private void Login_loginSuccess(object sender, RoutedEventArgs e)
         {
             btnHome_Click(sender, e);
-            tblLogin.Text = "Logout";
+            tblLogin.Text = "Đăng xuất";
             BitmapImage bitmap = new BitmapImage(new Uri("/Images/logout.png", UriKind.Relative));
             imgLogin.Source = bitmap;
             if (MainWindow.curAccount.type == 1)
@@ -154,18 +223,34 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             fContainer.Content = userManagement;
         }
 
-        private void btnMyBookings_Click(object sender, RoutedEventArgs e)
+        private void btnAllFlight_Click(object sender, RoutedEventArgs e)
         {
-            MyBookings myBookings = new MyBookings();
+            allFlight = new AllFlight();
+            fContainer.Content = allFlight;
+            allFlight.ShowDetail += AllFlight_ShowDetail;
+        }
+
+        private void AllFlight_ShowDetail(object sender, RoutedEventArgs e)
+        {
+            flightDetail = new FlightDetail();
+            flightDetail.Return += FlightDetail_Return;
+            flightDetail.Continue += FlightDetail_Continue;
+            flightDetail.Show(allFlight.flightID, allFlight.airlineLogo, allFlight.time, allFlight.dateTimeDestination, allFlight.dateTimeDeparture, true);
+            fContainer.Content = flightDetail;
+        }
+        private void setting_click(object sender, RoutedEventArgs e)
+        {
             if (curAccount != null)
             {
-                myBookings.MyTicket(curAccount.id);
+                Setting setting = new Setting();
+                fContainer.Content = setting;
             }
-            else
-            {
-                myBookings.NoLogin();
-            }
-            fContainer.Content = myBookings;
+        }
+        private void contactsUs_click(object sender, RoutedEventArgs e)
+        {
+            ContactUs contactUs = new ContactUs();
+            fContainer.Content = contactUs;
+
         }
     }
 }

@@ -73,6 +73,21 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
         {
             mahang = mahangTxb.Text;
             tenhang = tenhangTxb.Text;
+            if(mahang == ""||tenhang=="")
+            {
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
+                return;
+            }
+            string s = "SELECT * From HANGMAYBAY WHERE MaHang = @ma";
+            SqlParameter p = new SqlParameter("@ma", mahang);
+            using (SqlDataReader reader = DataProvider.ExecuteReader(s, CommandType.Text, p))
+            {
+                if (reader.HasRows)
+                {
+                    MessageBox.Show("Mã hãng đã tồn tại. ", "Dữ liệu không hợp lệ!");
+                    return;
+                }
+            }
             if (thaotac == 0)
             {
                 string query = "SELECT * FROM HANGMAYBAY";

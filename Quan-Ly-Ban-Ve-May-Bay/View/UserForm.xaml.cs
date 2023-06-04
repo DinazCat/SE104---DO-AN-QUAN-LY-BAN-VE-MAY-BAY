@@ -92,15 +92,18 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 finally { sqlCon.Close(); }
                 Random rd = new Random();
                 int ID = rd.Next(100000, 999999);
-                sqlCon.Open();
-                int type = cbRBAC.SelectedIndex + 1;
-                SqlCommand cmd = new SqlCommand("Insert into [TaiKhoan] values('" + "U" + ID + "',N'" + Username.Text + "',N'" + PasswordBox1.Password + "'," + type + ",'" + Email.Text + "',N'" + Displayname.Text + "')", sqlCon);
-                cmd.CommandType = CommandType.Text;
-                cmd.ExecuteNonQuery();
-                sqlCon.Close();
-                this.Close();
-                MessageBox.Show("Thêm tài khoản thành công!", "Success");
-            }
+                try
+                {
+                    sqlCon.Open();
+                    int type = cbRBAC.SelectedIndex + 1;
+                    SqlCommand cmd = new SqlCommand("Insert into [TaiKhoan] values('" + "U" + ID + "',N'" + Username.Text + "',N'" + PasswordBox1.Password + "'," + type + ",'" + Email.Text + "',N'" + Displayname.Text + "')", sqlCon);
+                    cmd.CommandType = CommandType.Text;
+                    cmd.ExecuteNonQuery();
+                    sqlCon.Close();
+                    this.Close();
+                    MessageBox.Show("Thêm tài khoản thành công!", "Success");
+                } catch (Exception ex) { Console.WriteLine(ex); }
+        }
             else if(action == 1) {
                 SqlConnection sqlCon = DataProvider.sqlConnection;
                 try
@@ -123,14 +126,18 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 }
                 catch { }
                 finally { sqlCon.Close(); }
-                sqlCon.Open();
-                int type = cbRBAC.SelectedIndex + 1;
-                SqlCommand cmd = new SqlCommand("Update [TAIKHOAN] set TenDangNhap=N'" + Username.Text + "',Email=N'" + Email.Text + "',TenHienThi=N'" + Displayname.Text + "',Loai=" + type + " where MaTK='" + userId + "'", sqlCon);
-                cmd.CommandType = CommandType.Text;
-                cmd.ExecuteNonQuery();
-                sqlCon.Close();
-                this.Close();
-                MessageBox.Show("Sửa thông tin tài khoản thành công!", "Success");
+                try
+                {
+                    sqlCon.Open();
+                    int type = cbRBAC.SelectedIndex + 1;
+                    SqlCommand cmd = new SqlCommand("Update [TAIKHOAN] set TenDangNhap=N'" + Username.Text + "',Email=N'" + Email.Text + "',TenHienThi=N'" + Displayname.Text + "',Loai=" + type + " where MaTK='" + userId + "'", sqlCon);
+                    cmd.CommandType = CommandType.Text;
+                    cmd.ExecuteNonQuery();
+                    sqlCon.Close();
+                    this.Close();
+                    MessageBox.Show("Sửa thông tin tài khoản thành công!", "Success");
+                }
+                catch (Exception ex) { Console.WriteLine(ex); }
             }
         }
 

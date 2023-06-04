@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Quan_Ly_Ban_Ve_May_Bay"
         mc:Ignorable="d"
-        Height="600" Width="1250" Background="White" WindowStartupLocation="CenterScreen"
+        Height="600" Width="1280" Background="White" WindowStartupLocation="CenterScreen"
         Title="Quản lý bán vé máy bay">
     <Grid>
         
@@ -44,56 +44,51 @@
                         <Button HorizontalAlignment="Left"  Margin="10 0 0 0" Height="35" Click="btnHome_Click">
                             <StackPanel Orientation="Horizontal" >
                                 <Image Source="/Images/home_52px.png"/>
-                                <TextBlock Margin="15 0 0 0" FontSize="20" Text="Home" Foreground="#FFF"/>
+                                <TextBlock Margin="15 0 0 0" FontSize="20" Text="Trang chủ" Foreground="#FFF"/>
                             </StackPanel>
                         </Button>
 
                         <Button x:Name="btnMyBookings" HorizontalAlignment="Left" Margin="10 0 0 0" Height="35" Click="btnMyBookings_Click">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="/Images/contacts_52px.png" Height="30" Width="30" />
-                                <TextBlock Margin="15 0 0 0" FontSize="20" Text="My Bookings" Foreground="#FFF"/>
+                                <TextBlock Margin="15 0 0 0" FontSize="20" Text="Hóa đơn của tôi" Foreground="#FFF"/>
                             </StackPanel>
                         </Button>
-                        <Button HorizontalAlignment="Left" Margin="10 0 0 0" Height="35">
+                        <Button HorizontalAlignment="Left" Margin="10 0 0 0" Height="35" Click="btnAllFlight_Click">
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="/Images/airplane_mode_on_52px.png" Height="25" Width="30" />
-                                <TextBlock Margin="15 0 0 0" FontSize="20" Text="All Flight" Foreground="#FFF"/>
+                                <Image Source="/Images/airplane_mode_on_52px.png" Height="25" Width="30"/>
+                                <TextBlock Margin="15 0 0 0" FontSize="20" Text="Danh sách chuyến bay" Foreground="#FFF"/>
                             </StackPanel>
                         </Button>
-                        <Button HorizontalAlignment="Left" Margin="10 0 0 0" Height="35">
+                        <Button HorizontalAlignment="Left" Margin="10 0 0 0" Height="35" Click="contactsUs_click">
                             <StackPanel  Orientation="Horizontal">
                                 <Image Source="/Images/envelope_52px.png" Height="30" Width="30" />
-                                <TextBlock Margin="15 0 0 0" FontSize="20" Text="Contact Us" Foreground="#FFF"/>
+                                <TextBlock Margin="15 0 0 0" FontSize="20" Text="Liên lạc" Foreground="#FFF"/>
                             </StackPanel>
                         </Button>
-                        <Button HorizontalAlignment="Left" Margin="10 0 0 0" Height="35">
-                            <StackPanel Orientation="Horizontal">
-                                <Image Source="/Images/area_chart_52px.png" Height="30" Width="30" />
-                                <TextBlock Margin="15 0 0 0" FontSize="20" Text="Reports" Foreground="#FFF"/>
-                            </StackPanel>
-                        </Button>
-                        <Button HorizontalAlignment="Left" Margin="10 0 0 0" Height="35">
+                        
+                        <Button HorizontalAlignment="Left" Margin="10 0 0 0" Height="35" Click="setting_click">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="/Images/settings_100px.png" Height="30"/>
-                                <TextBlock Margin="15 0 0 0" FontSize="20" Text="Settings" Foreground="#FFF"/>
+                                <TextBlock Margin="15 0 0 0" FontSize="20" Text="Cài đặt" Foreground="#FFF"/>
                             </StackPanel>
                         </Button>
                         <Button  x:Name="btn_SalesmanRight" HorizontalAlignment="Left" Margin="10 0 0 0" Height="35" Click="AdminAccessBtn" Visibility="Collapsed">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="/Images/key.png" Height="30"/>
-                                <TextBlock Margin="15 0 0 0" FontSize="20" Text="Salesman Right" Foreground="#FFF"/>
+                                <TextBlock Margin="15 0 0 0" FontSize="20" Text="Quản lý hệ thống" Foreground="#FFF"/>
                             </StackPanel>
                         </Button>
                         <Button x:Name="btn_UserManagement" HorizontalAlignment="Left" Margin="10 0 0 0" Height="37" Click="userManagement_Click" Visibility="Collapsed">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="/Images/usersetting.png" Height="30" Width="30" />
-                                <TextBlock Margin="15 0 0 0" FontSize="20" Text="User Management" Foreground="#FFF"/>
+                                <TextBlock Margin="15 0 0 0" FontSize="20" Text="Quản lý người dùng" Foreground="#FFF"/>
                             </StackPanel>
                         </Button>
                         <Button HorizontalAlignment="Left" Margin="10 0 0 0" Height="37" Click="loginBtn_Click">
                             <StackPanel Orientation="Horizontal">
                                 <Image x:Name="imgLogin" Source="/Images/login.png" Height="30" Width="30" />
-                                <TextBlock x:Name="tblLogin" Margin="15 0 0 0" FontSize="20" Text="Login" Foreground="#FFF"/>
+                                <TextBlock x:Name="tblLogin" Margin="15 0 0 0" FontSize="20" Text="Đăng nhập" Foreground="#FFF"/>
                             </StackPanel>
                         </Button>
                     </StackPanel>

@@ -58,7 +58,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
                 cb.maCB = dr["MaChuyenBay"].ToString();
                 cb.SBdi = dr["SanBayDi"].ToString();
                 cb.SBden = dr["SanBayDen"].ToString();
-                cb.datetime = dr["NgayKhoiHanh"].ToString() + dr["ThoiGianXuatPhat"].ToString();
+                cb.datetime = dr["NgayKhoiHanh"].ToString() +"-"+ dr["ThoiGianXuatPhat"].ToString();
                 cb.tgBay = dr["ThoiGianDuKien"].ToString();
                 cb.Gia = dr["Gia"].ToString();
                 CBTable.Items.Add(cb);
@@ -119,6 +119,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
             con.Close();
             CBTable.Items.Clear();
             loadDatatoTable();
+            MessageBox.Show("Xóa chuyến bay thành công!");
 
         }
         QLCB_SB qLCB_SB;

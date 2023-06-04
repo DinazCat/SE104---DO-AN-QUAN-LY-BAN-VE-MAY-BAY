@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Quan_Ly_Ban_Ve_May_Bay.Model;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.SqlClient;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +16,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Office.Interop.Excel;
+using System.Windows.Forms;
+using UserControl = System.Windows.Controls.UserControl;
+using DataTable = System.Data.DataTable;
 
 namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
 {
@@ -24,22 +31,14 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
         public MonthRevenue()
         {
             InitializeComponent();
-            //ObservableCollection<string> list = new ObservableCollection<string>();
 
-            //list.Add("T1-2023");
-            //list.Add("T2-2023");
-            //list.Add("T3-2023");
-            //list.Add("T4-2023");
-            //list.Add("T5-2023");
-            //list.Add("T6-2023");
-            //list.Add("T7-2023");
             List<int> months = new List<int>();
             for (int month = 1; month <= 12; month++)
             {
                 months.Add(month);
             }
             cBoxMonth.ItemsSource = months;
-            cBoxYear.SelectedIndex = 0;
+            cBoxMonth.SelectedIndex = 0;
             List<int> years = new List<int>();
             int currentYear = DateTime.Now.Year;
             for (int year = 2020; year <= currentYear; year++)
@@ -50,12 +49,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
             cBoxYear.SelectedIndex = 0;
             MonthSale Example = new MonthSale();
 
-            Example.stt = "1";
-            Example.chuyenbay = "VJ346";
-            Example.sove = "1";
-            Example.doanhthu = "2 tỷ";
-            Example.tile = "10%";
-            MonthRevenueTable.Items.Add(Example);
+            loadData();
         }
         public class MonthSale
         {
@@ -64,6 +58,88 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
             public string sove { get; set; }
             public string doanhthu { get; set; }
             public string tile { get; set; }
+        }
+
+        DataTable dt;
+        void loadData()
+        {
+            MonthRevenueTable.Items.Clear();
+            string query = 
+                "SELECT C.MaChuyenBay, " +
+                    "COUNT(DISTINCT MaVe) AS SoVe, " +
+                    "SUM(V.GiaVe) AS DoanhThu, " +
+                    "(SUM(CAST(V.GiaVe AS decimal(18, 2))) * 100) / " +
+                        "(SELECT SUM(V1.GiaVe) FROM VE V1 JOIN CHUYENBAY C1 ON V1.MaChuyenBay = C1.MaChuyenBay " +
+                            "WHERE SUBSTRING(C1.NgayKhoiHanh, 4, 2) = @Month AND SUBSTRING(C1.NgayKhoiHanh, 7, 4) = @Year and V1.TinhTrang = 'SOLD') AS 'TyLe' " +
+                "FROM CHUYENBAY C JOIN VE V ON C.MaChuyenBay = V.MaChuyenBay " +
+                "WHERE SUBSTRING(C.NgayKhoiHanh, 4, 2) = @Month AND SUBSTRING(C.NgayKhoiHanh, 7, 4) = @Year AND TinhTrang = 'SOLD' " +
+                "GROUP BY C.MaChuyenBay, C.NgayKhoiHanh";
+            SqlParameter param1 = new SqlParameter("@Month", int.Parse(cBoxMonth.SelectedItem.ToString()));
+            SqlParameter param2 = new SqlParameter("@Year", int.Parse(cBoxYear.SelectedItem.ToString()));
+            try
+            {
+                using (SqlDataReader reader = DataProvider.ExecuteReader(query, CommandType.Text, param1, param2))
+                {
+                    dt = new DataTable();
+                    if (reader.HasRows)
+                    {
+                        dt.Load(reader);
+                    }
+                }
+
+                int stt = 1;
+                int sum = 0;
+                foreach (DataRow dr in dt.Rows)
+                {
+                    MonthSale ms = new MonthSale();
+                    ms.stt = stt.ToString();
+                    ms.chuyenbay = dr[0].ToString();
+                    ms.sove = dr[1].ToString();
+                    ms.doanhthu = dr[2].ToString();
+                    ms.tile = dr[3].ToString();
+                    MonthRevenueTable.Items.Add(ms);
+                    stt++;
+                    sum += dr.Field<int>(2);
+                }
+                tb_total.Text = sum.ToString();
+            }
+            catch (Exception ex) { Console.WriteLine(ex); }
+        }
+
+        private void btOk_click(object sender, RoutedEventArgs e)
+        {
+            loadData();
+        }
+
+        private void Excel_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Office.Interop.Excel.Application excel = null;
+            Microsoft.Office.Interop.Excel.Workbook wb = null;
+            object missing = Type.Missing;
+            Microsoft.Office.Interop.Excel.Worksheet ws = null;
+            Microsoft.Office.Interop.Excel.Range rng = null;
+
+
+
+            excel = new Microsoft.Office.Interop.Excel.Application();
+            wb = excel.Workbooks.Add();
+            ws = (Microsoft.Office.Interop.Excel.Worksheet)wb.ActiveSheet;
+            ws.Columns.AutoFit();
+            ws.Columns.EntireColumn.ColumnWidth = 25;
+
+
+            for (int i = 0; i < MonthRevenueTable.Columns.Count; i++)
+            {
+                ws.Cells[1, i + 1].Value = MonthRevenueTable.Columns[i].Header;
+                for (int j = 0; j < MonthRevenueTable.Items.Count; j++)
+                {
+                    var cellValue = (MonthRevenueTable.Columns[i].GetCellContent(MonthRevenueTable.Items[j]) as TextBlock).Text;
+                    ws.Cells[j + 2, i + 1].Value = cellValue;
+                }
+            }
+
+            excel.Visible = true;
+            wb.Activate();
         }
     }
 }
