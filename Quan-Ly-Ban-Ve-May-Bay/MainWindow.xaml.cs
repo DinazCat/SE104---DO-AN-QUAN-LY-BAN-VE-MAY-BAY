@@ -153,5 +153,11 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             UserManagement userManagement = new UserManagement();
             fContainer.Content = userManagement;
         }
+
+        private void btnMyBookings_Click(object sender, RoutedEventArgs e)
+        {
+            MyBookings myBookings = new MyBookings();
+            fContainer.Content = myBookings;
+        }
     }
 }

@@ -478,3 +478,11 @@ C:\Users\DELL\Source\Repos\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\bin\Debug\Pages\F
 C:\Users\DELL\Source\Repos\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\bin\Debug\Pages\FlightDetail.xaml.cs
 C:\Users\DELL\Source\Repos\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\bin\Debug\Pages\Home.xaml.cs
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Quan-Ly-Ban-Ve-May-Bay_Content.g.cs
+C:\Users\DELL\source\Repos\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Pages\MyBookings.g.cs
+C:\Users\DELL\source\Repos\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Pages\MyBookings.baml
+C:\Users\DELL\source\Repos\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Pages\btnTicket.g.cs
+C:\Users\DELL\source\Repos\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Pages\btnTicket.baml
+C:\Users\DELL\source\Repos\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Pages\BookingsDetail.g.cs
+C:\Users\DELL\source\Repos\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Pages\BookingsDetail.baml
+C:\Users\DELL\source\Repos\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\View\BookingsUpdate.g.cs
+C:\Users\DELL\source\Repos\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\View\BookingsUpdate.baml
