@@ -157,6 +157,14 @@ namespace Quan_Ly_Ban_Ve_May_Bay
         private void btnMyBookings_Click(object sender, RoutedEventArgs e)
         {
             MyBookings myBookings = new MyBookings();
+            if (curAccount != null)
+            {
+                myBookings.MyTicket(curAccount.id);
+            }
+            else
+            {
+                myBookings.NoLogin();
+            }
             fContainer.Content = myBookings;
         }
     }

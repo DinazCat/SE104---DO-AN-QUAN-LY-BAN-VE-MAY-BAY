@@ -255,7 +255,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 sqlCommand.ExecuteNonQuery();
                 DataProvider.sqlConnection.Close();
 
-                SaveVe("BOOKED");
+                SaveVe("BOOKED",maHoaDonTxt.Text);
                 MessageBox.Show("Đặt vé thành công! \nVui lòng thanh toán hóa đơn trước khi chuyến bay xuất phát! \n" +
                     "Phiếu đặt chỗ sẽ bị hủy nếu không được thanh toán trước giờ bay!");
                 Finish();
@@ -280,18 +280,17 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 sqlCommand.Parameters.Add("@matk", SqlDbType.NVarChar).Value = maTKTTTxt.Text;
                 sqlCommand.ExecuteNonQuery();
                 DataProvider.sqlConnection.Close();
-                SaveVe("SOLD");
+                SaveVe("SOLD",maHoaDonTxt.Text);
                 MessageBox.Show("Thanh toán vé thành công!");
                 Finish();
             }
         }
 
-        private void SaveVe(String tinhtrang)
+        private void SaveVe(String tinhtrang, string mahd)
         {
             foreach (Ticket item in ve)
             {
                 DataProvider.sqlConnection.Open();
-                SqlDataAdapter adapter = new SqlDataAdapter();
                 SqlCommand sqlCommand = new SqlCommand(
                     "update [VE] set MaHK = @mahk, TenHK = @tenhk, CMND = @cmnd, SDT = @sdt, TinhTrang = @tt " +
                     "where MaVe = @mave", DataProvider.sqlConnection);
@@ -302,6 +301,15 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 sqlCommand.Parameters.Add("@mave", SqlDbType.NVarChar).Value = item.TiketID;
                 sqlCommand.Parameters.Add("@tt", SqlDbType.NVarChar).Value = tinhtrang;
                 sqlCommand.ExecuteNonQuery();
+                DataProvider.sqlConnection.Close();
+
+                DataProvider.sqlConnection.Open();
+                SqlCommand sql = new SqlCommand(
+                    "insert into [CTHD] values(@macthd, @mahd, @mave)", DataProvider.sqlConnection);
+                sql.Parameters.Add("@macthd", SqlDbType.NVarChar).Value = item.TiketID;
+                sql.Parameters.Add("@mahd", SqlDbType.NVarChar).Value = mahd;
+                sql.Parameters.Add("@mave", SqlDbType.NVarChar).Value = item.TiketID;
+                sql.ExecuteNonQuery();
                 DataProvider.sqlConnection.Close();
             }
         }
