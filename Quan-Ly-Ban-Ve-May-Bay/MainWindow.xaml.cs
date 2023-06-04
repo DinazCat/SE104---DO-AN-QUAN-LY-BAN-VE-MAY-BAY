@@ -33,6 +33,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
         public static Account curAccount = null;
         private AddInforHK addInforHK;
         private AllFlight allFlight;
+        private MyBookings myBookings;
         public MainWindow()
         {
             InitializeComponent();
@@ -251,6 +252,20 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             ContactUs contactUs = new ContactUs();
             fContainer.Content = contactUs;
 
+        }
+
+        private void btnMyBookings_Click(object sender, RoutedEventArgs e)
+        {
+            MyBookings myBookings = new MyBookings();
+            if (curAccount != null)
+            {
+                myBookings.MyTicket(curAccount.id);
+            }
+            else
+            {
+                myBookings.NoLogin();
+            }
+            fContainer.Content = myBookings;
         }
     }
 }
