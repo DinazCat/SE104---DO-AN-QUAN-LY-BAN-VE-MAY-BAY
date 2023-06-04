@@ -22,14 +22,15 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
     /// </summary>
     public partial class MyBookings : Page
     {
-        private BookingsDetail bookingsDetail;
+        BookingsDetail bookingsDetail;
+        BookingsUpdate bookingsUpdate;
         public MyBookings()
         {
             InitializeComponent();
             bookingsDetail = new BookingsDetail();
-            fTicket.Content = bookingsDetail;
-            BookingsUpdate bookingsUpdate = new BookingsUpdate();
-            bookingsUpdate.ShowDialog();
+            bookingsUpdate = new BookingsUpdate();
+            //fTicket.Content= bookingsDetail;
+            //bookingsUpdate.ShowDialog();
         }
     }
 }
