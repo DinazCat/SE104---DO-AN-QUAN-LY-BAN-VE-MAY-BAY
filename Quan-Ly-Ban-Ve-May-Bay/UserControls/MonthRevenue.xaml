@@ -14,20 +14,28 @@
             <RowDefinition/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <TextBlock Text="Tháng: " Foreground="#000000" TextAlignment="Center" FontSize="20" VerticalAlignment="Center"/>
-            <ComboBox Width="80" Margin="10" FontSize="18" VerticalAlignment="Center"
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="Tháng: " Foreground="#000000" TextAlignment="Center" FontSize="20" VerticalAlignment="Center"/>
+                <ComboBox Width="80" Margin="10" FontSize="18" VerticalAlignment="Center"
                       Background="#F5F5F5"
                       x:Name="cBoxMonth">
-            </ComboBox>
-            <TextBlock Text="Năm: " Foreground="#000000" TextAlignment="Center" FontSize="20" VerticalAlignment="Center" Margin="10 0 0 0"/>
-            <ComboBox Width="80" Margin="10" FontSize="18" VerticalAlignment="Center"
+                </ComboBox>
+                <TextBlock Text="Năm: " Foreground="#000000" TextAlignment="Center" FontSize="20" VerticalAlignment="Center" Margin="10 0 0 0"/>
+                <ComboBox Width="80" Margin="10" FontSize="18" VerticalAlignment="Center"
                       Background="#F5F5F5"
                       x:Name="cBoxYear">
-            </ComboBox>
-            <Button x:Name="bt_ok" Content="Ok" Background="White" Width="70" Margin="20 0 0 0"
+                </ComboBox>
+                <Button x:Name="bt_ok" Content="Ok" Background="White" Width="70" Margin="20 0 0 0"
                     Click="btOk_click"/>
-        </StackPanel>
+            </StackPanel>
+            <Button Grid.Column="1" x:Name="Excel" Content="Xuất Excel" Background="White" Width="100" 
+                    Click="Excel_Click"/>
+        </Grid>
         <DataGrid Grid.Row="1" x:Name="MonthRevenueTable">
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">

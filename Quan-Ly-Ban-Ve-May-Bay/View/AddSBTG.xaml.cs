@@ -93,6 +93,31 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             tenSB = SBTGcBox.Text;
             tgDung = thoigiandungTxb.Text;
             GhiChu = ghichuTxb.Text;
+            if (tenSB == "" || tgDung == "" || GhiChu=="")
+            {
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
+                return;
+            }
+            string s = "SELECT * From SANBAYTRUNGGIAN where MaChuyenBay = @ma";
+            SqlParameter par = new SqlParameter("@ma", maCB);
+            DataTable table;
+            using (SqlDataReader reader = DataProvider.ExecuteReader(s, CommandType.Text, par))
+            {
+                table = new DataTable();   
+                if (reader.HasRows)
+                {
+                    table.Load(reader);
+                    foreach (DataRow dr in table.Rows)
+                    {
+                        if (dr["SanBayTrungGian"].ToString() == tenSB)
+                        {
+                            MessageBox.Show("Sân bay trung gian đã có trong chuyến bay này.", "Dữ liệu không hợp lệ!");
+                            return;
+                        }    
+                    }    
+                      
+                }
+            }
             try
             {
                 int p = int.Parse(tgDung);
@@ -119,8 +144,11 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                     TGdungtoida = dr.Field<int>(1);
                 }
             }
-            if (int.Parse(tgDung) >= TGdungtoithieu && int.Parse(tgDung) <= TGdungtoida)
+            if (int.Parse(tgDung) < TGdungtoithieu || int.Parse(tgDung) > TGdungtoida)
             {
+                MessageBox.Show("Vui lòng nhập thời gian dừng phải phù hợp với thời gian dừng tối thiểu và tối đa đã định. ", "Dữ liệu không hợp lệ!");
+                return;
+            }
                 if (thaotac == 0)
                 {
                     string query = "SELECT * FROM SANBAYTRUNGGIAN where MaChuyenBay = @ma";
@@ -161,11 +189,11 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                     loadDatatoSBTG();
                     this.Close();
                 }
-            }
-            else
-            {
-                MessageBox.Show("Vui lòng nhập thời gian dừng phải phù hợp với thời gian dừng tối thiểu và tối đa đã định. ", "Dữ liệu không hợp lệ!");
-            }
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Vui lòng nhập thời gian dừng phải phù hợp với thời gian dừng tối thiểu và tối đa đã định. ", "Dữ liệu không hợp lệ!");
+            //}
         }
     }
 }

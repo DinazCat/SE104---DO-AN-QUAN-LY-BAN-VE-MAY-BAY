@@ -320,11 +320,15 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                     Random rd = new Random();
                     int ID = rd.Next(100000, 999999);
                     string mave = ID.ToString()+j.ToString();
-                    con.Open();
-                    SqlCommand cmd2 = new SqlCommand("Insert into [VE] values('" + mave + "', N'" + qLHangVeClass[i].Machuyenbay + "',N'" + "" + "',N'" + "" + "',N'" + "" + "',N'" + "" + "',N'" + "" + "',N'" + "TRONG" + "',N'" + qLHangVeClass[i].Mahangve + "'," + giave + ")", con);
-                    cmd2.CommandType = CommandType.Text;
-                    cmd2.ExecuteNonQuery();
-                    con.Close();
+                    try
+                    {
+                        con.Open();
+                        SqlCommand cmd2 = new SqlCommand("Insert into [VE] values('" + mave + "', N'" + qLHangVeClass[i].Machuyenbay + "',N'" + "" + "',N'" + "" + "',N'" + "" + "',N'" + "" + "',N'" + "" + "',N'" + "TRONG" + "',N'" + qLHangVeClass[i].Mahangve + "'," + giave + ")", con);
+                        cmd2.CommandType = CommandType.Text;
+                        cmd2.ExecuteNonQuery();
+                        con.Close();
+                    }
+                    catch (Exception ex) { Console.WriteLine(ex); }
                 }
 
             }
@@ -333,6 +337,24 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
         chuyenbayclass cb;
         private void Hoantat_Click(object sender, RoutedEventArgs e)
         {
+            DateTime? selectedDate = Ngaypicker.SelectedDate;
+            if (selectedDate.HasValue)
+            {
+                Ngay = selectedDate.Value.ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            }
+            MaCB = machuyenbayTxb.Text;
+            Sanbaydi = FromcBox.Text;
+            Sanbayden = TocBox.Text;
+            Gio = gioTxb.Text;
+            TgBay = TGbayTxb.Text;
+            Gia = GiaTxb.Text;
+            mahangMB = MaHcBox.Text;
+            loaiMB = loaimaybayTxb.Text;
+            if (machuyenbayTxb.Text == "" || gioTxb.Text == "" || TGbayTxb.Text ==""||GiaTxb.Text==""|| MaHcBox.Text==""|| loaimaybayTxb.Text==""||Ngay=="")
+            {
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
+                return;
+            }
             int ThoiGianBayToiThieu = 0;
             string q = "SELECT * FROM BANGTHAMSO";
             DataTable d;
@@ -347,19 +369,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 }
             }
 
-            DateTime? selectedDate = Ngaypicker.SelectedDate;
-            if (selectedDate.HasValue)
-            {
-                Ngay = selectedDate.Value.ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
-            }
-            MaCB = machuyenbayTxb.Text;
-            Sanbaydi = FromcBox.Text;
-            Sanbayden = TocBox.Text;
-            Gio = gioTxb.Text;
-            TgBay = TGbayTxb.Text;
-            Gia = GiaTxb.Text;
-            mahangMB = MaHcBox.Text;
-            loaiMB = loaimaybayTxb.Text;
             try
             {
                 int p1 = int.Parse(Gia);
@@ -378,9 +387,23 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 MessageBox.Show("Vui lòng nhập thời gian bay là một số nguyên.", "Dữ liệu không hợp lệ!");
                 return;
             }
-            if (int.Parse(TgBay) >= ThoiGianBayToiThieu)
+            if (int.Parse(TgBay) < ThoiGianBayToiThieu)
             {
-                if (thaotac == 0)
+                MessageBox.Show("Vui lòng nhập thời gian bay phải lớn hơn thời gian bay tối thiểu đã định. ", "Dữ liệu không hợp lệ!");
+                return;
+
+            }
+            string s = "SELECT * From CHUYENBAY WHERE MaChuyenBay = @ma";
+            SqlParameter p = new SqlParameter("@ma", machuyenbayTxb.Text);
+            using (SqlDataReader reader = DataProvider.ExecuteReader(s, CommandType.Text, p))
+            {
+                if (reader.HasRows)
+                {
+                    MessageBox.Show("Mã chuyến bay đã tồn tại. ", "Dữ liệu không hợp lệ!");
+                    return;
+                }
+            }
+            if (thaotac == 0)
                 {
                     string query = "SELECT * From CHUYENBAY";
                     SqlParameter param1 = new SqlParameter("", "");
@@ -437,11 +460,11 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                     loadDatatoTable();
                     this.Close();
                 }
-            }
-            else
-            {
-                MessageBox.Show("Vui lòng nhập thời gian bay phải lớn hơn thời gian bay tối thiểu đã định. ", "Dữ liệu không hợp lệ!");
-            }
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Vui lòng nhập thời gian bay phải lớn hơn thời gian bay tối thiểu đã định. ", "Dữ liệu không hợp lệ!");
+            //}
 
         }
     }

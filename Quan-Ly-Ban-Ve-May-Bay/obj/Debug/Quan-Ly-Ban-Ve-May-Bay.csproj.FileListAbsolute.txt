@@ -666,3 +666,7 @@ D:\a\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Quan-Ly-Ban-Ve-May-Bay.csproj
 D:\a\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Quan-Ly-Ban-Ve-May-Bay.csproj.CopyComplete
 D:\a\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Quan-Ly-Ban-Ve-May-Bay.exe
 D:\a\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Quan-Ly-Ban-Ve-May-Bay.pdb
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Pages\Setting.g.cs
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\View\ChangePassword.g.cs
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Pages\Setting.baml
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\View\ChangePassword.baml

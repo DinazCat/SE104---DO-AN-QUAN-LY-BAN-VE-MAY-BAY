@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -76,6 +77,21 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             MaSB = masanbayTxb.Text;
             TenSB = tensanbayTxb.Text;
             Tinh = tinhTxb.Text;
+            if (MaSB == "" || TenSB == "" || Tinh == "")
+            {
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
+                return;
+            }
+            string s = "SELECT * From SANBAY WHERE MaSanBay = @ma";
+            SqlParameter p = new SqlParameter("@ma", MaSB);
+            using (SqlDataReader reader = DataProvider.ExecuteReader(s, CommandType.Text, p))
+            {
+                if (reader.HasRows)
+                {
+                    MessageBox.Show("Mã sân bay đã tồn tại. ", "Dữ liệu không hợp lệ!");
+                    return;
+                }
+            }
             if (thaotac == 0)
             {
                 string query = "SELECT * FROM SANBAY";
