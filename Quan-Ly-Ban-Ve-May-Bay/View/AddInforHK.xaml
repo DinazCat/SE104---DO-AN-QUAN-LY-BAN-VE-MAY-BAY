@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:uc="clr-namespace:Quan_Ly_Ban_Ve_May_Bay.UserControls"
         WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
         Title="AddInforHK" Height="650" Width="1000">
     
     <Grid>
@@ -36,7 +37,7 @@
                 <TextBox x:Name="maHoaDonTxt" HorizontalAlignment="Stretch" Margin="180,0,0,0" TextDecorations="{x:Null}" Visibility="Visible" UndoLimit="99" IsEnabled="False" SelectionBrush="{x:Null}" BorderBrush="{x:Null}"/>
                 <TextBlock Text="Ngày lập: " Margin="60,0,0,0"/>
                 <TextBox x:Name="ngaylapHDTxt" HorizontalAlignment="Stretch" Margin="180,0,0,0" TextDecorations="{x:Null}" Visibility="Visible" UndoLimit="99" IsEnabled="False" SelectionBrush="{x:Null}" BorderBrush="{x:Null}"/>
-                <TextBlock Text="Mã tài khoản thanh toán: " Margin="60,0,0,0"/>
+                <TextBlock x:Name="tbl_MaTK" Text="Mã tài khoản thanh toán: " Margin="60,0,0,0"/>
                 <TextBox x:Name="maTKTTTxt" HorizontalAlignment="Stretch" Margin="180,0,0,0" TextDecorations="{x:Null}" Visibility="Visible" UndoLimit="99" IsEnabled="False" SelectionBrush="{x:Null}" BorderBrush="{x:Null}"/>
 
             </StackPanel>
@@ -122,15 +123,16 @@
                 <ColumnDefinition Width="583*"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.ColumnSpan="2">
-                <TextBlock Text="Thành tiền: " Margin="60,15,0,0"/>
-                <TextBox x:Name="tienTxt"  Text="0" HorizontalAlignment="Stretch" Margin="180,0,0,0" TextDecorations="{x:Null}" Visibility="Visible" UndoLimit="99" IsEnabled="False" SelectionBrush="{x:Null}" BorderBrush="{x:Null}"/>
+                <StackPanel Orientation="Horizontal" Margin="0 20 0 10">
+                    <TextBlock Text="Thành tiền: " Margin="60,0,0,0"/>
+                    <TextBox x:Name="tienTxt"  Text="0" HorizontalAlignment="Stretch" Margin="180,0,0,0" TextDecorations="{x:Null}" Visibility="Visible" UndoLimit="99" IsEnabled="False" SelectionBrush="{x:Null}" BorderBrush="{x:Null}"/>
+                </StackPanel>
                 <Grid Height="40">
                     <Button x:Name="btnTTSau"  Height="30" Width="150" Content="Thanh toán sau" Foreground="Black" FontSize="14" Background="#2E8B57"  Margin="800,5,50,0" Click="btnTTSau_Click"/>
                     <Button x:Name="btnTTNgay"  Height="30" Width="150" Content="Thanh toán ngay" Foreground="Black" FontSize="14" Background="#2E8B57"  Margin="580,5,270,0" Click="btnTTNgay_Click"/>
                 </Grid>
 
             </StackPanel>
-
         </Grid>
 
     </Grid>

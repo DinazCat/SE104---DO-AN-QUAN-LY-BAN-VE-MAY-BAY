@@ -32,6 +32,14 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
         public AddInforHK()
         {
             InitializeComponent();
+            if(MainWindow.curAccount != null) {
+                if (MainWindow.curAccount.type == 1 || MainWindow.curAccount.type == 2)
+                {
+                    tbl_MaTK.Text = "Mã nhân viên: ";
+                    btnTTNgay.Content = "Đã thanh toán";
+                    btnTTSau.Content = "Chưa thanh toán";
+                }
+            }           
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
