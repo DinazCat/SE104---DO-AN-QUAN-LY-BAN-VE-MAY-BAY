@@ -807,3 +807,7 @@ D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Pages\BookingsDetail.g.cs
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\View\BookingsUpdate.g.cs
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Pages\BookingsDetail.baml
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\View\BookingsUpdate.baml
+C:\Users\lethi\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Pages\BookingsDetail.g.cs
+C:\Users\lethi\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\View\BookingsUpdate.g.cs
+C:\Users\lethi\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Pages\BookingsDetail.baml
+C:\Users\lethi\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\View\BookingsUpdate.baml

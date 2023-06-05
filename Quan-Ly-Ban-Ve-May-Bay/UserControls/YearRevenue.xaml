@@ -29,7 +29,7 @@
                     Click="Excel_Click"/>
         </Grid>
        
-        <DataGrid Grid.Row="1" x:Name="YearRevenueTable">
+        <DataGrid Grid.Row="1" x:Name="YearRevenueTable" IsReadOnly="true">
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="Background" Value="#DDDDDD"/>

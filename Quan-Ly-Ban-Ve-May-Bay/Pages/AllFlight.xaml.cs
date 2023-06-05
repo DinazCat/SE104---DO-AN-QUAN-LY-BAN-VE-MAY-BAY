@@ -54,7 +54,8 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
                     string airportDestinationName = reader["SanBayDen"].ToString();
                     string ngayGioXuatPhat = reader["NgayKhoiHanh"].ToString() + " " + reader["ThoiGianXuatPhat"].ToString();
                     CultureInfo provider = CultureInfo.InvariantCulture;
-                    string format = "d/M/yyyy HH:mm";
+                    //string format = "d/M/yyyy HH:mm";
+                    string format = "dd/MM/yyyy HH:mm";
                     TimeSpan time = TimeSpan.FromMinutes(double.Parse(reader["ThoiGianDuKien"].ToString()));
 
                     DateTime dateTimeDeparture = DateTime.ParseExact(ngayGioXuatPhat, format, provider);
