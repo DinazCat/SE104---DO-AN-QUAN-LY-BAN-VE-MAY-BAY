@@ -252,19 +252,5 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             fContainer.Content = contactUs;
 
         }
-
-        private void btnMyBookings_Click(object sender, RoutedEventArgs e)
-        {
-            MyBookings myBookings = new MyBookings();
-            if (curAccount== null)
-            {
-                myBookings.NoLogin();
-            }
-            else
-            {
-                myBookings.MyTicket(curAccount.id);
-            }
-            fContainer.Content = myBookings;
-        }
     }
 }
