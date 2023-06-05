@@ -75,13 +75,9 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             {
                 DataProvider.sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand(
-                    "select [c].Gia, [hv].TyLe from [CHUYENBAY] [c], [HANGVE] [hv], [VE] [v] where [c].MaChuyenBay = @macb " +
-                    "and [v].MaChuyenBay = [c].MaChuyenBay " +
-                    "and [hv].MaHangVe = [v].MaHangVe " +
-                    "and [hv].MaHangVe=@maHangVe",
+                    "select [c].Gia from [CHUYENBAY] [c] where [c].MaChuyenBay = @macb",
                     DataProvider.sqlConnection);
                 sqlCommand.Parameters.Add("@macb", SqlDbType.NVarChar).Value = maChuyenBayTxt.Text;
-                sqlCommand.Parameters.Add("@maHangVe", SqlDbType.NVarChar).Value = item.FlightClass;
                 SqlDataReader reader = sqlCommand.ExecuteReader();
 
                 if (reader.HasRows)
@@ -89,8 +85,12 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                     if (reader.Read())
                     {
                         int dongia = int.Parse(reader["Gia"].ToString());
-                        double TyLe = double.Parse(reader["TyLe"].ToString());
-                        tien += (int)(dongia * TyLe / 100);
+                        if (item.FlightClass != "HV229365")
+                        {
+                            tien += (dongia * 105) / 100;
+                        }
+                        else
+                            tien += dongia;
                     }
                 }
                 DataProvider.sqlConnection.Close();
@@ -220,13 +220,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             TienVe();
         }
 
-        private void cmndTxt_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            Regex regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
-        }
-
-        private void sdtTxt_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void Number_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
@@ -269,7 +263,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
 
                 SaveVe("BOOKED");
                 SaveCTHD();
-                Finish();
                 //go to home screen in MainWindow
                 MessageBoxResult result = MessageBox.Show("Đặt vé thành công! \nVui lòng thanh toán hóa đơn trước khi chuyến bay xuất phát! \n" +
                     "Phiếu đặt chỗ sẽ bị hủy nếu không được thanh toán trước giờ bay!");
@@ -302,7 +295,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 SaveVe("SOLD");
                 SaveCTHD();
                 MessageBoxResult result = MessageBox.Show("Thanh toán vé thành công!");
-                Finish();
+                
                 //go to home screen in MainWindow
                 if (result == MessageBoxResult.OK)
                 {
@@ -331,6 +324,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 DataProvider.sqlConnection.Close();
             }
         }
+
         private void SaveCTHD()
         {
             SqlCommand _sqlCommand = new SqlCommand(
@@ -355,9 +349,5 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             }
         }
 
-        private void Finish()
-        {
-            
-        }
     }
 }
