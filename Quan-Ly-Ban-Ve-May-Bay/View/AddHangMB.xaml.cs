@@ -73,19 +73,22 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
         {
             mahang = mahangTxb.Text;
             tenhang = tenhangTxb.Text;
-            if(mahang == ""||tenhang=="")
+            if (mahang == "" || tenhang == "")
             {
                 MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
                 return;
             }
-            string s = "SELECT * From HANGMAYBAY WHERE MaHang = @ma";
-            SqlParameter p = new SqlParameter("@ma", mahang);
-            using (SqlDataReader reader = DataProvider.ExecuteReader(s, CommandType.Text, p))
+            if (thaotac == 0)
             {
-                if (reader.HasRows)
+                string s = "SELECT * From HANGMAYBAY WHERE MaHang = @ma";
+                SqlParameter p = new SqlParameter("@ma", mahang);
+                using (SqlDataReader reader = DataProvider.ExecuteReader(s, CommandType.Text, p))
                 {
-                    MessageBox.Show("Mã hãng đã tồn tại. ", "Dữ liệu không hợp lệ!");
-                    return;
+                    if (reader.HasRows)
+                    {
+                        MessageBox.Show("Mã hãng đã tồn tại. ", "Dữ liệu không hợp lệ!");
+                        return;
+                    }
                 }
             }
             if (thaotac == 0)
@@ -107,8 +110,11 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 hb.mahang = mahang;
                 hangmbtable.Items.Add(hb);
                 SqlConnection con = DataProvider.sqlConnection;
-                con.Open();
-                SqlCommand cmd = new SqlCommand("Insert into HANGMAYBAY values('" + mahang + "',N'" + tenhang + "')", con);
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+                SqlCommand cmd = new SqlCommand("Insert into HANGMAYBAY values('" + mahang + "',N'" + tenhang + "',N'" + "" + "')", con);
                 cmd.CommandType = CommandType.Text;
                 cmd.ExecuteNonQuery();
                 con.Close();
@@ -118,7 +124,10 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             else
             {
                 SqlConnection con = DataProvider.sqlConnection;
-                con.Open();
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
                 SqlCommand cmd = new SqlCommand("Update [HANGMAYBAY] set MaHang='" + mahang + "',TenHang='" + tenhang + "' where MaHang='" + Hangmaybay.hangbaytofix.mahang + "'", con);
                 cmd.CommandType = CommandType.Text;
                 cmd.ExecuteNonQuery();

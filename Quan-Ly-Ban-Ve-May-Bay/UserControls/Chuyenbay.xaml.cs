@@ -58,7 +58,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
                 cb.maCB = dr["MaChuyenBay"].ToString();
                 cb.SBdi = dr["SanBayDi"].ToString();
                 cb.SBden = dr["SanBayDen"].ToString();
-                cb.datetime = dr["NgayKhoiHanh"].ToString() +"-"+ dr["ThoiGianXuatPhat"].ToString();
+                cb.datetime = dr["NgayKhoiHanh"].ToString() + "-" + dr["ThoiGianXuatPhat"].ToString();
                 cb.tgBay = dr["ThoiGianDuKien"].ToString();
                 cb.Gia = dr["Gia"].ToString();
                 CBTable.Items.Add(cb);
@@ -93,26 +93,60 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
         private void Xoa_Click(object sender, RoutedEventArgs e)
         {
             chuyenbayclass info = CBTable.SelectedItem as chuyenbayclass;
+            Boolean flag = false;
+            string query = "SELECT * From VE where MaChuyenBay = @ma";
+            SqlParameter param1 = new SqlParameter("@ma", info.maCB);
+            DataTable table;
+            using (SqlDataReader reader = DataProvider.ExecuteReader(query, CommandType.Text, param1))
+            {
+                table = new DataTable();
+                if (reader.HasRows)
+                {
+                    table.Load(reader);
+
+                }
+                foreach (DataRow dr in table.Rows)
+                {
+                    if (dr["TinhTrang"].ToString() != "TRONG") flag = true;
+                }
+            }
+            if (flag == true)
+            {
+                MessageBox.Show("Chuyến bay đã được đưa vào sử dụng, không thể xóa.", "Thông báo");
+                return;
+            }
             SqlConnection con = DataProvider.sqlConnection;
-            con.Open();
+            if (con.State == ConnectionState.Closed)
+            {
+                con.Open();
+            }
             SqlCommand cmd2 = new SqlCommand("Delete from  SANBAYTRUNGGIAN where MaChuyenBay=N'" + info.maCB + "'", con);
             cmd2.CommandType = CommandType.Text;
             cmd2.ExecuteReader();
             con.Close();
 
-            con.Open();
+            if (con.State == ConnectionState.Closed)
+            {
+                con.Open();
+            }
             SqlCommand cmd3 = new SqlCommand("Delete from VE where  MaChuyenBay=N'" + info.maCB + "'", con);
             cmd3.CommandType = CommandType.Text;
             cmd3.ExecuteReader();
             con.Close();
 
-            con.Open();
+            if (con.State == ConnectionState.Closed)
+            {
+                con.Open();
+            }
             SqlCommand cmd1 = new SqlCommand("Delete from QuanLyHangVeChuyenBay where  MaChuyenBay=N'" + info.maCB + "'", con);
             cmd1.CommandType = CommandType.Text;
             cmd1.ExecuteReader();
             con.Close();
 
-            con.Open();
+            if (con.State == ConnectionState.Closed)
+            {
+                con.Open();
+            }
             SqlCommand cmd = new SqlCommand("Delete from CHUYENBAY where MaChuyenBay=N'" + info.maCB + "'", con);
             cmd.CommandType = CommandType.Text;
             cmd.ExecuteReader();

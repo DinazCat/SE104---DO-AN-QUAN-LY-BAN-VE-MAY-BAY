@@ -82,14 +82,17 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
                 return;
             }
-            string s = "SELECT * From SANBAY WHERE MaSanBay = @ma";
-            SqlParameter p = new SqlParameter("@ma", MaSB);
-            using (SqlDataReader reader = DataProvider.ExecuteReader(s, CommandType.Text, p))
+            if (thaotac == 0)
             {
-                if (reader.HasRows)
+                string s = "SELECT * From SANBAY WHERE MaSanBay = @ma";
+                SqlParameter p = new SqlParameter("@ma", MaSB);
+                using (SqlDataReader reader = DataProvider.ExecuteReader(s, CommandType.Text, p))
                 {
-                    MessageBox.Show("Mã sân bay đã tồn tại. ", "Dữ liệu không hợp lệ!");
-                    return;
+                    if (reader.HasRows)
+                    {
+                        MessageBox.Show("Mã sân bay đã tồn tại. ", "Dữ liệu không hợp lệ!");
+                        return;
+                    }
                 }
             }
             if (thaotac == 0)
@@ -113,7 +116,10 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 SanbayDataGrid.Items.Add(sb);
 
                 SqlConnection con = DataProvider.sqlConnection;
-                con.Open();
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
                 SqlCommand cmd = new SqlCommand("Insert into [SANBAY] values('" + MaSB + "',N'" + TenSB + "', N'" + Tinh + "')", con);
                 cmd.CommandType = CommandType.Text;
                 cmd.ExecuteNonQuery();
@@ -125,7 +131,10 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             else
             {
                 SqlConnection con = DataProvider.sqlConnection;
-                con.Open();
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
                 SqlCommand cmd = new SqlCommand("Update [SANBAY] set MaSanBay='" + MaSB + "', TenSanBay='" + TenSB + "', Tinh='" + Tinh + "' where MaSanBay='" + Sanbay.sanbaytofix.maSB + "'", con);
                 cmd.CommandType = CommandType.Text;
                 cmd.ExecuteNonQuery();

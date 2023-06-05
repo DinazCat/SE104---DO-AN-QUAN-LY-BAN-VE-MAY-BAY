@@ -80,7 +80,10 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
             try
             {
                 SqlConnection con = DataProvider.sqlConnection;
-                con.Open();
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
                 SqlCommand cmd = new SqlCommand("Delete from HANGMAYBAY where MaHang=N'" + info.mahang + "'", con);
                 cmd.CommandType = CommandType.Text;
                 cmd.ExecuteReader();

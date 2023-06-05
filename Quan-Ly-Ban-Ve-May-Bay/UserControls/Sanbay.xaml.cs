@@ -83,7 +83,10 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
         {
             sanbayclass info = SBTable.SelectedItem as sanbayclass;
             SqlConnection con = DataProvider.sqlConnection;
-            con.Open();
+            if (con.State == ConnectionState.Closed)
+            {
+                con.Open();
+            }
             SqlCommand cmd = new SqlCommand("Delete from SANBAY where MaSanBay=N'" + info.maSB + "'", con);
             cmd.CommandType = CommandType.Text;
             cmd.ExecuteReader();

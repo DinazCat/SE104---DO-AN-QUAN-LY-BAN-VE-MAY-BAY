@@ -53,14 +53,64 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
         {
             QLHangVeClass hv = (sender as ComboBox).DataContext as QLHangVeClass;
             if (hv != null)
+            {
                 hv.Mahangve = (sender as ComboBox).SelectedItem as string;
+            }
         }
 
         private void SLcBox_DropDownClosed(object sender, EventArgs e)
         {
             QLHangVeClass hv = (sender as ComboBox).DataContext as QLHangVeClass;
             if (hv != null)
+            {
                 hv.Soluong = (sender as ComboBox).SelectedItem as string;
+            }
+        }
+
+        private void maHVcBox_DropDownOpened(object sender, EventArgs e)
+        {
+            QLHangVeClass hv = (sender as ComboBox).DataContext as QLHangVeClass;
+            if (hv.Machuyenbay != null && hv.Mahangve != null)
+            {
+                string query = "SELECT * From VE where MaChuyenBay = @ma and MaHangVe = @mah";
+                SqlParameter param1 = new SqlParameter("@ma", hv.Machuyenbay);
+                SqlParameter param2 = new SqlParameter("@mah", hv.Mahangve);
+                DataTable table;
+                using (SqlDataReader reader = DataProvider.ExecuteReader(query, CommandType.Text, param1, param2))
+                {
+                    table = new DataTable();
+                    if (reader.HasRows)
+                    {
+                        MessageBox.Show("Không thể sửa hạng vé này.", "Thông báo");
+
+                        return;
+
+                    }
+                }
+            }
+        }
+
+        private void SLcBox_DropDownOpened(object sender, EventArgs e)
+        {
+            QLHangVeClass hv = (sender as ComboBox).DataContext as QLHangVeClass;
+            if (hv.Machuyenbay != null && hv.Mahangve != null)
+            {
+                string query = "SELECT * From VE where MaChuyenBay = @ma and MaHangVe = @mah";
+                SqlParameter param1 = new SqlParameter("@ma", hv.Machuyenbay);
+                SqlParameter param2 = new SqlParameter("@mah", hv.Mahangve);
+                DataTable table;
+                using (SqlDataReader reader = DataProvider.ExecuteReader(query, CommandType.Text, param1, param2))
+                {
+                    table = new DataTable();
+                    if (reader.HasRows)
+                    {
+                        MessageBox.Show("Không thể sửa hạng vé này.", "Thông báo");
+
+                        return;
+
+                    }
+                }
+            }
         }
     }
 }
