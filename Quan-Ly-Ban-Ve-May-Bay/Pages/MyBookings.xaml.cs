@@ -26,13 +26,12 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
     public partial class MyBookings : Page
     {
         BookingsDetail bookingsDetail;
-        BookingsUpdate bookingsUpdate;
+        public event RoutedEventHandler Pay;
         string user_id;
         public MyBookings()
         {
             InitializeComponent();
             addSearchOptions();
-            bookingsUpdate = new BookingsUpdate();
             //bookingsUpdate.ReturnBookings += UpdateInForHK;
         }
 
@@ -52,7 +51,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
                         "[v].MaVe = [ct].MaVe and " +
                         "[v].MaChuyenBay = [cb].MaChuyenBay and " +
                         "[hv].MaHangVe = [v].MaHangVe and " +
-                        "[hd].MaTK = @userID " +
+                        "[hd].MaTK = @userID and [v].TenHK is not NULL " +
                 "order by [v].MaVe DESC", DataProvider.sqlConnection);
             sqlCommand.Parameters.Add("@userID", SqlDbType.NVarChar).Value = userID;
             SqlDataReader reader = sqlCommand.ExecuteReader();
@@ -80,8 +79,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
                 StatusBookings.Text = "Không có lịch sử đặt vé";
             }
             else StatusBookings.Text = "Vui lòng nhấn vào vé để xem thông tin vé!";
-
-
         }
 
         public void NoLogin()
@@ -100,19 +97,20 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
             SymbolTicket ticket = (SymbolTicket)lvTicket.SelectedItem;
             if (ticket != null)
             {
-                bookingsDetail.ShowDetail(ticket.MaVe);
+                bookingsDetail.ShowDetail(ticket.MaVe,user_id);
                 fTicket.Content = bookingsDetail;
             }
+
+            Pay?.Invoke(this, new RoutedEventArgs());
         }
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
-
             DataProvider.sqlConnection.Open();
             string sql = "select distinct [cb].MaChuyenBay, [ct].MaHD, [v].MaVe, [v].TenHK, [v].SoGhe, [hv].TenHangVe, " +
                                  "[cb].SanBayDi, [cb].SanBayDen,[cb].NgayKhoiHanh, [cb].ThoiGianXuatPhat " +
                          "from [HOADON] [hd], [VE] [v], [CTHD] [ct], [CHUYENBAY] [cb], [HANGVE] [hv], " +
-                         "     [SANBAY] [sbdi], [SANBAY] [sbden] " +
+                                "[SANBAY] [sbdi], [SANBAY] [sbden] " +
                          "where  [hd].MaHD = [ct].MaHD and " +
                                  "[v].MaVe = [ct].MaVe and " +
                                  "[v].MaChuyenBay = [cb].MaChuyenBay and " +
@@ -120,11 +118,11 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
                                  "[hd].MaTK = @userID";
             if (tuSearchTxt.SelectedIndex != -1)
             {
-                sql += " and [cb].SanBayDi = [sbdi].MaSanBay and [sbdi].Tinh = '" + tuSearchTxt.SelectedItem + "'";
+                sql += " and [cb].SanBayDi = [sbdi].MaSanBay and [sbdi].Tinh = N'" + tuSearchTxt.SelectedItem + "'";
             }
             if (denSearchTxt.Text != "")
             {
-                sql += " and [cb].SanBayDen = [sbden].MaSanBay and [sbden].Tinh = '" + denSearchTxt.SelectedItem + "'";
+                sql += " and [cb].SanBayDen = [sbden].MaSanBay and [sbden].Tinh = N'" + denSearchTxt.SelectedItem + "'";
             }
             if (ngaySearchBox.Text != "")
             {
@@ -132,7 +130,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
             }
             if (hangveSearchBox.Text != "")
             {
-                sql += " and [hv].TenHangVe = '" + hangveSearchBox.SelectedItem + "'";
+                sql += " and [hv].TenHangVe = N'" + hangveSearchBox.SelectedItem + "'";
             }
             sql += " order by [v].MaVe DESC";
             SqlCommand sqlCommand = new SqlCommand(sql, DataProvider.sqlConnection);

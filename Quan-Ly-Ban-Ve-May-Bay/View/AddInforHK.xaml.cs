@@ -55,17 +55,49 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             }
             else
             {
-                foreach (Ticket item in ve)
+                if (!CheckCMND())
                 {
-                    if (item.TiketID == maVeBox.SelectedItem.ToString())
+                    MessageBox.Show("Thông tin hành khách không hợp lệ.\nCMND đã được đăng ký cho một vé khác\nVui lòng kiểm tra và sửa đổi thông tin hành khách!");
+                }
+                else
+                {
+
+                    foreach (Ticket item in ve)
                     {
-                        item.HkID = maHanhKhachText.Text;
-                        item.HkName = tenHanhKhachTxt.Text;
-                        item.CMND = cmndTxt.Text;
-                        item.PhoneNumber = sdtTxt.Text;
+                        if (item.TiketID == maVeBox.SelectedItem.ToString())
+                        {
+                            item.HkID = maHanhKhachText.Text;
+                            item.HkName = tenHanhKhachTxt.Text;
+                            item.CMND = cmndTxt.Text;
+                            item.PhoneNumber = sdtTxt.Text;
+                        }
                     }
                 }
             }
+        }
+
+        private bool CheckCMND()
+        {
+            bool check = true;
+            DataProvider.sqlConnection.Open();
+            SqlCommand sqlCommand = new SqlCommand(
+                "select [v].CMND from [VE] [v] where [v].CMND = @cmnd ", DataProvider.sqlConnection);
+            sqlCommand.Parameters.Add("@cmnd", SqlDbType.NVarChar).Value = cmndTxt.Text;
+            SqlDataReader reader = sqlCommand.ExecuteReader();
+            if (reader.HasRows)
+            {
+                check = false;
+            }
+            DataProvider.sqlConnection.Close();
+            
+            foreach(Ticket ticket in ve)
+            {
+                if (ticket.CMND == cmndTxt.Text)
+                {
+                    check = false;
+                }
+            }
+            return check;
         }
 
         private void TienVe()
@@ -78,10 +110,10 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                     "select [c].Gia, [hv].TyLe from [CHUYENBAY] [c], [HANGVE] [hv], [VE] [v] where [c].MaChuyenBay = @macb " +
                     "and [v].MaChuyenBay = [c].MaChuyenBay " +
                     "and [hv].MaHangVe = [v].MaHangVe " +
-                    "and [hv].MaHangVe=@maHangVe",
+                    "and [hv].TenHangVe=@tenHangVe",
                     DataProvider.sqlConnection);
                 sqlCommand.Parameters.Add("@macb", SqlDbType.NVarChar).Value = maChuyenBayTxt.Text;
-                sqlCommand.Parameters.Add("@maHangVe", SqlDbType.NVarChar).Value = item.FlightClass;
+                sqlCommand.Parameters.Add("@tenHangVe", SqlDbType.NVarChar).Value = item.FlightClass;
                 SqlDataReader reader = sqlCommand.ExecuteReader();
 
                 if (reader.HasRows)
@@ -111,12 +143,13 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                     cmndTxt.Text = item.CMND;
                     sdtTxt.Text = item.PhoneNumber;
                     soGheTxt.Text = item.SeatNumber.ToString();
-                    maHangVeTxt.Text = item.FlightClass;
+                    hangVeTxt.Text = item.FlightClass;
+                    maHanhKhachText.Text = item.HkID;
                 }
             }
         }
 
-        private void NewHD_NewHK()
+        private void NewHD()
         {
             DataProvider.sqlConnection.Open();
             SqlCommand sqlCommand = new SqlCommand("select [h].* from HOADON [h] order by MaHD desc", DataProvider.sqlConnection);
@@ -129,22 +162,29 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                     maHoaDonTxt.Text = mahd.ToString();
                 }
             }
-            else maHoaDonTxt.Text = "100";
+            else maHoaDonTxt.Text = "1";
             DataProvider.sqlConnection.Close();
+                        
+        }
 
+        private int NewHK_ID()
+        {
+            int newID = 1;
             DataProvider.sqlConnection.Open();
-            sqlCommand = new SqlCommand("select [v].* from VE [v] order by MaHK desc", DataProvider.sqlConnection);
-            reader = sqlCommand.ExecuteReader();
-            if (reader.Read())
+            SqlCommand sqlCommand = new SqlCommand("select [v].* from VE [v] order by MaHK desc", DataProvider.sqlConnection);
+            SqlDataReader reader = sqlCommand.ExecuteReader();
+            if (reader.HasRows)
             {
-                if (reader["MaHK"].ToString() != "")
+                if (reader.Read())
                 {
-                    int mahk = int.Parse(reader["MaHK"].ToString()) + 1;
-                    maHanhKhachText.Text = mahk.ToString();
+                    if (reader["MaHK"].ToString() != "")
+                    {
+                        newID = int.Parse(reader["MaHK"].ToString()) + 1;
+                    }
                 }
-                else maHanhKhachText.Text = "100";
             }
             DataProvider.sqlConnection.Close();
+            return newID;
         }
         private void veLV_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -155,16 +195,18 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 cmndTxt.Text = item.CMND;
                 sdtTxt.Text = item.PhoneNumber;
                 soGheTxt.Text = item.SeatNumber.ToString();
-                maHangVeTxt.Text = item.FlightClass;
+                hangVeTxt.Text = item.FlightClass;
                 maVeBox.SelectedItem = item.TiketID;
+                maHanhKhachText.Text = item.HkID;
             }
         }
 
         public void Show(string macb, List<string> list, string userID)
         {
-            NewHD_NewHK();
+            NewHD();
+            int newHK = NewHK_ID();
             ngayHD = DateTime.Now;
-            ngaylapHDTxt.Text = ngayHD.ToString("dd/MM/yyyy h:mm");
+            ngaylapHDTxt.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
             maTKTTTxt.Text = userID;
             maVeBox.ItemsSource = list;
             maChuyenBayTxt.Text = macb;
@@ -172,7 +214,8 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             foreach (string mave in list)
             {
                 DataProvider.sqlConnection.Open();
-                SqlCommand sqlCommand = new SqlCommand(" select [v].* from [VE] [v] where [v].MaVe = @mave",
+                SqlCommand sqlCommand = new SqlCommand(
+                    "select [v].*, [hv].TenHangVe from [VE] [v], [HANGVE] [hv] where [v].MaVe = @mave and [hv].MaHangVe = [v].MaHangVe",
                     DataProvider.sqlConnection);
                 sqlCommand.Parameters.Add("@mave", SqlDbType.NVarChar).Value = mave;
                 SqlDataReader reader = sqlCommand.ExecuteReader();
@@ -183,14 +226,21 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                     {
                         string mv = reader["MaVe"].ToString();
                         int sg = int.Parse(reader["SoGhe"].ToString());
-                        string mhv = reader["MaHangVe"].ToString();
+                        string mhv = reader["TenHangVe"].ToString();
                         string tt = reader["TinhTrang"].ToString();
-                        string mhk = reader["MaHK"].ToString();
                         string thk = reader["TenHK"].ToString();
                         string cmnd = reader["CMND"].ToString();
                         string sdt = reader["SDT"].ToString();
-                        ticket = new Ticket(mv, mhv, sg, tt, mhk, thk, cmnd, sdt);
+                        ticket = new Ticket(mv, mhv, sg, tt, "", thk, cmnd, sdt);
                     }
+                }
+                if (ve.Count == 0)
+                {
+                    ticket.HkID = newHK.ToString();
+                }
+                else
+                {
+                    ticket.HkID = (++newHK).ToString();
                 }
                 ve.Add(ticket);
                 DataProvider.sqlConnection.Close();
@@ -200,8 +250,9 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
 
             DataProvider.sqlConnection.Open();
             SqlCommand sqlcommand = new SqlCommand(
-                " select [c].SanBayDi, [c].SanBayDen, [c].NgayKhoiHanh, [c].ThoiGianXuatPhat " +
-                "from [CHUYENBAY] [c] where [c].MaChuyenBay = @macb",
+                " select [s1].TenSanBay sbDi, [s2].TenSanBay sbDen, [c].NgayKhoiHanh, [c].ThoiGianXuatPhat " +
+                "from [CHUYENBAY] [c], [SANBAY] [s1], [SANBAY] [s2] " +
+                "where [c].MaChuyenBay = @macb and [s1].MaSanBay = [c].SanBayDi and [s2].MaSanBay = [c].SanBayDen",
                 DataProvider.sqlConnection);
             sqlcommand.Parameters.Add("@macb", SqlDbType.NVarChar).Value = macb;
             SqlDataReader rd = sqlcommand.ExecuteReader();
@@ -209,9 +260,9 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             {
                 if (rd.Read())
                 {
-                    tuTxt.Text = rd["SanBayDi"].ToString();
-                    denTxt.Text = rd["SanBayDen"].ToString();
-                    ngayGiotxt.Text = rd["ThoiGianXuatPhat"].ToString() + " " + rd["NgayKhoiHanh"].ToString();
+                    tuTxt.Text = rd["sbDi"].ToString();
+                    denTxt.Text = rd["sbDen"].ToString();
+                    ngayGiotxt.Text = rd["NgayKhoiHanh"].ToString() + " " + rd["ThoiGianXuatPhat"].ToString();
                 }
             }            
             DataProvider.sqlConnection.Close();
@@ -256,27 +307,31 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             }
             else
             {
-                DataProvider.sqlConnection.Open();
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                SqlCommand sqlCommand = new SqlCommand(
-                    "insert into [HOADON] values (@mahd, @ngay, @tien, 'UNPAID', @matk)", DataProvider.sqlConnection);
-                sqlCommand.Parameters.Add("@mahd", SqlDbType.NVarChar).Value = maHoaDonTxt.Text;
-                sqlCommand.Parameters.Add("@ngay", SqlDbType.DateTime).Value = ngayHD;
-                sqlCommand.Parameters.Add("@tien", SqlDbType.Int).Value = int.Parse(tienTxt.Text.ToString());
-                sqlCommand.Parameters.Add("@matk", SqlDbType.NVarChar).Value = maTKTTTxt.Text;
-                sqlCommand.ExecuteNonQuery();
-                DataProvider.sqlConnection.Close();
+                MessageBoxResult result = MessageBox.Show("Bạn có chắc chắn muốn đặt vé?", "", MessageBoxButton.YesNo);
 
-                SaveVe("BOOKED");
-                SaveCTHD();
-                Finish();
-                //go to home screen in MainWindow
-                MessageBoxResult result = MessageBox.Show("Đặt vé thành công! \nVui lòng thanh toán hóa đơn trước khi chuyến bay xuất phát! \n" +
-                    "Phiếu đặt chỗ sẽ bị hủy nếu không được thanh toán trước giờ bay!");
-                if (result == MessageBoxResult.OK)
+                if (result == MessageBoxResult.Yes)
                 {
-                    GoToHomeScreen?.Invoke(this, new RoutedEventArgs());
-                    this.Close();
+                    DataProvider.sqlConnection.Open();
+                    SqlCommand sqlCommand = new SqlCommand(
+                        "insert into [HOADON] values (@mahd, @ngay, @tien, 'UNPAID', @matk)", DataProvider.sqlConnection);
+                    sqlCommand.Parameters.Add("@mahd", SqlDbType.NVarChar).Value = maHoaDonTxt.Text;
+                    sqlCommand.Parameters.Add("@ngay", SqlDbType.DateTime).Value = ngayHD;
+                    sqlCommand.Parameters.Add("@tien", SqlDbType.Int).Value = int.Parse(tienTxt.Text.ToString());
+                    sqlCommand.Parameters.Add("@matk", SqlDbType.NVarChar).Value = maTKTTTxt.Text;
+                    sqlCommand.ExecuteNonQuery();
+                    DataProvider.sqlConnection.Close();
+
+                    SaveVe("BOOKED");
+                    SaveCTHD();
+
+                    //go to home screen in MainWindow
+                    result = MessageBox.Show("Đặt vé thành công! \nVui lòng thanh toán hóa đơn trước khi chuyến bay xuất phát! \n" +
+                        "Phiếu đặt chỗ sẽ bị hủy nếu không được thanh toán trước giờ bay 24 giờ!");
+                    if (result == MessageBoxResult.OK)
+                    {
+                        GoToHomeScreen?.Invoke(this, new RoutedEventArgs());
+                        this.Close();
+                    }
                 }
             }
         }
@@ -289,26 +344,35 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             }
             else
             {
-                DataProvider.sqlConnection.Open();
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                SqlCommand sqlCommand = new SqlCommand(
-                    "insert into [HOADON] values (@mahd, @ngay, @tien, 'PAID', @matk)", DataProvider.sqlConnection);
-                sqlCommand.Parameters.Add("@mahd", SqlDbType.NVarChar).Value = maHoaDonTxt.Text;
-                sqlCommand.Parameters.Add("@ngay", SqlDbType.DateTime).Value = ngayHD;
-                sqlCommand.Parameters.Add("@tien", SqlDbType.Int).Value = int.Parse(tienTxt.Text.ToString());
-                sqlCommand.Parameters.Add("@matk", SqlDbType.NVarChar).Value = maTKTTTxt.Text;
-                sqlCommand.ExecuteNonQuery();
-                DataProvider.sqlConnection.Close();
-                SaveVe("SOLD");
-                SaveCTHD();
-                MessageBoxResult result = MessageBox.Show("Thanh toán vé thành công!");
-                Finish();
-                //go to home screen in MainWindow
-                if (result == MessageBoxResult.OK)
+                MessageBoxResult result = MessageBox.Show("Bạn có chắc chắn muốn thanh toán?","",MessageBoxButton.YesNo);
+
+                if (result == MessageBoxResult.Yes)
                 {
-                    GoToHomeScreen?.Invoke(this, new RoutedEventArgs());
-                    this.Close();
+                    DataProvider.sqlConnection.Open();
+                    SqlCommand sqlCommand = new SqlCommand(
+                        "insert into [HOADON] values (@mahd, @ngay, @tien, 'PAID', @matk)", DataProvider.sqlConnection);
+                    sqlCommand.Parameters.Add("@mahd", SqlDbType.NVarChar).Value = maHoaDonTxt.Text;
+                    sqlCommand.Parameters.Add("@ngay", SqlDbType.DateTime).Value = ngayHD;
+                    sqlCommand.Parameters.Add("@tien", SqlDbType.Int).Value = int.Parse(tienTxt.Text.ToString());
+                    sqlCommand.Parameters.Add("@matk", SqlDbType.NVarChar).Value = maTKTTTxt.Text;
+                    sqlCommand.ExecuteNonQuery();
+                    DataProvider.sqlConnection.Close();
+                    SaveVe("SOLD");
+                    SaveCTHD();
+                    result = MessageBox.Show("Thanh toán vé thành công!");
+
+                    //go to home screen in MainWindow
+                    if (result == MessageBoxResult.OK)
+                    {
+                        GoToHomeScreen?.Invoke(this, new RoutedEventArgs());
+                        this.Close();
+                    }
                 }
+                else
+                {
+
+                }
+                
             }
         }
 
@@ -353,11 +417,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 sqlCommand.ExecuteNonQuery();
                 DataProvider.sqlConnection.Close();
             }
-        }
-
-        private void Finish()
-        {
-            
         }
     }
 }

@@ -59,6 +59,9 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             ClassesColor.ItemsSource = flight_classes;
 
         }
+
+        //used in timer
+        public string airline_logo;
         //show detail
         public void Show(string flightID, string airlineLogo, TimeSpan time, DateTime dateTimeDestination, DateTime dateTimeDeparture, bool _isAllFlight)
         {
@@ -67,6 +70,9 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             sp_timeDeparture.DataContext = dateTimeDeparture;
             sp_timeDestination.DataContext = dateTimeDestination;
             tb_Time.DataContext = time;
+
+            //used in timer
+            airline_logo = airlineLogo;
 
             ImageSource imgSource = new BitmapImage(new Uri(airlineLogo, UriKind.Relative));
             image_Logo.Source = imgSource;

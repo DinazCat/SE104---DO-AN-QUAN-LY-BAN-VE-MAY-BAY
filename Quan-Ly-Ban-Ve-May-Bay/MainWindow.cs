@@ -21,6 +21,8 @@ using Quan_Ly_Ban_Ve_May_Bay.View;
 using Quan_Ly_Ban_Ve_May_Bay.UserControls;
 using Quan_Ly_Ban_Ve_May_Bay.Model;
 using System.Windows.Threading;
+using System.Globalization;
+
 namespace Quan_Ly_Ban_Ve_May_Bay
 {
 
@@ -33,12 +35,13 @@ namespace Quan_Ly_Ban_Ve_May_Bay
         public static Account curAccount = null;
         private AddInforHK addInforHK;
         private AllFlight allFlight;
+        private MyBookings myBookings;
         public MainWindow()
         {
             InitializeComponent();
             //hủy vé tự động
             dispatcherTimer.Tick += DispatcherTimer_Tick;
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 5);
             dispatcherTimer.Start();
 
             //main code
@@ -59,30 +62,72 @@ namespace Quan_Ly_Ban_Ve_May_Bay
 
         private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
-            //DataProvider.sqlConnection.Open();
-            //SqlCommand sqlCommand = new SqlCommand(
-            // "select * from [HOADON] where " +
-            // " ",
-            //DataProvider.sqlConnection);
-            //sqlCommand.Parameters.Add("@flightID", SqlDbType.NVarChar).Value = flightID;
-            //SqlDataReader reader = sqlCommand.ExecuteReader();
-            //string[] flight = new string[8];
-            //if (reader.HasRows)
-            //{
-            //    if (reader.Read())
-            //    {
-            //        string airlineName = reader["TenHang"].ToString();
-            //        string airportDepartureID = reader["SanBayDi"].ToString();
-            //        string airportDestinationID = reader["SanBayDen"].ToString();
-            //        string airportDepartureName = reader["TenSBDi"].ToString();
-            //        string airportDestinationName = reader["TenSBDen"].ToString();
-            //        string airportDepartureCity = reader["TinhSBDi"].ToString();
-            //        string airportDestinationCity = reader["TinhSBDen"].ToString();
-            //        string aircraftType = reader["LoaiMayBay"].ToString();
-            //        flight = new string[] { airlineName, airportDepartureID, airportDestinationID, airportDepartureName, airportDestinationName, airportDepartureCity, airportDestinationCity, aircraftType };
-            //    }
-            //}
-            //DataProvider.sqlConnection.Close();
+            try
+            {
+                DataProvider.sqlConnection.Open();
+                SqlCommand sqlCommand = new SqlCommand(
+                    "select [c].NgayKhoiHanh, [c].ThoiGianXuatPhat, [v].MaVe " +
+                    "from [CHUYENBAY] [c], [VE] [v] " +
+                    "where [c].MaChuyenBay = [v].MaChuyenBay and [v].TinhTrang = 'BOOKED'"
+                    , DataProvider.sqlConnection);
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+                List<string> ticket_des = new List<string>();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        string strtime = reader["NgayKhoiHanh"].ToString() + " " + reader["ThoiGianXuatPhat"].ToString();
+                        DateTime flighttime = DateTime.ParseExact(strtime, "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture);
+                        TimeSpan time = flighttime - DateTime.Now;
+
+                        if (time.Days < 1)
+                        {
+                            ticket_des.Add(reader["MaVe"].ToString());
+                        }
+                    }
+                }
+                DataProvider.sqlConnection.Close();
+
+
+                if (ticket_des.Count > 0)
+                {
+                    foreach (string ticket in ticket_des)
+                    {
+                        DataProvider.sqlConnection.Open();
+                        sqlCommand = new SqlCommand(
+                            "update [VE] set TinhTrang = 'TRONG', TenHK = NULL, CMND = NULL, SDT = NULL, MaHK = NULL" +
+                            " where MaVe = @mave ", DataProvider.sqlConnection);
+                        sqlCommand.Parameters.Add("@mave", SqlDbType.NVarChar).Value = ticket;
+                        sqlCommand.ExecuteNonQuery();
+                        DataProvider.sqlConnection.Close();
+                    }
+
+                    if (fContainer.Content == flightDetail)
+                    {
+                        string flightID = flightDetail.flight_ID.Text;
+                        string airlineLogo = flightDetail.airline_logo;
+                        TimeSpan time = (TimeSpan)flightDetail.tb_Time.DataContext;
+                        DateTime timedes = (DateTime)flightDetail.sp_timeDestination.DataContext;
+                        DateTime timedepar = (DateTime)flightDetail.sp_timeDeparture.DataContext;
+
+                        flightDetail = new FlightDetail();
+                        flightDetail.Show(flightID,airlineLogo,time, timedes, timedepar, false);
+                        flightDetail.Return += FlightDetail_Return;
+                        flightDetail.Continue += FlightDetail_Continue;
+                        fContainer.Content = flightDetail;
+                    }
+                    else if (fContainer.Content == myBookings)
+                    {
+                        myBookings = new MyBookings();
+                        myBookings.MyTicket(curAccount.id);
+                        fContainer.Content = myBookings;
+                    }
+                }
+            }
+            catch (Exception ex) { }
+            
+
         }
 
         private void AddInforHK_GoToHomeScreen(object sender, RoutedEventArgs e)
@@ -255,14 +300,17 @@ namespace Quan_Ly_Ban_Ve_May_Bay
 
         private void btnMyBookings_Click(object sender, RoutedEventArgs e)
         {
-            MyBookings myBookings = new MyBookings();
+
+            myBookings = new MyBookings();
             if (curAccount == null)
             {
                 myBookings.NoLogin();
             }
             else
             {
+                BookingsPay bookingsPay = new BookingsPay();
                 myBookings.MyTicket(curAccount.id);
+
             }
             fContainer.Content = myBookings;
         }

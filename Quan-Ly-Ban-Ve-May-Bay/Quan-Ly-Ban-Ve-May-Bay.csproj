@@ -98,8 +98,8 @@
     <Compile Include="Pages\AllFlight.xaml.cs">
       <DependentUpon>AllFlight.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\BookingsDetail.xaml.cs">
-      <DependentUpon>BookingsDetail.xaml</DependentUpon>
+    <Compile Include="Pages\BookingsDetails.xaml.cs">
+      <DependentUpon>BookingsDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ContactUs.xaml.cs">
       <DependentUpon>ContactUs.xaml</DependentUpon>
@@ -170,8 +170,8 @@
     <Compile Include="View\AddSBTG.xaml.cs">
       <DependentUpon>AddSBTG.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\BookingsUpdate.xaml.cs">
-      <DependentUpon>BookingsUpdate.xaml</DependentUpon>
+    <Compile Include="View\BookingsPay.xaml.cs">
+      <DependentUpon>BookingsPay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ChangePassword.xaml.cs">
       <DependentUpon>ChangePassword.xaml</DependentUpon>
@@ -189,7 +189,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\BookingsDetail.xaml">
+    <Page Include="Pages\BookingsDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -321,7 +321,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\BookingsUpdate.xaml">
+    <Page Include="View\BookingsPay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

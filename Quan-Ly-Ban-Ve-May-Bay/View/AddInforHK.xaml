@@ -8,14 +8,15 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:uc="clr-namespace:Quan_Ly_Ban_Ve_May_Bay.UserControls"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
-        Title="AddInforHK" Height="650" Width="1000">
-    
-    <Grid>
+        Title="Thông Tin Hóa Đơn" 
+        Height="650" Width="1000">
+
+    <Grid Background="#FFDEF5B6">        
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
-            <RowDefinition Height="150"/>
-            <RowDefinition Height="230"/>
-            <RowDefinition Height="120"/>
+            <RowDefinition Height="130"/>
+            <RowDefinition Height="220"/>
+            <RowDefinition Height="170"/>
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
 
@@ -32,39 +33,49 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <StackPanel>
-                <TextBlock Text="Thông tin hóa đơn" Margin="30,0,0,0" FontSize="20"/>
-                <TextBlock Text="Mã hóa đơn: " Margin="60,5,0,0"/>
-                <TextBox x:Name="maHoaDonTxt" HorizontalAlignment="Stretch" Margin="180,0,0,0" TextDecorations="{x:Null}" Visibility="Visible" UndoLimit="99" IsEnabled="False" SelectionBrush="{x:Null}" BorderBrush="{x:Null}"/>
-                <TextBlock Text="Ngày lập: " Margin="60,0,0,0"/>
-                <TextBox x:Name="ngaylapHDTxt" HorizontalAlignment="Stretch" Margin="180,0,0,0" TextDecorations="{x:Null}" Visibility="Visible" UndoLimit="99" IsEnabled="False" SelectionBrush="{x:Null}" BorderBrush="{x:Null}"/>
-                <TextBlock x:Name="tbl_MaTK" Text="Mã tài khoản thanh toán: " Margin="60,0,0,0"/>
-                <TextBox x:Name="maTKTTTxt" HorizontalAlignment="Stretch" Margin="180,0,0,0" TextDecorations="{x:Null}" Visibility="Visible" UndoLimit="99" IsEnabled="False" SelectionBrush="{x:Null}" BorderBrush="{x:Null}"/>
-
+                <TextBlock Text="THÔNG TIN HÓA ĐƠN" Margin="30,0,0,0" FontSize="20" Foreground="#FF4C9821" FontWeight="Bold"/>
+                <DockPanel Height="30">
+                    <TextBlock Text="Mã hóa đơn: " Margin="60,5,0,0" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
+                    <TextBox x:Name="maHoaDonTxt" HorizontalAlignment="Left" Margin="10,0,0,0" TextDecorations="{x:Null}" Visibility="Visible" UndoLimit="99" IsEnabled="False" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" Width="200" FontSize="14" VerticalAlignment="Center"/>
+                </DockPanel>
+                <DockPanel Height="30">
+                    <TextBlock Text="Ngày lập: " Margin="60,5,0,0" FontSize="14" Height="30"/>
+                    <TextBox x:Name="ngaylapHDTxt" HorizontalAlignment="Left" Margin="10,0,0,0" TextDecorations="{x:Null}" Visibility="Visible" UndoLimit="99" IsEnabled="False" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" Width="200" FontSize="14"/>
+                </DockPanel>
+                <DockPanel Height="30">
+                    <TextBlock x:Name="tbl_MaTK" Text="Mã tài khoản thanh toán: " Margin="60,5,0,0" FontSize="14"/>
+                    <TextBox x:Name="maTKTTTxt" HorizontalAlignment="Left" Margin="10,0,0,0" TextDecorations="{x:Null}" Visibility="Visible" UndoLimit="99" IsEnabled="False" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" Width="200" FontSize="14"/>
+                </DockPanel>
             </StackPanel>
             <StackPanel Grid.Column="1">
-                <TextBlock Text="Thông tin chuyến bay" Margin="30,0,0,0" FontSize="20"/>
-                <TextBlock Text="Mã chuyến bay: " Margin="60,5,0,0"/>
-                <TextBox x:Name="maChuyenBayTxt" HorizontalAlignment="Stretch" Margin="180,0,0,0" TextDecorations="{x:Null}" Visibility="Visible" UndoLimit="99" IsEnabled="False" SelectionBrush="{x:Null}" BorderBrush="{x:Null}"/>
+                <TextBlock Text="THÔNG TIN CHUYẾN BAY" Margin="30,0,0,0" FontSize="20" Foreground="#FF4C9821" FontWeight="Bold"/>
                 <Grid >
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="270"/>
+                        <ColumnDefinition Width="250"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Grid>
-                        <StackPanel>
-                            <TextBlock Text="Xuất phát từ: " Margin="60,0,0,0"/>
-                            <TextBox x:Name="tuTxt"  HorizontalAlignment="Stretch" Margin="180,0,0,0" TextDecorations="{x:Null}" Visibility="Visible" UndoLimit="99" IsEnabled="False" SelectionBrush="{x:Null}" BorderBrush="{x:Null}"/>
-                        </StackPanel>
+                        <DockPanel Height="30">
+                            <TextBlock Text="Mã chuyến bay: " Margin="60,5,0,0" FontSize="14"/>
+                            <TextBox x:Name="maChuyenBayTxt" HorizontalAlignment="Left" Margin="10,0,0,0" TextDecorations="{x:Null}" Visibility="Visible" UndoLimit="99" IsEnabled="False" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" Width="Auto
+                                     " FontSize="14"/>
+                        </DockPanel>
                     </Grid>
                     <Grid Grid.Column="1">
-                        <StackPanel>
-                            <TextBlock Text="Đến: " Margin="20,0,0,0"/>
-                            <TextBox x:Name="denTxt" HorizontalAlignment="Stretch" Margin="70,0,0,0" TextDecorations="{x:Null}" Visibility="Visible" UndoLimit="99" IsEnabled="False" SelectionBrush="{x:Null}" BorderBrush="{x:Null}"/>
-                        </StackPanel>
+                        <DockPanel Height="30">
+                            <TextBlock Text="Ngày giờ: " Margin="0,5,0,0" FontSize="14"/>
+                            <TextBox x:Name="ngayGiotxt" HorizontalAlignment="Left" Margin="10,0,0,0" TextDecorations="{x:Null}" Visibility="Visible" UndoLimit="99" IsEnabled="False" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" Width="200" FontSize="14"/>
+                        </DockPanel>
                     </Grid>
                 </Grid>
-                <TextBlock Text="Ngày giờ: " Margin="60,0,0,0"/>
-                <TextBox x:Name="ngayGiotxt" HorizontalAlignment="Stretch" Margin="180,0,0,0" TextDecorations="{x:Null}" Visibility="Visible" UndoLimit="99" IsEnabled="False" SelectionBrush="{x:Null}" BorderBrush="{x:Null}"/>
+                <DockPanel Height="30">
+                    <TextBlock Text="Từ: " Margin="60,5,0,0" FontSize="14"/>
+                    <TextBox x:Name="tuTxt"  HorizontalAlignment="Stretch" Margin="10,0,0,0" TextDecorations="{x:Null}" Visibility="Visible" UndoLimit="99" IsEnabled="False" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" FontSize="14"/>
+                </DockPanel>
+                <DockPanel Height="29">
+                    <TextBlock Text="Đến: " Margin="60,5,0,0" FontSize="14"/>
+                    <TextBox x:Name="denTxt" HorizontalAlignment="Left" Margin="10,0,0,0" TextDecorations="{x:Null}" Visibility="Visible" UndoLimit="99" IsEnabled="False" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" Width="150" FontSize="14"/>
+                </DockPanel>
             </StackPanel>
 
         </Grid>
@@ -75,44 +86,55 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.ColumnSpan="2">
-                <TextBlock Text="Thông tin hành khách" Margin="30,0,0,0" FontSize="20"/>
-                <TextBlock Text="Mã hành khách: " Margin="60,5,0,0"/>
-                <TextBox x:Name="maHanhKhachText"  HorizontalAlignment="Stretch" Margin="180,0,0,0" TextDecorations="{x:Null}" Visibility="Visible" UndoLimit="99" IsEnabled="False" SelectionBrush="{x:Null}" BorderBrush="{x:Null}"/>
-                <TextBlock Text="Tên hành khách: " Margin="60,5,0,0"/>
-                <TextBox Width="300" Height="30" BorderBrush="Black" BorderThickness="1" x:Name="tenHanhKhachTxt" HorizontalAlignment="Left" Margin="180,0,0,0" PreviewTextInput="tenHanhKhachTxt_PreviewTextInput"/>
-                <TextBlock Text="CMND/CCCD: " Margin="60,5,0,0"/>
-                <TextBox Width="300" Height="30" BorderBrush="Black" BorderThickness="1" x:Name="cmndTxt" HorizontalAlignment="Left" Margin="180,0,0,0" PreviewTextInput="cmndTxt_PreviewTextInput"/>
-                <TextBlock Text="Số điện thoại: " Margin="60,5,0,0"/>
-                <TextBox Width="300" Height="30" BorderBrush="Black" BorderThickness="1" x:Name="sdtTxt" HorizontalAlignment="Left" Margin="180,0,0,0" PreviewTextInput="sdtTxt_PreviewTextInput"/>
+                <TextBlock Text="THÔNG TIN HÀNH KHÁCH" Margin="30,0,0,0" FontSize="20" Foreground="#FF4C9821" FontWeight="Bold"/>
+                <DockPanel Height="44">
+                    <TextBlock Text="Mã hành khách: " Margin="60,7,0,0" FontSize="14"/>
+                    <TextBox x:Name="maHanhKhachText"  HorizontalAlignment="Right" Margin="0,2,20,0" TextDecorations="{x:Null}" Visibility="Visible" UndoLimit="99" IsEnabled="False" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" FontSize="14" Width="300" VerticalAlignment="Top"/>
+                </DockPanel>
+                <DockPanel Height="45">
+                    <TextBlock Text="Họ tên: " Margin="60,6,0,0" FontSize="14"/>
+                    <TextBox Width="300" Height="28" BorderBrush="#FF4C9821" BorderThickness="1" x:Name="tenHanhKhachTxt" HorizontalAlignment="Right" Margin="0,0,20,0" PreviewTextInput="tenHanhKhachTxt_PreviewTextInput" FontSize="14" Background="{x:Null}" VerticalAlignment="Top"/>
+                </DockPanel>
+                <DockPanel Height="45">
+                    <TextBlock Text="CMND/CCCD: " Margin="60,6,0,0" FontSize="14" HorizontalAlignment="Left"/>
+                    <TextBox Width="300" Height="28" MaxLength="9" BorderBrush="#FF4C9821" BorderThickness="1" x:Name="cmndTxt" HorizontalAlignment="Right" Margin="0,0,20,0" PreviewTextInput="cmndTxt_PreviewTextInput" FontSize="14" VerticalAlignment="Top"/>
+                </DockPanel>
+                <DockPanel Height="45">
+                    <TextBlock Text="Số điện thoại: " Margin="60,6,0,0" FontSize="14"/>
+                    <TextBox Width="300" Height="30" MaxLength="11" BorderBrush="#FF4C9821" BorderThickness="1" x:Name="sdtTxt" HorizontalAlignment="Right" Margin="0,0,20,0" PreviewTextInput="sdtTxt_PreviewTextInput" FontSize="14" VerticalAlignment="Top"/>
+
+                </DockPanel>
             </StackPanel>
             <StackPanel Grid.Column="2">
-                <TextBlock Text="Thông tin vé" Margin="30,0,0,0" FontSize="20"/>
-                <TextBlock Text="Mã vé: " Margin="60,5,0,0"/>
-                <ComboBox Width="250" FontSize="18" 
-                      BorderBrush="Black" BorderThickness="1"
-                      Background="#F5F5F5"
-                      x:Name="maVeBox" HorizontalAlignment="Left" Margin="180,0,0,0" SelectionChanged="maVeBox_SelectionChanged"/>
-                <TextBlock Text="Số ghế: " Margin="60,5,0,0"/>
-                <TextBox x:Name="soGheTxt" HorizontalAlignment="Stretch" Margin="180,0,0,0" TextDecorations="{x:Null}" Visibility="Visible" UndoLimit="99" IsEnabled="False" SelectionBrush="{x:Null}" BorderBrush="{x:Null}"/>
-                <TextBlock Text="Mã hạng vé: " Margin="60,0,0,0"/>
-                <TextBox x:Name="maHangVeTxt" HorizontalAlignment="Stretch" Margin="180,0,0,0" TextDecorations="{x:Null}" Visibility="Visible" UndoLimit="99" IsEnabled="False" SelectionBrush="{x:Null}" BorderBrush="{x:Null}"/>
-                <Button x:Name="btnXacNhanVe"  Height="30" Width="150" Content="Xác nhận vé" Foreground="Black" FontSize="14" Background="#2E8B57" Margin="0,10,0,0" Click="btnXacNhanVe_Click"/>
-
+                <TextBlock Text="THÔNG TIN VÉ" Margin="30,0,0,0" FontSize="20" Foreground="#FF4C9821" FontWeight="Bold"/>
+                <DockPanel Height="38">
+                    <TextBlock Text="Mã vé: " Margin="60,7,0,0" FontSize="14"/>
+                    <ComboBox Width="150" FontSize="16" 
+                      BorderBrush="#FF4C9821" BorderThickness="1"
+                      x:Name="maVeBox" HorizontalAlignment="Left" Margin="30,0,0,0" SelectionChanged="maVeBox_SelectionChanged" Height="30"/>
+                </DockPanel>
+                <DockPanel Height="38">
+                    <TextBlock Text="Số ghế: " Margin="60,7,0,0" FontSize="14"/>
+                    <TextBox x:Name="soGheTxt" HorizontalAlignment="Left" Margin="27,2,0,0" TextDecorations="{x:Null}" Visibility="Visible" UndoLimit="99" IsEnabled="False" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" Width="200" FontSize="14" VerticalAlignment="Top"/>
+                </DockPanel>
+                <DockPanel Height="38">
+                    <TextBlock Text="Hạng vé: " Margin="60,7,0,0" FontSize="14"/>
+                    <TextBox x:Name="hangVeTxt" HorizontalAlignment="Left" Margin="20,2,0,0" TextDecorations="{x:Null}" Visibility="Visible" UndoLimit="99" IsEnabled="False" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" Width="200" FontSize="14" VerticalAlignment="Top"/>
+                </DockPanel>
+                <Button x:Name="btnXacNhanVe"  Height="38" Width="160" Content="Xác nhận vé" Foreground="Black" FontSize="17" Background="#FF64C32E" Margin="0,17,0,0" Click="btnXacNhanVe_Click"/>
             </StackPanel>
-
-
         </Grid>
 
-        <ListView x:Name="veLV" Grid.Row="3" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,0,10,0" SelectionChanged="veLV_SelectionChanged">
+        <ListView x:Name="veLV" Grid.Row="3" Margin="15,0,15,0" SelectionChanged="veLV_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Mã vé" Width="100" DisplayMemberBinding="{Binding TiketID}"/>
                     <GridViewColumn Header="Số ghế" Width="110" DisplayMemberBinding="{Binding SeatNumber}"/>
-                    <GridViewColumn Header="Mã hạng vé" Width="140" DisplayMemberBinding="{Binding FlightClass}"/>
-                    <GridViewColumn Header="Mã hành khách" Width="150" DisplayMemberBinding="{Binding HkID}"/>
-                    <GridViewColumn Header="Tên hành khách" Width="180" DisplayMemberBinding="{Binding HkName}"/>
-                    <GridViewColumn Header="CMND/CCCD" Width="145" DisplayMemberBinding="{Binding CMND}"/>
-                    <GridViewColumn Header="SĐT" Width="100" DisplayMemberBinding="{Binding PhoneNumber}"/>
+                    <GridViewColumn Header="Hạng vé" Width="120" DisplayMemberBinding="{Binding FlightClass}"/>
+                    <GridViewColumn Header="Mã hành khách" Width="160" DisplayMemberBinding="{Binding HkID}"/>
+                    <GridViewColumn Header="Họ tên" Width="180" DisplayMemberBinding="{Binding HkName}"/>
+                    <GridViewColumn Header="CMND" Width="130" DisplayMemberBinding="{Binding CMND}"/>
+                    <GridViewColumn Header="SĐT" Width="110" DisplayMemberBinding="{Binding PhoneNumber}"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -123,13 +145,13 @@
                 <ColumnDefinition Width="583*"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.ColumnSpan="2">
-                <StackPanel Orientation="Horizontal" Margin="0 20 0 10">
-                    <TextBlock Text="Thành tiền: " Margin="60,0,0,0"/>
-                    <TextBox x:Name="tienTxt"  Text="0" HorizontalAlignment="Stretch" Margin="180,0,0,0" TextDecorations="{x:Null}" Visibility="Visible" UndoLimit="99" IsEnabled="False" SelectionBrush="{x:Null}" BorderBrush="{x:Null}"/>
-                </StackPanel>
-                <Grid Height="40">
-                    <Button x:Name="btnTTSau"  Height="30" Width="150" Content="Thanh toán sau" Foreground="Black" FontSize="14" Background="#2E8B57"  Margin="800,5,50,0" Click="btnTTSau_Click"/>
-                    <Button x:Name="btnTTNgay"  Height="30" Width="150" Content="Thanh toán ngay" Foreground="Black" FontSize="14" Background="#2E8B57"  Margin="580,5,270,0" Click="btnTTNgay_Click"/>
+                <DockPanel Margin="0,10,0,0">
+                    <TextBlock Text="THÀNH TIỀN: " Margin="130,4,0,0" FontSize="15"/>
+                    <TextBox x:Name="tienTxt"  Text="0" HorizontalAlignment="Left" Margin="20,0,0,0" TextDecorations="{x:Null}" Visibility="Visible" UndoLimit="99" IsEnabled="False" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" FontSize="17"/>
+                </DockPanel>
+                <Grid>
+                    <Button x:Name="btnTTSau"  Height="38" Width="170" Content="Thanh toán sau" Foreground="Black" FontSize="17" Background="#FF64C32E"  Margin="740,5,0,0" Click="btnTTSau_Click" HorizontalAlignment="Left"/>
+                    <Button x:Name="btnTTNgay"  Height="38" Width="170" Content="Thanh toán ngay" Foreground="Black" FontSize="17" Background="#FF64C32E"  Margin="520,5,0,0" Click="btnTTNgay_Click" HorizontalAlignment="Left"/>
                 </Grid>
 
             </StackPanel>

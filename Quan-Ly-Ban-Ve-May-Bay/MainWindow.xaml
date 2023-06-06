@@ -44,7 +44,7 @@
                         <Button HorizontalAlignment="Left"  Margin="10 0 0 0" Height="35" Click="btnHome_Click">
                             <StackPanel Orientation="Horizontal" >
                                 <Image Source="/Images/home_52px.png"/>
-                                <TextBlock Margin="15 0 0 0" FontSize="20" Text="Trang chủ" Foreground="#FFF"/>
+                                <TextBlock Name="timer" Margin="15 0 0 0" FontSize="20" Text="Trang chủ" Foreground="#FFF"/>
                             </StackPanel>
                         </Button>
 

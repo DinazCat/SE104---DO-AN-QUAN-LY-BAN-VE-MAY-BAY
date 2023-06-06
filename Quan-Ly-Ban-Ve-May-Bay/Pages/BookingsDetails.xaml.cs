@@ -24,7 +24,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
     /// </summary>
     public partial class BookingsDetail : Page
     {
-        private BookingsUpdate bookingsUpdate;
         private string MaVe;
         public BookingsDetail()
         {
@@ -36,7 +35,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
         //    ShowDetail(MaVe);
         //}
 
-        public void ShowDetail(string mave)
+        public void ShowDetail(string mave, string user_id)
         {
             MaVe = mave;
             DataProvider.sqlConnection.Open();
@@ -44,12 +43,15 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
                 "select [cb].MaChuyenBay, [cb].SanBayDi, [cb].SanBayDen, [cb].NgayKhoiHanh, [cb].ThoiGianXuatPhat, [cb].ThoiGIanDuKien, " +
                         "[v].MaVe, [v].SoGhe, [v].TenHK, [v].MaHK, [v].CMND, [v].SDT, " +
                         "[hv].TenHangVe, " +
-                        "[hd].MaHD, [hd].NgayLap, [hd].ThanhTien, [hd].TinhTrang, [hd].MaTK " +
-                "from [CHUYENBAY] [cb], [VE] [v], [HANGVE] [hv], [HOADON] [hd], [CTHD] [ct] " +
+                        "[hd].MaHD, [hd].NgayLap, [hd].ThanhTien, [hd].TinhTrang, [hd].MaTK, " +
+                        "[s1].TenSanBay sbDi, [s2].TenSanBay sbDen " +
+                "from [CHUYENBAY] [cb], [VE] [v], [HANGVE] [hv], [HOADON] [hd], [CTHD] [ct], [SANBAY] [s1], [SANBAY] [s2] " +
                 "where  [hd].MaHD = [ct].MaHD and " +
                         "[v].MaVe = [ct].MaVe and " +
                         "[v].MaChuyenBay = [cb].MaChuyenBay and " +
                         "[hv].MaHangVe = [v].MaHangVe and " +
+                        "[s1].MaSanBay = [cb].SanBayDi and " +
+                        "[s2].MaSanBay = [cb].SanBayDen and " +
                         "[v].MaVe = @mave ", DataProvider.sqlConnection);
             sqlCommand.Parameters.Add("@mave", SqlDbType.NVarChar).Value = mave;
             SqlDataReader reader = sqlCommand.ExecuteReader();
@@ -58,9 +60,9 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
                 if (reader.Read())
                 {
                     maCBTxt.Text = reader["MaChuyenBay"].ToString();
-                    tuTxt.Text = reader["SanBayDi"].ToString();
-                    denTxt.Text = reader["SanBayDen"].ToString();
-                    gioBayTxt.Text = reader["ThoiGianXuatPhat"].ToString() + " " + reader["NgayKhoiHanh"].ToString();
+                    tuTxt.Text = reader["sbDi"].ToString();
+                    denTxt.Text = reader["sbDen"].ToString();
+                    gioBayTxt.Text = reader["NgayKhoiHanh"].ToString() + " " + reader["ThoiGianXuatPhat"].ToString();
                     tgBayTxt.Text = reader["ThoiGianDuKien"].ToString() + " phút";
 
                     maVeTxt.Text = mave;
@@ -81,14 +83,40 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
             }
             DataProvider.sqlConnection.Close();
 
+            if (tinhTrangTxt.Text == "UNPAID")
+            {
+                if (MainWindow.curAccount.type == 1 || MainWindow.curAccount.type == 2)
+                {
+                    btnPay.Content = "Đã thanh toán";
+                }
+                btnPay.Visibility = Visibility.Visible;
+                statusPaymentTxt.Visibility = Visibility.Visible; 
+            }
         }
 
-        private void btnUpdate_Click(object sender, RoutedEventArgs e)
+        private void btnPay_Click(object sender, RoutedEventArgs e)
         {
-            bookingsUpdate = new BookingsUpdate();
-            bookingsUpdate.ShowInforHK(MaVe);
-            bookingsUpdate.ShowDialog();
-        }
+            //DataProvider.sqlConnection.Open();
+            //SqlCommand sqlcommand = new SqlCommand(
+            //    "Update [VE] set TinhTrang = 'SOLD' " +
+            //    "where MaVe = @mave", DataProvider.sqlConnection);
+            //sqlcommand.Parameters.Add("@mave", SqlDbType.NVarChar).Value = maVeTxt.Text;
+            //sqlcommand.ExecuteNonQuery();
+            //DataProvider.sqlConnection.Close();
 
+            //DataProvider.sqlConnection.Open();
+            //SqlCommand sqlCommand = new SqlCommand(
+            //    "Update [HOADON] set TinhTrang = 'PAID' " +
+            //    "where MaHD in (select [hd].MaHD from [HOADON] [hd], [CTHD] [ct] " +
+            //                        "where [ct].MaVe = @mave and [hd].MaHD = [ct].MaHD "
+            //    , DataProvider.sqlConnection);
+            //sqlCommand.Parameters.Add("@mave", SqlDbType.NVarChar).Value = maVeTxt.Text;
+            //sqlCommand.ExecuteNonQuery();
+            //DataProvider.sqlConnection.Close();            
+
+            BookingsPay bookingsPay = new BookingsPay();
+            bookingsPay.ShowBill(maHDTxt.Text, ngayLapTxt.Text, maCBTxt.Text, gioBayTxt.Text, tienTxt.Text);
+            bookingsPay.ShowDialog();
+        }
     }
 }

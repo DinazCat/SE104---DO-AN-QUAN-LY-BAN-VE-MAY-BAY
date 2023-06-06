@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\
+C:\Users\DELL\source\Repos\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\
 Quan_Ly_Ban_Ve_May_Bay
 none
 false
 DEBUG;TRACE
-D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\App.xaml
-34-1122596512
+C:\Users\DELL\source\Repos\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\App.xaml
+34-2142581392
 1-1546700801
-511960724414
-25-107386494
-Pages\AllFlight.xaml;Pages\BookingsDetail.xaml;Pages\ContactUs.xaml;Pages\FlightsList.xaml;MainWindow.xaml;Pages\FlightDetail.xaml;Pages\Home.xaml;Pages\Login.xaml;Pages\MyBookings.xaml;Pages\Register.xaml;Pages\Setting.xaml;Pages\UserManagement.xaml;Style\FilterMenu.xaml;Style\MainStyle.xaml;UserControls\AdminRight.xaml;UserControls\Chuyenbay.xaml;UserControls\FareClassManagement.xaml;UserControls\Hangmaybay.xaml;UserControls\HangVeItem.xaml;UserControls\MonthRevenue.xaml;UserControls\QLCB_SB.xaml;UserControls\RuleChange.xaml;UserControls\Sanbay.xaml;UserControls\YearRevenue.xaml;View\AddChuyenbay.xaml;View\AddHangMB.xaml;View\AddInforHK.xaml;View\AddSanBay.xaml;View\AddSBTG.xaml;View\BookingsUpdate.xaml;View\ChangePassword.xaml;View\FareClassForm.xaml;View\SendCodeForm.xaml;View\UserForm.xaml;
+51-781975238
+25-566004940
+Pages\AllFlight.xaml;Pages\BookingsDetails.xaml;Pages\ContactUs.xaml;Pages\FlightsList.xaml;MainWindow.xaml;Pages\FlightDetail.xaml;Pages\Home.xaml;Pages\Login.xaml;Pages\MyBookings.xaml;Pages\Register.xaml;Pages\Setting.xaml;Pages\UserManagement.xaml;Style\FilterMenu.xaml;Style\MainStyle.xaml;UserControls\AdminRight.xaml;UserControls\Chuyenbay.xaml;UserControls\FareClassManagement.xaml;UserControls\Hangmaybay.xaml;UserControls\HangVeItem.xaml;UserControls\MonthRevenue.xaml;UserControls\QLCB_SB.xaml;UserControls\RuleChange.xaml;UserControls\Sanbay.xaml;UserControls\YearRevenue.xaml;View\AddChuyenbay.xaml;View\AddHangMB.xaml;View\AddInforHK.xaml;View\AddSanBay.xaml;View\AddSBTG.xaml;View\BookingsPay.xaml;View\ChangePassword.xaml;View\FareClassForm.xaml;View\SendCodeForm.xaml;View\UserForm.xaml;
 
 False
 
