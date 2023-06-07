@@ -389,9 +389,19 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
         {
             for (int i = 0; i < qLHangVeClass.Count; i++)
             {
+                string maHV = "";
+                string s = "SELECT * From HANGVE WHERE TenHangVe = @ten";
+                SqlParameter p = new SqlParameter("@ten", qLHangVeClass[i].Mahangve);
+                using (SqlDataReader reader = DataProvider.ExecuteReader(s, CommandType.Text, p))
+                {
+                    if (reader.Read())
+                    {
+                        maHV = reader.GetString(reader.GetOrdinal("MaHangVe"));
+                    }
+                }
                 int giave = 0;
                 string query1 = "SELECT * FROM HANGVE WHERE MaHangVe=@ma";
-                SqlParameter param2 = new SqlParameter("@ma", qLHangVeClass[i].Mahangve);
+                SqlParameter param2 = new SqlParameter("@ma", maHV);
                 DataTable dt1;
                 using (SqlDataReader reader = DataProvider.ExecuteReader(query1, CommandType.Text, param2))
                 {
@@ -407,16 +417,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                     giave = (int)(int.Parse(Gia) * phantram);
                 }
                 qLHangVeClass[i].Machuyenbay = MaCB;
-                string maHV = "";
-                string s = "SELECT * From HANGVE WHERE TenHangVe = @ten";
-                SqlParameter p = new SqlParameter("@ten", qLHangVeClass[i].Mahangve);
-                using (SqlDataReader reader = DataProvider.ExecuteReader(s, CommandType.Text, p))
-                {
-                    if (reader.Read())
-                    {
-                        maHV = reader.GetString(reader.GetOrdinal("MaHangVe"));
-                    }
-                }
+
                 SqlConnection con = DataProvider.sqlConnection;
                 try
                 {

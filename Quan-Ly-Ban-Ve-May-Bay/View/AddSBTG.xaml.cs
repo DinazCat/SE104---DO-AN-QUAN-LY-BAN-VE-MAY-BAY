@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using Quan_Ly_Ban_Ve_May_Bay.Model;
 using static Quan_Ly_Ban_Ve_May_Bay.UserControls.Sanbay;
 using static Quan_Ly_Ban_Ve_May_Bay.UserControls.Chuyenbay;
+using Quan_Ly_Ban_Ve_May_Bay.UserControls;
 
 namespace Quan_Ly_Ban_Ve_May_Bay.View
 {
@@ -52,7 +53,16 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             if (thaotac == 1)
             {
                 headertxt.Text = "Sửa sân bay";
-                SBTGcBox.SelectedItem = AddChuyenbay.infotofix.tenSB;
+                string s = "SELECT * From SANBAY WHERE MaSanBay = @ma";
+                SqlParameter p = new SqlParameter("@ma", AddChuyenbay.infotofix.tenSB);
+                using (SqlDataReader reader = DataProvider.ExecuteReader(s, CommandType.Text, p))
+                {
+                    if (reader.Read())
+                    {
+                        SBTGcBox.SelectedItem = reader.GetString(reader.GetOrdinal("TenSanBay"));
+                    }
+                }
+                // SBTGcBox.SelectedItem = AddChuyenbay.infotofix.tenSB;
                 thoigiandungTxb.Text = AddChuyenbay.infotofix.TGdung;
                 ghichuTxb.Text = AddChuyenbay.infotofix.ghichu;
             }
@@ -91,7 +101,16 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
         }
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            tenSB = SBTGcBox.Text;
+            string s = "SELECT * From SANBAY WHERE TenSanBay = @ten";
+            SqlParameter p = new SqlParameter("@ten", SBTGcBox.Text);
+            using (SqlDataReader reader = DataProvider.ExecuteReader(s, CommandType.Text, p))
+            {
+                if (reader.Read())
+                {
+                    tenSB = reader.GetString(reader.GetOrdinal("MaSanBay"));
+                }
+            }
+            // tenSB = SBTGcBox.Text;
             tgDung = thoigiandungTxb.Text;
             GhiChu = ghichuTxb.Text;
             if (tenSB == "" || tgDung == "" || GhiChu == "")
@@ -99,14 +118,14 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
                 return;
             }
-            if (tenSB == AddChuyenbay.tenSBdi || tenSB == AddChuyenbay.tenSBden)
+            if (SBTGcBox.Text == AddChuyenbay.tenSBdi || tenSB == AddChuyenbay.tenSBden)
             {
                 MessageBox.Show("Sân bay trung gian không được trùng với sân bay đi và sân bay đến.", "Dữ liệu không hợp lệ!");
                 return;
             }
             // if (thaotac == 0)
             // {
-            string s = "SELECT * From SANBAYTRUNGGIAN where MaChuyenBay = @ma";
+            s = "SELECT * From SANBAYTRUNGGIAN where MaChuyenBay = @ma";
             SqlParameter par = new SqlParameter("@ma", maCB);
             DataTable table;
             using (SqlDataReader reader = DataProvider.ExecuteReader(s, CommandType.Text, par))
@@ -129,7 +148,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             // }
             try
             {
-                int p = int.Parse(tgDung);
+                int p1 = int.Parse(tgDung);
 
             }
             catch
