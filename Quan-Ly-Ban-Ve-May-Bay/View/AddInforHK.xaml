@@ -150,7 +150,7 @@
                     <TextBox x:Name="tienTxt"  Text="0" HorizontalAlignment="Left" Margin="20,0,0,0" TextDecorations="{x:Null}" Visibility="Visible" UndoLimit="99" IsEnabled="False" SelectionBrush="{x:Null}" BorderBrush="{x:Null}" FontSize="17"/>
                 </DockPanel>
                 <Grid>
-                    <Button x:Name="btnTTSau"  Height="38" Width="170" Content="Thanh toán sau" Foreground="Black" FontSize="17" Background="#FF64C32E"  Margin="740,5,0,0" Click="btnTTSau_Click" HorizontalAlignment="Left"/>
+                    <Button x:Name="btnTTSau"  Height="38" Width="170" Content="Thanh toán sau" Foreground="Black" FontSize="17" Background="#FF64C32E"  Margin="740,5,0,0" Click="btnTTSau_Click" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                     <Button x:Name="btnTTNgay"  Height="38" Width="170" Content="Thanh toán ngay" Foreground="Black" FontSize="17" Background="#FF64C32E"  Margin="520,5,0,0" Click="btnTTNgay_Click" HorizontalAlignment="Left"/>
                 </Grid>
 

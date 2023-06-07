@@ -33,14 +33,75 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
         public AddInforHK()
         {
             InitializeComponent();
-            if(MainWindow.curAccount != null) {
+            CheckTime();
+            if (MainWindow.curAccount != null) {
                 if (MainWindow.curAccount.type == 1 || MainWindow.curAccount.type == 2)
                 {
                     tbl_MaTK.Text = "Mã nhân viên: ";
                     btnTTNgay.Content = "Đã thanh toán";
                     btnTTSau.Content = "Chưa thanh toán";
                 }
-            }           
+            }
+        }
+
+        private void CheckTime()
+        {
+            TimeSpan TimeBook = TimeSpan.Zero;
+            TimeSpan TimePay = TimeSpan.Zero;
+
+            DataProvider.sqlConnection.Open();
+            SqlCommand sqlcommand = new SqlCommand(
+                "select [t].GiaTri from [BANGTHAMSO] [t] " +
+                "where convert(varchar,[t].TenThamSo) = 'ThoiGianChamNhatChoPhepDatVe'"
+                , DataProvider.sqlConnection);
+            SqlDataReader rd = sqlcommand.ExecuteReader();
+            if (rd.HasRows)
+            {
+                if (rd.Read())
+                {
+                    TimeBook = TimeSpan.FromHours(double.Parse(rd["GiaTri"].ToString()));
+                }
+            }
+            DataProvider.sqlConnection.Close();
+
+            DataProvider.sqlConnection.Open();
+            sqlcommand = new SqlCommand(
+                "select [t].GiaTri from [BANGTHAMSO] [t] " +
+                "where convert(varchar,[t].TenThamSo) = 'ThoiGianChamNhatChoPhepHuyVe'"
+                , DataProvider.sqlConnection);
+            rd = sqlcommand.ExecuteReader();
+            if (rd.HasRows)
+            {
+                if (rd.Read())
+                {
+                    TimePay = TimeSpan.FromHours(double.Parse(rd["GiaTri"].ToString()));
+                }
+            }
+            DataProvider.sqlConnection.Close();
+
+            DataProvider.sqlConnection.Open();
+            SqlCommand sqlCommand = new SqlCommand(
+                "select [c].NgayKhoiHanh, [c].ThoiGianXuatPhat " +
+                "from [CHUYENBAY] [c]" +
+                "where [c].MaChuyenBay = @macb", DataProvider.sqlConnection);
+            sqlCommand.Parameters.Add("@macb", SqlDbType.NVarChar).Value = maChuyenBayTxt.Text;
+            SqlDataReader reader = sqlCommand.ExecuteReader();
+            DateTime flighttime = DateTime.Now;
+
+            if (reader.HasRows)
+            {
+                if (reader.Read())
+                {
+                    string strtime = reader["NgayKhoiHanh"].ToString() + " " + reader["ThoiGianXuatPhat"].ToString();
+                    flighttime = DateTime.ParseExact(strtime, "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture);
+                }
+            }
+            DataProvider.sqlConnection.Close();
+
+            if ((TimePay - TimeBook > TimeSpan.Zero) && (DateTime.Now - TimePay - flighttime < TimeSpan.Zero))
+            {
+                btnTTSau.IsEnabled = false;
+            }
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
