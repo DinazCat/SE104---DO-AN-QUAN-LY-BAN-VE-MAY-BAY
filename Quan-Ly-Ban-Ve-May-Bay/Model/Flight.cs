@@ -136,6 +136,28 @@ namespace Quan_Ly_Ban_Ve_May_Bay
                 RaisePropertyChanged();
             }
         }
+        private int availableSeats;
+
+        public int AvailableSeats
+        {
+            get { return availableSeats; }
+            set
+            {
+                availableSeats = value;
+                RaisePropertyChanged();
+            }
+        }
+        private int bookedSeats;
+
+        public int BookedSeats
+        {
+            get { return bookedSeats; }
+            set
+            {
+                bookedSeats = value;
+                RaisePropertyChanged();
+            }
+        }
         public Flight() { }
         public Flight(string flightID, string airlineLogo, string airlineName, string airportDepartureName, string airportDestinationName, string timeDestination, string timeDeparture, TimeSpan time, DateTime dateTimeDeparture, DateTime dateTimeDestination, int stop, long price)
         {
@@ -151,7 +173,25 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             this.price = price;
             this.dateTimeDeparture = dateTimeDeparture; 
             this.dateTimeDestination = dateTimeDestination; 
-        }   
+        }
+        public Flight(string flightID, string airlineLogo, string airlineName, string airportDepartureName, string airportDestinationName, string timeDestination, string timeDeparture, TimeSpan time, DateTime dateTimeDeparture, DateTime dateTimeDestination, int stop, long price, int availableSeats, int bookedSeats)
+        {
+            this.flightID = flightID;
+            this.airlineLogo = airlineLogo;
+            this.airlineName = airlineName;
+            this.airportDepartureName = airportDepartureName;
+            this.airportDestinationName = airportDestinationName;
+            this.timeDestination = timeDestination;
+            this.timeDeparture = timeDeparture;
+            this.time = time;
+            this.stop = stop;
+            this.price = price;
+            this.dateTimeDeparture = dateTimeDeparture;
+            this.dateTimeDestination = dateTimeDestination;
+            this.availableSeats = availableSeats;
+            this.bookedSeats = bookedSeats;
+        }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 

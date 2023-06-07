@@ -35,11 +35,13 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
             InitializeComponent();
             DataProvider.sqlConnection.Open();
             SqlCommand sqlCommand = new SqlCommand(
-             "select [c].*, Logo, TenHang, (select count(*) from [SANBAYTRUNGGIAN] [sbtg] where [sbtg].MaChuyenBay = [c].MaChuyenBay) SoSBTG from [CHUYENBAY] [c], [SANBAY] [s1], [SANBAY] [s2], [HANGMAYBAY] [hmb] " +
+             "select [c].*, Logo, TenHang, (select count(*) from [SANBAYTRUNGGIAN] [sbtg] where [sbtg].MaChuyenBay = [c].MaChuyenBay) SoSBTG, " +
+             "(select count(*) from [VE] [v1] where [v1].MaChuyenBay = [c].MaChuyenBay and [v1].TinhTrang = 'TRONG') SoVeTrong, " +
+             "(select count(*) from [VE] [v2] where [v2].MaChuyenBay = [c].MaChuyenBay and [v2].TinhTrang != 'TRONG') SoVeDat " +
+             "from [CHUYENBAY] [c], [SANBAY] [s1], [SANBAY] [s2], [HANGMAYBAY] [hmb] " +
              "where [c].SanBayDi=[s1].MaSanBay " +
              "and [c].SanBayDen=[s2].MaSanBay " +
              "and [c].MaHangMayBay=[hmb].MaHang ",
-
             DataProvider.sqlConnection);
             SqlDataReader reader = sqlCommand.ExecuteReader();
             List<Flight> flight_list = new List<Flight>();
@@ -64,8 +66,9 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
                     string timeDestination = dateTimeDestination.ToString("HH:mm");
 
                     int stop = int.Parse(reader["SoSBTG"].ToString());
-                    long price = long.Parse(reader["Gia"].ToString());
-                    flight_list.Add(new Flight(flightID, airlineLogo, airlineName, airportDepartureName, airportDestinationName, timeDestination, timeDeparture, time, dateTimeDeparture, dateTimeDestination, stop, price));
+                    long price = long.Parse(reader["Gia"].ToString()); int availableSeats = int.Parse(reader["SoVeTrong"].ToString());
+                    int bookedSeats = int.Parse(reader["SoVeDat"].ToString());
+                    flight_list.Add(new Flight(flightID, airlineLogo, airlineName, airportDepartureName, airportDestinationName, timeDestination, timeDeparture, time, dateTimeDeparture, dateTimeDestination, stop, price, availableSeats, bookedSeats));
 
                 }
             }

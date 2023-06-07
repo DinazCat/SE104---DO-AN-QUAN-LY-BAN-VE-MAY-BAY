@@ -33,7 +33,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
         public AddInforHK()
         {
             InitializeComponent();
-            CheckTime();
+            //CheckTime();
             if (MainWindow.curAccount != null) {
                 if (MainWindow.curAccount.type == 1 || MainWindow.curAccount.type == 2)
                 {
@@ -369,30 +369,51 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             }
             else
             {
-                MessageBoxResult result = MessageBox.Show("Bạn có chắc chắn muốn đặt vé?", "", MessageBoxButton.YesNo);
-                if (result == MessageBoxResult.Yes)
+                //ko đặt vé nếu quá hạn chậm đặt vé
+                SqlCommand _sqlCommand = new SqlCommand(
+            "select GiaTri from [BANGTHAMSO] " +
+            "where convert(varchar, TenThamSo)='ThoiGianChamNhatChoPhepDatVe'", DataProvider.sqlConnection);
+                SqlDataAdapter _adapter = new SqlDataAdapter(_sqlCommand);
+                DataSet _ds = new DataSet();
+                _adapter.Fill(_ds);
+                string _tgChamNhatDatVe = _ds.Tables[0].Rows[0][0].ToString();
+                TimeSpan tgChamNhatDatVe = TimeSpan.FromHours(double.Parse(_tgChamNhatDatVe));
+                CultureInfo provider = CultureInfo.InvariantCulture;
+                string format = "dd/MM/yyyy HH:mm";
+                DateTime dateTimeDeparture = DateTime.ParseExact(ngayGiotxt.Text, format, provider);
+                DateTime dateTimeNow = DateTime.Now;
+                if (dateTimeDeparture - dateTimeNow - tgChamNhatDatVe > TimeSpan.Zero)
                 {
-                    DataProvider.sqlConnection.Open();
-                    SqlDataAdapter adapter = new SqlDataAdapter();
-                    SqlCommand sqlCommand = new SqlCommand(
-                        "insert into [HOADON] values (@mahd, @ngay, @tien, 'UNPAID', @matk)", DataProvider.sqlConnection);
-                    sqlCommand.Parameters.Add("@mahd", SqlDbType.NVarChar).Value = maHoaDonTxt.Text;
-                    sqlCommand.Parameters.Add("@ngay", SqlDbType.DateTime).Value = ngayHD;
-                    sqlCommand.Parameters.Add("@tien", SqlDbType.Int).Value = int.Parse(tienTxt.Text.ToString());
-                    sqlCommand.Parameters.Add("@matk", SqlDbType.NVarChar).Value = maTKTTTxt.Text;
-                    sqlCommand.ExecuteNonQuery();
-                    DataProvider.sqlConnection.Close();
-
-                    SaveVe("BOOKED");
-                    SaveCTHD();
-                    //go to home screen in MainWindow
-                    result = MessageBox.Show("Đặt vé thành công! \nVui lòng thanh toán hóa đơn trước khi chuyến bay xuất phát! \n" +
-                        "Phiếu đặt chỗ sẽ bị hủy nếu không được thanh toán trước giờ bay!");
-                    if (result == MessageBoxResult.OK)
+                    MessageBoxResult result = MessageBox.Show("Bạn có chắc chắn muốn đặt vé?", "", MessageBoxButton.YesNo);
+                    if (result == MessageBoxResult.Yes)
                     {
-                        GoToHomeScreen?.Invoke(this, new RoutedEventArgs());
-                        this.Close();
+                        DataProvider.sqlConnection.Open();
+                        SqlDataAdapter adapter = new SqlDataAdapter();
+                        SqlCommand sqlCommand = new SqlCommand(
+                            "insert into [HOADON] values (@mahd, @ngay, @tien, 'UNPAID', @matk)", DataProvider.sqlConnection);
+                        sqlCommand.Parameters.Add("@mahd", SqlDbType.NVarChar).Value = maHoaDonTxt.Text;
+                        sqlCommand.Parameters.Add("@ngay", SqlDbType.DateTime).Value = ngayHD;
+                        sqlCommand.Parameters.Add("@tien", SqlDbType.Int).Value = int.Parse(tienTxt.Text.ToString());
+                        sqlCommand.Parameters.Add("@matk", SqlDbType.NVarChar).Value = maTKTTTxt.Text;
+                        sqlCommand.ExecuteNonQuery();
+                        DataProvider.sqlConnection.Close();
+
+                        SaveVe("BOOKED");
+                        SaveCTHD();
+                        //go to home screen in MainWindow
+                        result = MessageBox.Show("Đặt vé thành công! \nVui lòng thanh toán hóa đơn trước khi chuyến bay xuất phát! \n" +
+                            "Phiếu đặt chỗ sẽ bị hủy nếu không được thanh toán trước giờ bay!");
+                        if (result == MessageBoxResult.OK)
+                        {
+                            GoToHomeScreen?.Invoke(this, new RoutedEventArgs());
+                            this.Close();
+                        }
                     }
+                }
+                else
+                {
+                    MessageBox.Show("Vé phải được đặt chậm nhất trước giờ khởi hành là: " + _tgChamNhatDatVe + " giờ");
+
                 }
             }
         }
@@ -405,28 +426,41 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             }
             else
             {
-                MessageBoxResult result = MessageBox.Show("Bạn có chắc chắn muốn thanh toán hóa đơn?", "", MessageBoxButton.YesNo);
-                if (result == MessageBoxResult.Yes)
+                //ko mua vé nếu hết hạn
+                CultureInfo provider = CultureInfo.InvariantCulture;
+                string format = "dd/MM/yyyy HH:mm";
+                DateTime dateTimeDeparture = DateTime.ParseExact(ngayGiotxt.Text, format, provider);
+                DateTime dateTimeNow = DateTime.Now;
+                if (dateTimeDeparture - dateTimeNow > TimeSpan.Zero)
                 {
-                    DataProvider.sqlConnection.Open();
-                    SqlDataAdapter adapter = new SqlDataAdapter();
-                    SqlCommand sqlCommand = new SqlCommand(
-                        "insert into [HOADON] values (@mahd, @ngay, @tien, 'PAID', @matk)", DataProvider.sqlConnection);
-                    sqlCommand.Parameters.Add("@mahd", SqlDbType.NVarChar).Value = maHoaDonTxt.Text;
-                    sqlCommand.Parameters.Add("@ngay", SqlDbType.DateTime).Value = ngayHD;
-                    sqlCommand.Parameters.Add("@tien", SqlDbType.Int).Value = int.Parse(tienTxt.Text.ToString());
-                    sqlCommand.Parameters.Add("@matk", SqlDbType.NVarChar).Value = maTKTTTxt.Text;
-                    sqlCommand.ExecuteNonQuery();
-                    DataProvider.sqlConnection.Close();
-                    SaveVe("SOLD");
-                    SaveCTHD();
-                    result = MessageBox.Show("Thanh toán vé thành công!");
-                    //go to home screen in MainWindow
-                    if (result == MessageBoxResult.OK)
+
+                    MessageBoxResult result = MessageBox.Show("Bạn có chắc chắn muốn thanh toán hóa đơn?", "", MessageBoxButton.YesNo);
+                    if (result == MessageBoxResult.Yes)
                     {
-                        GoToHomeScreen?.Invoke(this, new RoutedEventArgs());
-                        this.Close();
+                        DataProvider.sqlConnection.Open();
+                        SqlDataAdapter adapter = new SqlDataAdapter();
+                        SqlCommand sqlCommand = new SqlCommand(
+                            "insert into [HOADON] values (@mahd, @ngay, @tien, 'PAID', @matk)", DataProvider.sqlConnection);
+                        sqlCommand.Parameters.Add("@mahd", SqlDbType.NVarChar).Value = maHoaDonTxt.Text;
+                        sqlCommand.Parameters.Add("@ngay", SqlDbType.DateTime).Value = ngayHD;
+                        sqlCommand.Parameters.Add("@tien", SqlDbType.Int).Value = int.Parse(tienTxt.Text.ToString());
+                        sqlCommand.Parameters.Add("@matk", SqlDbType.NVarChar).Value = maTKTTTxt.Text;
+                        sqlCommand.ExecuteNonQuery();
+                        DataProvider.sqlConnection.Close();
+                        SaveVe("SOLD");
+                        SaveCTHD();
+                        result = MessageBox.Show("Thanh toán vé thành công!");
+                        //go to home screen in MainWindow
+                        if (result == MessageBoxResult.OK)
+                        {
+                            GoToHomeScreen?.Invoke(this, new RoutedEventArgs());
+                            this.Close();
+                        }
                     }
+                }
+                else
+                {
+                    MessageBox.Show("Đã quá hạn mua vé");
                 }
             }
         }

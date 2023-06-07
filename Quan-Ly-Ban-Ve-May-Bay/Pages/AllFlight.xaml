@@ -34,7 +34,17 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Row="1" Grid.Column="1" Margin="10" FontSize="14" HorizontalAlignment="Right" FontWeight="Bold" Foreground="#FFAE0C0C">
+                                <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
+                                    <TextBlock Margin="10" FontSize="14"  >
+                                    <Run Text="Số ghế trống: " FontWeight="Bold" Foreground="#FFAE0C0C"/>
+                                    <Run Text="{Binding AvailableSeats}"/>
+                                    </TextBlock>
+                                    <TextBlock Margin="10" FontSize="14" >
+                                    <Run Text="Số ghế đặt: " FontWeight="Bold" Foreground="#FFAE0C0C"/>
+                                    <Run Text="{Binding BookedSeats}"/>
+                                    </TextBlock>
+                                </StackPanel>
+                                <TextBlock Grid.Row="1" Grid.Column="1" Margin="10" FontSize="14" HorizontalAlignment="Right" FontWeight="Bold" Foreground="#FFAE0C0C">
                                     <Run Text="{Binding Price}"/>
                                     <Run Text=" VND"/>
                             </TextBlock>

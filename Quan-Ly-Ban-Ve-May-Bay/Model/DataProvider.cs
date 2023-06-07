@@ -27,7 +27,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Model
         }
 
 
-        // public static SqlConnection sqlConnection = new SqlConnection(@"Data Source=(local);Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
+        //public static SqlConnection sqlConnection = new SqlConnection(@"Data Source=(local);Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
         public static SqlConnection sqlConnection = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=QuanLyBanVeMayBay;Integrated Security=True");
 
         public static List<string> colorList = new List<string>() { "#C8D70C", "#CB1D1D", "#459DF2", "#459DF2", "#F44EEE", "#ECA65D", "#ECA65D", "#C0F081" };
