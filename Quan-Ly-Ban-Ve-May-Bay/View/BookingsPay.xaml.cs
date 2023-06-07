@@ -24,6 +24,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
     public partial class BookingsPay : Window
     {
         private string MaHD;
+        public event RoutedEventHandler ReturnBookings;
         public BookingsPay()
         {
             InitializeComponent();
@@ -101,6 +102,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
 
                 MessageBox.Show("Thanh toán hóa đơn thành công!");
 
+                ReturnBookings?.Invoke(this, new RoutedEventArgs());
                 this.Close();
             }
         }

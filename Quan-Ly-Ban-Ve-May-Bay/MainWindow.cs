@@ -143,6 +143,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             catch (Exception ex) { }         
         }
 
+
         private void AddInforHK_GoToHomeScreen(object sender, RoutedEventArgs e)
         {
             home = new Home();

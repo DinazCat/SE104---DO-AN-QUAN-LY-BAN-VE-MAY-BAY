@@ -25,7 +25,7 @@
                         </DockPanel>
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="340"/>
+                                <ColumnDefinition Width="370"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <StackPanel>
@@ -53,30 +53,38 @@
                     </StackPanel>
                     <StackPanel Margin="0,10,0,0">
                         <TextBlock Text="VÉ" FontSize="16" FontWeight="Bold" Foreground="#4d9921" HorizontalAlignment="Left" Margin="70,0,0,0"/>
-                        <DockPanel>
-                            <TextBlock Text="Mã vé: " FontSize="14" FontWeight="Normal" HorizontalAlignment="Left" Margin="35,0,0,0" VerticalAlignment="Bottom"/>
-                            <TextBlock x:Name="maVeTxt" FontSize="16" FontWeight="Normal" HorizontalAlignment="Left" Margin="5,0,0,0"/>
-                        </DockPanel>
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="340"/>
+                                <ColumnDefinition Width="370"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <DockPanel>
-                                <TextBlock Text="Số ghế: " FontSize="14" FontWeight="Normal" HorizontalAlignment="Left" Margin="35,0,0,0" VerticalAlignment="Bottom"/>
-                                <TextBlock x:Name="soGheTxt" FontSize="16" FontWeight="Normal" Margin="5,0,0,0" HorizontalAlignment="Left"/>
-                            </DockPanel>
-                            <DockPanel Grid.Column="1">
-                                <TextBlock Text="Hạng vé: " FontSize="14" FontWeight="Normal" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Bottom"/>
-                                <TextBlock x:Name="tenHangVeTxt" FontSize="16" FontWeight="Normal" HorizontalAlignment="Left" Margin="5,2,0,0"/>
-                            </DockPanel>
+                            <StackPanel>
+                                <DockPanel>
+                                    <TextBlock Text="Mã vé: " FontSize="14" FontWeight="Normal" HorizontalAlignment="Left" Margin="35,0,0,0" VerticalAlignment="Bottom"/>
+                                    <TextBlock x:Name="maVeTxt" FontSize="16" FontWeight="Normal" HorizontalAlignment="Left" Margin="5,0,0,0"/>
+                                </DockPanel>
+                                <DockPanel>
+                                    <TextBlock Text="Số ghế: " FontSize="14" FontWeight="Normal" HorizontalAlignment="Left" Margin="35,0,0,0" VerticalAlignment="Bottom"/>
+                                    <TextBlock x:Name="soGheTxt" FontSize="16" FontWeight="Normal" Margin="5,0,0,0" HorizontalAlignment="Left"/>
+                                </DockPanel>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <DockPanel Grid.Column="1">
+                                    <TextBlock Text="Giá vé: " FontSize="14" FontWeight="Normal" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Bottom"/>
+                                    <TextBlock x:Name="giaVeTxt" FontSize="16" FontWeight="Normal" HorizontalAlignment="Left" Margin="5,2,0,0"/>
+                                </DockPanel>
+                                <DockPanel Grid.Column="1">
+                                    <TextBlock Text="Hạng vé: " FontSize="14" FontWeight="Normal" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Bottom"/>
+                                    <TextBlock x:Name="tenHangVeTxt" FontSize="16" FontWeight="Normal" HorizontalAlignment="Left" Margin="5,2,0,0"/>
+                                </DockPanel>
+                            </StackPanel>     
                         </Grid> 
                     </StackPanel>
                     <StackPanel Margin="0,10,0,0">
                         <TextBlock Text="HÀNH KHÁCH" FontSize="16" FontWeight="Bold" Foreground="#4d9921" HorizontalAlignment="Left" Margin="70,0,0,0"/>
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="340"/>
+                                <ColumnDefinition Width="370"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <StackPanel>
@@ -109,7 +117,7 @@
                         </DockPanel>
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="340"/>
+                                <ColumnDefinition Width="370"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <StackPanel>

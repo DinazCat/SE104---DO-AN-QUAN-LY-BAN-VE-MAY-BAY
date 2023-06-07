@@ -25,6 +25,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
     public partial class BookingsDetail : Page
     {
         private string MaVe;
+        public event RoutedEventHandler ReturnBookings;
         public BookingsDetail()
         {
             InitializeComponent();
@@ -36,7 +37,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
             DataProvider.sqlConnection.Open();
             SqlCommand sqlCommand = new SqlCommand(
                 "select [cb].MaChuyenBay, [cb].SanBayDi, [cb].SanBayDen, [cb].NgayKhoiHanh, [cb].ThoiGianXuatPhat, [cb].ThoiGIanDuKien, " +
-                        "[v].MaVe, [v].SoGhe, [v].TenHK, [v].MaHK, [v].CMND, [v].SDT, " +
+                        "[v].MaVe, [v].SoGhe, [v].TenHK, [v].MaHK, [v].CMND, [v].SDT, [v].GiaVe, " +
                         "[hv].TenHangVe, " +
                         "[hd].MaHD, [hd].NgayLap, [hd].ThanhTien, [hd].TinhTrang, [hd].MaTK, " +
                         "[s1].TenSanBay sbDi, [s2].TenSanBay sbDen " +
@@ -61,6 +62,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
                     tgBayTxt.Text = reader["ThoiGianDuKien"].ToString() + " phút";
 
                     maVeTxt.Text = mave;
+                    giaVeTxt.Text = reader["GiaVe"].ToString();
                     soGheTxt.Text = reader["SoGhe"].ToString();
                     tenHangVeTxt.Text = reader["TenHangVe"].ToString();
 
@@ -88,11 +90,15 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
                 statusPaymentTxt.Visibility = Visibility.Visible; 
             }
         }
-
+        private void Pay_ReturnMyBookings(object sender, RoutedEventArgs e)
+        {
+            ReturnBookings?.Invoke(this, new RoutedEventArgs());
+        }
         private void btnPay_Click(object sender, RoutedEventArgs e)
         {
             BookingsPay bookingsPay = new BookingsPay();
             bookingsPay.ShowBill(maHDTxt.Text, ngayLapTxt.Text, maCBTxt.Text, gioBayTxt.Text, tienTxt.Text);
+            bookingsPay.ReturnBookings += Pay_ReturnMyBookings;
             bookingsPay.ShowDialog();
         }
     }

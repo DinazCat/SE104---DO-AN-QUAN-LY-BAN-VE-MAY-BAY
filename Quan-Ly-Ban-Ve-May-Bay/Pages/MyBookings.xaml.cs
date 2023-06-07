@@ -90,7 +90,20 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
             SymbolTicket ticket = (SymbolTicket)lvTicket.SelectedItem;
             if (ticket != null)
             {
+                bookingsDetail.ReturnBookings += ReturnBookings;
                 bookingsDetail.ShowDetail(ticket.MaVe,user_id);
+                fTicket.Content = bookingsDetail;
+            }
+        }
+
+        private void ReturnBookings(object sender, RoutedEventArgs e)
+        {
+            bookingsDetail = new BookingsDetail();
+            SymbolTicket ticket = (SymbolTicket)lvTicket.SelectedItem;
+            if (ticket != null)
+            {
+                bookingsDetail.ReturnBookings += ReturnBookings;
+                bookingsDetail.ShowDetail(ticket.MaVe, user_id);
                 fTicket.Content = bookingsDetail;
             }
         }
