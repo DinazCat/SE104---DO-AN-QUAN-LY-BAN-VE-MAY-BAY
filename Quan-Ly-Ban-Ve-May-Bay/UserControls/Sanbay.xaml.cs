@@ -82,17 +82,53 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
         private void Xoa_Click(object sender, RoutedEventArgs e)
         {
             sanbayclass info = SBTable.SelectedItem as sanbayclass;
-            SqlConnection con = DataProvider.sqlConnection;
-            if (con.State == ConnectionState.Closed)
+            if (info != null)
             {
-                con.Open();
+                int kt = 0;
+                string query = "SELECT * From CHUYENBAY where SanBayDi = @sbdi";
+                SqlParameter param1 = new SqlParameter("@sbdi", info.maSB);
+                using (SqlDataReader reader = DataProvider.ExecuteReader(query, CommandType.Text, param1))
+                {
+                    if (reader.HasRows)
+                    {
+                        kt += 1;
+
+                    }
+                }
+                string query1 = "SELECT * From CHUYENBAY where SanBayDen = @sbden";
+                SqlParameter param2 = new SqlParameter("@sbden", info.maSB);
+                using (SqlDataReader reader = DataProvider.ExecuteReader(query1, CommandType.Text, param2))
+                {
+                    if (reader.HasRows)
+                    {
+                        kt += 1;
+
+                    }
+                }
+                if (kt == 0)
+                {
+                    SqlConnection con = DataProvider.sqlConnection;
+                    if (con.State == ConnectionState.Closed)
+                    {
+                        con.Open();
+                    }
+                    SqlCommand cmd = new SqlCommand("Delete from SANBAY where MaSanBay=N'" + info.maSB + "'", con);
+                    cmd.CommandType = CommandType.Text;
+                    cmd.ExecuteReader();
+                    con.Close();
+                    SBTable.Items.Clear();
+                    loadDatatoTable();
+                    MessageBox.Show("Xóa sân bay thành công ", "Thông báo");
+                }
+                else
+                {
+                    MessageBox.Show("Sân bay này không thể xóa", "Thông báo");
+                }
             }
-            SqlCommand cmd = new SqlCommand("Delete from SANBAY where MaSanBay=N'" + info.maSB + "'", con);
-            cmd.CommandType = CommandType.Text;
-            cmd.ExecuteReader();
-            con.Close();
-            SBTable.Items.Clear();
-            loadDatatoTable();
+            else
+            {
+                MessageBox.Show("Vui lòng chọn dòng bạn muốn xóa");
+            }
 
         }
         QLCB_SB qLCB_SB;

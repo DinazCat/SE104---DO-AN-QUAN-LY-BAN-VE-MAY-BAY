@@ -255,32 +255,15 @@ namespace Quan_Ly_Ban_Ve_May_Bay
 
         private void btnCont_Click(object sender, RoutedEventArgs e)
         {
-            SqlCommand sqlCommand = new SqlCommand(
-             "select GiaTri from [BANGTHAMSO] " +
-             "where convert(varchar, TenThamSo)='ThoiGianChamNhatChoPhepDatVe'", DataProvider.sqlConnection);
-            SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
-            DataSet ds = new DataSet();
-            adapter.Fill(ds);
-            List<string> listDestination = new List<string>();
-            string _tgChamNhatDatVe = ds.Tables[0].Rows[0][0].ToString();
-            TimeSpan tgChamNhatDatVe = TimeSpan.FromHours(double.Parse(_tgChamNhatDatVe));
-            DateTime dateTimeDeparture = (DateTime)sp_timeDeparture.DataContext;
-            DateTime dateTimeNow = DateTime.Now;
             if (TicketID_Chosen.Count == 0)
             {
                 MessageBox.Show("Vui lòng chọn vé muốn đặt!");
             }
             else
             {
-                if (dateTimeDeparture - dateTimeNow - tgChamNhatDatVe > TimeSpan.Zero)
-                {
-                    flightID = flight_ID.Text;
-                    Continue?.Invoke(this, new RoutedEventArgs());
-                }
-                else
-                {
-                    MessageBox.Show("Vé phải được đặt chậm nhất trước giờ khởi hành là: " + _tgChamNhatDatVe + " giờ");
-                }
+
+                flightID = flight_ID.Text;
+                Continue?.Invoke(this, new RoutedEventArgs());
             }
         }
     }

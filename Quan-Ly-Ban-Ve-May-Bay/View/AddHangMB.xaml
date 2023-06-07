@@ -8,19 +8,24 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
-        Height="300" Width="600">
+        Height="310" Width="600">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="25"/>
+            <RowDefinition Height="45"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Button Style ="{StaticResource MaterialDesignIconButton}"
+        <Grid Grid.Row="0">
+            <DockPanel>
+                <TextBlock x:Name="headertxt" Text="Thêm hãng bay" TextAlignment="Center" Foreground="Black" Background="#ADFF2F" FontSize="20" FontFamily="Sitka Text" Margin="10"/>
+                <Button Style ="{StaticResource MaterialDesignIconButton}"
                 Height="25" Width="25" Click="BtnClose_Click"
                 ToolTip="Close"
                 HorizontalAlignment="Right"
                 Grid.Row="0" >
-            <materialDesign:PackIcon Kind="Close" Foreground="Black"/>
-        </Button>
+                    <materialDesign:PackIcon Kind="Close" Foreground="Black"/>
+                </Button>
+            </DockPanel>
+        </Grid>
         <StackPanel Grid.Row="1" Orientation="Vertical" Margin="0,50">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBlock Text="Mã hãng: " Margin="10"/>

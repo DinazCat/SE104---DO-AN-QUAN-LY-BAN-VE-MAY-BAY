@@ -24,6 +24,7 @@ using MessageBox = System.Windows.Forms.MessageBox;
 using Button = System.Windows.Controls.Button;
 using DataGrid = System.Windows.Controls.DataGrid;
 using System.Collections;
+using KeyEventArgs = System.Windows.Forms.KeyEventArgs;
 
 namespace Quan_Ly_Ban_Ve_May_Bay.View
 {
@@ -45,6 +46,11 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             qLHangVeClass = new List<QLHangVeClass>();
             qLHangVeClassexist = new List<QLHangVeClass>();
 
+            loaimaybaycb.Items.Add("BOEING");
+            loaimaybaycb.Items.Add("Airbus A321-200");
+            loaimaybaycb.Items.Add("ATR 72");
+            loaimaybaycb.Items.Add("Airbus A330-200");
+            loaimaybaycb.Items.Add("Airbus A350-900 XWB");
             string query = "SELECT * FROM SANBAY";
             SqlParameter param1 = new SqlParameter("", "");
             DataTable dt;
@@ -58,8 +64,8 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             }
             foreach (DataRow dr in dt.Rows)
             {
-                FromcBox.Items.Add(dr["MaSanBay"].ToString());
-                TocBox.Items.Add(dr["MaSanBay"].ToString());
+                FromcBox.Items.Add(dr["TenSanBay"].ToString());
+                TocBox.Items.Add(dr["TenSanBay"].ToString());
             }
             FromcBox.SelectedIndex = 0;
             TocBox.SelectedIndex = 0;
@@ -86,6 +92,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
 
             if (thaotac == 1)
             {
+                headertxt.Text = "Sửa chuyến bay";
                 query = "SELECT * FROM CHUYENBAY where MaChuyenBay = @macb";
                 param1 = new SqlParameter("@macb", Chuyenbay.chuyenbaytofix.maCB);
                 using (SqlDataReader reader = DataProvider.ExecuteReader(query, CommandType.Text, param1))
@@ -129,12 +136,31 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                     Ngaypicker.SelectedDate = new DateTime(nam, thang, ngay);
                     gioTxb.Text = dr["ThoiGianXuatPhat"].ToString();
                     MaHcBox.SelectedItem = dr["MaHangMayBay"].ToString();
-                    loaimaybayTxb.Text = dr["LoaiMayBay"].ToString();
+                    loaimaybaycb.Text = dr["LoaiMayBay"].ToString();
                 }
                 machuyenbayTxb.Text = Chuyenbay.chuyenbaytofix.maCB;
                 machuyenbayTxb.IsEnabled = false;
-                FromcBox.Text = Chuyenbay.chuyenbaytofix.SBdi;
-                TocBox.Text = Chuyenbay.chuyenbaytofix.SBden;
+
+                string s = "SELECT * From SANBAY WHERE MaSanBay = @ma";
+                SqlParameter p = new SqlParameter("@ma", Chuyenbay.chuyenbaytofix.SBdi);
+                using (SqlDataReader reader = DataProvider.ExecuteReader(s, CommandType.Text, p))
+                {
+                    if (reader.Read())
+                    {
+                        FromcBox.Text = reader.GetString(reader.GetOrdinal("TenSanBay"));
+                    }
+                }
+                // FromcBox.Text = Chuyenbay.chuyenbaytofix.SBdi;
+                s = "SELECT * From SANBAY WHERE MaSanBay = @ma";
+                p = new SqlParameter("@ma", Chuyenbay.chuyenbaytofix.SBden);
+                using (SqlDataReader reader = DataProvider.ExecuteReader(s, CommandType.Text, p))
+                {
+                    if (reader.Read())
+                    {
+                        TocBox.Text = reader.GetString(reader.GetOrdinal("TenSanBay"));
+                    }
+                }
+                //TocBox.Text = Chuyenbay.chuyenbaytofix.SBden;
                 TGbayTxb.Text = Chuyenbay.chuyenbaytofix.tgBay;
                 GiaTxb.Text = Chuyenbay.chuyenbaytofix.Gia;
 
@@ -151,7 +177,16 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 foreach (DataRow dr in dt2.Rows)
                 {
                     QLHangVeClass HV = new QLHangVeClass();
-                    HV.Mahangve = dr["MaHangVe"].ToString();
+                    s = "SELECT * From HANGVE WHERE MaHangVe = @ma";
+                    p = new SqlParameter("@ma", dr["MaHangVe"]);
+                    using (SqlDataReader reader = DataProvider.ExecuteReader(s, CommandType.Text, p))
+                    {
+                        if (reader.Read())
+                        {
+                            HV.Mahangve = reader.GetString(reader.GetOrdinal("TenHangVe"));
+                        }
+                    }
+                    // HV.Mahangve = dr["TenHangVe"].ToString();
                     HV.Machuyenbay = dr["MaChuyenBay"].ToString();
                     HV.Soluong = dr["SoLuong"].ToString();
                     // qLHangVeClass.Add(HV);
@@ -202,6 +237,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 MessageBox.Show("Số sân bay trung gian đã đạt đến giới hạn quy định. ", "Thông báo!");
             }
         }
+
         public void loadDatatoSBTG(string MaCB)
         {
             string query = "SELECT * FROM SANBAYTRUNGGIAN WHERE MaChuyenBay=@macb";
@@ -231,9 +267,29 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
 
         private void ThemHV_Click(object sender, RoutedEventArgs e)
         {
-            QLHangVeClass hv = new QLHangVeClass();
-            qLHangVeClass.Add(hv);
-            HangVeList.Items.Add(hv);
+            int rowCount = 0;
+            SqlConnection sqlCon = DataProvider.sqlConnection;
+            if (sqlCon.State == ConnectionState.Closed)
+            {
+                sqlCon.Open();
+            }
+            String query = "SELECT COUNT(*) FROM HANGVE";
+            using (SqlCommand sqlCmd = new SqlCommand(query, sqlCon))
+            {
+                rowCount = (int)sqlCmd.ExecuteScalar();
+            }
+
+
+            if (HangVeList.Items.Count < rowCount)
+            {
+                QLHangVeClass hv = new QLHangVeClass();
+                qLHangVeClass.Add(hv);
+                HangVeList.Items.Add(hv);
+            }
+            else
+            {
+                return;
+            }
         }
         private void XoaHV_Click(object sender, RoutedEventArgs e)
         {
@@ -281,17 +337,24 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
         private void XoaSBTG_Click(object sender, RoutedEventArgs e)
         {
             SanbayTG info = SBTGTable.SelectedItem as SanbayTG;
-            SqlConnection con = DataProvider.sqlConnection;
-            if (con.State == ConnectionState.Closed)
+            if (info != null)
             {
-                con.Open();
+                SqlConnection con = DataProvider.sqlConnection;
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+                SqlCommand cmd = new SqlCommand("Delete from SANBAYTRUNGGIAN where SanBayTrungGian=N'" + info.tenSB + "' and MaChuyenBay=N'" + machuyenbayTxb.Text + "'", con);
+                cmd.CommandType = CommandType.Text;
+                cmd.ExecuteReader();
+                con.Close();
+                SBTGTable.Items.Clear();
+                loadDatatoSBTG(machuyenbayTxb.Text);
             }
-            SqlCommand cmd = new SqlCommand("Delete from SANBAYTRUNGGIAN where SanBayTrungGian=N'" + info.tenSB + "' and MaChuyenBay=N'" + machuyenbayTxb.Text + "'", con);
-            cmd.CommandType = CommandType.Text;
-            cmd.ExecuteReader();
-            con.Close();
-            SBTGTable.Items.Clear();
-            loadDatatoSBTG(machuyenbayTxb.Text);
+            else
+            {
+                MessageBox.Show("Vui lòng chọn dòng bạn muốn xóa");
+            }
         }
         public void loadDatatoTable()
         {
@@ -344,6 +407,16 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                     giave = (int)(int.Parse(Gia) * phantram);
                 }
                 qLHangVeClass[i].Machuyenbay = MaCB;
+                string maHV = "";
+                string s = "SELECT * From HANGVE WHERE TenHangVe = @ten";
+                SqlParameter p = new SqlParameter("@ten", qLHangVeClass[i].Mahangve);
+                using (SqlDataReader reader = DataProvider.ExecuteReader(s, CommandType.Text, p))
+                {
+                    if (reader.Read())
+                    {
+                        maHV = reader.GetString(reader.GetOrdinal("MaHangVe"));
+                    }
+                }
                 SqlConnection con = DataProvider.sqlConnection;
                 try
                 {
@@ -351,37 +424,40 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                     {
                         con.Open();
                     }
-                    SqlCommand cmd1 = new SqlCommand("Insert into [QuanLyHangVeChuyenBay] values('" + MaCB + "', N'" + qLHangVeClass[i].Mahangve + "',N'" + qLHangVeClass[i].Soluong + "')", con);
+                    SqlCommand cmd1 = new SqlCommand("Insert into [QuanLyHangVeChuyenBay] values('" + MaCB + "', N'" + maHV + "',N'" + qLHangVeClass[i].Soluong + "')", con);
                     cmd1.CommandType = CommandType.Text;
                     cmd1.ExecuteNonQuery();
                     con.Close();
 
                     for (int j = 0; j < int.Parse(qLHangVeClass[i].Soluong); j++)
                     {
-                        //string mave = j.ToString() + MaCB + qLHangVeClass[i].Mahangve;
-                        Random rd = new Random();
-                        int ID = rd.Next(100000, 999999);
-                        string mave = ID.ToString() + j.ToString();
+                        string mave = j.ToString() + MaCB + maHV;
+                        //Random rd = new Random();
+                        //int ID = rd.Next(100000, 999999);
+                        //string mave = ID.ToString() + j.ToString();
                         try
                         {
                             if (con.State == ConnectionState.Closed)
                             {
                                 con.Open();
                             }
-                            SqlCommand cmd2 = new SqlCommand("Insert into [VE] values('" + mave + "', N'" + qLHangVeClass[i].Machuyenbay + "',N'" + (j + 1).ToString() + "',N'" + "" + "',N'" + "" + "',N'" + "" + "',N'" + "" + "',N'" + "TRONG" + "',N'" + qLHangVeClass[i].Mahangve + "'," + giave + ")", con);
+                            SqlCommand cmd2 = new SqlCommand("Insert into [VE] values('" + mave + "', N'" + qLHangVeClass[i].Machuyenbay + "',N'" + (j + 1).ToString() + "',N'" + "" + "',N'" + "" + "',N'" + "" + "',N'" + "" + "',N'" + "TRONG" + "',N'" + maHV + "'," + giave + ")", con);
                             cmd2.CommandType = CommandType.Text;
                             cmd2.ExecuteNonQuery();
                             con.Close();
                         }
-                        catch (Exception ex) { MessageBox.Show(ex.ToString()); }
+                        catch (Exception ex) { Console.WriteLine(ex); }
                     }
                 }
-                catch (Exception ex) { MessageBox.Show(ex.ToString()); }
+                catch (Exception ex) { Console.WriteLine(ex); }
 
             }
         }
         public string MaCB, Sanbaydi, Sanbayden, Ngay, Gio, TgBay, Gia, mahangMB, loaiMB;
 
+
+
+        public static string tenSBdi = "", tenSBden = "";
         chuyenbayclass cb;
         void SaveCB()
         {
@@ -391,16 +467,66 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 Ngay = selectedDate.Value.ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
             }
             MaCB = machuyenbayTxb.Text;
-            Sanbaydi = FromcBox.Text;
-            Sanbayden = TocBox.Text;
+            string s = "SELECT * From SANBAY WHERE TenSanBay = @ten";
+            SqlParameter p = new SqlParameter("@ten", FromcBox.Text);
+            using (SqlDataReader reader = DataProvider.ExecuteReader(s, CommandType.Text, p))
+            {
+                if (reader.Read())
+                {
+                    Sanbaydi = reader.GetString(reader.GetOrdinal("MaSanBay"));
+                }
+            }
+            tenSBdi = FromcBox.Text;
+            s = "SELECT * From SANBAY WHERE TenSanBay = @ten";
+            p = new SqlParameter("@ten", TocBox.Text);
+            using (SqlDataReader reader = DataProvider.ExecuteReader(s, CommandType.Text, p))
+            {
+                if (reader.Read())
+                {
+                    Sanbayden = reader.GetString(reader.GetOrdinal("MaSanBay"));
+                }
+            }
+            tenSBden = TocBox.Text;
             Gio = gioTxb.Text;
             TgBay = TGbayTxb.Text;
             Gia = GiaTxb.Text;
             mahangMB = MaHcBox.Text;
-            loaiMB = loaimaybayTxb.Text;
-            if (machuyenbayTxb.Text == "" || gioTxb.Text == "" || TGbayTxb.Text == "" || GiaTxb.Text == "" || MaHcBox.Text == "" || loaimaybayTxb.Text == "" || Ngay == "")
+            loaiMB = loaimaybaycb.Text;
+            if (machuyenbayTxb.Text == "" || gioTxb.Text == "" || TGbayTxb.Text == "" || GiaTxb.Text == "" || MaHcBox.Text == "" || loaimaybaycb.Text == "" || Ngay == "")
             {
                 MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
+                return;
+            }
+            if (thaotac == 0)
+            {
+                s = "SELECT * From CHUYENBAY WHERE MaChuyenBay = @ma";
+                p = new SqlParameter("@ma", machuyenbayTxb.Text);
+                using (SqlDataReader reader = DataProvider.ExecuteReader(s, CommandType.Text, p))
+                {
+                    if (reader.HasRows)
+                    {
+                        MessageBox.Show("Mã chuyến bay đã tồn tại. ", "Dữ liệu không hợp lệ!");
+                        return;
+                    }
+                }
+            }
+            try
+            {
+                string[] thoigianKH = Gio.Split(':');
+                if (int.Parse(thoigianKH[0]) < 0 || int.Parse(thoigianKH[0]) >= 24)
+                {
+                    MessageBox.Show("Số giờ khởi hành không hợp lệ ", "Dữ liệu không hợp lệ!");
+                    return;
+                }
+                if (int.Parse(thoigianKH[1]) < 0 || int.Parse(thoigianKH[1]) >= 60)
+                {
+                    MessageBox.Show("Số phút trong giờ khởi hành không hợp lệ ", "Dữ liệu không hợp lệ!");
+                    return;
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Giờ khởi hành không đúng định dạng ", "Dữ liệu không hợp lệ!");
                 return;
             }
             int ThoiGianBayToiThieu = 0;
@@ -420,6 +546,11 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             try
             {
                 int p1 = int.Parse(Gia);
+                if (p1 < 0)
+                {
+                    MessageBox.Show("Vui lòng nhập giá là một số dương.", "Dữ liệu không hợp lệ!");
+                    return;
+                }
             }
             catch
             {
@@ -437,23 +568,51 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             }
             if (int.Parse(TgBay) < ThoiGianBayToiThieu)
             {
-                MessageBox.Show("Vui lòng nhập thời gian bay phải lớn hơn thời gian bay tối thiểu đã định. ", "Dữ liệu không hợp lệ!");
+                MessageBox.Show("Vui lòng nhập thời gian bay phải lớn hơn thời gian bay tối thiểu đã định: " + ThoiGianBayToiThieu + " phút", "Dữ liệu không hợp lệ!");
+                return;
+
+            }
+            if (Sanbaydi == Sanbayden)
+            {
+                MessageBox.Show("Sân bay đi và sân bay đến không được trùng nhau.", "Dữ liệu không hợp lệ!");
                 return;
 
             }
             if (thaotac == 0)
             {
-                string s = "SELECT * From CHUYENBAY WHERE MaChuyenBay = @ma";
-                SqlParameter p = new SqlParameter("@ma", machuyenbayTxb.Text);
-                using (SqlDataReader reader = DataProvider.ExecuteReader(s, CommandType.Text, p))
+                if (qLHangVeClass.Count == 0)
                 {
-                    if (reader.HasRows)
+                    MessageBox.Show("Vui lòng chọn hạng vé cho chuyến bay.", "Dữ liệu không hợp lệ!");
+                    return;
+                }
+                else
+                {
+                    for (int i = 0; i < qLHangVeClass.Count; i++)
                     {
-                        MessageBox.Show("Mã chuyến bay đã tồn tại. ", "Dữ liệu không hợp lệ!");
-                        return;
+                        if (qLHangVeClass[i].Mahangve == null || qLHangVeClass[i].Soluong == null)
+                        {
+                            MessageBox.Show("Vui lòng nhập thông tin đầy đủ cho hạng vé.", "Dữ liệu không hợp lệ!");
+                            return;
+                        }
+                    }
+                }
+
+            }
+            if (thaotac == 1)
+            {
+                if (qLHangVeClass.Count > 0)
+                {
+                    for (int i = 0; i < qLHangVeClass.Count; i++)
+                    {
+                        if (qLHangVeClass[i].Mahangve == null || qLHangVeClass[i].Soluong == null)
+                        {
+                            MessageBox.Show("Vui lòng nhập thông tin đầy đủ cho hạng vé.", "Dữ liệu không hợp lệ!");
+                            return;
+                        }
                     }
                 }
             }
+
             if (thaotac == 0)
             {
                 for (int i = 0; i < qLHangVeClass.Count - 1; i++)
@@ -492,11 +651,12 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 {
                     con.Open();
                 }
-                SqlCommand cmd = new SqlCommand("Insert into [CHUYENBAY] values('" + MaCB + "',N'" + Sanbaydi + "',N'" + Sanbayden + "',N'" + Ngay + "',N'" + Gio + "',N'" + TgBay + "',N'" + mahangMB + "',N'" + loaiMB + "',N'" + Gia + "')", con);
+                SqlCommand cmd = new SqlCommand("Insert into [CHUYENBAY] values(N'" + MaCB + "',N'" + Sanbaydi + "',N'" + Sanbayden + "',N'" + Ngay + "',N'" + Gio + "',N'" + TgBay + "',N'" + mahangMB + "',N'" + loaiMB + "',N'" + Gia + "')", con);
                 cmd.CommandType = CommandType.Text;
                 cmd.ExecuteNonQuery();
                 con.Close();
-                SaveHV_VE();
+                if (qLHangVeClass.Count > 0)
+                    SaveHV_VE();
             }
             else
             {
@@ -528,15 +688,16 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 {
                     con.Open();
                 }
-                SqlCommand cmd = new SqlCommand("Update [CHUYENBAY] set MaChuyenBay = '" + MaCB + "',SanBayDi='" + Sanbaydi + "', SanBayDen='" + Sanbayden + "', NgayKhoiHanh='" + Ngay + "',ThoiGianXuatPhat='" + Gio + "', ThoiGianDuKien='" + TgBay + "', MaHangMayBay='" + mahangMB + "', LoaiMayBay=N'" + loaiMB + "', Gia='" + Gia + "' where MaChuyenBay='" + Chuyenbay.chuyenbaytofix.maCB + "'", con);
+                SqlCommand cmd = new SqlCommand("Update [CHUYENBAY] set MaChuyenBay = N'" + MaCB + "',SanBayDi=N'" + Sanbaydi + "', SanBayDen=N'" + Sanbayden + "', NgayKhoiHanh='" + Ngay + "',ThoiGianXuatPhat='" + Gio + "', ThoiGianDuKien='" + TgBay + "', MaHangMayBay='" + mahangMB + "', LoaiMayBay=N'" + loaiMB + "', Gia='" + Gia + "' where MaChuyenBay=N'" + Chuyenbay.chuyenbaytofix.maCB + "'", con);
                 cmd.CommandType = CommandType.Text;
                 cmd.ExecuteNonQuery();
                 con.Close();
-
-                SaveHV_VE();
+                if (qLHangVeClass.Count > 0)
+                    SaveHV_VE();
                 chuyenbayTable.Items.Clear();
                 loadDatatoTable();
             }
+            MessageBox.Show("Bạn đã lưu chuyến bay thành công. ", "Thông báo");
             isSave = true;
         }
         private void Luu_Click(object sender, RoutedEventArgs e)
@@ -558,10 +719,15 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                     this.Close();
                 }
             }
+            else
+            {
+                isSave = false;
+                this.Close();
+            }
 
-            isSave = false;
-            this.Close();
+
 
         }
+
     }
 }

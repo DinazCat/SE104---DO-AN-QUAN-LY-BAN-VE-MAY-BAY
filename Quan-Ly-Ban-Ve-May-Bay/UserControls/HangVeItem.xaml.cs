@@ -39,7 +39,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
             }
             foreach (DataRow dr in dt.Rows)
             {
-                maHVcBox.Items.Add(dr["MaHangVe"]);
+                maHVcBox.Items.Add(dr["TenHangVe"]);
             }
 
             SLcBox.Items.Add("6");
@@ -55,6 +55,15 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
             if (hv != null)
             {
                 hv.Mahangve = (sender as ComboBox).SelectedItem as string;
+                //string s = "SELECT * From HANGVE WHERE TenHangVe = @ten";
+                //SqlParameter p = new SqlParameter("@ten", (sender as ComboBox).SelectedItem as string);
+                //using (SqlDataReader reader = DataProvider.ExecuteReader(s, CommandType.Text, p))
+                //{
+                //    if (reader.Read())
+                //    {
+                //        hv.Mahangve = reader.GetString(reader.GetOrdinal("MaHangVe"));
+                //    }
+                //}
             }
         }
 
@@ -72,9 +81,19 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
             QLHangVeClass hv = (sender as ComboBox).DataContext as QLHangVeClass;
             if (hv.Machuyenbay != null && hv.Mahangve != null)
             {
+                string maHV = "";
+                string s = "SELECT * From HANGVE WHERE TenHangVe = @ten";
+                SqlParameter p = new SqlParameter("@ten", hv.Mahangve);
+                using (SqlDataReader reader = DataProvider.ExecuteReader(s, CommandType.Text, p))
+                {
+                    if (reader.Read())
+                    {
+                        maHV = reader.GetString(reader.GetOrdinal("MaHangVe"));
+                    }
+                }
                 string query = "SELECT * From VE where MaChuyenBay = @ma and MaHangVe = @mah";
                 SqlParameter param1 = new SqlParameter("@ma", hv.Machuyenbay);
-                SqlParameter param2 = new SqlParameter("@mah", hv.Mahangve);
+                SqlParameter param2 = new SqlParameter("@mah", maHV);
                 DataTable table;
                 using (SqlDataReader reader = DataProvider.ExecuteReader(query, CommandType.Text, param1, param2))
                 {
@@ -95,9 +114,19 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
             QLHangVeClass hv = (sender as ComboBox).DataContext as QLHangVeClass;
             if (hv.Machuyenbay != null && hv.Mahangve != null)
             {
+                string maHV = "";
+                string s = "SELECT * From HANGVE WHERE TenHangVe = @ten";
+                SqlParameter p = new SqlParameter("@ten", hv.Mahangve);
+                using (SqlDataReader reader = DataProvider.ExecuteReader(s, CommandType.Text, p))
+                {
+                    if (reader.Read())
+                    {
+                        maHV = reader.GetString(reader.GetOrdinal("MaHangVe"));
+                    }
+                }
                 string query = "SELECT * From VE where MaChuyenBay = @ma and MaHangVe = @mah";
                 SqlParameter param1 = new SqlParameter("@ma", hv.Machuyenbay);
-                SqlParameter param2 = new SqlParameter("@mah", hv.Mahangve);
+                SqlParameter param2 = new SqlParameter("@mah", maHV);
                 DataTable table;
                 using (SqlDataReader reader = DataProvider.ExecuteReader(query, CommandType.Text, param1, param2))
                 {

@@ -34,6 +34,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             this.hangmbtable = dataGrid;
             if (thaotac == 1)
             {
+                headertxt.Text = "Sửa hãng bay";
                 mahangTxb.Text = Hangmaybay.hangbaytofix.mahang;
                 mahangTxb.IsEnabled = false;
                 tenhangTxb.Text = Hangmaybay.hangbaytofix.tenhang;
@@ -114,7 +115,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 {
                     con.Open();
                 }
-                SqlCommand cmd = new SqlCommand("Insert into HANGMAYBAY values('" + mahang + "',N'" + tenhang + "',N'" + "" + "')", con);
+                SqlCommand cmd = new SqlCommand("Insert into HANGMAYBAY values(N'" + mahang + "',N'" + tenhang + "',N'" + "" + "')", con);
                 cmd.CommandType = CommandType.Text;
                 cmd.ExecuteNonQuery();
                 con.Close();
@@ -128,7 +129,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 {
                     con.Open();
                 }
-                SqlCommand cmd = new SqlCommand("Update [HANGMAYBAY] set MaHang='" + mahang + "',TenHang='" + tenhang + "' where MaHang='" + Hangmaybay.hangbaytofix.mahang + "'", con);
+                SqlCommand cmd = new SqlCommand("Update [HANGMAYBAY] set MaHang=N'" + mahang + "',TenHang=N'" + tenhang + "' where MaHang=N'" + Hangmaybay.hangbaytofix.mahang + "'", con);
                 cmd.CommandType = CommandType.Text;
                 cmd.ExecuteNonQuery();
                 con.Close();

@@ -77,23 +77,31 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
         private void Xoa_Click(object sender, RoutedEventArgs e)
         {
             HangMBclass info = HangMBTable.SelectedItem as HangMBclass;
-            try
+            if (info != null)
             {
-                SqlConnection con = DataProvider.sqlConnection;
-                if (con.State == ConnectionState.Closed)
+                try
                 {
-                    con.Open();
+                    SqlConnection con = DataProvider.sqlConnection;
+                    if (con.State == ConnectionState.Closed)
+                    {
+                        con.Open();
+                    }
+                    SqlCommand cmd = new SqlCommand("Delete from HANGMAYBAY where MaHang=N'" + info.mahang + "'", con);
+                    cmd.CommandType = CommandType.Text;
+                    cmd.ExecuteReader();
+                    con.Close();
+                    HangMBTable.Items.Clear();
+                    loadDatatoTable();
+                    MessageBox.Show("Xóa hãng bay thành công ", "Thông báo");
                 }
-                SqlCommand cmd = new SqlCommand("Delete from HANGMAYBAY where MaHang=N'" + info.mahang + "'", con);
-                cmd.CommandType = CommandType.Text;
-                cmd.ExecuteReader();
-                con.Close();
-                HangMBTable.Items.Clear();
-                loadDatatoTable();
+                catch
+                {
+                    MessageBox.Show("Hãng máy bay này đã được đưa vào sử dụng, không thể xóa");
+                }
             }
-            catch
+            else
             {
-                MessageBox.Show("Hãng máy bay này đã được đưa vào sử dụng, không thể xóa");
+                MessageBox.Show("Vui lòng chọn dòng bạn muốn xóa");
             }
 
         }

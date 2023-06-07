@@ -48,8 +48,10 @@
                 <StackPanel Orientation="Vertical" VerticalAlignment="Center" x:Name="Cbaydetail">
                     <TextBlock Text="Mã chuyến bay:" FontSize="20" Foreground="AntiqueWhite" TextAlignment="Left"/>
                     <TextBox Width="170" Height="30" BorderBrush="Black" BorderThickness="1" x:Name="machuyenbayTxb" Background="White"/>
-                    <TextBlock Text="From -> to:" FontSize="20" Foreground="AntiqueWhite" TextAlignment="Left"/>
-                    <TextBox Width="170" Height="30" BorderBrush="Black" BorderThickness="1" x:Name="fromtoTxb" Background="White"/>
+                    <TextBlock Text="Sân bay đi:" FontSize="20" Foreground="AntiqueWhite" TextAlignment="Left"/>
+                    <TextBox Width="170" Height="30" BorderBrush="Black" BorderThickness="1" x:Name="fromTxb" Background="White"/>
+                    <TextBlock Text="Sân bay đến:" FontSize="20" Foreground="AntiqueWhite" TextAlignment="Left"/>
+                    <TextBox Width="170" Height="30" BorderBrush="Black" BorderThickness="1" x:Name="toTxb" Background="White"/>
                     <TextBlock Text="Ngay - gio:" FontSize="20" Foreground="AntiqueWhite" TextAlignment="Left"/>
                     <TextBox Width="170" Height="30" BorderBrush="Black" BorderThickness="1" x:Name="datetimeTxb" Background="White"/>
                     <TextBlock Text="Giá:" FontSize="20" Foreground="AntiqueWhite" TextAlignment="Left"/>

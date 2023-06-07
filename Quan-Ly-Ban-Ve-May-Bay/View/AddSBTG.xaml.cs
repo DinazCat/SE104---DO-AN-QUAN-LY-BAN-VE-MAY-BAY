@@ -51,6 +51,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             SBTGcBox.SelectedIndex = 0;
             if (thaotac == 1)
             {
+                headertxt.Text = "Sửa sân bay";
                 SBTGcBox.SelectedItem = AddChuyenbay.infotofix.tenSB;
                 thoigiandungTxb.Text = AddChuyenbay.infotofix.TGdung;
                 ghichuTxb.Text = AddChuyenbay.infotofix.ghichu;
@@ -98,29 +99,34 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 MessageBox.Show("Vui lòng nhập đầy đủ thông tin!");
                 return;
             }
-            if (thaotac == 0)
+            if (tenSB == AddChuyenbay.tenSBdi || tenSB == AddChuyenbay.tenSBden)
             {
-                string s = "SELECT * From SANBAYTRUNGGIAN where MaChuyenBay = @ma";
-                SqlParameter par = new SqlParameter("@ma", maCB);
-                DataTable table;
-                using (SqlDataReader reader = DataProvider.ExecuteReader(s, CommandType.Text, par))
+                MessageBox.Show("Sân bay trung gian không được trùng với sân bay đi và sân bay đến.", "Dữ liệu không hợp lệ!");
+                return;
+            }
+            // if (thaotac == 0)
+            // {
+            string s = "SELECT * From SANBAYTRUNGGIAN where MaChuyenBay = @ma";
+            SqlParameter par = new SqlParameter("@ma", maCB);
+            DataTable table;
+            using (SqlDataReader reader = DataProvider.ExecuteReader(s, CommandType.Text, par))
+            {
+                table = new DataTable();
+                if (reader.HasRows)
                 {
-                    table = new DataTable();
-                    if (reader.HasRows)
+                    table.Load(reader);
+                    foreach (DataRow dr in table.Rows)
                     {
-                        table.Load(reader);
-                        foreach (DataRow dr in table.Rows)
+                        if (dr["SanBayTrungGian"].ToString() == tenSB)
                         {
-                            if (dr["SanBayTrungGian"].ToString() == tenSB)
-                            {
-                                MessageBox.Show("Sân bay trung gian đã có trong chuyến bay này.", "Dữ liệu không hợp lệ!");
-                                return;
-                            }
+                            MessageBox.Show("Sân bay trung gian đã có trong chuyến bay này.", "Dữ liệu không hợp lệ!");
+                            return;
                         }
-
                     }
+
                 }
             }
+            // }
             try
             {
                 int p = int.Parse(tgDung);
@@ -149,7 +155,8 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             }
             if (int.Parse(tgDung) < TGdungtoithieu || int.Parse(tgDung) > TGdungtoida)
             {
-                MessageBox.Show("Vui lòng nhập thời gian dừng phải phù hợp với thời gian dừng tối thiểu và tối đa đã định. ", "Dữ liệu không hợp lệ!");
+                string tb = TGdungtoithieu + " phút" + " - " + TGdungtoida + " phút";
+                MessageBox.Show("Vui lòng nhập thời gian dừng phải phù hợp với thời gian dừng tối thiểu và tối đa đã định: " + tb, "Dữ liệu không hợp lệ!");
                 return;
             }
             if (thaotac == 0)
@@ -176,7 +183,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 {
                     con.Open();
                 }
-                SqlCommand cmd = new SqlCommand("Insert into SANBAYTRUNGGIAN values('" + tenSB + "',N'" + maCB + "',N'" + tgDung + "',N'" + GhiChu + "')", con);
+                SqlCommand cmd = new SqlCommand("Insert into SANBAYTRUNGGIAN values(N'" + tenSB + "',N'" + maCB + "',N'" + tgDung + "',N'" + GhiChu + "')", con);
                 cmd.CommandType = CommandType.Text;
                 cmd.ExecuteNonQuery();
                 con.Close();
@@ -190,7 +197,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 {
                     con.Open();
                 }
-                SqlCommand cmd = new SqlCommand("Update [SANBAYTRUNGGIAN] set SanBayTrungGian='" + tenSB + "',ThoiGianDung='" + tgDung + "', GhiChu='" + GhiChu + "' where MaChuyenBay='" + maCB + "' and SanBayTrungGian='" + AddChuyenbay.infotofix.tenSB + "'", con);
+                SqlCommand cmd = new SqlCommand("Update [SANBAYTRUNGGIAN] set SanBayTrungGian=N'" + tenSB + "',ThoiGianDung='" + tgDung + "', GhiChu=N'" + GhiChu + "' where MaChuyenBay='" + maCB + "' and SanBayTrungGian=N'" + AddChuyenbay.infotofix.tenSB + "'", con);
                 cmd.CommandType = CommandType.Text;
                 cmd.ExecuteNonQuery();
                 con.Close();

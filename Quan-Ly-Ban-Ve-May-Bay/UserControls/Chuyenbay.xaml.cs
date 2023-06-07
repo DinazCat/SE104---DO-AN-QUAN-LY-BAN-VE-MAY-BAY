@@ -93,67 +93,74 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
         private void Xoa_Click(object sender, RoutedEventArgs e)
         {
             chuyenbayclass info = CBTable.SelectedItem as chuyenbayclass;
-            Boolean flag = false;
-            string query = "SELECT * From VE where MaChuyenBay = @ma";
-            SqlParameter param1 = new SqlParameter("@ma", info.maCB);
-            DataTable table;
-            using (SqlDataReader reader = DataProvider.ExecuteReader(query, CommandType.Text, param1))
+            if (info != null)
             {
-                table = new DataTable();
-                if (reader.HasRows)
+                Boolean flag = false;
+                string query = "SELECT * From VE where MaChuyenBay = @ma";
+                SqlParameter param1 = new SqlParameter("@ma", info.maCB);
+                DataTable table;
+                using (SqlDataReader reader = DataProvider.ExecuteReader(query, CommandType.Text, param1))
                 {
-                    table.Load(reader);
+                    table = new DataTable();
+                    if (reader.HasRows)
+                    {
+                        table.Load(reader);
 
+                    }
+                    foreach (DataRow dr in table.Rows)
+                    {
+                        if (dr["TinhTrang"].ToString() != "TRONG") flag = true;
+                    }
                 }
-                foreach (DataRow dr in table.Rows)
+                if (flag == true)
                 {
-                    if (dr["TinhTrang"].ToString() != "TRONG") flag = true;
+                    MessageBox.Show("Chuyến bay đã được đưa vào sử dụng, không thể xóa.", "Thông báo");
+                    return;
                 }
-            }
-            if (flag == true)
-            {
-                MessageBox.Show("Chuyến bay đã được đưa vào sử dụng, không thể xóa.", "Thông báo");
-                return;
-            }
-            SqlConnection con = DataProvider.sqlConnection;
-            if (con.State == ConnectionState.Closed)
-            {
-                con.Open();
-            }
-            SqlCommand cmd2 = new SqlCommand("Delete from  SANBAYTRUNGGIAN where MaChuyenBay=N'" + info.maCB + "'", con);
-            cmd2.CommandType = CommandType.Text;
-            cmd2.ExecuteReader();
-            con.Close();
+                SqlConnection con = DataProvider.sqlConnection;
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+                SqlCommand cmd2 = new SqlCommand("Delete from  SANBAYTRUNGGIAN where MaChuyenBay=N'" + info.maCB + "'", con);
+                cmd2.CommandType = CommandType.Text;
+                cmd2.ExecuteReader();
+                con.Close();
 
-            if (con.State == ConnectionState.Closed)
-            {
-                con.Open();
-            }
-            SqlCommand cmd3 = new SqlCommand("Delete from VE where  MaChuyenBay=N'" + info.maCB + "'", con);
-            cmd3.CommandType = CommandType.Text;
-            cmd3.ExecuteReader();
-            con.Close();
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+                SqlCommand cmd3 = new SqlCommand("Delete from VE where  MaChuyenBay=N'" + info.maCB + "'", con);
+                cmd3.CommandType = CommandType.Text;
+                cmd3.ExecuteReader();
+                con.Close();
 
-            if (con.State == ConnectionState.Closed)
-            {
-                con.Open();
-            }
-            SqlCommand cmd1 = new SqlCommand("Delete from QuanLyHangVeChuyenBay where  MaChuyenBay=N'" + info.maCB + "'", con);
-            cmd1.CommandType = CommandType.Text;
-            cmd1.ExecuteReader();
-            con.Close();
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+                SqlCommand cmd1 = new SqlCommand("Delete from QuanLyHangVeChuyenBay where  MaChuyenBay=N'" + info.maCB + "'", con);
+                cmd1.CommandType = CommandType.Text;
+                cmd1.ExecuteReader();
+                con.Close();
 
-            if (con.State == ConnectionState.Closed)
-            {
-                con.Open();
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+                SqlCommand cmd = new SqlCommand("Delete from CHUYENBAY where MaChuyenBay=N'" + info.maCB + "'", con);
+                cmd.CommandType = CommandType.Text;
+                cmd.ExecuteReader();
+                con.Close();
+                CBTable.Items.Clear();
+                loadDatatoTable();
+                MessageBox.Show("Xóa chuyến bay thành công ", "Thông báo");
             }
-            SqlCommand cmd = new SqlCommand("Delete from CHUYENBAY where MaChuyenBay=N'" + info.maCB + "'", con);
-            cmd.CommandType = CommandType.Text;
-            cmd.ExecuteReader();
-            con.Close();
-            CBTable.Items.Clear();
-            loadDatatoTable();
-            MessageBox.Show("Xóa chuyến bay thành công!");
+            else
+            {
+                MessageBox.Show("Vui lòng chọn dòng bạn muốn xóa");
+            }
 
         }
         QLCB_SB qLCB_SB;
@@ -180,7 +187,26 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
             if (info != null)
             {
                 q.machuyenbayTxb.Text = info.maCB;
-                q.fromtoTxb.Text = info.SBdi + "-" + info.SBden;
+                string s = "SELECT * From SANBAY WHERE MaSanBay = @ma";
+                SqlParameter p = new SqlParameter("@ma", info.SBdi);
+                using (SqlDataReader reader = DataProvider.ExecuteReader(s, CommandType.Text, p))
+                {
+                    if (reader.Read())
+                    {
+                        q.fromTxb.Text = reader.GetString(reader.GetOrdinal("TenSanBay"));
+                    }
+                }
+                // q.fromTxb.Text = info.SBden;
+                s = "SELECT * From SANBAY WHERE MaSanBay = @ma";
+                p = new SqlParameter("@ma", info.SBden);
+                using (SqlDataReader reader = DataProvider.ExecuteReader(s, CommandType.Text, p))
+                {
+                    if (reader.Read())
+                    {
+                        q.toTxb.Text = reader.GetString(reader.GetOrdinal("TenSanBay"));
+                    }
+                }
+                //  q.toTxb.Text =  info.SBdi;
                 q.datetimeTxb.Text = info.datetime;
                 string query = "SELECT * FROM CHUYENBAY where MaChuyenBay = @ma";
                 SqlParameter param1 = new SqlParameter("@ma", info.maCB);

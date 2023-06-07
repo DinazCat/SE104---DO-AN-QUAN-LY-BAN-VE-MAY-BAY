@@ -21,7 +21,7 @@
                     <TextBlock Text="Doanh thu theo năm" TextAlignment="Center" TextWrapping="Wrap"/>
                 </Button>
                 <Button BorderBrush="Black" Margin="0,10,0,0" BorderThickness="2" Height="50" Background="#F5F5F5" Click="QLCB_Click">
-                    <TextBlock Text="Quản lý chyến bay" TextAlignment="Center" TextWrapping="Wrap"/>
+                    <TextBlock Text="Quản lý chuyến bay" TextAlignment="Center" TextWrapping="Wrap"/>
                 </Button>
                 <Button BorderBrush="Black" Margin="0,10,0,0" BorderThickness="2" Height="50" Background="#F5F5F5" Click="TDQD_Click">
                     <TextBlock Text="Thay đổi quy định" TextAlignment="Center" TextWrapping="Wrap"/>

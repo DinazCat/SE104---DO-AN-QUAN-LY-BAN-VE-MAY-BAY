@@ -35,6 +35,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             this.thaotac = thaotac;
             if (thaotac == 1)
             {
+                headertxt.Text = "Sửa sân bay";
                 masanbayTxb.Text = Sanbay.sanbaytofix.maSB;
                 tensanbayTxb.Text = Sanbay.sanbaytofix.tenSB;
                 tinhTxb.Text = Sanbay.sanbaytofix.tinh;
@@ -120,7 +121,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 {
                     con.Open();
                 }
-                SqlCommand cmd = new SqlCommand("Insert into [SANBAY] values('" + MaSB + "',N'" + TenSB + "', N'" + Tinh + "')", con);
+                SqlCommand cmd = new SqlCommand("Insert into [SANBAY] values(N'" + MaSB + "',N'" + TenSB + "', N'" + Tinh + "')", con);
                 cmd.CommandType = CommandType.Text;
                 cmd.ExecuteNonQuery();
                 con.Close();
@@ -135,7 +136,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 {
                     con.Open();
                 }
-                SqlCommand cmd = new SqlCommand("Update [SANBAY] set MaSanBay='" + MaSB + "', TenSanBay='" + TenSB + "', Tinh='" + Tinh + "' where MaSanBay='" + Sanbay.sanbaytofix.maSB + "'", con);
+                SqlCommand cmd = new SqlCommand("Update [SANBAY] set MaSanBay=N'" + MaSB + "', TenSanBay=N'" + TenSB + "', Tinh=N'" + Tinh + "' where MaSanBay=N'" + Sanbay.sanbaytofix.maSB + "'", con);
                 cmd.CommandType = CommandType.Text;
                 cmd.ExecuteNonQuery();
                 con.Close();
