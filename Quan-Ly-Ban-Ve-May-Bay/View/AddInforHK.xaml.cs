@@ -17,6 +17,7 @@ using System.Text.RegularExpressions;
 using System.Data;
 using Quan_Ly_Ban_Ve_May_Bay.Model;
 using Quan_Ly_Ban_Ve_May_Bay.Pages;
+using System.Globalization;
 
 namespace Quan_Ly_Ban_Ve_May_Bay.View
 {
@@ -307,31 +308,27 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             }
             else
             {
-                MessageBoxResult result = MessageBox.Show("Bạn có chắc chắn muốn đặt vé?", "", MessageBoxButton.YesNo);
+                DataProvider.sqlConnection.Open();
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                SqlCommand sqlCommand = new SqlCommand(
+                    "insert into [HOADON] values (@mahd, @ngay, @tien, 'UNPAID', @matk)", DataProvider.sqlConnection);
+                sqlCommand.Parameters.Add("@mahd", SqlDbType.NVarChar).Value = maHoaDonTxt.Text;
+                sqlCommand.Parameters.Add("@ngay", SqlDbType.DateTime).Value = ngayHD;
+                sqlCommand.Parameters.Add("@tien", SqlDbType.Int).Value = int.Parse(tienTxt.Text.ToString());
+                sqlCommand.Parameters.Add("@matk", SqlDbType.NVarChar).Value = maTKTTTxt.Text;
+                sqlCommand.ExecuteNonQuery();
+                DataProvider.sqlConnection.Close();
 
-                if (result == MessageBoxResult.Yes)
+                SaveVe("BOOKED");
+                SaveCTHD();
+                Finish();
+                //go to home screen in MainWindow
+                MessageBoxResult result = MessageBox.Show("Đặt vé thành công! \nVui lòng thanh toán hóa đơn trước khi chuyến bay xuất phát! \n" +
+                    "Phiếu đặt chỗ sẽ bị hủy nếu không được thanh toán trước giờ bay!");
+                if (result == MessageBoxResult.OK)
                 {
-                    DataProvider.sqlConnection.Open();
-                    SqlCommand sqlCommand = new SqlCommand(
-                        "insert into [HOADON] values (@mahd, @ngay, @tien, 'UNPAID', @matk)", DataProvider.sqlConnection);
-                    sqlCommand.Parameters.Add("@mahd", SqlDbType.NVarChar).Value = maHoaDonTxt.Text;
-                    sqlCommand.Parameters.Add("@ngay", SqlDbType.DateTime).Value = ngayHD;
-                    sqlCommand.Parameters.Add("@tien", SqlDbType.Int).Value = int.Parse(tienTxt.Text.ToString());
-                    sqlCommand.Parameters.Add("@matk", SqlDbType.NVarChar).Value = maTKTTTxt.Text;
-                    sqlCommand.ExecuteNonQuery();
-                    DataProvider.sqlConnection.Close();
-
-                    SaveVe("BOOKED");
-                    SaveCTHD();
-
-                    //go to home screen in MainWindow
-                    result = MessageBox.Show("Đặt vé thành công! \nVui lòng thanh toán hóa đơn trước khi chuyến bay xuất phát! \n" +
-                        "Phiếu đặt chỗ sẽ bị hủy nếu không được thanh toán trước giờ bay 24 giờ!");
-                    if (result == MessageBoxResult.OK)
-                    {
-                        GoToHomeScreen?.Invoke(this, new RoutedEventArgs());
-                        this.Close();
-                    }
+                    GoToHomeScreen?.Invoke(this, new RoutedEventArgs());
+                    this.Close();
                 }
             }
         }
@@ -344,35 +341,26 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             }
             else
             {
-                MessageBoxResult result = MessageBox.Show("Bạn có chắc chắn muốn thanh toán?","",MessageBoxButton.YesNo);
-
-                if (result == MessageBoxResult.Yes)
+                DataProvider.sqlConnection.Open();
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                SqlCommand sqlCommand = new SqlCommand(
+                    "insert into [HOADON] values (@mahd, @ngay, @tien, 'PAID', @matk)", DataProvider.sqlConnection);
+                sqlCommand.Parameters.Add("@mahd", SqlDbType.NVarChar).Value = maHoaDonTxt.Text;
+                sqlCommand.Parameters.Add("@ngay", SqlDbType.DateTime).Value = ngayHD;
+                sqlCommand.Parameters.Add("@tien", SqlDbType.Int).Value = int.Parse(tienTxt.Text.ToString());
+                sqlCommand.Parameters.Add("@matk", SqlDbType.NVarChar).Value = maTKTTTxt.Text;
+                sqlCommand.ExecuteNonQuery();
+                DataProvider.sqlConnection.Close();
+                SaveVe("SOLD");
+                SaveCTHD();
+                MessageBoxResult result = MessageBox.Show("Thanh toán vé thành công!");
+                Finish();
+                //go to home screen in MainWindow
+                if (result == MessageBoxResult.OK)
                 {
-                    DataProvider.sqlConnection.Open();
-                    SqlCommand sqlCommand = new SqlCommand(
-                        "insert into [HOADON] values (@mahd, @ngay, @tien, 'PAID', @matk)", DataProvider.sqlConnection);
-                    sqlCommand.Parameters.Add("@mahd", SqlDbType.NVarChar).Value = maHoaDonTxt.Text;
-                    sqlCommand.Parameters.Add("@ngay", SqlDbType.DateTime).Value = ngayHD;
-                    sqlCommand.Parameters.Add("@tien", SqlDbType.Int).Value = int.Parse(tienTxt.Text.ToString());
-                    sqlCommand.Parameters.Add("@matk", SqlDbType.NVarChar).Value = maTKTTTxt.Text;
-                    sqlCommand.ExecuteNonQuery();
-                    DataProvider.sqlConnection.Close();
-                    SaveVe("SOLD");
-                    SaveCTHD();
-                    result = MessageBox.Show("Thanh toán vé thành công!");
-
-                    //go to home screen in MainWindow
-                    if (result == MessageBoxResult.OK)
-                    {
-                        GoToHomeScreen?.Invoke(this, new RoutedEventArgs());
-                        this.Close();
-                    }
+                    GoToHomeScreen?.Invoke(this, new RoutedEventArgs());
+                    this.Close();
                 }
-                else
-                {
-
-                }
-                
             }
         }
 

@@ -430,8 +430,6 @@
     <Resource Include="Images\logo_VNA.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Pages\symbolticket_icon.png" />
-    <Resource Include="Pages\search_icon.png" />
     <Resource Include="Images\symbolticket_icon.png" />
     <Resource Include="Images\search_icon.png" />
     <Resource Include="Images\ticketbg.png" />
