@@ -30,11 +30,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
             InitializeComponent();
         }
 
-        //private void ReshowDetail(object sender, RoutedEventArgs e)
-        //{
-        //    ShowDetail(MaVe);
-        //}
-
         public void ShowDetail(string mave, string user_id)
         {
             MaVe = mave;
@@ -96,24 +91,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
 
         private void btnPay_Click(object sender, RoutedEventArgs e)
         {
-            //DataProvider.sqlConnection.Open();
-            //SqlCommand sqlcommand = new SqlCommand(
-            //    "Update [VE] set TinhTrang = 'SOLD' " +
-            //    "where MaVe = @mave", DataProvider.sqlConnection);
-            //sqlcommand.Parameters.Add("@mave", SqlDbType.NVarChar).Value = maVeTxt.Text;
-            //sqlcommand.ExecuteNonQuery();
-            //DataProvider.sqlConnection.Close();
-
-            //DataProvider.sqlConnection.Open();
-            //SqlCommand sqlCommand = new SqlCommand(
-            //    "Update [HOADON] set TinhTrang = 'PAID' " +
-            //    "where MaHD in (select [hd].MaHD from [HOADON] [hd], [CTHD] [ct] " +
-            //                        "where [ct].MaVe = @mave and [hd].MaHD = [ct].MaHD "
-            //    , DataProvider.sqlConnection);
-            //sqlCommand.Parameters.Add("@mave", SqlDbType.NVarChar).Value = maVeTxt.Text;
-            //sqlCommand.ExecuteNonQuery();
-            //DataProvider.sqlConnection.Close();            
-
             BookingsPay bookingsPay = new BookingsPay();
             bookingsPay.ShowBill(maHDTxt.Text, ngayLapTxt.Text, maCBTxt.Text, gioBayTxt.Text, tienTxt.Text);
             bookingsPay.ShowDialog();

@@ -61,9 +61,25 @@ namespace Quan_Ly_Ban_Ve_May_Bay
         }
 
         private void DispatcherTimer_Tick(object sender, EventArgs e)
-        {
+        {     
             try
             {
+                TimeSpan Timeout = TimeSpan.Zero;
+                DataProvider.sqlConnection.Open();
+                SqlCommand sqlcommand = new SqlCommand(
+                    "select [t].GiaTri from [BANGTHAMSO] [t] " +
+                    "where convert(varchar,[t].TenThamSo) = 'ThoiGianChamNhatChoPhepHuyVe'"
+                    , DataProvider.sqlConnection);
+                SqlDataReader rd = sqlcommand.ExecuteReader();
+                if (rd.HasRows)
+                {
+                    if (rd.Read())
+                    {
+                        Timeout = TimeSpan.FromHours(double.Parse(rd["GiaTri"].ToString()));
+                    }
+                }
+                DataProvider.sqlConnection.Close();
+
                 DataProvider.sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand(
                     "select [c].NgayKhoiHanh, [c].ThoiGianXuatPhat, [v].MaVe " +
@@ -81,14 +97,13 @@ namespace Quan_Ly_Ban_Ve_May_Bay
                         DateTime flighttime = DateTime.ParseExact(strtime, "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture);
                         TimeSpan time = flighttime - DateTime.Now;
 
-                        if (time.Days < 1)
+                        if ( time - Timeout <= TimeSpan.Zero )
                         {
                             ticket_des.Add(reader["MaVe"].ToString());
                         }
                     }
                 }
                 DataProvider.sqlConnection.Close();
-
 
                 if (ticket_des.Count > 0)
                 {
@@ -102,7 +117,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
                         sqlCommand.ExecuteNonQuery();
                         DataProvider.sqlConnection.Close();
                     }
-
+                                        
                     if (fContainer.Content == flightDetail)
                     {
                         string flightID = flightDetail.flight_ID.Text;
@@ -125,9 +140,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
                     }
                 }
             }
-            catch (Exception ex) { }
-            
-
+            catch (Exception ex) { }         
         }
 
         private void AddInforHK_GoToHomeScreen(object sender, RoutedEventArgs e)
@@ -295,12 +308,10 @@ namespace Quan_Ly_Ban_Ve_May_Bay
         {
             ContactUs contactUs = new ContactUs();
             fContainer.Content = contactUs;
-
         }
 
         private void btnMyBookings_Click(object sender, RoutedEventArgs e)
         {
-
             myBookings = new MyBookings();
             if (curAccount == null)
             {
@@ -308,11 +319,10 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             }
             else
             {
-                BookingsPay bookingsPay = new BookingsPay();
                 myBookings.MyTicket(curAccount.id);
-
             }
             fContainer.Content = myBookings;
         }
+
     }
 }

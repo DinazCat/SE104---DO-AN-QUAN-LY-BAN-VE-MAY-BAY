@@ -152,7 +152,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
         private void NewHD()
         {
             DataProvider.sqlConnection.Open();
-            SqlCommand sqlCommand = new SqlCommand("select [h].* from HOADON [h] order by MaHD desc", DataProvider.sqlConnection);
+            SqlCommand sqlCommand = new SqlCommand("select [h].* from HOADON [h] order by NgayLap desc", DataProvider.sqlConnection);
             SqlDataReader reader = sqlCommand.ExecuteReader();
             if (reader.HasRows)
             {
@@ -171,7 +171,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
         {
             int newID = 1;
             DataProvider.sqlConnection.Open();
-            SqlCommand sqlCommand = new SqlCommand("select [v].* from VE [v] order by MaHK desc", DataProvider.sqlConnection);
+            SqlCommand sqlCommand = new SqlCommand("select [v].* from VE [v] order by CMND desc", DataProvider.sqlConnection);
             SqlDataReader reader = sqlCommand.ExecuteReader();
             if (reader.HasRows)
             {

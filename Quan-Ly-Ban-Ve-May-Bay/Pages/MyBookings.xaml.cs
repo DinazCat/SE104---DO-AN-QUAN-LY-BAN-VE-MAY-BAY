@@ -26,26 +26,19 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
     public partial class MyBookings : Page
     {
         BookingsDetail bookingsDetail;
-        public event RoutedEventHandler Pay;
         string user_id;
         public MyBookings()
         {
             InitializeComponent();
             addSearchOptions();
-            //bookingsUpdate.ReturnBookings += UpdateInForHK;
         }
-
-        //private void UpdateInForHK(object sender, RoutedEventArgs e)
-        //{
-        //    fTicket.Content = null;
-        //}
 
         public void MyTicket(string userID)
         {
             user_id = userID;
             DataProvider.sqlConnection.Open();
             SqlCommand sqlCommand = new SqlCommand(
-                "select [cb].MaChuyenBay, [ct].MaHD, [v].MaVe, [v].TenHK, [v].SoGhe, [hv].TenHangVe, [cb].SanBayDi, [cb].SanBayDen,[cb].NgayKhoiHanh, [cb].ThoiGianXuatPhat " +
+                "select distinct [cb].MaChuyenBay, [ct].MaHD, [v].MaVe, [v].TenHK, [v].SoGhe, [hv].TenHangVe, [cb].SanBayDi, [cb].SanBayDen,[cb].NgayKhoiHanh, [cb].ThoiGianXuatPhat " +
                 "from [HOADON] [hd], [VE] [v], [CTHD] [ct], [CHUYENBAY] [cb], [HANGVE] [hv]" +
                 "where  [hd].MaHD = [ct].MaHD and " +
                         "[v].MaVe = [ct].MaVe and " +
@@ -100,8 +93,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
                 bookingsDetail.ShowDetail(ticket.MaVe,user_id);
                 fTicket.Content = bookingsDetail;
             }
-
-            Pay?.Invoke(this, new RoutedEventArgs());
         }
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)
