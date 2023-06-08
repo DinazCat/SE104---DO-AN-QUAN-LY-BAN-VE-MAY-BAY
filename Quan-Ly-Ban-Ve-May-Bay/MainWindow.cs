@@ -138,6 +138,12 @@ namespace Quan_Ly_Ban_Ve_May_Bay
                         myBookings.MyTicket(curAccount.id);
                         fContainer.Content = myBookings;
                     }
+                    else if (fContainer.Content == allFlight)
+                    {
+                        allFlight = new AllFlight();
+                        fContainer.Content = allFlight;
+                        allFlight.ShowDetail += AllFlight_ShowDetail;
+                    }
                 }
             }
             catch (Exception ex) { }         

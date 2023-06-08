@@ -32,8 +32,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
 
         public AddInforHK()
         {
-            InitializeComponent();
-            //CheckTime();
+            InitializeComponent();            
             if (MainWindow.curAccount != null) {
                 if (MainWindow.curAccount.type == 1 || MainWindow.curAccount.type == 2)
                 {
@@ -42,67 +41,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                     btnTTSau.Content = "Chưa thanh toán";
                 }
             }
-        }
-
-        private void CheckTime()
-        {
-            TimeSpan TimeBook = TimeSpan.Zero;
-            TimeSpan TimePay = TimeSpan.Zero;
-
-            DataProvider.sqlConnection.Open();
-            SqlCommand sqlcommand = new SqlCommand(
-                "select [t].GiaTri from [BANGTHAMSO] [t] " +
-                "where convert(varchar,[t].TenThamSo) = 'ThoiGianChamNhatChoPhepDatVe'"
-                , DataProvider.sqlConnection);
-            SqlDataReader rd = sqlcommand.ExecuteReader();
-            if (rd.HasRows)
-            {
-                if (rd.Read())
-                {
-                    TimeBook = TimeSpan.FromHours(double.Parse(rd["GiaTri"].ToString()));
-                }
-            }
-            DataProvider.sqlConnection.Close();
-
-            DataProvider.sqlConnection.Open();
-            sqlcommand = new SqlCommand(
-                "select [t].GiaTri from [BANGTHAMSO] [t] " +
-                "where convert(varchar,[t].TenThamSo) = 'ThoiGianChamNhatChoPhepHuyVe'"
-                , DataProvider.sqlConnection);
-            rd = sqlcommand.ExecuteReader();
-            if (rd.HasRows)
-            {
-                if (rd.Read())
-                {
-                    TimePay = TimeSpan.FromHours(double.Parse(rd["GiaTri"].ToString()));
-                }
-            }
-            DataProvider.sqlConnection.Close();
-
-            DataProvider.sqlConnection.Open();
-            SqlCommand sqlCommand = new SqlCommand(
-                "select [c].NgayKhoiHanh, [c].ThoiGianXuatPhat " +
-                "from [CHUYENBAY] [c]" +
-                "where [c].MaChuyenBay = @macb", DataProvider.sqlConnection);
-            sqlCommand.Parameters.Add("@macb", SqlDbType.NVarChar).Value = maChuyenBayTxt.Text;
-            SqlDataReader reader = sqlCommand.ExecuteReader();
-            DateTime flighttime = DateTime.Now;
-
-            if (reader.HasRows)
-            {
-                if (reader.Read())
-                {
-                    string strtime = reader["NgayKhoiHanh"].ToString() + " " + reader["ThoiGianXuatPhat"].ToString();
-                    flighttime = DateTime.ParseExact(strtime, "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture);
-                }
-            }
-            DataProvider.sqlConnection.Close();
-
-            if ((TimePay - TimeBook > TimeSpan.Zero) && (DateTime.Now - TimePay - flighttime < TimeSpan.Zero))
-            {
-                btnTTSau.IsEnabled = false;
-            }
-        }
+        }               
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
@@ -355,7 +294,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
         {
             foreach (Ticket item in ve)
             {
-                if (item.HkID == "")
+                if (item.HkName == "")
                     return false;
             }
             return true;
@@ -401,8 +340,16 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                         SaveVe("BOOKED");
                         SaveCTHD();
                         //go to home screen in MainWindow
-                        result = MessageBox.Show("Đặt vé thành công! \nVui lòng thanh toán hóa đơn trước khi chuyến bay xuất phát! \n" +
+                        if (MainWindow.curAccount.type == 1 || MainWindow.curAccount.type == 2)
+                        {
+                            result = MessageBox.Show("Đặt vé thành công! \nVui lòng nhắc nhở hành khách thanh toán hóa đơn trước khi chuyến bay xuất phát! \n" +
                             "Phiếu đặt chỗ sẽ bị hủy nếu không được thanh toán trước giờ bay!");
+                        }
+                        else
+                        {
+                            result = MessageBox.Show("Đặt vé thành công! \nVui lòng thanh toán hóa đơn trước khi chuyến bay xuất phát! \n" +
+                            "Phiếu đặt chỗ sẽ bị hủy nếu không được thanh toán trước giờ bay!");
+                        }
                         if (result == MessageBoxResult.OK)
                         {
                             GoToHomeScreen?.Invoke(this, new RoutedEventArgs());
@@ -449,7 +396,15 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                         DataProvider.sqlConnection.Close();
                         SaveVe("SOLD");
                         SaveCTHD();
-                        result = MessageBox.Show("Thanh toán vé thành công!");
+
+                        if (MainWindow.curAccount.type == 1 || MainWindow.curAccount.type == 2)
+                        {
+                            result = MessageBox.Show("Vui lòng thông báo đến hành khách vé đã được thanh toán thành công!");
+                        }
+                        else
+                        {
+                            result = MessageBox.Show("Thanh toán vé thành công!");
+                        }
                         //go to home screen in MainWindow
                         if (result == MessageBoxResult.OK)
                         {

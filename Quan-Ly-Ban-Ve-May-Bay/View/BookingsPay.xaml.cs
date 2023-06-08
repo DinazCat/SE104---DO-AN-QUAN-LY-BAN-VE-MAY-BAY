@@ -100,7 +100,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 sqlCommand.ExecuteNonQuery();
                 DataProvider.sqlConnection.Close();
 
-                MessageBox.Show("Thanh toán hóa đơn thành công!");
+                MessageBox.Show("Vui lòng thông báo đến hành khách hóa đơn đã được thanh toán thành công!");
 
                 ReturnBookings?.Invoke(this, new RoutedEventArgs());
                 this.Close();
