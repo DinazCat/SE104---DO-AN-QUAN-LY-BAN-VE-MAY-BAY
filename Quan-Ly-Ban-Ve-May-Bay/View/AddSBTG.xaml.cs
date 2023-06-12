@@ -53,16 +53,16 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             if (thaotac == 1)
             {
                 headertxt.Text = "Sửa sân bay";
-                string s = "SELECT * From SANBAY WHERE MaSanBay = @ma";
-                SqlParameter p = new SqlParameter("@ma", AddChuyenbay.infotofix.tenSB);
-                using (SqlDataReader reader = DataProvider.ExecuteReader(s, CommandType.Text, p))
-                {
-                    if (reader.Read())
-                    {
-                        SBTGcBox.SelectedItem = reader.GetString(reader.GetOrdinal("TenSanBay"));
-                    }
-                }
-                // SBTGcBox.SelectedItem = AddChuyenbay.infotofix.tenSB;
+                //string s = "SELECT * From SANBAY WHERE MaSanBay = @ma";
+                //SqlParameter p = new SqlParameter("@ma", AddChuyenbay.infotofix.tenSB);
+                //using (SqlDataReader reader = DataProvider.ExecuteReader(s, CommandType.Text, p))
+                //{
+                //    if (reader.Read())
+                //    {
+                //        SBTGcBox.SelectedItem = reader.GetString(reader.GetOrdinal("TenSanBay"));
+                //    }
+                //}
+                SBTGcBox.SelectedItem = AddChuyenbay.infotofix.tenSB;
                 thoigiandungTxb.Text = AddChuyenbay.infotofix.TGdung;
                 ghichuTxb.Text = AddChuyenbay.infotofix.ghichu;
             }
@@ -92,7 +92,16 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
 
                 SanbayTG sb = new SanbayTG();
                 sb.STT = stt.ToString();
-                sb.tenSB = dr["SanBayTrungGian"].ToString();
+                string s = "SELECT * From SANBAY WHERE MaSanBay = @ma";
+                SqlParameter p = new SqlParameter("@ma", dr["SanBayTrungGian"].ToString());
+                using (SqlDataReader reader = DataProvider.ExecuteReader(s, CommandType.Text, p))
+                {
+                    if (reader.Read())
+                    {
+                        sb.tenSB = reader.GetString(reader.GetOrdinal("TenSanBay"));
+                    }
+                }
+                //sb.tenSB = dr["SanBayTrungGian"].ToString();
                 sb.TGdung = dr["ThoiGianDung"].ToString();
                 sb.ghichu = dr["GhiChu"].ToString();
                 SanBayTG.Items.Add(sb);
@@ -123,29 +132,29 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 MessageBox.Show("Sân bay trung gian không được trùng với sân bay đi và sân bay đến.", "Dữ liệu không hợp lệ!");
                 return;
             }
-            // if (thaotac == 0)
-            // {
-            s = "SELECT * From SANBAYTRUNGGIAN where MaChuyenBay = @ma";
-            SqlParameter par = new SqlParameter("@ma", maCB);
-            DataTable table;
-            using (SqlDataReader reader = DataProvider.ExecuteReader(s, CommandType.Text, par))
+            if (thaotac == 0)
             {
-                table = new DataTable();
-                if (reader.HasRows)
+                s = "SELECT * From SANBAYTRUNGGIAN where MaChuyenBay = @ma";
+                SqlParameter par = new SqlParameter("@ma", maCB);
+                DataTable table;
+                using (SqlDataReader reader = DataProvider.ExecuteReader(s, CommandType.Text, par))
                 {
-                    table.Load(reader);
-                    foreach (DataRow dr in table.Rows)
+                    table = new DataTable();
+                    if (reader.HasRows)
                     {
-                        if (dr["SanBayTrungGian"].ToString() == tenSB)
+                        table.Load(reader);
+                        foreach (DataRow dr in table.Rows)
                         {
-                            MessageBox.Show("Sân bay trung gian đã có trong chuyến bay này.", "Dữ liệu không hợp lệ!");
-                            return;
+                            if (dr["SanBayTrungGian"].ToString() == tenSB)
+                            {
+                                MessageBox.Show("Sân bay trung gian đã có trong chuyến bay này.", "Dữ liệu không hợp lệ!");
+                                return;
+                            }
                         }
-                    }
 
+                    }
                 }
             }
-            // }
             try
             {
                 int p1 = int.Parse(tgDung);
@@ -178,6 +187,11 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 MessageBox.Show("Vui lòng nhập thời gian dừng phải phù hợp với thời gian dừng tối thiểu và tối đa đã định: " + tb, "Dữ liệu không hợp lệ!");
                 return;
             }
+            if (int.Parse(tgDung) >= int.Parse(AddChuyenbay.thoigianbayDC))
+            {
+                MessageBox.Show("Vui lòng nhập thời gian dừng phải bé hơn thời gian bay của chuyến bay: " + AddChuyenbay.thoigianbayDC + " phút", "Dữ liệu không hợp lệ!");
+                return;
+            }
             if (thaotac == 0)
             {
                 string query = "SELECT * FROM SANBAYTRUNGGIAN where MaChuyenBay = @ma";
@@ -193,7 +207,16 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 }
                 SanbayTG sb = new SanbayTG();
                 sb.STT = (dt.Rows.Count + 1).ToString();
-                sb.tenSB = tenSB;
+                s = "SELECT * From SANBAY WHERE MaSanBay = @ma";
+                p = new SqlParameter("@ma", tenSB);
+                using (SqlDataReader reader = DataProvider.ExecuteReader(s, CommandType.Text, p))
+                {
+                    if (reader.Read())
+                    {
+                        sb.tenSB = reader.GetString(reader.GetOrdinal("TenSanBay"));
+                    }
+                }
+                // sb.tenSB = tenSB;
                 sb.TGdung = tgDung;
                 sb.ghichu = GhiChu;
                 SanBayTG.Items.Add(sb);
@@ -211,12 +234,22 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             }
             else
             {
+                string MaSBTGtofix = "";
+                s = "SELECT * From SANBAY WHERE TenSanBay = @ten";
+                p = new SqlParameter("@ten", AddChuyenbay.infotofix.tenSB);
+                using (SqlDataReader reader = DataProvider.ExecuteReader(s, CommandType.Text, p))
+                {
+                    if (reader.Read())
+                    {
+                        MaSBTGtofix = reader.GetString(reader.GetOrdinal("MaSanBay"));
+                    }
+                }
                 SqlConnection con = DataProvider.sqlConnection;
                 if (con.State == ConnectionState.Closed)
                 {
                     con.Open();
                 }
-                SqlCommand cmd = new SqlCommand("Update [SANBAYTRUNGGIAN] set SanBayTrungGian=N'" + tenSB + "',ThoiGianDung='" + tgDung + "', GhiChu=N'" + GhiChu + "' where MaChuyenBay='" + maCB + "' and SanBayTrungGian=N'" + AddChuyenbay.infotofix.tenSB + "'", con);
+                SqlCommand cmd = new SqlCommand("Update [SANBAYTRUNGGIAN] set SanBayTrungGian=N'" + tenSB + "',ThoiGianDung='" + tgDung + "', GhiChu=N'" + GhiChu + "' where MaChuyenBay='" + maCB + "' and SanBayTrungGian=N'" + MaSBTGtofix + "'", con);
                 cmd.CommandType = CommandType.Text;
                 cmd.ExecuteNonQuery();
                 con.Close();
