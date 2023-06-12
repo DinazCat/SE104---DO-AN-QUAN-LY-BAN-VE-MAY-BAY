@@ -43,6 +43,11 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             try
             {
                 int p = int.Parse(Percentage.Text);
+                if (p <= 0)
+                {
+                    MessageBox.Show("Vui lòng nhập tỷ lệ phần trăm là một số nguyên dương.", "Dữ liệu không hợp lệ!");
+                    return;
+                }
             }
             catch (Exception ex)
             {

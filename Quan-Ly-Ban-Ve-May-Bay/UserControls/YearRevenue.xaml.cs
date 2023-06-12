@@ -46,17 +46,42 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
         private void loadData()
         {
             YearRevenueTable.Items.Clear();
-            string query =
-                "SELECT SUBSTRING(C.NgayKhoiHanh, 4, 2) AS Thang, " +
-                    "(SELECT COUNT(DISTINCT C1.MaChuyenBay) " +
-                        "FROM CHUYENBAY C1 WHERE SUBSTRING(C1.NgayKhoiHanh, 4, 2) = SUBSTRING(C.NgayKhoiHanh, 4, 2) AND SUBSTRING(C1.NgayKhoiHanh, 7, 4) = @Year) AS SoChuyenBay, " +
-                    "SUM(V.GiaVe) AS DoanhThu, " +
-                    "(SUM(CAST(V.GiaVe AS decimal(18, 2))) * 100) / " +
-                        "(SELECT SUM(GiaVe) FROM VE WHERE SUBSTRING(C.NgayKhoiHanh, 7, 4) = @Year AND TinhTrang = 'SOLD') AS TyLe " +
-                "FROM CHUYENBAY C JOIN VE V ON C.MaChuyenBay = V.MaChuyenBay " +
-                "WHERE SUBSTRING(C.NgayKhoiHanh, 7, 4) = @Year AND TinhTrang = 'SOLD' " +
-                "GROUP BY SUBSTRING(C.NgayKhoiHanh, 4, 2), C.NgayKhoiHanh " +
-                "ORDER BY SUBSTRING(C.NgayKhoiHanh, 4, 2) ASC";
+            //string query =
+            //    "SELECT SUBSTRING(C.NgayKhoiHanh, 4, 2) AS Thang, " +
+            //        "(SELECT COUNT(DISTINCT C1.MaChuyenBay) " +
+            //            "FROM CHUYENBAY C1 WHERE SUBSTRING(C1.NgayKhoiHanh, 4, 2) = SUBSTRING(C.NgayKhoiHanh, 4, 2) AND SUBSTRING(C1.NgayKhoiHanh, 7, 4) = @Year) AS SoChuyenBay, " +
+            //        "SUM(V.GiaVe) AS DoanhThu, " +
+            //        "(SUM(CAST(V.GiaVe AS decimal(18, 2))) * 100) / " +
+            //            "(SELECT SUM(GiaVe) FROM VE WHERE SUBSTRING(C.NgayKhoiHanh, 7, 4) = @Year AND TinhTrang = 'SOLD') AS TyLe " +
+            //    "FROM CHUYENBAY C JOIN VE V ON C.MaChuyenBay = V.MaChuyenBay " +
+            //    "WHERE SUBSTRING(C.NgayKhoiHanh, 7, 4) = @Year AND TinhTrang = 'SOLD' " +
+            //    "GROUP BY SUBSTRING(C.NgayKhoiHanh, 4, 2), C.NgayKhoiHanh " +
+            //    "ORDER BY SUBSTRING(C.NgayKhoiHanh, 4, 2) ASC";
+
+            string query = "WITH AllMonths AS (" +
+                "SELECT '01' AS MonthNumber UNION ALL SELECT '02' UNION ALL SELECT '03' UNION ALL SELECT '04' UNION ALL " +
+                "SELECT '05' UNION ALL SELECT '06' UNION ALL SELECT '07' UNION ALL SELECT '08' UNION ALL " +
+                "SELECT '09' UNION ALL SELECT '10' UNION ALL SELECT '11' UNION ALL SELECT '12'" +
+                ")" +
+                "SELECT AllMonths.MonthNumber AS Thang, " +
+                "COUNT(DISTINCT C.MaChuyenBay) AS SoChuyenBay, " +
+                "COALESCE(SUM(V.GiaVe), 0) AS DoanhThu, " +
+                "CASE WHEN SUM(V.GiaVe) > 0 THEN " +
+                "   (SUM(CAST(V.GiaVe AS decimal(18, 2))) * 100) / " +
+                "       (SELECT SUM(V1.GiaVe) " +
+                "       FROM VE V1 " +
+                "       JOIN CHUYENBAY C1 ON V1.MaChuyenBay = C1.MaChuyenBay " +
+                "       WHERE SUBSTRING(C1.NgayKhoiHanh, 7, 4) = @Year " +
+                "           AND V1.TinhTrang = 'SOLD') " +
+                "ELSE 0 END AS TyLe " +
+                "FROM AllMonths " +
+                "LEFT JOIN CHUYENBAY C ON AllMonths.MonthNumber = SUBSTRING(C.NgayKhoiHanh, 4, 2) " +
+                "AND SUBSTRING(C.NgayKhoiHanh, 7, 4) = @Year " +
+                "LEFT JOIN VE V ON C.MaChuyenBay = V.MaChuyenBay " +
+                "AND V.TinhTrang = 'SOLD' " +
+                "GROUP BY AllMonths.MonthNumber " +
+                "ORDER BY AllMonths.MonthNumber ASC";
+
             SqlParameter param1 = new SqlParameter("@Year", int.Parse(cBox.SelectedItem.ToString()));
             try
             {

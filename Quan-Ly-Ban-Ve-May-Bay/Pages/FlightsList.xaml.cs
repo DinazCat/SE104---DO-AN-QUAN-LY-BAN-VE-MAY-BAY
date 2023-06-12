@@ -78,21 +78,40 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             infoSearch.Text = departure + " -> " + destination + " | " + date + " | " + flightClass + " | " + quantity + " người";
            
             DataProvider.sqlConnection.Open();
-            SqlCommand sqlCommand = new SqlCommand(
-             "select [c].*, Logo, TenHang, (select count(*) from [SANBAYTRUNGGIAN] [sbtg] where [sbtg].MaChuyenBay = [c].MaChuyenBay) SoSBTG from [CHUYENBAY] [c], [SANBAY] [s1], [SANBAY] [s2], [HANGMAYBAY] [hmb] " +
-             "where NgayKhoiHanh=@date " +
-             "and [c].SanBayDi=[s1].MaSanBay " +
-             "and [c].SanBayDen=[s2].MaSanBay " +
-             "and [c].MaHangMayBay=[hmb].MaHang " +
-             "and [s1].Tinh=@departure " +
-             "and [s2].Tinh=@destination " +
-             "and MaChuyenBay in (select MaChuyenBay from [VE] [v], [HANGVE] [hv] " +
-                                   " where TinhTrang = N'TRONG' and [v].MaHangVe = [hv].MaHangVe " +
-                                   "and TenHangVe=@flightClass " +
-                                   "group by MaChuyenBay " +
-                                   "having count(MaVe)>=@quantity)",
-
-            DataProvider.sqlConnection);
+            SqlCommand sqlCommand = new SqlCommand();
+            if (flightClass != "")
+            {
+                sqlCommand = new SqlCommand(
+                 "select [c].*, Logo, TenHang, (select count(*) from [SANBAYTRUNGGIAN] [sbtg] where [sbtg].MaChuyenBay = [c].MaChuyenBay) SoSBTG from [CHUYENBAY] [c], [SANBAY] [s1], [SANBAY] [s2], [HANGMAYBAY] [hmb] " +
+                 "where NgayKhoiHanh=@date " +
+                 "and [c].SanBayDi=[s1].MaSanBay " +
+                 "and [c].SanBayDen=[s2].MaSanBay " +
+                 "and [c].MaHangMayBay=[hmb].MaHang " +
+                 "and [s1].Tinh=@departure " +
+                 "and [s2].Tinh=@destination " +
+                 "and MaChuyenBay in (select MaChuyenBay from [VE] [v], [HANGVE] [hv] " +
+                                       " where TinhTrang = N'TRONG' and [v].MaHangVe = [hv].MaHangVe " +
+                                       "and TenHangVe=@flightClass " +
+                                       "group by MaChuyenBay " +
+                                       "having count(MaVe)>=@quantity)",
+                DataProvider.sqlConnection);
+            }
+            else
+            {
+                sqlCommand = new SqlCommand(
+                 "select [c].*, Logo, TenHang, (select count(*) from [SANBAYTRUNGGIAN] [sbtg] where [sbtg].MaChuyenBay = [c].MaChuyenBay) SoSBTG from [CHUYENBAY] [c], [SANBAY] [s1], [SANBAY] [s2], [HANGMAYBAY] [hmb] " +
+                 "where NgayKhoiHanh=@date " +
+                 "and [c].SanBayDi=[s1].MaSanBay " +
+                 "and [c].SanBayDen=[s2].MaSanBay " +
+                 "and [c].MaHangMayBay=[hmb].MaHang " +
+                 "and [s1].Tinh=@departure " +
+                 "and [s2].Tinh=@destination " +
+                 "and MaChuyenBay in (select MaChuyenBay from [VE] [v] " +
+                                       " where TinhTrang = N'TRONG' " +
+                                       "group by MaChuyenBay " +
+                                       "having count(MaVe)>=@quantity)",
+                DataProvider.sqlConnection);
+            }
             sqlCommand.Parameters.Add("@date", SqlDbType.NVarChar).Value = date;
             sqlCommand.Parameters.Add("@departure", SqlDbType.NVarChar).Value = departure;
             sqlCommand.Parameters.Add("@destination", SqlDbType.NVarChar).Value = destination;

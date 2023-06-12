@@ -20,6 +20,10 @@ using Microsoft.Office.Interop.Excel;
 using System.Windows.Forms;
 using UserControl = System.Windows.Controls.UserControl;
 using DataTable = System.Data.DataTable;
+using MaterialDesignThemes.Wpf;
+using System.Drawing;
+using System.Windows.Controls.Primitives;
+using static Quan_Ly_Ban_Ve_May_Bay.QuanLyBanVeMayBayDataSet;
 
 namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
 {
@@ -64,29 +68,81 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
         void loadData()
         {
             MonthRevenueTable.Items.Clear();
-            string query = 
+
+            string query =
                 "SELECT C.MaChuyenBay, " +
                     "COUNT(DISTINCT MaVe) AS SoVe, " +
-                    "SUM(V.GiaVe) AS DoanhThu, " +
-                    "(SUM(CAST(V.GiaVe AS decimal(18, 2))) * 100) / " +
-                        "(SELECT SUM(V1.GiaVe) FROM VE V1 JOIN CHUYENBAY C1 ON V1.MaChuyenBay = C1.MaChuyenBay " +
-                            "WHERE SUBSTRING(C1.NgayKhoiHanh, 4, 2) = @Month AND SUBSTRING(C1.NgayKhoiHanh, 7, 4) = @Year and V1.TinhTrang = 'SOLD') AS 'TyLe' " +
-                "FROM CHUYENBAY C JOIN VE V ON C.MaChuyenBay = V.MaChuyenBay " +
-                "WHERE SUBSTRING(C.NgayKhoiHanh, 4, 2) = @Month AND SUBSTRING(C.NgayKhoiHanh, 7, 4) = @Year AND TinhTrang = 'SOLD' " +
+                    "COALESCE(SUM(V.GiaVe), 0) AS DoanhThu, " +
+                "CASE " +
+                            "WHEN(SELECT SUM(V1.GiaVe) " +
+                      "FROM VE V1 " +
+                      "JOIN CHUYENBAY C1 ON V1.MaChuyenBay = C1.MaChuyenBay " +
+                      "WHERE SUBSTRING(C1.NgayKhoiHanh, 4, 2) = @Month AND SUBSTRING(C1.NgayKhoiHanh, 7, 4) = @Year AND V1.TinhTrang = 'SOLD') IS NULL THEN 0 " +
+                "ELSE(COALESCE(SUM(CAST(V.GiaVe AS decimal(18, 2))), 0) * 100) / " +
+                     "(SELECT SUM(V1.GiaVe) " +
+                      "FROM VE V1 " +
+                      "JOIN CHUYENBAY C1 ON V1.MaChuyenBay = C1.MaChuyenBay " +
+                      "WHERE SUBSTRING(C1.NgayKhoiHanh, 4, 2) = @Month AND SUBSTRING(C1.NgayKhoiHanh, 7, 4) = @Year AND V1.TinhTrang = 'SOLD') " +
+                      "END AS 'TyLe' " +
+                "FROM CHUYENBAY C LEFT JOIN VE V ON C.MaChuyenBay = V.MaChuyenBay AND TinhTrang = 'SOLD' " +
+                "WHERE SUBSTRING(C.NgayKhoiHanh, 4, 2) = @Month AND SUBSTRING(C.NgayKhoiHanh, 7, 4) = @Year " +
                 "GROUP BY C.MaChuyenBay, C.NgayKhoiHanh";
+
+            string query1 = "SELECT * FROM [BaoCaoThang] where Thang=@Month and Nam=@Year";
+
             SqlParameter param1 = new SqlParameter("@Month", int.Parse(cBoxMonth.SelectedItem.ToString()));
             SqlParameter param2 = new SqlParameter("@Year", int.Parse(cBoxYear.SelectedItem.ToString()));
+
             try
-            {
-                using (SqlDataReader reader = DataProvider.ExecuteReader(query, CommandType.Text, param1, param2))
+            {              
+                bool flag = true;
+                dt = new DataTable();
+                DateTime currentDate = DateTime.Now;
+                using (SqlDataReader reader = DataProvider.ExecuteReader(query1, CommandType.Text, param1, param2))
                 {
-                    dt = new DataTable();
                     if (reader.HasRows)
                     {
                         dt.Load(reader);
+                        flag = false;
                     }
                 }
+                if (flag)
+                {
+                    SqlParameter param3 = new SqlParameter("@Month", int.Parse(cBoxMonth.SelectedItem.ToString()));
+                    SqlParameter param4 = new SqlParameter("@Year", int.Parse(cBoxYear.SelectedItem.ToString()));
+                    using (SqlDataReader reader = DataProvider.ExecuteReader(query, CommandType.Text, param3, param4))
+                    {
 
+                        if (reader.HasRows)
+                        {
+                            dt = new DataTable();
+                            dt.Load(reader);
+                            if (currentDate.Month > int.Parse(cBoxMonth.SelectedItem.ToString()))
+                            {
+                                SqlConnection sqlCon = DataProvider.sqlConnection;
+
+                                using (sqlCon)
+                                {
+
+                                    sqlCon.Open();
+
+                                    foreach (DataRow row in dt.Rows)
+                                    {
+                                        try
+                                        {
+                                            SqlCommand cmd = new SqlCommand("Insert into [BaoCaoThang] values('" + row[0].ToString() + "', " + int.Parse(row[1].ToString()) + ", '" + row[2].ToString() + "', '" + row[3].ToString() + "', '" + cBoxMonth.SelectedItem.ToString() + "', '" + cBoxYear.SelectedItem.ToString() + "')", sqlCon);
+                                            cmd.CommandType = CommandType.Text;
+                                            cmd.ExecuteNonQuery();
+                                        }
+                                        catch (Exception ex) { System.Windows.MessageBox.Show(ex.ToString()); }
+                                    }
+
+                                    sqlCon.Close();
+                                }
+                            }
+                        }
+                    }
+                }
                 int stt = 1;
                 int sum = 0;
                 foreach (DataRow dr in dt.Rows)
@@ -94,12 +150,12 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
                     MonthSale ms = new MonthSale();
                     ms.stt = stt.ToString();
                     ms.chuyenbay = dr[0].ToString();
-                    ms.sove = dr[1].ToString();
+                    ms.sove = (dr.Field<int>(1)).ToString();
                     ms.doanhthu = dr[2].ToString();
                     ms.tile = dr[3].ToString();
                     MonthRevenueTable.Items.Add(ms);
                     stt++;
-                    sum += dr.Field<int>(2);
+                    sum += int.Parse(ms.doanhthu);
                 }
                 tb_total.Text = sum.ToString();
             }

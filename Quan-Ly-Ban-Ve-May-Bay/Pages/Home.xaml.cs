@@ -59,13 +59,14 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
         public Home()
         {
             InitializeComponent();
+            date.Text = DateTime.Now.ToString("dd/MM/yyyy");
             addDataToClass();
             addDataToCCBDeparture();
             addDataToCCBDestination();
         }
         public void btnSearch_Click(object sender, RoutedEventArgs e)
         {
-            if (cbbDeparture.Text == "" || cbbDestination.Text == "" || cbbQuantity.Text == "" || date.Text == "" ||cbbClass.Text == "")
+            if (cbbDeparture.Text == "" || cbbDestination.Text == "" || cbbQuantity.Text == "" || date.Text == "")
             {
                 MessageBox.Show("Mời bạn chọn đầy đủ thông tin");
             }

@@ -267,7 +267,8 @@ namespace Quan_Ly_Ban_Ve_May_Bay
         private void Home_Search(object sender, RoutedEventArgs e)
         {
             flights = new FlightsList();
-            flights.Return += Flights_Return; 
+            flights.Return += Flights_Return;
+            flights.Search += Flights_Return;
             flights.ShowDetail += Flight_ShowDetail;
             flights.FlightSearched(home.Departure, home.Destination, home.Date, home.Quantity, home.FlightClass);
             fContainer.Content = flights;
@@ -307,6 +308,9 @@ namespace Quan_Ly_Ban_Ve_May_Bay
                     imgLogin.Source = bitmap;
                     btn_UserManagement.Visibility = Visibility.Collapsed;
                     btn_SalesmanRight.Visibility = Visibility.Collapsed;
+                    btn_ChangeRule.Visibility = Visibility.Collapsed;
+                    btn_setting.Visibility = Visibility.Collapsed;
+                    btnMyBookings.Visibility = Visibility.Collapsed;
                     btnHome_Click(sender, e);
                 }
             }
@@ -322,11 +326,14 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             {
                 btn_UserManagement.Visibility = Visibility.Visible;
                 btn_SalesmanRight.Visibility = Visibility.Visible;
+                btn_ChangeRule.Visibility = Visibility.Visible;
             }
             if (MainWindow.curAccount.type == 2)
             {
                 btn_SalesmanRight.Visibility = Visibility.Visible;
             }
+            btn_setting.Visibility = Visibility.Visible;
+            btnMyBookings.Visibility = Visibility.Visible;
         }
 
         private void Login_redirectSignup(object sender, RoutedEventArgs e)
@@ -398,5 +405,10 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             fContainer.Content = myBookings;
         }
 
+        private void changeRule_Click(object sender, RoutedEventArgs e)
+        {
+            RuleChange ruleChange = new RuleChange();
+            fContainer.Content = ruleChange;
+        }
     }
 }
