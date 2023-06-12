@@ -107,6 +107,40 @@ namespace Quan_Ly_Ban_Ve_May_Bay
 
                 if (ticket_des.Count > 0)
                 {
+                    //List<string> bookings = new List<string>();
+                    //DataProvider.sqlConnection.Open();
+                    //sqlCommand = new SqlCommand(
+                    //    "select [ct].MaVe from [HOADON] [hd], [CTHD] [ct] " +
+                    //    "where [ct].MaHD = [hd].MaHD and [hd].MaTK = @id", DataProvider.sqlConnection);
+                    //sqlCommand.Parameters.Add("@id", SqlDbType.NVarChar).Value = curAccount.id;
+                    //rd = sqlCommand.ExecuteReader();
+                    //if (rd.HasRows)
+                    //{
+                    //    if (rd.Read())
+                    //    {
+                    //        bookings.Add(rd["MaVe"].ToString());
+                    //    }
+                    //}
+                    //DataProvider.sqlConnection.Close();
+
+                    //bool check = false;
+                    //foreach (string ticket in ticket_des)
+                    //{
+                    //    foreach (string curticket in bookings)
+                    //    {
+                    //        if (curticket == ticket)
+                    //        {
+                    //            MessageBox.Show("Một số vé của bạn bị hủy do không thanh toán đúng hạn! Vui lòng kiểm tra lại!", "Thông báo");
+                    //            check = true;
+                    //            break;
+                    //        }
+                    //    }
+                    //    if (check)
+                    //    {
+                    //        break;
+                    //    }
+                    //}
+
                     foreach (string ticket in ticket_des)
                     {
                         DataProvider.sqlConnection.Open();
@@ -143,6 +177,31 @@ namespace Quan_Ly_Ban_Ve_May_Bay
                         allFlight = new AllFlight();
                         fContainer.Content = allFlight;
                         allFlight.ShowDetail += AllFlight_ShowDetail;
+                    }
+
+                    string id="";
+                    foreach (string ticket in ticket_des)
+                    {
+                        DataProvider.sqlConnection.Open();
+                        sqlCommand = new SqlCommand(
+                            "select [hd].MaTK from [HOADON] [hd], [CTHD] [ct] " +
+                            "where [ct].MaVe = @mave and [ct].MaHD = [hd].MaHD", DataProvider.sqlConnection);
+                        sqlCommand.Parameters.Add("@mave", SqlDbType.NVarChar).Value = ticket;
+                        reader = sqlCommand.ExecuteReader();
+                        if (reader.HasRows)
+                        {
+                            if (reader.Read())
+                            {
+                                id = reader["MaTK"].ToString();                                
+                            }
+                        }
+                        DataProvider.sqlConnection.Close();
+
+                        if (id == curAccount.id)
+                        {
+                            MessageBox.Show("Một số vé của bạn đã bị hủy do không thanh toán đúng hạn!");
+                            break;
+                        }
                     }
                 }
             }
@@ -316,10 +375,18 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             ContactUs contactUs = new ContactUs();
             fContainer.Content = contactUs;
         }
+        private void Reload_Mybookings(object sender, RoutedEventArgs e)
+        {
+            myBookings = new MyBookings();
+            myBookings.Return += Reload_Mybookings;
+            myBookings.MyTicket(curAccount.id);
+            fContainer.Content = myBookings;
+        }
 
         private void btnMyBookings_Click(object sender, RoutedEventArgs e)
         {
             myBookings = new MyBookings();
+            myBookings.Return += Reload_Mybookings;
             if (curAccount == null)
             {
                 myBookings.NoLogin();

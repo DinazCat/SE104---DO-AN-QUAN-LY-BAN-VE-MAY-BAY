@@ -441,21 +441,37 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
         }
         private void SaveCTHD()
         {
+            int count = 1;
+            DataProvider.sqlConnection.Open();
+            SqlCommand sqlCommand = new SqlCommand("select * from CTHD order by MaCTHD desc", DataProvider.sqlConnection);
+            SqlDataReader reader = sqlCommand.ExecuteReader();
+            if (reader.HasRows)
+            {
+                if (reader.Read())
+                {
+                    if (reader["MaCTHD"].ToString() != "")
+                    {
+                        count = int.Parse(reader["MaCTHD"].ToString()) + 1;
+                    }
+                }
+            }
+            DataProvider.sqlConnection.Close();
+
             SqlCommand _sqlCommand = new SqlCommand(
              "select * from [CTHD]", DataProvider.sqlConnection);
             SqlDataAdapter _adapter = new SqlDataAdapter(_sqlCommand);
             DataSet ds = new DataSet();
-            _adapter.Fill(ds);
-            int count = ds.Tables[0].Rows.Count + 1;
+            _adapter.Fill(ds);            
+            //int count = ds.Tables[0].Rows.Count + 1;
 
             for (int i = 0; i < ve.Count; i++)
             {
                 Ticket item = (Ticket)ve[i];
                 DataProvider.sqlConnection.Open();
                 SqlDataAdapter adapter = new SqlDataAdapter();
-                SqlCommand sqlCommand = new SqlCommand(
+                sqlCommand = new SqlCommand(
                     "insert into [CTHD] values (@macthd, @mahd, @mave)", DataProvider.sqlConnection);
-                sqlCommand.Parameters.Add("@macthd", SqlDbType.NVarChar).Value = (count + i).ToString();
+                sqlCommand.Parameters.Add("@macthd", SqlDbType.NVarChar).Value = count.ToString();
                 sqlCommand.Parameters.Add("@mahd", SqlDbType.NVarChar).Value = maHoaDonTxt.Text;
                 sqlCommand.Parameters.Add("@mave", SqlDbType.NVarChar).Value = item.TiketID;
                 sqlCommand.ExecuteNonQuery();

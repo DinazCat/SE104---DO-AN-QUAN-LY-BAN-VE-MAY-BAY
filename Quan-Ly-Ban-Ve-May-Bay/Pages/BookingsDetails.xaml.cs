@@ -26,6 +26,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
     {
         private string MaVe;
         public event RoutedEventHandler ReturnBookings;
+        public event RoutedEventHandler Pay_ReturnBookings;
         public BookingsDetail()
         {
             InitializeComponent();
@@ -86,20 +87,33 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
                 {
                     btnPay.Content = "Đã thanh toán";
                 }
-                btnPay.Visibility = Visibility.Visible;
-                statusPaymentTxt.Visibility = Visibility.Visible; 
+                dpPay_Update.Visibility = Visibility.Visible;
             }
         }
-        private void Pay_ReturnMyBookings(object sender, RoutedEventArgs e)
+        private void Update_ReturnMyBookings(object sender, RoutedEventArgs e)
         {
             ReturnBookings?.Invoke(this, new RoutedEventArgs());
         }
+        private void Pay_ReturnMyBookings(object sender, RoutedEventArgs e)
+        {
+            Pay_ReturnBookings?.Invoke(this, new RoutedEventArgs());
+        }
+
         private void btnPay_Click(object sender, RoutedEventArgs e)
         {
             BookingsPay bookingsPay = new BookingsPay();
             bookingsPay.ShowBill(maHDTxt.Text, ngayLapTxt.Text, maCBTxt.Text, gioBayTxt.Text, tienTxt.Text);
-            bookingsPay.ReturnBookings += Pay_ReturnMyBookings;
+            bookingsPay.ReturnBookings += Update_ReturnMyBookings;
+            bookingsPay.Return += Pay_ReturnMyBookings;
             bookingsPay.ShowDialog();
+        }
+
+        private void btnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            BookingsUpdate bookingsUpdate = new BookingsUpdate();
+            bookingsUpdate.ShowInforHK(MaVe);
+            bookingsUpdate.ReturnBookings += Update_ReturnMyBookings;
+            bookingsUpdate.ShowDialog();
         }
     }
 }

@@ -26,6 +26,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
     public partial class MyBookings : Page
     {
         BookingsDetail bookingsDetail;
+        public event RoutedEventHandler Return;
         string user_id;
         public MyBookings()
         {
@@ -91,11 +92,16 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
             if (ticket != null)
             {
                 bookingsDetail.ReturnBookings += ReturnBookings;
-                bookingsDetail.ShowDetail(ticket.MaVe,user_id);
+                bookingsDetail.Pay_ReturnBookings += Pay_Return;
+                bookingsDetail.ShowDetail(ticket.MaVe, user_id);
                 fTicket.Content = bookingsDetail;
             }
         }
 
+        private void Pay_Return(object sender, RoutedEventArgs e)
+        {
+            Return?.Invoke(this, new RoutedEventArgs());
+        }
         private void ReturnBookings(object sender, RoutedEventArgs e)
         {
             bookingsDetail = new BookingsDetail();
@@ -103,6 +109,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
             if (ticket != null)
             {
                 bookingsDetail.ReturnBookings += ReturnBookings;
+                bookingsDetail.Pay_ReturnBookings += Pay_Return;
                 bookingsDetail.ShowDetail(ticket.MaVe, user_id);
                 fTicket.Content = bookingsDetail;
             }

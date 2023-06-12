@@ -25,6 +25,8 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
     {
         private string MaHD;
         public event RoutedEventHandler ReturnBookings;
+        public event RoutedEventHandler Return;
+        List<SymbolTicket> list_ticker;
         public BookingsPay()
         {
             InitializeComponent();
@@ -52,7 +54,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 , DataProvider.sqlConnection);
             sqlCommand.Parameters.Add("@maHD", SqlDbType.NVarChar).Value = maHD;
             SqlDataReader reader = sqlCommand.ExecuteReader();
-            List<SymbolTicket> list_ticker = new List<SymbolTicket>();
+            list_ticker = new List<SymbolTicket>();
 
             if (reader.HasRows)
             {
@@ -104,6 +106,62 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
 
                 ReturnBookings?.Invoke(this, new RoutedEventArgs());
                 this.Close();
+            }
+        }
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Hủy hóa đơn đồng nghĩa với hủy tất cả vé đã đặt trong hóa đơn.\nBạn có chắc chắn muốn hủy hóa đơn?", "Thông báo", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                RemoveCTHD();
+                RemoveHD();
+                RemoveVe();
+
+                if (MainWindow.curAccount.type == 1 || MainWindow.curAccount.type == 2)
+                {
+                    MessageBox.Show("Vui lòng thông báo đến hành khách hủy hóa đơn thành công!", "Thông báo");
+                }
+                else
+                {
+                    MessageBox.Show("Hủy hóa đơn thành công!", "Thông báo");
+
+                }
+                Return?.Invoke(this, new RoutedEventArgs());
+                this.Close();
+            }
+        }
+
+        private void RemoveHD()
+        {
+            DataProvider.sqlConnection.Open();
+            SqlCommand sqlCommand = new SqlCommand(
+                "delete from [HOADON] where MaHD = @mahd", DataProvider.sqlConnection);
+            sqlCommand.Parameters.Add("@mahd", SqlDbType.NVarChar).Value = MaHD;
+            sqlCommand.ExecuteNonQuery();
+            DataProvider.sqlConnection.Close();
+        }
+
+        private void RemoveCTHD()
+        {
+            DataProvider.sqlConnection.Open();
+            SqlCommand sqlCommand = new SqlCommand(
+                "delete from [CTHD] where MaHD = @mahd", DataProvider.sqlConnection);
+            sqlCommand.Parameters.Add("@mahd", SqlDbType.NVarChar).Value = MaHD;
+            sqlCommand.ExecuteNonQuery();
+            DataProvider.sqlConnection.Close();
+        }
+
+        private void RemoveVe()
+        {
+            foreach (SymbolTicket ticket in list_ticker)
+            {
+                DataProvider.sqlConnection.Open();
+                SqlCommand sqlCommand = new SqlCommand(
+                    "update [VE] set TinhTrang = 'TRONG', TenHK = NULL, CMND = NULL, SDT = NULL, MaHK = NULL" +
+                    " where MaVe = @mave ", DataProvider.sqlConnection);
+                sqlCommand.Parameters.Add("@mave", SqlDbType.NVarChar).Value = ticket.MaVe;
+                sqlCommand.ExecuteNonQuery();
+                DataProvider.sqlConnection.Close();
             }
         }
     }

@@ -146,10 +146,11 @@
                 </StackPanel>
             </Border>
         </Grid>
-        <DockPanel Grid.Row="1">
+        <DockPanel Grid.Row="1" x:Name="dpPay_Update" Visibility="Hidden">
             <TextBox x:Name="statusPaymentTxt" Text="*Vui lòng thanh toán trước giờ bay 24 giờ." 
-                     TextWrapping="Wrap" AcceptsReturn="True" FontWeight="Normal" Width="357" Margin="15,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" Visibility="Hidden"/>
-            <Button x:Name="btnPay" Content="THANH TOÁN" Width="180" Background="#FF64C32E" Click="btnPay_Click" Height="40" FontSize="16" Visibility="Hidden"/>
+                     TextWrapping="Wrap" AcceptsReturn="True" FontWeight="Normal" Width="250" Margin="15,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" />
+            <Button x:Name="btnPay" Content="THANH TOÁN" Width="160" Background="#FF64C32E" Click="btnPay_Click" Height="40" FontSize="16" HorizontalAlignment="Left" Margin="20,0,0,0" />
+            <Button x:Name="btnUpdate" Content="CẬP NHẬT" Width="160" Background="#FF64C32E" Click="btnUpdate_Click" Height="40" FontSize="16" HorizontalAlignment="Left" Margin="20,0,0,0" BorderBrush="#FF707070" />
         </DockPanel>
 
     </Grid>

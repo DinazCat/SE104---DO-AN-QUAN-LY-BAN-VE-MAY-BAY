@@ -56,9 +56,10 @@
                     <TextBlock Text="Thành tiền: " Margin="30,5,0,0" FontSize="14" Width="Auto"/>
                     <TextBlock Width="Auto" x:Name="tienTxt" HorizontalAlignment="Left" Margin="10,5,0,0" FontSize="14"/>
                 </DockPanel>
-                <DockPanel Margin="200,5,0,0">
-                    <Button x:Name="btnPay" Content="Thanh toán" Foreground="Black" FontSize="14" Background="#FF64C32E" HorizontalAlignment="Left" Width="130" Click="btnPay_Click" />
-                    <Button x:Name="btnCancle" Content="Hủy" Foreground="Black" FontSize="14" Background="#FF64C32E" Margin="10,0,0,0" Width="130" Click="btnHuy_Click"/>
+                <DockPanel Margin="80,15,0,0">
+                    <Button x:Name="btnDelete" Content="Hủy hóa đơn" Foreground="Black" FontSize="14" Background="#FF64C32E"  HorizontalAlignment="Stretch" Width="130" Click="btnDelete_Click" BorderBrush="{x:Null}" />
+                    <Button x:Name="btnPay" Content="Thanh toán" Foreground="Black" FontSize="14" Background="#FF64C32E"  HorizontalAlignment="Stretch" Width="130" Click="btnPay_Click" Margin="30,0,0,0" />
+                    <Button x:Name="btnCancle" Content="Hủy" Foreground="Black" FontSize="14" Background="#FF64C32E" Width="130" Click="btnHuy_Click" HorizontalAlignment="Left" Margin="30,0,0,0"/>
                 </DockPanel>
             </StackPanel>
         </Border>

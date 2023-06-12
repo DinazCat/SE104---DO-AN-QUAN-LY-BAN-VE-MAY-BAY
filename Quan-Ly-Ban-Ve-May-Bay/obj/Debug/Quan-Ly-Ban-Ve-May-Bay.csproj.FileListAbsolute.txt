@@ -914,3 +914,5 @@ D:\abc\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Quan-Ly-Ban-Ve-May-Bay.cspr
 D:\abc\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Quan-Ly-Ban-Ve-May-Bay.csproj.CopyComplete
 D:\abc\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Quan-Ly-Ban-Ve-May-Bay.exe
 D:\abc\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\Quan-Ly-Ban-Ve-May-Bay.pdb
+C:\Users\DELL\source\Repos\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\View\BookingsUpdate.g.cs
+C:\Users\DELL\source\Repos\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay\obj\Debug\View\BookingsUpdate.baml

@@ -173,6 +173,9 @@
     <Compile Include="View\BookingsPay.xaml.cs">
       <DependentUpon>BookingsPay.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\BookingsUpdate.xaml.cs">
+      <DependentUpon>BookingsUpdate.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ChangePassword.xaml.cs">
       <DependentUpon>ChangePassword.xaml</DependentUpon>
     </Compile>
@@ -322,6 +325,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\BookingsPay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\BookingsUpdate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
