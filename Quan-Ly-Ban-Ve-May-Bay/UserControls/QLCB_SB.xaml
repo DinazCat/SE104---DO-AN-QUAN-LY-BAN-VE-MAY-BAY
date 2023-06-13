@@ -21,9 +21,9 @@
                 <Button BorderBrush="Black" BorderThickness="2" Height="40" Width="150" Background="#F5F5F5" Margin="10,0" Click="SanBay_Click">
                     <TextBlock Text="Sân bay"/>
                 </Button>
-                <Button BorderBrush="Black" BorderThickness="2" Height="40" Width="130" Background="#F5F5F5" Margin="10,0" Click="HangMB_Click">
+                <!--<Button BorderBrush="Black" BorderThickness="2" Height="40" Width="130" Background="#F5F5F5" Margin="10,0" Click="HangMB_Click">
                     <TextBlock Text="Hãng máy bay"/>
-                </Button>
+                </Button>-->
                 <Button BorderBrush="Black" BorderThickness="2" Height="40" Width="150" Background="#F5F5F5" Margin="10,0" Click="ChuyenBay_Click">
                     <TextBlock Text="Chuyến bay"/>
                 </Button>

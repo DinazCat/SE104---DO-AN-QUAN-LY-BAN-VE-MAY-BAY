@@ -53,7 +53,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
             cBoxYear.SelectedIndex = 0;
             MonthSale Example = new MonthSale();
 
-            loadData();
         }
         public class MonthSale
         {
@@ -64,9 +63,10 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
             public string tile { get; set; }
         }
 
-        DataTable dt;
-        void loadData()
+        DataTable dataTable;
+        DataTable loadData()
         {
+            DataTable dt = new DataTable();
             MonthRevenueTable.Items.Clear();
 
             string query =
@@ -104,6 +104,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
                     {
                         dt.Load(reader);
                         flag = false;
+                        return dt;
                     }
                 }
                 if (flag)
@@ -112,7 +113,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
                     SqlParameter param4 = new SqlParameter("@Year", int.Parse(cBoxYear.SelectedItem.ToString()));
                     using (SqlDataReader reader = DataProvider.ExecuteReader(query, CommandType.Text, param3, param4))
                     {
-
                         if (reader.HasRows)
                         {
                             dt = new DataTable();
@@ -139,32 +139,35 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
 
                                     sqlCon.Close();
                                 }
-                            }
+                            }                           
                         }
+                        return dt;
                     }
                 }
-                int stt = 1;
-                int sum = 0;
-                foreach (DataRow dr in dt.Rows)
-                {
-                    MonthSale ms = new MonthSale();
-                    ms.stt = stt.ToString();
-                    ms.chuyenbay = dr[0].ToString();
-                    ms.sove = (dr.Field<int>(1)).ToString();
-                    ms.doanhthu = dr[2].ToString();
-                    ms.tile = dr[3].ToString();
-                    MonthRevenueTable.Items.Add(ms);
-                    stt++;
-                    sum += int.Parse(ms.doanhthu);
-                }
-                tb_total.Text = sum.ToString();
+
             }
-            catch (Exception ex) { Console.WriteLine(ex); }
+            catch (Exception ex) { Console.WriteLine(ex); return dt; }
+            return dt;
         }
 
         private void btOk_click(object sender, RoutedEventArgs e)
         {
-            loadData();
+            dataTable = loadData();
+            int stt = 1;
+            int sum = 0;
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                MonthSale ms = new MonthSale();
+                ms.stt = stt.ToString();
+                ms.chuyenbay = dr[0].ToString();
+                ms.sove = (dr.Field<int>(1)).ToString();
+                ms.doanhthu = dr[2].ToString();
+                ms.tile = dr[3].ToString();
+                MonthRevenueTable.Items.Add(ms);
+                stt++;
+                sum += int.Parse(ms.doanhthu);
+            }
+            tb_total.Text = sum.ToString();
         }
 
         private void Excel_Click(object sender, RoutedEventArgs e)

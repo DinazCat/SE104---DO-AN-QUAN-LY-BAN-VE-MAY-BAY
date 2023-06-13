@@ -441,41 +441,41 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
         }
         private void SaveCTHD()
         {
-            int count = 1;
+           int count = 1;
             DataProvider.sqlConnection.Open();
-            SqlCommand sqlCommand = new SqlCommand("select * from CTHD order by MaCTHD desc", DataProvider.sqlConnection);
-            SqlDataReader reader = sqlCommand.ExecuteReader();
-            if (reader.HasRows)
+            SqlCommand sqlCommand = new SqlCommand("select count(*) SL from [CTHD]", DataProvider.sqlConnection);
+            SqlDataReader rd = sqlCommand.ExecuteReader();
+            if (rd.HasRows)
             {
-                if (reader.Read())
+                if (rd.Read())
                 {
-                    if (reader["MaCTHD"].ToString() != "")
-                    {
-                        count = int.Parse(reader["MaCTHD"].ToString()) + 1;
-                    }
+                    count = int.Parse(rd["SL"].ToString()) + 1;
                 }
             }
+          
             DataProvider.sqlConnection.Close();
 
-            SqlCommand _sqlCommand = new SqlCommand(
-             "select * from [CTHD]", DataProvider.sqlConnection);
-            SqlDataAdapter _adapter = new SqlDataAdapter(_sqlCommand);
-            DataSet ds = new DataSet();
-            _adapter.Fill(ds);            
+            // SqlCommand _sqlCommand = new SqlCommand(
+            //"select * from [CTHD]", DataProvider.sqlConnection);
+            //SqlDataAdapter _adapter = new SqlDataAdapter(_sqlCommand);
+            //DataSet ds = new DataSet();
+            //_adapter.Fill(ds);            
             //int count = ds.Tables[0].Rows.Count + 1;
-
-            for (int i = 0; i < ve.Count; i++)
+            int i = 1;
+            foreach (Ticket item in ve)
             {
-                Ticket item = (Ticket)ve[i];
                 DataProvider.sqlConnection.Open();
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 sqlCommand = new SqlCommand(
                     "insert into [CTHD] values (@macthd, @mahd, @mave)", DataProvider.sqlConnection);
-                sqlCommand.Parameters.Add("@macthd", SqlDbType.NVarChar).Value = count.ToString();
+                Random r = new Random();
+                int ID = r.Next(100000000, 999999999);
+                sqlCommand.Parameters.Add("@macthd", SqlDbType.NVarChar).Value = ID.ToString() + item.TiketID;
                 sqlCommand.Parameters.Add("@mahd", SqlDbType.NVarChar).Value = maHoaDonTxt.Text;
                 sqlCommand.Parameters.Add("@mave", SqlDbType.NVarChar).Value = item.TiketID;
                 sqlCommand.ExecuteNonQuery();
                 DataProvider.sqlConnection.Close();
+                i++;
             }
         }
     }

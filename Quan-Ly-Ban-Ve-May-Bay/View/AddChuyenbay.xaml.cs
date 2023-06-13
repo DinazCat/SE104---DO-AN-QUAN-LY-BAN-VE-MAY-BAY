@@ -486,7 +486,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
 
             }
         }
-        public string MaCB, Sanbaydi, Sanbayden, Ngay, Gio, TgBay, Gia, mahangMB, loaiMB;
+        public string MaCB = "", Sanbaydi = "", Sanbayden = "", Ngay="", Gio = "", TgBay ="", Gia = "", mahangMB = "", loaiMB = "";
 
         private void machuyenbayTxb_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
@@ -581,8 +581,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                     MessageBox.Show("Số phút trong giờ khởi hành không hợp lệ ", "Dữ liệu không hợp lệ!");
                     return;
                 }
-                if (thaotac == 0)
-                {
+
                     DateTime currentTime = DateTime.Now;
                     int second = currentTime.Second;
                     string[] thoigian = Ngay.Split('/');
@@ -600,7 +599,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                     //    MessageBox.Show("Số giờ khởi hành phải lớn hơn thời gian hiện tại ", "Dữ liệu không hợp lệ!");
                     //    return;
                     //}
-                }
+                
             }
             catch
             {
@@ -624,7 +623,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             try
             {
                 int p1 = int.Parse(Gia);
-                if (p1 < 0)
+                if (p1 <= 0)
                 {
                     MessageBox.Show("Vui lòng nhập giá là một số dương.", "Dữ liệu không hợp lệ!");
                     return;

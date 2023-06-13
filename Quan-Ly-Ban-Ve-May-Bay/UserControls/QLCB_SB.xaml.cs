@@ -65,15 +65,15 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
             Hvedetail.Visibility = Visibility.Hidden;
             SB_CB.NavigationService.Navigate(chuyenbay);
         }
-        private void HangMB_Click(object sender, RoutedEventArgs e)
-        {
-            hangmaybay = new Hangmaybay(this);
-            sanbaydetail.Visibility = Visibility.Hidden;
-            Cbaydetail.Visibility = Visibility.Hidden;
-            Hbaydetail.Visibility = Visibility.Visible;
-            Hvedetail.Visibility = Visibility.Hidden;
-            SB_CB.NavigationService.Navigate(hangmaybay);
-        }
+        //private void HangMB_Click(object sender, RoutedEventArgs e)
+        //{
+        //    hangmaybay = new Hangmaybay(this);
+        //    sanbaydetail.Visibility = Visibility.Hidden;
+        //    Cbaydetail.Visibility = Visibility.Hidden;
+        //    Hbaydetail.Visibility = Visibility.Visible;
+        //    Hvedetail.Visibility = Visibility.Hidden;
+        //    SB_CB.NavigationService.Navigate(hangmaybay);
+        //}
         private void HangVe_Click(object sender, RoutedEventArgs e)
         {
             FareClassManagement fareClassManagement = new FareClassManagement(this);

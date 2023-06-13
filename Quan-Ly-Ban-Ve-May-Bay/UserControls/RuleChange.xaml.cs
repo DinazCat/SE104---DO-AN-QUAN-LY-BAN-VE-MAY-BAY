@@ -100,13 +100,13 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
         {            
             try
             {
-                int oldvalue = ruleChangeVM.ThoiGianBayToiThieu;
-                //ruleChangeVM.ThoiGianBayToiThieu = int.Parse(TGBTT.Text);
+                int oldvalue = ruleChangeVM.ThoiGianBayToiThieu;               
                 if (int.Parse(TGBTT.Text) <= 10)
                 {
                     MessageBox.Show("Vui lòng nhập thời gian bay tối thiểu lớn hơn 10 phút.", "Dữ liệu không hợp lệ!");
                     return;
                 }
+                ruleChangeVM.ThoiGianBayToiThieu = int.Parse(TGBTT.Text);
                 SqlConnection sqlCon = DataProvider.sqlConnection;
                 sqlCon.Open();
                 SqlCommand cmd = new SqlCommand("Update BANGTHAMSO set GiaTri=" + ruleChangeVM.ThoiGianBayToiThieu + "where CONVERT(varchar, TenThamSo)='ThoiGianBayToiThieu'", sqlCon);
@@ -131,12 +131,13 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
             try
             {
                 int oldvalue = ruleChangeVM.SoSanBayTrungGianToiDa;
-                //ruleChangeVM.SoSanBayTrungGianToiDa = int.Parse(SSBTGTD.Text);
+
                 if (int.Parse(SSBTGTD.Text) <= 0)
                 {
                     MessageBox.Show("Vui lòng nhập một số nguyên dương.", "Dữ liệu không hợp lệ!");
                     return;
                 }
+                ruleChangeVM.SoSanBayTrungGianToiDa = int.Parse(SSBTGTD.Text);
                 SqlConnection sqlCon = DataProvider.sqlConnection;
                 sqlCon.Open();
                 SqlCommand cmd = new SqlCommand("Update BANGTHAMSO set GiaTri=" + ruleChangeVM.SoSanBayTrungGianToiDa + "where CONVERT(varchar, TenThamSo)='SoSanBayTrungGianToiDa'", sqlCon);
@@ -162,12 +163,13 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
             try
             {
                 int oldvalue = ruleChangeVM.ThoiGianDungToiThieu;
-                //ruleChangeVM.ThoiGianDungToiThieu = int.Parse(TGDTT.Text);
+                
                 if (int.Parse(TGDTT.Text) <= 5)
                 {
                     MessageBox.Show("Vui lòng nhập thời gian dừng tối thiểu lớn hơn 5 phút.", "Dữ liệu không hợp lệ!");
                     return;
                 }
+                ruleChangeVM.ThoiGianDungToiThieu = int.Parse(TGDTT.Text);
                 SqlConnection sqlCon = DataProvider.sqlConnection;
                 sqlCon.Open();
                 SqlCommand cmd = new SqlCommand("Update BANGTHAMSO set GiaTri=" + ruleChangeVM.ThoiGianDungToiThieu + "where CONVERT(varchar, TenThamSo)='ThoiGianDungToiThieu'", sqlCon);
@@ -194,12 +196,13 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
             try
             {
                 int oldvalue = ruleChangeVM.ThoiGianDungToiDa;
-                //ruleChangeVM.ThoiGianDungToiDa = int.Parse(TGDTD.Text);
+                
                 if (int.Parse(TGDTD.Text) <= 5)
                 {
                     MessageBox.Show("Vui lòng nhập thời gian dừng tối đa lớn hơn 5 phút.", "Dữ liệu không hợp lệ!");
                     return;
                 }
+                ruleChangeVM.ThoiGianDungToiDa = int.Parse(TGDTD.Text);
                 SqlConnection sqlCon = DataProvider.sqlConnection;
                 sqlCon.Open();
                 SqlCommand cmd = new SqlCommand("Update BANGTHAMSO set GiaTri=" + ruleChangeVM.ThoiGianDungToiDa + "where CONVERT(varchar, TenThamSo)='ThoiGianDungToiDa'", sqlCon);
@@ -225,12 +228,13 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
             try
             {
                 int oldvalue = ruleChangeVM.SoGioTruocKhoiHanhChoPhepDatVe;
-                //ruleChangeVM.SoGioTruocKhoiHanhChoPhepDatVe = int.Parse(SGTKHCPDV.Text);
+                
                 if (int.Parse(SGTKHCPDV.Text) <= 0)
                 {
                     MessageBox.Show("Vui lòng nhập một số nguyên dương.", "Dữ liệu không hợp lệ!");
                     return;
-                }              
+                }
+                ruleChangeVM.SoGioTruocKhoiHanhChoPhepDatVe = int.Parse(SGTKHCPDV.Text);
                 SqlConnection sqlCon = DataProvider.sqlConnection;
                 sqlCon.Open();
                 SqlCommand cmd = new SqlCommand("Update BANGTHAMSO set GiaTri=" + ruleChangeVM.SoGioTruocKhoiHanhChoPhepDatVe + "where CONVERT(varchar, TenThamSo)='ThoiGianChamNhatChoPhepDatVe'", sqlCon);
@@ -257,12 +261,12 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
             try
             {
                 int oldvalue = ruleChangeVM.SoGioTruocKhoiHanhChoPhepHuyVe;
-                //ruleChangeVM.SoGioTruocKhoiHanhChoPhepHuyVe = int.Parse(SGTKHCPHV.Text);
                 if (int.Parse(SGTKHCPHV.Text) <= 0)
                 {
                     MessageBox.Show("Vui lòng nhập một số nguyên dương.", "Dữ liệu không hợp lệ!");
                     return;
                 }
+                ruleChangeVM.SoGioTruocKhoiHanhChoPhepHuyVe = int.Parse(SGTKHCPHV.Text);
                 SqlConnection sqlCon = DataProvider.sqlConnection;
                 sqlCon.Open();
                 SqlCommand cmd = new SqlCommand("Update BANGTHAMSO set GiaTri=" + ruleChangeVM.SoGioTruocKhoiHanhChoPhepHuyVe + "where CONVERT(varchar, TenThamSo)='ThoiGianChamNhatChoPhepHuyVe'", sqlCon);

@@ -170,6 +170,60 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
             chuyenbaytofix = CBTable.SelectedItem as chuyenbayclass;
             if (chuyenbaytofix != null)
             {
+                string ngayKH = "";
+                string gioKH = "";
+                string query = "SELECT * FROM CHUYENBAY where MaCHuyenBay = @ma";
+                SqlParameter param1 = new SqlParameter("@ma", chuyenbaytofix.maCB);
+                using (SqlDataReader reader = DataProvider.ExecuteReader(query, CommandType.Text, param1))
+                {
+                    dt = new DataTable();
+                    if (reader.HasRows)
+                    {
+                        dt.Load(reader);
+                    }
+                }
+                foreach (DataRow dr in dt.Rows)
+                {
+
+                    ngayKH = dr["NgayKhoiHanh"].ToString();
+                    gioKH = dr["ThoiGianXuatPhat"].ToString();
+
+                }
+                DateTime currentTime = DateTime.Now;
+                int second = currentTime.Second;
+                string[] thoigian = ngayKH.Split('/');
+                int nam = int.Parse(thoigian[2]);
+                int thang = int.Parse(thoigian[1]);
+                int ngay = int.Parse(thoigian[0]);
+                string[] thoigianKH = gioKH.Split(':');
+                DateTime specificTime = new DateTime(nam, thang, ngay, int.Parse(thoigianKH[0]), int.Parse(thoigianKH[1]), second);
+                if (specificTime <= currentTime)
+                {
+                    MessageBox.Show("Chuyến bay này đã khởi hành, không thể sửa ", "Thông báo");
+                    return;
+                }
+                Boolean flag = false;
+                query = "SELECT * From VE where MaChuyenBay = @ma";
+                param1 = new SqlParameter("@ma", chuyenbaytofix.maCB);
+                DataTable table;
+                using (SqlDataReader reader = DataProvider.ExecuteReader(query, CommandType.Text, param1))
+                {
+                    table = new DataTable();
+                    if (reader.HasRows)
+                    {
+                        table.Load(reader);
+
+                    }
+                    foreach (DataRow dr in table.Rows)
+                    {
+                        if (dr["TinhTrang"].ToString() != "TRONG") flag = true;
+                    }
+                }
+                if (flag == true)
+                {
+                    MessageBox.Show("Chuyến bay đã được đưa vào sử dụng, không thể sửa.", "Thông báo");
+                    return;
+                }
                 AddChuyenbay cb = new AddChuyenbay(CBTable, 1);
                 cb.Show();
             }

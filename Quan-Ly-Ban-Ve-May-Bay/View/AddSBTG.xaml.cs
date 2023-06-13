@@ -192,6 +192,29 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 MessageBox.Show("Vui lòng nhập thời gian dừng phải bé hơn thời gian bay của chuyến bay: " + AddChuyenbay.thoigianbayDC + " phút", "Dữ liệu không hợp lệ!");
                 return;
             }
+            int tongTG = 0;
+            string query9 = "SELECT * FROM SANBAYTRUNGGIAN where MaChuyenBay = @ma";
+            SqlParameter param9 = new SqlParameter("@ma", maCB);
+            DataTable dt9;
+            using (SqlDataReader reader = DataProvider.ExecuteReader(query9, CommandType.Text, param9))
+            {
+                dt9 = new DataTable();
+                if (reader.HasRows)
+                {
+                    dt9.Load(reader);
+                }
+                foreach(DataRow dr in dt9.Rows)
+                {
+                    tongTG += int.Parse(dr["ThoiGianDung"].ToString());
+                }
+            }
+            if (int.Parse(tgDung) + tongTG >= int.Parse(AddChuyenbay.thoigianbayDC) && thaotac==0)
+            {
+                MessageBox.Show("Tổng thời gian dừng không được lớn hơn hoặc bằng thời gian bay: " + AddChuyenbay.thoigianbayDC + " phút", "Dữ liệu không hợp lệ!");
+                return;
+            }
+           
+
             if (thaotac == 0)
             {
                 string query = "SELECT * FROM SANBAYTRUNGGIAN where MaChuyenBay = @ma";
