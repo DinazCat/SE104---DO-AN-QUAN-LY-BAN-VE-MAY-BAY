@@ -5,6 +5,8 @@ VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quan-Ly-Ban-Ve-May-Bay", "Quan-Ly-Ban-Ve-May-Bay\Quan-Ly-Ban-Ve-May-Bay.csproj", "{042CDDFA-B02F-4CCA-A2DC-FC84E5CFEF19}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quan-Ly-Ban-Ve-May-Bay_Test", "Quan-Ly-Ban-Ve-May-Bay_Test\Quan-Ly-Ban-Ve-May-Bay_Test.csproj", "{13C50D81-C55F-42C9-B73D-D992E14E31EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{042CDDFA-B02F-4CCA-A2DC-FC84E5CFEF19}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{042CDDFA-B02F-4CCA-A2DC-FC84E5CFEF19}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{042CDDFA-B02F-4CCA-A2DC-FC84E5CFEF19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13C50D81-C55F-42C9-B73D-D992E14E31EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13C50D81-C55F-42C9-B73D-D992E14E31EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13C50D81-C55F-42C9-B73D-D992E14E31EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13C50D81-C55F-42C9-B73D-D992E14E31EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

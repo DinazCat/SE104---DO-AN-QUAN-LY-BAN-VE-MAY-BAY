@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Quan_Ly_Ban_Ve_May_Bay
 {
-    internal class Flight : INotifyPropertyChanged
+    public class Flight : INotifyPropertyChanged
     {
         private string flightID;
         public string FlightID

@@ -274,7 +274,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
                 }
                 foreach (DataRow dr in dt.Rows)
                 {
-
                     q.GiaTxb.Text = dr["Gia"].ToString();
                 }
             }

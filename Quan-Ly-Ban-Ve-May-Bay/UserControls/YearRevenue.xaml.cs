@@ -117,33 +117,33 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
         }
         private void Excel_Click(object sender, RoutedEventArgs e)
         {
-            Microsoft.Office.Interop.Excel.Application excel = null;
-            Microsoft.Office.Interop.Excel.Workbook wb = null;
-            object missing = Type.Missing;
-            Microsoft.Office.Interop.Excel.Worksheet ws = null;
-            Microsoft.Office.Interop.Excel.Range rng = null;
+            //Microsoft.Office.Interop.Excel.Application excel = null;
+            //Microsoft.Office.Interop.Excel.Workbook wb = null;
+            //object missing = Type.Missing;
+            //Microsoft.Office.Interop.Excel.Worksheet ws = null;
+            //Microsoft.Office.Interop.Excel.Range rng = null;
 
 
 
-            excel = new Microsoft.Office.Interop.Excel.Application();
-            wb = excel.Workbooks.Add();
-            ws = (Microsoft.Office.Interop.Excel.Worksheet)wb.ActiveSheet;
-            ws.Columns.AutoFit();
-            ws.Columns.EntireColumn.ColumnWidth = 25;
+            //excel = new Microsoft.Office.Interop.Excel.Application();
+            //wb = excel.Workbooks.Add();
+            //ws = (Microsoft.Office.Interop.Excel.Worksheet)wb.ActiveSheet;
+            //ws.Columns.AutoFit();
+            //ws.Columns.EntireColumn.ColumnWidth = 25;
 
 
-            for (int i = 0; i < YearRevenueTable.Columns.Count; i++)
-            {
-                ws.Cells[1, i + 1].Value = YearRevenueTable.Columns[i].Header;
-                for (int j = 0; j < YearRevenueTable.Items.Count; j++)
-                {
-                    var cellValue = (YearRevenueTable.Columns[i].GetCellContent(YearRevenueTable.Items[j]) as TextBlock).Text;
-                    ws.Cells[j + 2, i + 1].Value = cellValue;
-                }
-            }
+            //for (int i = 0; i < YearRevenueTable.Columns.Count; i++)
+            //{
+            //    ws.Cells[1, i + 1].Value = YearRevenueTable.Columns[i].Header;
+            //    for (int j = 0; j < YearRevenueTable.Items.Count; j++)
+            //    {
+            //        var cellValue = (YearRevenueTable.Columns[i].GetCellContent(YearRevenueTable.Items[j]) as TextBlock).Text;
+            //        ws.Cells[j + 2, i + 1].Value = cellValue;
+            //    }
+            //}
 
-            excel.Visible = true;
-            wb.Activate();
+            //excel.Visible = true;
+            //wb.Activate();
         }
     }
 }

@@ -8,7 +8,7 @@ using System.Windows.Data;
 
 namespace Quan_Ly_Ban_Ve_May_Bay.Converter
 {
-    internal class TimeConverter : IValueConverter
+    public class TimeConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

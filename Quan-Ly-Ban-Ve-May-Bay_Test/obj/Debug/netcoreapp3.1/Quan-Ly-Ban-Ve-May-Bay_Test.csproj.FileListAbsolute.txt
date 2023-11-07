@@ -1,0 +1,5 @@
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay_Test\obj\Debug\netcoreapp3.1\Quan-Ly-Ban-Ve-May-Bay_Test.csproj.AssemblyReference.cache
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay_Test\obj\Debug\netcoreapp3.1\Quan-Ly-Ban-Ve-May-Bay_Test.GeneratedMSBuildEditorConfig.editorconfig
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay_Test\obj\Debug\netcoreapp3.1\Quan-Ly-Ban-Ve-May-Bay_Test.AssemblyInfoInputs.cache
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay_Test\obj\Debug\netcoreapp3.1\Quan-Ly-Ban-Ve-May-Bay_Test.AssemblyInfo.cs
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay_Test\obj\Debug\netcoreapp3.1\Quan-Ly-Ban-Ve-May-Bay_Test.csproj.CoreCompileInputs.cache
