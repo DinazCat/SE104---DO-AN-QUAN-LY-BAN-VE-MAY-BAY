@@ -620,18 +620,14 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 }
             }
 
-            try
+            if (!DataProvider.isPositiveInteger(TgBay))
             {
-                int p1 = int.Parse(Gia);
-                if (p1 <= 0)
-                {
-                    MessageBox.Show("Vui lòng nhập giá là một số dương.", "Dữ liệu không hợp lệ!");
-                    return;
-                }
+                MessageBox.Show("Vui lòng nhập thời gian bay là một số nguyên dương", "Dữ liệu không hợp lệ!");
+                return;
             }
-            catch
+            if (!DataProvider.isPositiveInteger(Gia))
             {
-                MessageBox.Show("Vui lòng nhập giá là một số nguyên.", "Dữ liệu không hợp lệ!");
+                MessageBox.Show("Vui lòng nhập giá là một số nguyên dương", "Dữ liệu không hợp lệ!");
                 return;
             }
             try

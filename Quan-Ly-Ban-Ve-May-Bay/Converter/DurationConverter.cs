@@ -8,14 +8,14 @@ using System.Windows.Data;
 
 namespace Quan_Ly_Ban_Ve_May_Bay.Converter
 {
-    internal class DurationConverter : IValueConverter
+    public class DurationConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            TimeSpan duration = (TimeSpan) value;
-            if (duration.Hours * 60 + duration.Minutes < 60)
+            TimeSpan duration = (TimeSpan)value;
+            if (duration.TotalMinutes < 60)
             {
-                return (duration.Hours * 60 + duration.Minutes).ToString() + "'";
+                return duration.TotalMinutes.ToString() + "'";
             }
             return duration.ToString(@"hh\:mm");
         }
