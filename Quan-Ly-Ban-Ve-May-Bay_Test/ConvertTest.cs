@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Quan_Ly_Ban_Ve_May_Bay.Converter;
+using Quan_Ly_Ban_Ve_May_Bay.Pages;
 
 namespace Quan_Ly_Ban_Ve_May_Bay_Test
 {
@@ -58,6 +59,17 @@ namespace Quan_Ly_Ban_Ve_May_Bay_Test
             Assert.AreEqual(expectedResult, actualResult);
         }
         [TestMethod]
+        [DataRow(0, "")]
+        [DataRow(1, "Admin")]
+        [DataRow(2, "Nhân viên")]
+        [DataRow(3, "Khách hàng")]
+        public void AccountTypeConvertTest(int input, string expectedOutput)
+        {
+            AccountTypeConverter convert = new AccountTypeConverter();
+            var actualResult = (String)convert.Convert(input, typeof(String), null, CultureInfo.InvariantCulture);
+            Assert.AreEqual(expectedOutput, actualResult);
+        }
+        [TestMethod]
         [ExpectedException(typeof(NotImplementedException))]
         public void TimeSpanConvertBackTest()
         {
@@ -72,6 +84,13 @@ namespace Quan_Ly_Ban_Ve_May_Bay_Test
             TimeSpan timeSpan = DateTime.Now.TimeOfDay;
             DurationConverter convert = new DurationConverter();
             var actualResult1 = (String)convert.ConvertBack(timeSpan, typeof(String), null, CultureInfo.InvariantCulture);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(NotImplementedException))]
+        public void AccountTypeConvertBackTest()
+        {
+            AccountTypeConverter convert = new AccountTypeConverter();
+            var actualResult1 = (String)convert.ConvertBack(0, typeof(String), null, CultureInfo.InvariantCulture);
         }
         //viết tương tự cho DateConverter và TimeConverter
     }

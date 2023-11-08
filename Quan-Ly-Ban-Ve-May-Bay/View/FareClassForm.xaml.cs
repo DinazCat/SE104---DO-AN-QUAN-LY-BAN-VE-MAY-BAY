@@ -40,18 +40,9 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 txblError.Text = "Vui lòng nhập đầy đủ thông tin!";
                 return;
             }
-            try
+            if (!DataProvider.isPositiveInteger(Percentage.Text))
             {
-                int p = int.Parse(Percentage.Text);
-                if (p <= 0)
-                {
-                    MessageBox.Show("Vui lòng nhập tỷ lệ phần trăm là một số nguyên dương.", "Dữ liệu không hợp lệ!");
-                    return;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Vui lòng nhập tỷ lệ phần trăm là một số nguyên.", "Dữ liệu không hợp lệ!");
+                MessageBox.Show("Vui lòng nhập tỷ lệ phần trăm là một số nguyên dương.", "Dữ liệu không hợp lệ!");
                 return;
             }
             SqlConnection sqlCon = DataProvider.sqlConnection;

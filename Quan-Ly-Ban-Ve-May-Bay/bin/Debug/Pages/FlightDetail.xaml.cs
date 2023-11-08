@@ -148,21 +148,11 @@ namespace Quan_Ly_Ban_Ve_May_Bay
         }
 
         //add data for ticket
-        List<Ticket> tickets1 = new List<Ticket>();
-        List<Ticket> tickets2 = new List<Ticket>();
-        List<Ticket> tickets3 = new List<Ticket>();
-        List<Ticket> tickets4 = new List<Ticket>();
-        List<Ticket> tickets5 = new List<Ticket>();
-        List<Ticket> tickets6 = new List<Ticket>();
+        List<Ticket> tickets = new List<Ticket>();
         private void addDataToSeat(string flightID)
         {
-            tickets1 = new List<Ticket>();
-            tickets2 = new List<Ticket>();
-            tickets3 = new List<Ticket>();
-            tickets4 = new List<Ticket>();
-            tickets5 = new List<Ticket>();
+            tickets = new List<Ticket>();
             TicketID_Chosen = new List<string>();
-            tickets6 = new List<Ticket>();
             for (int i = 1; i < flight_classes.Count; i++)
             {
                 DataProvider.sqlConnection.Open();
@@ -194,40 +184,19 @@ namespace Quan_Ly_Ban_Ve_May_Bay
                             color = "#FF95988E";
                             // enable = false;
                         }
-
-                        switch (seatNumber % 6)
-                        {
-                            case 1:
-                                tickets1.Add(new Ticket(ticketID, flightClass, seatNumber, status, color));
-                                break;
-                            case 2:
-                                tickets2.Add(new Ticket(ticketID, flightClass, seatNumber, status, color));
-                                break;
-                            case 3:
-                                tickets3.Add(new Ticket(ticketID, flightClass, seatNumber, status, color));
-                                break;
-                            case 4:
-                                tickets4.Add(new Ticket(ticketID, flightClass, seatNumber, status, color));
-                                break;
-                            case 5:
-                                tickets5.Add(new Ticket(ticketID, flightClass, seatNumber, status, color));
-                                break;
-                            case 0:
-                                tickets6.Add(new Ticket(ticketID, flightClass, seatNumber, status, color));
-                                break;
-                        }
+                        tickets.Add(new Ticket(ticketID, flightClass, seatNumber, status, color));
                     }
                 }
                 DataProvider.sqlConnection.Close();
             }
 
 
-            SeatsChart1.ItemsSource = tickets1;
-            SeatsChart2.ItemsSource = tickets2;
-            SeatsChart3.ItemsSource = tickets3;
-            SeatsChart4.ItemsSource = tickets4;
-            SeatsChart5.ItemsSource = tickets5;
-            SeatsChart6.ItemsSource = tickets6;
+            SeatsChart1.ItemsSource = DataProvider.addDataToSeat(tickets, 1);
+            SeatsChart2.ItemsSource = DataProvider.addDataToSeat(tickets, 2);
+            SeatsChart3.ItemsSource = DataProvider.addDataToSeat(tickets, 3);
+            SeatsChart4.ItemsSource = DataProvider.addDataToSeat(tickets, 4);
+            SeatsChart5.ItemsSource = DataProvider.addDataToSeat(tickets, 5);
+            SeatsChart6.ItemsSource = DataProvider.addDataToSeat(tickets, 0);
         }
 
         public List<string> TicketID_Chosen = new List<string>();

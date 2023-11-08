@@ -195,7 +195,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
                             // enable = false;
                         }
 
-                        switch (seatNumber % 6)
+                        switch (seatNumber % 6)//tách ra để test
                         {
                             case 1:
                                 tickets1.Add(new Ticket(ticketID, flightClass, seatNumber, status, color));

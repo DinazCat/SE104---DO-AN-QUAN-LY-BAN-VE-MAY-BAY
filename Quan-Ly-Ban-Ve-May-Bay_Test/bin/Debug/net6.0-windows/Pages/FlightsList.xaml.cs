@@ -68,7 +68,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
 
         }
         //filter by airport name
-        private bool airlineNameFilter(object item)
+        private bool airlineNameFilter(object item)//test
         {
             return ((item as Flight).AirlineName.CompareTo(selectedAirlineName) == 0);
         }
@@ -148,14 +148,8 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             DataProvider.sqlConnection.Close();
 
             lvFlight.ItemsSource = flight_list;
-            if (flight_list.Count == 0)
-            {
-                isHavingData.Text = "Không tìm thấy chuyến bay thích hợp";
-            }
-            else
-            {
-                isHavingData.Text = "Tất cả những chuyến bay đã tìm thấy";
-            }
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvFlight.ItemsSource);
+            setIsHavingData(view);
         }
 
 
@@ -175,12 +169,12 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             }
         }
 
-        private void btnReturn_Click(object sender, RoutedEventArgs e)
+        private void btnReturn_Click(object sender, RoutedEventArgs e)//test
         {
             Return?.Invoke(this, new RoutedEventArgs());
         }
 
-        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        private void btnSearch_Click(object sender, RoutedEventArgs e)//test
         {
             Search?.Invoke(this, new RoutedEventArgs());
         }
@@ -232,7 +226,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
         }
 
         ///function filter
-        private bool noStopFilter(object item)
+        private bool noStopFilter(object item)//test
         {
             return ((item as Flight).Stop == 0);
         }
@@ -268,7 +262,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             }
             return false;
         }
-        private bool eveningToNight_Destination_Filter(object item)
+        private bool eveningToNight_Destination_Filter(object item)//test
         {
             if (((item as Flight).TimeDestination.CompareTo("18:00")) >= 0 && ((item as Flight).TimeDestination.CompareTo("23:59")) <= 0)
             {
@@ -285,7 +279,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             }
             return false;
         }
-        private bool morningToNoon_Departure_Filter(object item)
+        private bool morningToNoon_Departure_Filter(object item)//test
         {
             if (((item as Flight).TimeDeparture.CompareTo("06:00")) >= 0 && ((item as Flight).TimeDeparture.CompareTo("11:59")) <= 0)
             {
@@ -293,7 +287,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             }
             return false;
         }
-        private bool noonToEvening_Departure_Filter(object item)
+        private bool noonToEvening_Departure_Filter(object item)//test
         {
             if (((item as Flight).TimeDeparture.CompareTo("12:00")) >= 0 && ((item as Flight).TimeDeparture.CompareTo("17:59")) <= 0)
             {
@@ -301,7 +295,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             }
             return false;
         }
-        private bool eveningToNight_Departure_Filter(object item)
+        private bool eveningToNight_Departure_Filter(object item)//test
         {
             if (((item as Flight).TimeDeparture.CompareTo("18:00")) >= 0 && ((item as Flight).TimeDeparture.CompareTo("23:59")) <= 0)
             {
@@ -414,7 +408,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             }
             lvAirline.SelectedIndex = -1;
         }
-        private void setIsHavingData(CollectionView view)
+        private void setIsHavingData(CollectionView view)//test
         {
             if (view.Count <= 0)
             {

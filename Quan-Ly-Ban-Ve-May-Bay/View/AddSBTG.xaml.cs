@@ -155,12 +155,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                     }
                 }
             }
-            try
-            {
-                int p1 = int.Parse(tgDung);
-
-            }
-            catch
+            if (!DataProvider.isPositiveInteger(tgDung))
             {
                 MessageBox.Show("Vui lòng nhập thời gian dừng là một số nguyên.", "Dữ liệu không hợp lệ!");
                 return;

@@ -232,7 +232,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 }
             }
             int rowCount = SBTGTable.Items.Count;
-            if (rowCount < SoSanBayTGtoida)
+            if(rowCount < SoSanBayTGtoida)
             {
                 if (isSave == true)
                 {
@@ -561,7 +561,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                         return;
                     }
                 }
-                bool isValid = Regex.IsMatch(machuyenbayTxb.Text, "^[A-Z]{2}[0-9]{3}$");
+                bool isValid = Regex.IsMatch(machuyenbayTxb.Text, "^[A-Z]{2}[0-9]{3}$");//định dạng MaCB
                 if (!isValid)
                 {
                     MessageBox.Show("Mã chuyến bay phải có định dạng như sau: XX000 ", "Dữ liệu không hợp lệ!");
@@ -570,17 +570,9 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             }
             try
             {
-                string[] thoigianKH = Gio.Split(':');
-                if (int.Parse(thoigianKH[0]) < 0 || int.Parse(thoigianKH[0]) >= 24)
+                if (Regex.IsMatch(Gio, "^([0-1]\\d|2[0-3]):[0-5]\\d$"))//định dạng giờ
                 {
-                    MessageBox.Show("Số giờ khởi hành không hợp lệ ", "Dữ liệu không hợp lệ!");
-                    return;
-                }
-                if (int.Parse(thoigianKH[1]) < 0 || int.Parse(thoigianKH[1]) >= 60)
-                {
-                    MessageBox.Show("Số phút trong giờ khởi hành không hợp lệ ", "Dữ liệu không hợp lệ!");
-                    return;
-                }
+                    string[] thoigianKH = Gio.Split(':');
 
                     DateTime currentTime = DateTime.Now;
                     int second = currentTime.Second;
@@ -599,7 +591,12 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                     //    MessageBox.Show("Số giờ khởi hành phải lớn hơn thời gian hiện tại ", "Dữ liệu không hợp lệ!");
                     //    return;
                     //}
-                
+                }
+                else
+                {
+                    MessageBox.Show("Định dạng giờ không hợp lệ", "Thông báo");
+                    return;
+                }
             }
             catch
             {
@@ -630,20 +627,10 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 MessageBox.Show("Vui lòng nhập giá là một số nguyên dương", "Dữ liệu không hợp lệ!");
                 return;
             }
-            try
-            {
-                int p2 = int.Parse(TgBay);
-            }
-            catch
-            {
-                MessageBox.Show("Vui lòng nhập thời gian bay là một số nguyên.", "Dữ liệu không hợp lệ!");
-                return;
-            }
             if (int.Parse(TgBay) < ThoiGianBayToiThieu)
             {
                 MessageBox.Show("Vui lòng nhập thời gian bay phải lớn hơn thời gian bay tối thiểu đã định: " + ThoiGianBayToiThieu + " phút", "Dữ liệu không hợp lệ!");
                 return;
-
             }
             if (Sanbaydi == Sanbayden)
             {
@@ -653,51 +640,36 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             }
             if (thaotac == 0)
             {
-                if (qLHangVeClass.Count == 0)
-                {
+                if(DataProvider.checkListHangVe(qLHangVeClass) == 0){
                     MessageBox.Show("Vui lòng chọn hạng vé cho chuyến bay.", "Dữ liệu không hợp lệ!");
                     return;
                 }
                 else
                 {
-                    for (int i = 0; i < qLHangVeClass.Count; i++)
+                    if (DataProvider.checkListHangVe(qLHangVeClass) == 1)
                     {
-                        if (qLHangVeClass[i].Mahangve == null || qLHangVeClass[i].Soluong == null)
-                        {
-                            MessageBox.Show("Vui lòng nhập thông tin đầy đủ cho hạng vé.", "Dữ liệu không hợp lệ!");
-                            return;
-                        }
+                        MessageBox.Show("Vui lòng nhập thông tin đầy đủ cho hạng vé.", "Dữ liệu không hợp lệ!");
+                        return;
                     }
+ 
                 }
 
             }
             if (thaotac == 1)
             {
-                if (qLHangVeClass.Count > 0)
+                if (DataProvider.checkListHangVe(qLHangVeClass) == 1)
                 {
-                    for (int i = 0; i < qLHangVeClass.Count; i++)
-                    {
-                        if (qLHangVeClass[i].Mahangve == null || qLHangVeClass[i].Soluong == null)
-                        {
-                            MessageBox.Show("Vui lòng nhập thông tin đầy đủ cho hạng vé.", "Dữ liệu không hợp lệ!");
-                            return;
-                        }
-                    }
+                    MessageBox.Show("Vui lòng nhập thông tin đầy đủ cho hạng vé.", "Dữ liệu không hợp lệ!");
+                    return;
                 }
             }
 
             if (thaotac == 0)
             {
-                for (int i = 0; i < qLHangVeClass.Count - 1; i++)
+                if (DataProvider.isDuplicateValue(qLHangVeClass))
                 {
-                    for (int j = i + 1; j < qLHangVeClass.Count; j++)
-                    {
-                        if (qLHangVeClass[i].Mahangve == qLHangVeClass[j].Mahangve)
-                        {
-                            MessageBox.Show("Xuất hiện tình trạng mã hạng vé trùng nhau. ", "Thông báo");
-                            return;
-                        }
-                    }
+                    MessageBox.Show("Xuất hiện tình trạng mã hạng vé trùng nhau. ", "Thông báo");
+                    return;
                 }
                 string query = "SELECT * From CHUYENBAY";
                 SqlParameter param1 = new SqlParameter("", "");
@@ -734,16 +706,10 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             else
             {
                 List<QLHangVeClass> mergedList = qLHangVeClass.Concat(qLHangVeClassexist).ToList();
-                for (int i = 0; i < mergedList.Count - 1; i++)
+                if (DataProvider.isDuplicateValue(mergedList))
                 {
-                    for (int j = i + 1; j < mergedList.Count; j++)
-                    {
-                        if (mergedList[i].Mahangve == mergedList[j].Mahangve)
-                        {
-                            MessageBox.Show("Xuất hiện tình trạng mã hạng vé trùng nhau. ", "Thông báo");
-                            return;
-                        }
-                    }
+                    MessageBox.Show("Xuất hiện tình trạng mã hạng vé trùng nhau. ", "Thông báo");
+                    return;
                 }
                 SqlConnection con = DataProvider.sqlConnection;
                 //con.Open();

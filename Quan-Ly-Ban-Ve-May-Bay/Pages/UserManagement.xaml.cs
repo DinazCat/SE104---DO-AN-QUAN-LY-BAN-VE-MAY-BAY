@@ -26,7 +26,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
     /// <summary>
     /// Interaction logic for UserManagement.xaml
     /// </summary>
-    public class AccountTypeConverter : IValueConverter
+    public class AccountTypeConverter : IValueConverter//test
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

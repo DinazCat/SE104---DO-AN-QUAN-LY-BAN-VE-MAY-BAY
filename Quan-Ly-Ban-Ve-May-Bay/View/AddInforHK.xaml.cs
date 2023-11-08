@@ -23,8 +23,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
 {
     public partial class AddInforHK : Window
     {
-
-
         List<Ticket> ve = new List<Ticket>();
         List<string> list_mave = new List<string>();
         DateTime ngayHD = new DateTime();
@@ -91,14 +89,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             }
             DataProvider.sqlConnection.Close();
             
-            foreach(Ticket ticket in ve)
-            {
-                if (ticket.CMND == cmndTxt.Text)
-                {
-                    check = false;
-                }
-            }
-            return check;
+            return DataProvider.checkCMNDInArr(ve, check, cmndTxt.Text);
         }
 
         private void TienVe()
@@ -290,19 +281,9 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
             e.Handled = regex.IsMatch(e.Text);
         }
 
-        private bool CheckInfor()
-        {
-            foreach (Ticket item in ve)
-            {
-                if (item.HkName == "")
-                    return false;
-            }
-            return true;
-        }
-
         private void btnTTSau_Click(object sender, RoutedEventArgs e)
         {
-            if (!CheckInfor())
+            if (!DataProvider.checkInfor(ve))
             {
                 MessageBox.Show("Vui lòng nhập đầy đủ thông tin vé!");
             }
@@ -367,7 +348,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
 
         private void btnTTNgay_Click(object sender, RoutedEventArgs e)
         {
-            if (!CheckInfor())
+            if (!DataProvider.checkInfor(ve))
             {
                 MessageBox.Show("Vui lòng nhập đầy đủ thông tin vé!");
             }
