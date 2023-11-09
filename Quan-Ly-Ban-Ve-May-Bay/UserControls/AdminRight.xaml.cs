@@ -29,7 +29,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
             frame.NavigationService.Navigate(MonthBCDT);
         }
 
-        private void MonthRevenue_Click(object sender, RoutedEventArgs e)
+        public void MonthRevenue_Click(object sender, RoutedEventArgs e)
         {
             frame.NavigationService.Navigate(MonthBCDT);
         }

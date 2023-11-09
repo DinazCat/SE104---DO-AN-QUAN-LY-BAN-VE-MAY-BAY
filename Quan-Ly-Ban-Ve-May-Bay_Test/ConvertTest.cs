@@ -92,6 +92,21 @@ namespace Quan_Ly_Ban_Ve_May_Bay_Test
             AccountTypeConverter convert = new AccountTypeConverter();
             var actualResult1 = (String)convert.ConvertBack(0, typeof(String), null, CultureInfo.InvariantCulture);
         }
-        //viết tương tự cho DateConverter và TimeConverter
+        [TestMethod]
+        [ExpectedException(typeof(NotImplementedException))]
+        public void DateConvertBackTest()
+        {
+            DateTime datetime = DateTime.Now;
+            DateConverter convert = new DateConverter();
+            var actualResult1 = (String)convert.ConvertBack(datetime, typeof(String), null, CultureInfo.InvariantCulture);
+        }
+        [TestMethod]
+        [ExpectedException(typeof(NotImplementedException))]
+        public void TimeConvertBackTest()
+        {
+            DateTime datetime = DateTime.Now;
+            TimeConverter convert = new TimeConverter();
+            var actualResult1 = (String)convert.ConvertBack(datetime, typeof(String), null, CultureInfo.InvariantCulture);
+        }
     }
 }

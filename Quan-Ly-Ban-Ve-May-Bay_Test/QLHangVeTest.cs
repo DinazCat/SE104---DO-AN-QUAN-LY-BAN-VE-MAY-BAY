@@ -17,7 +17,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay_Test
             bool propertyWasUpdated = false;
             string[] props = new string[]
             {
-                "Machuyenbay",
                 "Mahangve",
                 "Soluong"
             };
@@ -29,10 +28,12 @@ namespace Quan_Ly_Ban_Ve_May_Bay_Test
                 }
             };
             qLHangVe.Machuyenbay = "002";
-            qLHangVe.Mahangve = "001";
-            qLHangVe.Soluong = "20";
             Assert.AreEqual("002", qLHangVe.Machuyenbay);
+            qLHangVe.Mahangve = "001";
             Assert.AreEqual("001", qLHangVe.Mahangve);
+            Assert.IsTrue(propertyWasUpdated);
+            propertyWasUpdated = false;
+            qLHangVe.Soluong = "20";
             Assert.AreEqual("20", qLHangVe.Soluong);
             Assert.IsTrue(propertyWasUpdated);
         }

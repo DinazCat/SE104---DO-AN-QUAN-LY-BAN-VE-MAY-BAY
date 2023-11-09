@@ -47,7 +47,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay_Test
             flightClass.ClassId = "001";
             Assert.IsTrue(propertyWasUpdated);
             Assert.AreEqual("001", flightClass.ClassId);
-            Trace.Write(flightClass.ClassId);
         }
         [TestMethod]
         public void FlightClassColorTest()
@@ -64,7 +63,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay_Test
             flightClass.ClassColor = "#FFF";
             Assert.IsTrue(propertyWasUpdated);
             Assert.AreEqual("#FFF", flightClass.ClassColor);
-            Trace.Write(flightClass.ClassColor);
         }
         [TestMethod]
         public void FlightClassPercentTest()
@@ -81,7 +79,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay_Test
             flightClass.Percent = "20";
             Assert.IsTrue(propertyWasUpdated);
             Assert.AreEqual("20", flightClass.Percent);
-            Trace.Write(flightClass.Percent);
         }
         [TestMethod]
         public void FlightClassNameTest()
@@ -98,7 +95,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay_Test
             flightClass.ClassName = "001";
             Assert.IsTrue(propertyWasUpdated);
             Assert.AreEqual("001", flightClass.ClassName);
-            Trace.Write(flightClass.ClassName);
         }
     }
 }

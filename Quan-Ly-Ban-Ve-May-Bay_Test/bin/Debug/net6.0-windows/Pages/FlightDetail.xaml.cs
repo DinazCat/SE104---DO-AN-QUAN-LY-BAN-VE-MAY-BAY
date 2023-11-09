@@ -211,11 +211,11 @@ namespace Quan_Ly_Ban_Ve_May_Bay
                 if (button.Background != Brushes.Green)
                 {
                     button.Background = Brushes.Green;
-                    TicketID_Chosen.Add(ticket.TiketID);
+                    TicketID_Chosen.Add(ticket.TicketID);
                 }
                 else
                 {
-                    TicketID_Chosen.Remove(ticket.TiketID);
+                    TicketID_Chosen.Remove(ticket.TicketID);
                     button.Background = (SolidColorBrush)new BrushConverter().ConvertFromString(ticket.Color);
                     button.Background = (SolidColorBrush)new BrushConverter().ConvertFromString(ticket.Color);
                 }

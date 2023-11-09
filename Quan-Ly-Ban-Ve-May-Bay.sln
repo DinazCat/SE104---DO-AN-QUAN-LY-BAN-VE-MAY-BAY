@@ -5,7 +5,7 @@ VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quan-Ly-Ban-Ve-May-Bay", "Quan-Ly-Ban-Ve-May-Bay\Quan-Ly-Ban-Ve-May-Bay.csproj", "{042CDDFA-B02F-4CCA-A2DC-FC84E5CFEF19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quan-Ly-Ban-Ve-May-Bay_Test", "Quan-Ly-Ban-Ve-May-Bay_Test\Quan-Ly-Ban-Ve-May-Bay_Test.csproj", "{13C50D81-C55F-42C9-B73D-D992E14E31EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quan-Ly-Ban-Ve-May-Bay_Test", "Quan-Ly-Ban-Ve-May-Bay_Test\Quan-Ly-Ban-Ve-May-Bay_Test.csproj", "{13C50D81-C55F-42C9-B73D-D992E14E31EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

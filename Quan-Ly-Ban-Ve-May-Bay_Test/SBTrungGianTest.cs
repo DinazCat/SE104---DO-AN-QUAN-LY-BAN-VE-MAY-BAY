@@ -34,7 +34,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay_Test
             sBTrungGian.FlightId = "001";
             Assert.IsTrue(propertyWasUpdated);
             Assert.AreEqual("001", sBTrungGian.FlightId);
-            Trace.Write(sBTrungGian.FlightId);
         }
         [TestMethod]
         public void AirportNameTest()
@@ -51,7 +50,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay_Test
             sBTrungGian.AirportName = "Bamboo";
             Assert.IsTrue(propertyWasUpdated);
             Assert.AreEqual("Bamboo", sBTrungGian.AirportName);
-            Trace.Write(sBTrungGian.AirportName);
         }
         [TestMethod]
         public void TimeStopTest()
@@ -69,7 +67,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay_Test
             sBTrungGian.TimeStop = times;
             Assert.IsTrue(propertyWasUpdated);
             Assert.AreEqual("150", sBTrungGian.TimeStop.TotalMinutes.ToString());
-            Trace.Write(sBTrungGian.TimeStop);
         }
         [TestMethod]
         public void NoteTest()
@@ -86,7 +83,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay_Test
             sBTrungGian.Note = "001";
             Assert.IsTrue(propertyWasUpdated);
             Assert.AreEqual("001", sBTrungGian.Note);
-            Trace.Write(sBTrungGian.Note);
         }
         [TestMethod]
         public void AirportIdTest()
@@ -103,7 +99,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay_Test
             sBTrungGian.AirportID = "BB001";
             Assert.IsTrue(propertyWasUpdated);
             Assert.AreEqual("BB001", sBTrungGian.AirportID);
-            Trace.Write(sBTrungGian.AirportID);
         }
 
 

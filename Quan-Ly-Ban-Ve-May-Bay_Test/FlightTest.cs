@@ -67,7 +67,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay_Test
             flight.AirlineLogo = "/Images/logo_Bamboo.png";
             Assert.IsTrue(propertyWasUpdated);
             Assert.AreEqual("/Images/logo_Bamboo.png", flight.AirlineLogo);
-            Trace.Write(flight.AirlineLogo);
         }
         [TestMethod]
         public void AirportDepartureNameTest()
@@ -84,7 +83,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay_Test
             flight.AirportDepartureName = "SGN";
             Assert.IsTrue(propertyWasUpdated);
             Assert.AreEqual("SGN", flight.AirportDepartureName);
-            Trace.Write(flight.AirportDepartureName);
         }
         [TestMethod]
         public void AirportDestinationNameTest()
@@ -101,7 +99,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay_Test
             flight.AirportDestinationName = "SGN";
             Assert.IsTrue(propertyWasUpdated);
             Assert.AreEqual("SGN", flight.AirportDestinationName);
-            Trace.Write(flight.AirportDestinationName);
         }
         [TestMethod]
         public void TimeDepartureTest()
@@ -118,7 +115,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay_Test
             flight.TimeDeparture = "15:30";
             Assert.IsTrue(propertyWasUpdated);
             Assert.AreEqual("15:30", flight.TimeDeparture);
-            Trace.Write(flight.TimeDeparture);
         }
         [TestMethod]
         public void TimeDestinationTest()
@@ -135,7 +131,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay_Test
             flight.TimeDestination = "16:50";
             Assert.IsTrue(propertyWasUpdated);
             Assert.AreEqual("16:50", flight.TimeDestination);
-            Trace.Write(flight.TimeDestination);
         }
         [TestMethod]
         public void DateTimeDestinationTest()
@@ -152,8 +147,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay_Test
             DateTime dt = new DateTime(2022, 5, 15);
             flight.DateTimeDestination = dt;
             Assert.IsTrue(propertyWasUpdated);
-            Assert.AreEqual("5/15/2022", flight.DateTimeDestination.ToString("d"));
-            Trace.Write(flight.DateTimeDestination);
+            Assert.AreEqual("15/05/2022", flight.DateTimeDestination.ToString("dd/MM/yyyy"));
         }
 
         [TestMethod]
@@ -170,9 +164,8 @@ namespace Quan_Ly_Ban_Ve_May_Bay_Test
             };
             DateTime dt = new DateTime(2022, 5, 15);
             flight.DateTimeDeparture = dt;
-            Assert.AreEqual("5/15/2022", flight.DateTimeDeparture.ToString("d"));
+            Assert.AreEqual("15/05/2022", flight.DateTimeDeparture.ToString("dd/MM/yyyy"));
             Assert.IsTrue(propertyWasUpdated);
-            Trace.Write(flight.DateTimeDeparture);
         }
 
 
@@ -189,9 +182,8 @@ namespace Quan_Ly_Ban_Ve_May_Bay_Test
                 }
             };
             flight.Stop = 2;
-
+            Assert.IsTrue(propertyWasUpdated);
             Assert.AreEqual(2, flight.Stop);
-            Trace.Write(flight.Stop);
         }
 
         [TestMethod]
@@ -211,7 +203,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay_Test
             flight.Time = times;
             Assert.IsTrue(propertyWasUpdated);
             Assert.AreEqual("150", flight.Time.TotalMinutes.ToString());
-            Trace.Write(flight.Time);
         }
 
         [TestMethod]
@@ -221,14 +212,14 @@ namespace Quan_Ly_Ban_Ve_May_Bay_Test
             bool propertyWasUpdated = false;
             flight.PropertyChanged += (s, e) =>
             {
-                if (e.PropertyName == "DateTimeDeparture")
+                if (e.PropertyName == "Price")
                 {
                     propertyWasUpdated = true;
                 }
             };
             flight.Price = 1500000;
             Assert.AreEqual(1500000, flight.Price);
-            Trace.Write(flight.Price);
+            Assert.IsTrue(propertyWasUpdated);
         }
         [TestMethod]
         public void AvailableSeatsTest()
@@ -244,7 +235,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay_Test
             };
             flight.AvailableSeats = 30;
             Assert.AreEqual(30, flight.AvailableSeats);
-            Trace.Write(flight.AvailableSeats);
+            Assert.IsTrue(propertyWasUpdated);
         }
 
         [TestMethod]
@@ -261,8 +252,23 @@ namespace Quan_Ly_Ban_Ve_May_Bay_Test
             };
             flight.BookedSeats = 3;
             Assert.AreEqual(3, flight.BookedSeats);
-            Trace.Write(flight.BookedSeats);
+            Assert.IsTrue(propertyWasUpdated);
         }
-
+        [TestMethod]    
+        public void FlightIDTest()
+        {
+            Flight flight = new Flight();
+            bool propertyWasUpdated = false;
+            flight.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName == "FlightID")
+                {
+                    propertyWasUpdated = true;
+                }
+            };
+            flight.FlightID = "VNA201";
+            Assert.AreEqual("VNA201", flight.FlightID);
+            Assert.IsTrue(propertyWasUpdated);
+        }
     }
 }

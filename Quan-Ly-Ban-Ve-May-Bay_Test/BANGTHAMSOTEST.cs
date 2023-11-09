@@ -1,4 +1,5 @@
 ﻿using Quan_Ly_Ban_Ve_May_Bay.Data;
+using Quan_Ly_Ban_Ve_May_Bay.UserControls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,13 +14,18 @@ namespace Quan_Ly_Ban_Ve_May_Bay_Test
         [TestMethod]
         public void ThoiGianBayToiThieuTest()
         {
-            BANGTHAMSO.ThoiGianBayToiThieu.CompareTo(30);
-            BANGTHAMSO.ThoiGianBayToiDa.CompareTo(2);
-            BANGTHAMSO.ThoiGianDungToiThieu.CompareTo(10);
-            BANGTHAMSO.ThoiGianDungToiDa.CompareTo(20);
-            BANGTHAMSO.SoGioTruocKhoiHanhChoPhepDatVe.CompareTo(24);
-            BANGTHAMSO.SoGioTruocKhoiHanhHuyPhieuDat.CompareTo(1);
-
+            BANGTHAMSO.ThoiGianBayToiThieu = 15;
+            BANGTHAMSO.SoSBTGToiDa = 3;
+            BANGTHAMSO.ThoiGianDungToiThieu = 15;
+            BANGTHAMSO.ThoiGianDungToiDa = 30;
+            BANGTHAMSO.SoGioTruocKhoiHanhChoPhepDatVe = 1;
+            BANGTHAMSO.SoGioTruocKhoiHanhHuyPhieuDat = 24;
+            Assert.AreEqual(15, BANGTHAMSO.ThoiGianBayToiThieu);
+            Assert.AreEqual(3, BANGTHAMSO.SoSBTGToiDa);
+            Assert.AreEqual(15, BANGTHAMSO.ThoiGianDungToiThieu);
+            Assert.AreEqual(30, BANGTHAMSO.ThoiGianDungToiDa);
+            Assert.AreEqual(24, BANGTHAMSO.SoGioTruocKhoiHanhHuyPhieuDat);
+            Assert.AreEqual(1, BANGTHAMSO.SoGioTruocKhoiHanhChoPhepDatVe);
         }
     }
 }

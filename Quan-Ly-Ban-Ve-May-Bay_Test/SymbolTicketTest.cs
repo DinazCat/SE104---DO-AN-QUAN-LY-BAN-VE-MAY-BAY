@@ -36,53 +36,88 @@ namespace Quan_Ly_Ban_Ve_May_Bay_Test
 
             symbolTicker.MaVe = "001";
             Assert.AreEqual("001", symbolTicker.MaVe);
-            Trace.Write(symbolTicker.MaVe);
         }
         [TestMethod]
         public void SymbolTicketTuyenTest()
         {
             SymbolTicket symbolTicker = new SymbolTicket();
-
+            bool propertyWasUpdated = false;
+            symbolTicker.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName == "Tuyen")
+                {
+                    propertyWasUpdated = true;
+                }
+            };
             symbolTicker.Tuyen = "001";
             Assert.AreEqual("001", symbolTicker.Tuyen);
-            Trace.Write(symbolTicker.Tuyen);
+            Assert.IsTrue(propertyWasUpdated);
         }
         [TestMethod]
         public void SymbolTicketSoGheTest()
         {
             SymbolTicket symbolTicker = new SymbolTicket();
-
+            bool propertyWasUpdated = false;
+            symbolTicker.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName == "SoGhe")
+                {
+                    propertyWasUpdated = true;
+                }
+            };
             symbolTicker.SoGhe = "10";
             Assert.AreEqual("10", symbolTicker.SoGhe);
-            Trace.Write(symbolTicker.SoGhe);
+            Assert.IsTrue(propertyWasUpdated);
+            symbolTicker.SoGhe = "10";
         }
         [TestMethod]
         public void SymbolTicketHangVeTest()
         {
             SymbolTicket symbolTicker = new SymbolTicket();
-
+            bool propertyWasUpdated = false;
+            symbolTicker.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName == "HangVe")
+                {
+                    propertyWasUpdated = true;
+                }
+            };
             symbolTicker.HangVe = "1";
             Assert.AreEqual("1", symbolTicker.HangVe);
-            Trace.Write(symbolTicker.HangVe);
+            Assert.IsTrue(propertyWasUpdated);
         }
         [TestMethod]
         public void SymbolTicketTenHKTest()
         {
             SymbolTicket symbolTicker = new SymbolTicket();
-
+            bool propertyWasUpdated = false;
+            symbolTicker.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName == "TenHK")
+                {
+                    propertyWasUpdated = true;
+                }
+            };
             symbolTicker.TenHK = "Nguyen Ha Mi";
             Assert.AreEqual("Nguyen Ha Mi", symbolTicker.TenHK);
-            Trace.Write(symbolTicker.TenHK);
+            Assert.IsTrue(propertyWasUpdated);
+            symbolTicker.TenHK = "Nguyen Ha Mi";
         }
         [TestMethod]
         public void SymbolTicketNgayGioTest()
         {
             SymbolTicket symbolTicker = new SymbolTicket();
-
+            bool propertyWasUpdated = false;
+            symbolTicker.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName == "NgayGio")
+                {
+                    propertyWasUpdated = true;
+                }
+            };
             symbolTicker.NgayGio = "15:00 19/08/2023";
             Assert.AreEqual("15:00 19/08/2023", symbolTicker.NgayGio);
-            Trace.Write(symbolTicker.NgayGio);
+            Assert.IsTrue(propertyWasUpdated);
         }
-
     }
 }

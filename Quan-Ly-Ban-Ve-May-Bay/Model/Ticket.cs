@@ -17,7 +17,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Model
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         private string ticketID;
-        public string TiketID
+        public string TicketID
         {
             get { return ticketID; }
             set

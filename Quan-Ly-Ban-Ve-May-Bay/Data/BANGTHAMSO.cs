@@ -9,7 +9,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Data
     public class BANGTHAMSO
     {
         static int thoiGianBayToiThieu = 30;
-        static int thoiGianBayToiDa = 2;
+        static int soSBTGToiDa = 2;
         static int thoiGianDungToiThieu = 10;
         static int thoiGianDungToiDa = 20;
         static int soGioTruocKhoiHanhChoPhepDatVe = 24;
@@ -25,15 +25,15 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Data
                 thoiGianBayToiThieu = value;
             }
         }
-        public static int ThoiGianBayToiDa
+        public static int SoSBTGToiDa
         {
             get
             {
-                return thoiGianBayToiDa;
+                return soSBTGToiDa;
             }
             set
             {
-                thoiGianBayToiDa = value;
+                soSBTGToiDa = value;
             }
         }
         public static int ThoiGianDungToiThieu

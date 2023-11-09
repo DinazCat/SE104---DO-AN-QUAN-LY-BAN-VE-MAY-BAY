@@ -14,7 +14,7 @@
         </Grid.ColumnDefinitions>
         <Border BorderBrush="Black" BorderThickness="2">
             <StackPanel Background="#006600">
-                <Button BorderBrush="Black" BorderThickness="2" Height="50" Background="#F5F5F5" Click="MonthRevenue_Click">
+                <Button x:Name="a" BorderBrush="Black" BorderThickness="2" Height="50" Background="#F5F5F5" Click="MonthRevenue_Click">
                     <TextBlock Text="Doanh thu theo tháng" TextAlignment="Center" TextWrapping="Wrap"/>
                 </Button>
                 <Button BorderBrush="Black" Margin="0,10,0,0" BorderThickness="2" Height="50" Background="#F5F5F5" Click="YearRevenue_Click">

@@ -63,7 +63,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
 
                     foreach (Ticket item in ve)
                     {
-                        if (item.TiketID == maVeBox.SelectedItem.ToString())
+                        if (item.TicketID == maVeBox.SelectedItem.ToString())
                         {
                             item.HkID = maHanhKhachText.Text;
                             item.HkName = tenHanhKhachTxt.Text;
@@ -129,7 +129,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
 
             foreach (Ticket item in ve)
             {
-                if (item.TiketID == maVeBox.SelectedItem.ToString())
+                if (item.TicketID == maVeBox.SelectedItem.ToString())
                 {
                     tenHanhKhachTxt.Text = item.HkName;
                     cmndTxt.Text = item.CMND;
@@ -188,7 +188,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 sdtTxt.Text = item.PhoneNumber;
                 soGheTxt.Text = item.SeatNumber.ToString();
                 hangVeTxt.Text = item.FlightClass;
-                maVeBox.SelectedItem = item.TiketID;
+                maVeBox.SelectedItem = item.TicketID;
                 maHanhKhachText.Text = item.HkID;
             }
         }
@@ -414,7 +414,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                 sqlCommand.Parameters.Add("@tenhk", SqlDbType.NVarChar).Value = item.HkName;
                 sqlCommand.Parameters.Add("@cmnd", SqlDbType.NVarChar).Value = item.CMND;
                 sqlCommand.Parameters.Add("@sdt", SqlDbType.NVarChar).Value = item.PhoneNumber;
-                sqlCommand.Parameters.Add("@mave", SqlDbType.NVarChar).Value = item.TiketID;
+                sqlCommand.Parameters.Add("@mave", SqlDbType.NVarChar).Value = item.TicketID;
                 sqlCommand.Parameters.Add("@tinhtrang", SqlDbType.NVarChar).Value = tinhtrang;
                 sqlCommand.ExecuteNonQuery();
                 DataProvider.sqlConnection.Close();
@@ -451,9 +451,9 @@ namespace Quan_Ly_Ban_Ve_May_Bay.View
                     "insert into [CTHD] values (@macthd, @mahd, @mave)", DataProvider.sqlConnection);
                 Random r = new Random();
                 int ID = r.Next(100000000, 999999999);
-                sqlCommand.Parameters.Add("@macthd", SqlDbType.NVarChar).Value = ID.ToString() + item.TiketID;
+                sqlCommand.Parameters.Add("@macthd", SqlDbType.NVarChar).Value = ID.ToString() + item.TicketID;
                 sqlCommand.Parameters.Add("@mahd", SqlDbType.NVarChar).Value = maHoaDonTxt.Text;
-                sqlCommand.Parameters.Add("@mave", SqlDbType.NVarChar).Value = item.TiketID;
+                sqlCommand.Parameters.Add("@mave", SqlDbType.NVarChar).Value = item.TicketID;
                 sqlCommand.ExecuteNonQuery();
                 DataProvider.sqlConnection.Close();
                 i++;
