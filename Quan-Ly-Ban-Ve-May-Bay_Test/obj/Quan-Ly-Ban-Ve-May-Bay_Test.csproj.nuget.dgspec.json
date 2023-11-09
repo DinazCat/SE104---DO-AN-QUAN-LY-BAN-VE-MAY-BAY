@@ -9,11 +9,22 @@
         "projectUniqueName": "D:\\SE104-QLBVMB\\Quan-Ly-Ban-Ve-May-Bay\\Quan-Ly-Ban-Ve-May-Bay.csproj",
         "projectName": "Quan-Ly-Ban-Ve-May-Bay",
         "projectPath": "D:\\SE104-QLBVMB\\Quan-Ly-Ban-Ve-May-Bay\\Quan-Ly-Ban-Ve-May-Bay.csproj",
+        "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
+        "projectStyle": "PackagesConfig",
+        "configFilePaths": [
+          "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
         "frameworks": {
           "net472": {
             "projectReferences": {}
           }
-        }
+        },
+        "packagesConfigPath": "D:\\SE104-QLBVMB\\Quan-Ly-Ban-Ve-May-Bay\\packages.config"
       },
       "frameworks": {
         "net472": {}
@@ -70,6 +81,10 @@
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
               "version": "[17.7.1, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.5.1, )"
             },
             "coverlet.collector": {
               "target": "Package",

@@ -106,5 +106,87 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Model
             }
             return tempArr;
         }
+        public static string selectedAirlineName = "Vietjet Air";
+        public static bool airlineNameFilter(object item)
+        {
+            return ((item as Flight).AirlineName.CompareTo(selectedAirlineName) == 0);
+        }
+        public static bool noStopFilter(object item)
+        {
+            return ((item as Flight).Stop == 0);
+        }
+        public static bool oneStopFilter(object item)
+        {
+            return ((item as Flight).Stop == 1);
+        }
+        public static bool moreTwoStopFilter(object item)
+        {
+            return ((item as Flight).Stop >= 2);
+        }
+        public static bool nightToMorning_Destination_Filter(object item)
+        {
+            if (((item as Flight).TimeDestination.CompareTo("00:00")) >= 0 && ((item as Flight).TimeDestination.CompareTo("05:59")) <= 0)
+            {
+                return true;
+            }
+            return false;
+        }
+        public static bool morningToNoon_Destination_Filter(object item)
+        {
+            if (((item as Flight).TimeDestination.CompareTo("06:00")) >= 0 && ((item as Flight).TimeDestination.CompareTo("11:59")) <= 0)
+            {
+                return true;
+            }
+            return false;
+        }
+        public static bool noonToEvening_Destination_Filter(object item)
+        {
+            if (((item as Flight).TimeDestination.CompareTo("12:00")) >= 0 && ((item as Flight).TimeDestination.CompareTo("17:59")) <= 0)
+            {
+                return true;
+            }
+            return false;
+        }
+        public static bool eveningToNight_Destination_Filter(object item)//test
+        {
+            if (((item as Flight).TimeDestination.CompareTo("18:00")) >= 0 && ((item as Flight).TimeDestination.CompareTo("23:59")) <= 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public static bool nightToMorning_Departure_Filter(object item)
+        {
+            if (((item as Flight).TimeDeparture.CompareTo("00:00")) >= 0 && ((item as Flight).TimeDeparture.CompareTo("05:59")) <= 0)
+            {
+                return true;
+            }
+            return false;
+        }
+        public static bool morningToNoon_Departure_Filter(object item)//test
+        {
+            if (((item as Flight).TimeDeparture.CompareTo("06:00")) >= 0 && ((item as Flight).TimeDeparture.CompareTo("11:59")) <= 0)
+            {
+                return true;
+            }
+            return false;
+        }
+        public static bool noonToEvening_Departure_Filter(object item)//test
+        {
+            if (((item as Flight).TimeDeparture.CompareTo("12:00")) >= 0 && ((item as Flight).TimeDeparture.CompareTo("17:59")) <= 0)
+            {
+                return true;
+            }
+            return false;
+        }
+        public static bool eveningToNight_Departure_Filter(object item)//test
+        {
+            if (((item as Flight).TimeDeparture.CompareTo("18:00")) >= 0 && ((item as Flight).TimeDeparture.CompareTo("23:59")) <= 0)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

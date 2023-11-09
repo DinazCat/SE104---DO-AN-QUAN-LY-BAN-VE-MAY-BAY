@@ -24,36 +24,11 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Pages
     /// </summary>
     public partial class Home : Page
     {
-        private string departure;
-        private string destination;
-        string _date;
-        private int quantity;
-        private string flightClass;
-        public string Departure
-        {
-            get { return departure; }
-            set { departure = value; }
-        }
-        public string Destination
-        {
-            get { return destination; } 
-            set { destination = value; }        
-        } 
-        public string Date
-        {
-            get { return _date; }
-            set { _date = value; }
-        }
-        public int Quantity
-        {
-            set { quantity = value; }
-            get { return quantity; }
-        }
-        public string FlightClass
-        {
-            set { flightClass = value; }
-            get { return flightClass; }
-        }
+        public string departure;
+        public string destination;
+        public string _date;
+        public int quantity;
+        public string flightClass;
         
         public event RoutedEventHandler Search;
         public Home()

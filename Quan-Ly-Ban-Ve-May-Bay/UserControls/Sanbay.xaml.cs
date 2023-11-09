@@ -64,13 +64,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
             }
         }
         DataTable dt;
-        public class sanbayclass
-        {
-            public string STT { get; set; }
-            public string maSB { get; set; }
-            public string tenSB { get; set; }
-            public string tinh { get; set; }
-        }
+        
 
         AddSanBay addSB;
         private void Them_Click(object sender, RoutedEventArgs e)
@@ -164,5 +158,13 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
                 q.tinhTxb.Text = info.tinh;
             }
         }
+    }
+    public class sanbayclass
+    {
+        string _STT, _maSB, _tenSB, _tinh;
+        public string STT { get { return _STT; } set { _STT = value; } }
+        public string maSB { get { return _maSB; } set { _maSB = value; } }
+        public string tenSB { get { return _tenSB; } set { _tenSB = value; } }
+        public string tinh { get { return _tinh; } set { _tinh = value; } }
     }
 }

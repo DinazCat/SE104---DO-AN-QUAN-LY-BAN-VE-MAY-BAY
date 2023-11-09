@@ -36,7 +36,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
     /// </summary>
     public partial class FlightsList : Page
     {
-        string selectedAirlineName;
+        //string selectedAirlineName;
         public DateTime dateTimeDestination, dateTimeDeparture;
         public TimeSpan time;
         public string flightID;
@@ -66,11 +66,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             }
             lvAirline.ItemsSource = listAirline;
 
-        }
-        //filter by airport name
-        private bool airlineNameFilter(object item)//test
-        {
-            return ((item as Flight).AirlineName.CompareTo(selectedAirlineName) == 0);
         }
         //set up flightList Screen
         public void FlightSearched(string departure, string destination, string date, int quantity, string flightClass)
@@ -224,20 +219,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             view.SortDescriptions.Clear();
             view.SortDescriptions.Add(new SortDescription("TimeDeparture", ListSortDirection.Descending));
         }
-
-        ///function filter
-        private bool noStopFilter(object item)//test
-        {
-            return ((item as Flight).Stop == 0);
-        }
-        private bool oneStopFilter(object item)
-        {
-            return ((item as Flight).Stop == 1);
-        }
-        private bool moreTwoStopFilter(object item)
-        {
-            return ((item as Flight).Stop >= 2);
-        }
         private bool nightToMorning_Destination_Filter(object item)
         {
             if (((item as Flight).TimeDestination.CompareTo("00:00")) >= 0 && ((item as Flight).TimeDestination.CompareTo("05:59")) <= 0)
@@ -303,14 +284,11 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             }
             return false;
         }
-        //
-
-        //filter stop
         private void noStopFilter_Click(object sender, RoutedEventArgs e)
         {
             CollectionViewSource.GetDefaultView(lvFlight.ItemsSource).Refresh();
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvFlight.ItemsSource);
-            view.Filter = noStopFilter;
+            view.Filter = DataProvider.noStopFilter;
             setIsHavingData(view);
         }
 
@@ -325,14 +303,14 @@ namespace Quan_Ly_Ban_Ve_May_Bay
         {
             CollectionViewSource.GetDefaultView(lvFlight.ItemsSource).Refresh();
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvFlight.ItemsSource);
-            view.Filter = oneStopFilter;
+            view.Filter = DataProvider.oneStopFilter;
             setIsHavingData(view);
         }
         private void moreTwoStopFilter_Click(object sender, RoutedEventArgs e)
         {
             CollectionViewSource.GetDefaultView(lvFlight.ItemsSource).Refresh();
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvFlight.ItemsSource);
-            view.Filter = moreTwoStopFilter;
+            view.Filter = DataProvider.moreTwoStopFilter;
             setIsHavingData(view);
         }
         //filter destination
@@ -398,12 +376,12 @@ namespace Quan_Ly_Ban_Ve_May_Bay
 
         private void lvAirline_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            selectedAirlineName = lvAirline.SelectedItem as string;
-            if (selectedAirlineName != null)
+            DataProvider.selectedAirlineName = lvAirline.SelectedItem as string;
+            if (DataProvider.selectedAirlineName != null)
             {
                 CollectionViewSource.GetDefaultView(lvFlight.ItemsSource).Refresh();
                 CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvFlight.ItemsSource);
-                view.Filter = airlineNameFilter;
+                view.Filter = DataProvider.airlineNameFilter;
                 setIsHavingData(view);
             }
             lvAirline.SelectedIndex = -1;

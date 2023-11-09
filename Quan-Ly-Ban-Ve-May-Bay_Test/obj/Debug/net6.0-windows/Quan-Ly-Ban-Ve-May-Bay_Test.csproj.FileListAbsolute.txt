@@ -142,6 +142,7 @@ D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay_Test\bin\Debug\net6.0-windows\Microsoft.V
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay_Test\bin\Debug\net6.0-windows\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay_Test\bin\Debug\net6.0-windows\Newtonsoft.Json.dll
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay_Test\bin\Debug\net6.0-windows\NuGet.Frameworks.dll
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay_Test\bin\Debug\net6.0-windows\System.Data.SqlClient.dll
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay_Test\bin\Debug\net6.0-windows\cs\Microsoft.TestPlatform.CoreUtilities.resources.dll
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay_Test\bin\Debug\net6.0-windows\cs\Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay_Test\bin\Debug\net6.0-windows\de\Microsoft.TestPlatform.CoreUtilities.resources.dll
@@ -207,6 +208,11 @@ D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay_Test\bin\Debug\net6.0-windows\zh-Hans\Mic
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay_Test\bin\Debug\net6.0-windows\zh-Hant\Microsoft.TestPlatform.CommunicationUtilities.resources.dll
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay_Test\bin\Debug\net6.0-windows\zh-Hant\Microsoft.TestPlatform.CrossPlatEngine.resources.dll
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay_Test\bin\Debug\net6.0-windows\zh-Hant\Microsoft.VisualStudio.TestPlatform.Common.resources.dll
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay_Test\bin\Debug\net6.0-windows\runtimes\win-arm64\native\sni.dll
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay_Test\bin\Debug\net6.0-windows\runtimes\win-x64\native\sni.dll
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay_Test\bin\Debug\net6.0-windows\runtimes\win-x86\native\sni.dll
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay_Test\bin\Debug\net6.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay_Test\bin\Debug\net6.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay_Test\bin\Debug\net6.0-windows\Quan-Ly-Ban-Ve-May-Bay.exe
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay_Test\bin\Debug\net6.0-windows\MaterialDesignThemes.Wpf.dll
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay_Test\bin\Debug\net6.0-windows\Microsoft.Xaml.Behaviors.dll

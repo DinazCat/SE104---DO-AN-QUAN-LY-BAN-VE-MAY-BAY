@@ -53,14 +53,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
             MonthSale Example = new MonthSale();
 
         }
-        public class MonthSale
-        {
-            public string stt { get; set; }
-            public string chuyenbay { get; set; }
-            public string sove { get; set; }
-            public string doanhthu { get; set; }
-            public string tile { get; set; }
-        }
 
         DataTable dataTable;
         DataTable loadData()
@@ -199,5 +191,13 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
             //excel.Visible = true;
             //wb.Activate();
         }
+    }
+    public class MonthSale
+    {
+        public string stt { get; set; }
+        public string chuyenbay { get; set; }
+        public string sove { get; set; }
+        public string doanhthu { get; set; }
+        public string tile { get; set; }
     }
 }

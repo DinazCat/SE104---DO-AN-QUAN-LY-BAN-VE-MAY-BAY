@@ -127,30 +127,22 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
         }
         private void OkSSBTGTDBtn_Click(object sender, RoutedEventArgs e)
         {
-           
-            try
-            {
-                int oldvalue = ruleChangeVM.SoSanBayTrungGianToiDa;
+            int oldvalue = ruleChangeVM.SoSanBayTrungGianToiDa;
 
-                if (int.Parse(SSBTGTD.Text) <= 0)
-                {
-                    MessageBox.Show("Vui lòng nhập một số nguyên dương.", "Dữ liệu không hợp lệ!");
-                    return;
-                }
-                ruleChangeVM.SoSanBayTrungGianToiDa = int.Parse(SSBTGTD.Text);
-                SqlConnection sqlCon = DataProvider.sqlConnection;
-                sqlCon.Open();
-                SqlCommand cmd = new SqlCommand("Update BANGTHAMSO set GiaTri=" + ruleChangeVM.SoSanBayTrungGianToiDa + "where CONVERT(varchar, TenThamSo)='SoSanBayTrungGianToiDa'", sqlCon);
-                cmd.CommandType = CommandType.Text;
-                cmd.ExecuteNonQuery();
-                sqlCon.Close();
-                panelSSBTGTD.Visibility = Visibility.Collapsed;
-                SSBTGTD.IsReadOnly = true;
-            }
-            catch (Exception ex)
+            if (!DataProvider.isPositiveInteger(SSBTGTD.Text))
             {
                 MessageBox.Show("Vui lòng nhập một số nguyên dương.", "Dữ liệu không hợp lệ!");
+                return;
             }
+            ruleChangeVM.SoSanBayTrungGianToiDa = int.Parse(SSBTGTD.Text);
+            SqlConnection sqlCon = DataProvider.sqlConnection;
+            sqlCon.Open();
+            SqlCommand cmd = new SqlCommand("Update BANGTHAMSO set GiaTri=" + ruleChangeVM.SoSanBayTrungGianToiDa + "where CONVERT(varchar, TenThamSo)='SoSanBayTrungGianToiDa'", sqlCon);
+            cmd.CommandType = CommandType.Text;
+            cmd.ExecuteNonQuery();
+            sqlCon.Close();
+            panelSSBTGTD.Visibility = Visibility.Collapsed;
+            SSBTGTD.IsReadOnly = true;
         }
         private void CancelSSBTGTDBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -225,29 +217,22 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
         }
         private void OkSGTKHCPDVBtn_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                int oldvalue = ruleChangeVM.SoGioTruocKhoiHanhChoPhepDatVe;
-                
-                if (int.Parse(SGTKHCPDV.Text) <= 0)
-                {
-                    MessageBox.Show("Vui lòng nhập một số nguyên dương.", "Dữ liệu không hợp lệ!");
-                    return;
-                }
-                ruleChangeVM.SoGioTruocKhoiHanhChoPhepDatVe = int.Parse(SGTKHCPDV.Text);
-                SqlConnection sqlCon = DataProvider.sqlConnection;
-                sqlCon.Open();
-                SqlCommand cmd = new SqlCommand("Update BANGTHAMSO set GiaTri=" + ruleChangeVM.SoGioTruocKhoiHanhChoPhepDatVe + "where CONVERT(varchar, TenThamSo)='ThoiGianChamNhatChoPhepDatVe'", sqlCon);
-                cmd.CommandType = CommandType.Text;
-                cmd.ExecuteNonQuery();
-                sqlCon.Close();
-                panelSGTKHCPDV.Visibility = Visibility.Collapsed;
-                SGTKHCPDV.IsReadOnly = true;
-            }
-            catch (Exception ex)
+            
+            int oldvalue = ruleChangeVM.SoGioTruocKhoiHanhChoPhepDatVe;
+            if(!DataProvider.isPositiveInteger(SGTKHCPDV.Text))
             {
                 MessageBox.Show("Vui lòng nhập một số nguyên dương.", "Dữ liệu không hợp lệ!");
+                return;
             }
+            ruleChangeVM.SoGioTruocKhoiHanhChoPhepDatVe = int.Parse(SGTKHCPDV.Text);
+            SqlConnection sqlCon = DataProvider.sqlConnection;
+            sqlCon.Open();
+            SqlCommand cmd = new SqlCommand("Update BANGTHAMSO set GiaTri=" + ruleChangeVM.SoGioTruocKhoiHanhChoPhepDatVe + "where CONVERT(varchar, TenThamSo)='ThoiGianChamNhatChoPhepDatVe'", sqlCon);
+            cmd.CommandType = CommandType.Text;
+            cmd.ExecuteNonQuery();
+            sqlCon.Close();
+            panelSGTKHCPDV.Visibility = Visibility.Collapsed;
+            SGTKHCPDV.IsReadOnly = true;
         }
         private void CancelSGTKHCPDVBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -256,30 +241,22 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
             SGTKHCPDV.Text = ruleChangeVM.SoGioTruocKhoiHanhChoPhepDatVe.ToString();
         }
         private void OkSGTKHCPHVBtn_Click(object sender, RoutedEventArgs e)
-        {
-            
-            try
+        { 
+            int oldvalue = ruleChangeVM.SoGioTruocKhoiHanhChoPhepHuyVe;
+            if (!DataProvider.isPositiveInteger(SGTKHCPHV.Text))
             {
-                int oldvalue = ruleChangeVM.SoGioTruocKhoiHanhChoPhepHuyVe;
-                if (int.Parse(SGTKHCPHV.Text) <= 0)
-                {
-                    MessageBox.Show("Vui lòng nhập một số nguyên dương.", "Dữ liệu không hợp lệ!");
-                    return;
-                }
-                ruleChangeVM.SoGioTruocKhoiHanhChoPhepHuyVe = int.Parse(SGTKHCPHV.Text);
-                SqlConnection sqlCon = DataProvider.sqlConnection;
-                sqlCon.Open();
-                SqlCommand cmd = new SqlCommand("Update BANGTHAMSO set GiaTri=" + ruleChangeVM.SoGioTruocKhoiHanhChoPhepHuyVe + "where CONVERT(varchar, TenThamSo)='ThoiGianChamNhatChoPhepHuyVe'", sqlCon);
-                cmd.CommandType = CommandType.Text;
-                cmd.ExecuteNonQuery();
-                sqlCon.Close();
-                panelSGTKHCPHV.Visibility = Visibility.Collapsed;
-                SGTKHCPHV.IsReadOnly = true;
-            }
-            catch (Exception ex)
-            {              
                 MessageBox.Show("Vui lòng nhập một số nguyên dương.", "Dữ liệu không hợp lệ!");
+                return;
             }
+            ruleChangeVM.SoGioTruocKhoiHanhChoPhepHuyVe = int.Parse(SGTKHCPHV.Text);
+            SqlConnection sqlCon = DataProvider.sqlConnection;
+            sqlCon.Open();
+            SqlCommand cmd = new SqlCommand("Update BANGTHAMSO set GiaTri=" + ruleChangeVM.SoGioTruocKhoiHanhChoPhepHuyVe + "where CONVERT(varchar, TenThamSo)='ThoiGianChamNhatChoPhepHuyVe'", sqlCon);
+            cmd.CommandType = CommandType.Text;
+            cmd.ExecuteNonQuery();
+            sqlCon.Close();
+            panelSGTKHCPHV.Visibility = Visibility.Collapsed;
+            SGTKHCPHV.IsReadOnly = true;
         }
         private void CancelSGTKHCPHVBtn_Click(object sender, RoutedEventArgs e)
         {

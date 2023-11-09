@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static Quan_Ly_Ban_Ve_May_Bay.UserControls.Sanbay;
 using Quan_Ly_Ban_Ve_May_Bay.Model;
+using System.Security.Cryptography;
 
 namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
 {
@@ -66,23 +67,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
             }
         }
         DataTable dt;
-        public class chuyenbayclass
-        {
-            public string STT { get; set; }
-            public string maCB { get; set; }
-            public string SBdi { get; set; }
-            public string SBden { get; set; }
-            public string datetime { get; set; }
-            public string tgBay { get; set; }
-            public string Gia { get; set; }
-        }
-        public class SanbayTG
-        {
-            public string STT { get; set; }
-            public string tenSB { get; set; }
-            public string TGdung { get; set; }
-            public string ghichu { get; set; }
-        }
+        
         AddChuyenbay addChuyenbay;
         private void Them_Click(object sender, RoutedEventArgs e)
         {
@@ -278,5 +263,24 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
                 }
             }
         }
+    }
+    public class chuyenbayclass
+    {
+        string _STT, _maCB, _SBdi, _SBden, _datetime, _tgBay, _Gia;
+        public string STT { get { return _STT; } set { _STT = value; } }
+        public string maCB { get { return _maCB; } set { _maCB = value; } }
+        public string SBdi { get { return _SBdi; } set { _SBdi = value; } }
+        public string SBden { get { return _SBden; } set { _SBden = value; } }
+        public string datetime { get { return _datetime; } set { _datetime = value; } }
+        public string tgBay { get { return _tgBay; } set { _tgBay = value; } }
+        public string Gia { get { return _Gia; } set { _Gia = value; } }
+    }
+    public class SanbayTG
+    {
+        string _STT, _tenSB, _TGdung, _ghichu;
+        public string STT { get { return _STT; } set { _STT = value; } }
+        public string tenSB { get { return _tenSB; } set { _tenSB = value; } }
+        public string TGdung { get { return _TGdung; } set { _TGdung = value; } }
+        public string ghichu { get { return _ghichu; } set { _ghichu = value; } }
     }
 }

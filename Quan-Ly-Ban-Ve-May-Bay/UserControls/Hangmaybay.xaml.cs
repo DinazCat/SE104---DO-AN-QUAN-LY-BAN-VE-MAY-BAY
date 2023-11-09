@@ -61,12 +61,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
             }
         }
         DataTable dt;
-        public class HangMBclass
-        {
-            public string STT { get; set; }
-            public string mahang { get; set; }
-            public string tenhang { get; set; }
-        }
+        
         AddHangMB hangMB;
         private void Them_Click(object sender, RoutedEventArgs e)
         {
@@ -129,5 +124,12 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
                 q.tenhangTxb.Text = info.tenhang;
             }
         }
+    }
+    public class HangMBclass
+    {
+        string _STT, _mahang, _tenhang; 
+        public string STT { get { return _STT; } set { _STT = value; } }
+        public string mahang { get { return _mahang; } set { _mahang = value; } }
+        public string tenhang { get { return _tenhang; } set { _tenhang = value; } }
     }
 }

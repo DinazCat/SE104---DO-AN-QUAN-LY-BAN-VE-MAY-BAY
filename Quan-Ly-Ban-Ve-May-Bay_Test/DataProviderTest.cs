@@ -1,5 +1,7 @@
-﻿using Quan_Ly_Ban_Ve_May_Bay.Model;
+﻿using Quan_Ly_Ban_Ve_May_Bay;
+using Quan_Ly_Ban_Ve_May_Bay.Model;
 using Quan_Ly_Ban_Ve_May_Bay.Pages;
+using Quan_Ly_Ban_Ve_May_Bay.UserControls;
 using System.Diagnostics;
 
 namespace Quan_Ly_Ban_Ve_May_Bay_Test
@@ -90,6 +92,93 @@ namespace Quan_Ly_Ban_Ve_May_Bay_Test
             Assert.IsTrue(expectedResult.SequenceEqual(DataProvider.addDataToSeat(tickets, 4)));
             expectedResult = new List<Ticket>() { data5 };
             Assert.IsTrue(expectedResult.SequenceEqual(DataProvider.addDataToSeat(tickets, 5)));
+        }
+        [TestMethod]
+        public void airlineNameFilterTest()
+        {
+            var flight = new Flight() { AirlineName = "A" };
+            Assert.IsFalse(DataProvider.airlineNameFilter(flight));
+            flight = new Flight() { AirlineName = "Vietjet Air" };
+            Assert.IsTrue(DataProvider.airlineNameFilter(flight));
+        }
+        [TestMethod]
+        public void stopFilterTest()
+        {
+            var flight0 = new Flight() { Stop = 0 };
+            var flight1 = new Flight() { Stop = 1 };
+            var flight2 = new Flight() { Stop = 2 };
+            var flight3 = new Flight() { Stop = 3 };
+            Assert.IsTrue(DataProvider.noStopFilter(flight0));
+            Assert.IsFalse(DataProvider.noStopFilter(flight1));
+            Assert.IsTrue(DataProvider.oneStopFilter(flight1));
+            Assert.IsFalse(DataProvider.oneStopFilter(flight0));
+            Assert.IsTrue(DataProvider.moreTwoStopFilter(flight2));
+            Assert.IsTrue(DataProvider.moreTwoStopFilter(flight3));
+            Assert.IsFalse(DataProvider.moreTwoStopFilter(flight1));
+        }
+        [TestMethod]
+        public void nightToMorning_FilterTest()
+        {
+            var flight1 = new Flight() { TimeDeparture = "00:00", TimeDestination = "05:59" };
+            var flight2 = new Flight() { TimeDeparture = "05:59", TimeDestination = "00:00" };
+            var flight3 = new Flight() { TimeDeparture = "02:00", TimeDestination = "04:00" };
+            var flight4 = new Flight() { TimeDeparture = "", TimeDestination = "" };
+            Assert.IsTrue(DataProvider.nightToMorning_Departure_Filter(flight1));
+            Assert.IsTrue(DataProvider.nightToMorning_Departure_Filter(flight2));
+            Assert.IsTrue(DataProvider.nightToMorning_Departure_Filter(flight3));
+            Assert.IsFalse(DataProvider.nightToMorning_Departure_Filter(flight4));
+            Assert.IsTrue(DataProvider.nightToMorning_Destination_Filter(flight1));
+            Assert.IsTrue(DataProvider.nightToMorning_Destination_Filter(flight2));
+            Assert.IsTrue(DataProvider.nightToMorning_Destination_Filter(flight3));
+            Assert.IsFalse(DataProvider.nightToMorning_Destination_Filter(flight4));
+        }
+        [TestMethod]
+        public void morningToNoon_FilterTest()
+        {
+            var flight1 = new Flight() { TimeDeparture = "06:00", TimeDestination = "11:59" };
+            var flight2 = new Flight() { TimeDeparture = "11:59", TimeDestination = "06:00" };
+            var flight3 = new Flight() { TimeDeparture = "07:00", TimeDestination = "08:00" };
+            var flight4 = new Flight() { TimeDeparture = "", TimeDestination = "" };
+            Assert.IsTrue(DataProvider.morningToNoon_Departure_Filter(flight1));
+            Assert.IsTrue(DataProvider.morningToNoon_Departure_Filter(flight2));
+            Assert.IsTrue(DataProvider.morningToNoon_Departure_Filter(flight3));
+            Assert.IsFalse(DataProvider.morningToNoon_Departure_Filter(flight4));
+            Assert.IsTrue(DataProvider.morningToNoon_Destination_Filter(flight1));
+            Assert.IsTrue(DataProvider.morningToNoon_Destination_Filter(flight2));
+            Assert.IsTrue(DataProvider.morningToNoon_Destination_Filter(flight3));
+            Assert.IsFalse(DataProvider.morningToNoon_Destination_Filter(flight4));
+        }
+        [TestMethod]
+        public void noonToEvening_FilterTest()
+        {
+            var flight1 = new Flight() { TimeDeparture = "12:00", TimeDestination = "17:59" };
+            var flight2 = new Flight() { TimeDeparture = "17:59", TimeDestination = "12:00" };
+            var flight3 = new Flight() { TimeDeparture = "13:00", TimeDestination = "14:00" };
+            var flight4 = new Flight() { TimeDeparture = "", TimeDestination = "" };
+            Assert.IsTrue(DataProvider.noonToEvening_Departure_Filter(flight1));
+            Assert.IsTrue(DataProvider.noonToEvening_Departure_Filter(flight2));
+            Assert.IsTrue(DataProvider.noonToEvening_Departure_Filter(flight3));
+            Assert.IsFalse(DataProvider.noonToEvening_Departure_Filter(flight4));
+            Assert.IsTrue(DataProvider.noonToEvening_Destination_Filter(flight1));
+            Assert.IsTrue(DataProvider.noonToEvening_Destination_Filter(flight2));
+            Assert.IsTrue(DataProvider.noonToEvening_Destination_Filter(flight3));
+            Assert.IsFalse(DataProvider.noonToEvening_Destination_Filter(flight4));
+        }
+        [TestMethod]
+        public void eveningToNight_FilterTest()
+        {
+            var flight1 = new Flight() { TimeDeparture = "18:00", TimeDestination = "23:59" };
+            var flight2 = new Flight() { TimeDeparture = "23:59", TimeDestination = "18:00" };
+            var flight3 = new Flight() { TimeDeparture = "19:00", TimeDestination = "20:00" };
+            var flight4 = new Flight() { TimeDeparture = "", TimeDestination = "" };
+            Assert.IsTrue(DataProvider.eveningToNight_Departure_Filter(flight1));
+            Assert.IsTrue(DataProvider.eveningToNight_Departure_Filter(flight2));
+            Assert.IsTrue(DataProvider.eveningToNight_Departure_Filter(flight3));
+            Assert.IsFalse(DataProvider.eveningToNight_Departure_Filter(flight4));
+            Assert.IsTrue(DataProvider.eveningToNight_Destination_Filter(flight1));
+            Assert.IsTrue(DataProvider.eveningToNight_Destination_Filter(flight2));
+            Assert.IsTrue(DataProvider.eveningToNight_Destination_Filter(flight3));
+            Assert.IsFalse(DataProvider.eveningToNight_Destination_Filter(flight4));
         }
     }
 }

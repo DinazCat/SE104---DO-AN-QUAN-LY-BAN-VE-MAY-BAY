@@ -50,7 +50,6 @@ namespace Quan_Ly_Ban_Ve_May_Bay_Test
             flight.AirlineName = "Jetstar Pacific Airlines";//set
             Assert.IsTrue(propertyWasUpdated);//PropertyChanged
             Assert.AreEqual("Jetstar Pacific Airlines", flight.AirlineName);//get
-            Trace.Write(flight.AirlineName);
         }
         //viết tương tự cho set, get, PropertyChanged của thuộc tính khác
     }

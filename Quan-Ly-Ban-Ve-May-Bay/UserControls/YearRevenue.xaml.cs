@@ -35,13 +35,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
             cBox.ItemsSource = years;
             cBox.SelectedIndex = 0;
         }
-        public class YearSale
-        {
-            public string sochuyenbay { get; set; }
-            public string thang { get; set; }
-            public string doanhthu { get; set; }
-            public string tile { get; set; }
-        }
+       
         DataTable dt;
         private void loadData()
         {
@@ -145,5 +139,13 @@ namespace Quan_Ly_Ban_Ve_May_Bay.UserControls
             //excel.Visible = true;
             //wb.Activate();
         }
+    }
+    public class YearSale
+    {
+        string _soCB, _thang, _doanhthu, _tile;
+        public string sochuyenbay { get { return _soCB; } set { _soCB = value; } }
+        public string thang { get { return _thang; } set { _thang = value; } }
+        public string doanhthu { get { return _doanhthu; } set { _doanhthu = value; } }
+        public string tile { get { return _tile; } set { _tile = value; } }
     }
 }

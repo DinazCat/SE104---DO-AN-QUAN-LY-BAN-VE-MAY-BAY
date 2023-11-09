@@ -270,7 +270,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay
             flights.Return += Flights_Return;
             flights.Search += Flights_Return;
             flights.ShowDetail += Flight_ShowDetail;
-            flights.FlightSearched(home.Departure, home.Destination, home.Date, home.Quantity, home.FlightClass);
+            flights.FlightSearched(home.departure, home.destination, home._date, home.quantity, home.flightClass);
             fContainer.Content = flights;
 
         }

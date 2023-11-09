@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Quan_Ly_Ban_Ve_May_Bay.ViewModel
 {
-    internal class RuleChangeViewModel : INotifyPropertyChanged
+    public class RuleChangeViewModel : INotifyPropertyChanged
     {
         private int _thoiGianBayToiThieu;
         private int _soSanBayTrungGianToiDa;
