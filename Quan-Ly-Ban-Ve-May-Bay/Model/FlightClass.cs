@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Quan_Ly_Ban_Ve_May_Bay.Model
 {
-    internal class FlightClass : INotifyPropertyChanged
+    public class FlightClass : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

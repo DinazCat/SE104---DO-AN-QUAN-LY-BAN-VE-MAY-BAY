@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Quan_Ly_Ban_Ve_May_Bay.Data
 {
-    internal class BANGTHAMSO
+    public class BANGTHAMSO
     {
         static int thoiGianBayToiThieu = 30;
         static int thoiGianBayToiDa = 2;

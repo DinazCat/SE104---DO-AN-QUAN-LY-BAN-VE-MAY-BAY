@@ -226,6 +226,7 @@ D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay_Test\bin\Debug\net6.0-windows\Microsoft.X
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay_Test\bin\Debug\net6.0-windows\MaterialDesignColors.pdb
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay_Test\obj\Debug\net6.0-windows\Quan-Ly-Ban-Ve-May-Bay_Test.csproj.AssemblyReference.cache
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay_Test\obj\Debug\net6.0-windows\Quan-Ly-Ban-Ve-May-Bay_Test.csproj.CoreCompileInputs.cache
+D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay_Test\obj\Debug\net6.0-windows\Quan-Ly-Ban-Ve-May-Bay_Test.sourcelink.json
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay_Test\obj\Debug\net6.0-windows\Quan-Ly-Ban-Ve-May-Bay_Test.dll
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay_Test\obj\Debug\net6.0-windows\refint\Quan-Ly-Ban-Ve-May-Bay_Test.dll
 D:\SE104-QLBVMB\Quan-Ly-Ban-Ve-May-Bay_Test\obj\Debug\net6.0-windows\Quan-Ly-Ban-Ve-May-Bay_Test.pdb

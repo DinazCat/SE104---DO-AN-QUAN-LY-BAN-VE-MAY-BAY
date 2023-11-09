@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Quan_Ly_Ban_Ve_May_Bay.Model
 {
-    internal class SymbolTicket
+    public class SymbolTicket
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -57,7 +57,7 @@ namespace Quan_Ly_Ban_Ve_May_Bay.Model
             this.hangVe = hangVe;
             this.tenHK = tenHK;
         }
-
+        public SymbolTicket() { }
         public SymbolTicket(string maVe, string soGhe, string hangVe, string tenHK)
         {
             this.maVe=maVe;
